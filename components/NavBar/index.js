@@ -6,8 +6,8 @@ export default function Navbar() {
       <Wrapper>
         <Logo>Computer Progress</Logo>
         <Menu>
-          <Button>About us</Button>
-          <Button>About us</Button>
+          <Button>Domains</Button>
+          <Button>Dataset</Button>
           <Button>About us</Button>
         </Menu>
         <Auth>
