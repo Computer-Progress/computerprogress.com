@@ -15,8 +15,6 @@ export default function Navbar() {
           <Button primary>SIGN IN</Button>
         </Auth>
       </Wrapper>
-
-      <footer></footer>
     </div>
   );
 }

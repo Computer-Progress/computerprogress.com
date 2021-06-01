@@ -4,7 +4,12 @@ export const Wrapper = styled.div`
   display: flex;
   justify-content: space-between;
   padding: 12px 24px;
-  background: #2000e5;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 50px;
+  z-index: 10000;
 `;
 
 export const Logo = styled.a`
