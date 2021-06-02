@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import Button from "../Button";
 
 export const Wrapper = styled.div`
   display: flex;
@@ -12,7 +13,7 @@ export const Wrapper = styled.div`
   z-index: 10000;
 `;
 
-export const Logo = styled.a`
+export const Logo = styled(Button)`
   font-family: "Montserrat", sans-serif;
   font-size: 24px;
   font-weight: bold;

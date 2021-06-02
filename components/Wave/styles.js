@@ -20,5 +20,5 @@ export const Text = styled.p`
   font-weight: bold;
   font-size: 1.5rem;
   color: ${theme.colors.white};
-  width: 50%;
+  width: 35%;
 `
