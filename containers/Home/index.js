@@ -1,10 +1,97 @@
+import React, { useState } from "react";
 
 import Head from "next/head";
 import { Container } from "./styles.js";
 import NavBar from "../../components/NavBar";
 import Wave from "../../components/Wave";
+import Chart from '../../components/Chart'
+import {
+  imagenet,
+  mscoco,
+  squad1_1,
+  conll2003,
+  wmt2014_enfr,
+  wmt2014_enge
+} from '../../data'
+
 
 export default function Home() {
+  const [data, setData] = useState(imagenet)
+  const [label, setLabel] = useState("TOP 1")
+  const [buttons, setButtons] = useState([{
+    label: 'Imagenet',
+    onPress: () => {}
+  }])
+
+  const tabs = [
+    {
+      label: 'Image Classification',
+      onSelect: () => {
+        setData(imagenet)
+        setLabel("TOP 1")
+        setButtons([{
+          label: 'Imagenet',
+          onPress: () => {}
+        }])
+      }
+    },
+    {
+      label: 'Object Detection',
+      onSelect: () => {
+        setData(mscoco)
+        setLabel("BOX AP")
+        setButtons([{
+          label: 'MS COCO',
+          onPress: () => {}
+        }])
+      }
+    },
+    {
+      label: 'Question Answering',
+      onSelect: () => {
+        setData(squad1_1)
+        setLabel("F1 SCORE")
+        setButtons([{
+          label: 'SQUAD 1.1',
+          onPress: () => {}
+        }])
+      }
+    },
+    {
+      label: 'Named Entity Recognition',
+      onSelect: () => {
+        setData(conll2003)
+        setLabel("F1 SCORE")
+        setButtons([{
+          label: 'Conll 2003',
+          onPress: () => {}
+        }])
+      }
+    },
+    {
+      label: 'Machine Translation',
+      onSelect: () => {
+        setData(wmt2014_enfr)
+        setLabel("BLEU")
+        setButtons([
+          {
+            label: 'WMT 2014 EN-FR',
+            onPress: () => {
+              setData(wmt2014_enfr)
+              setLabel("BLEU")
+            }
+          }, {
+            label: 'WMT 2014 EN-GE',
+            onPress: () => {
+              setData(wmt2014_enge)
+              setLabel("BLEU")
+            }
+          },
+      ])
+      }
+    },
+  ]
+
   return (
     <div>
       <Head>
@@ -14,7 +101,9 @@ export default function Home() {
       </Head>
       <NavBar />
       <Wave />
-      <Container></Container>
+      <Container>
+        <Chart data={data} label={label} />
+      </Container>
 
       <footer></footer>
     </div>
