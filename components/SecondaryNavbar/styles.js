@@ -4,14 +4,15 @@ import Button from "../Button";
 export const Wrapper = styled.div`
   display: flex;
   justify-content: space-between;
-  padding: 12px 24px;
+  align-items: center;
+  flex-wrap: wrap;
+  padding: 0 24px;
   position: absolute;
   top: 0;
   left: 0;
   right: 0;
-  height: 250px;
   z-index: 10000;
-  background: #782ed9;
+  background: linear-gradient(to right, #2000e5, #8f00ff, #8f00ff, #8f00ff), #2000e5;
 `;
 
 export const Logo = styled(Button)`
