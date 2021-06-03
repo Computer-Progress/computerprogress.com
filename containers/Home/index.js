@@ -4,6 +4,8 @@ import Head from "next/head";
 import { Container } from "./styles.js";
 import NavBar from "../../components/NavBar";
 import Wave from "../../components/Wave";
+import Footer from "../../components/Footer";
+import FooterWave from "../../components/FooterWave";
 import Chart from '../../components/Chart'
 import {
   imagenet,
@@ -104,8 +106,7 @@ export default function Home() {
       <Container>
         <Chart data={data} label={label} />
       </Container>
-
-      <footer></footer>
+      <Footer />
     </div>
   );
 }
