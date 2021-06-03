@@ -1,4 +1,3 @@
-
 import styled from "styled-components";
 import Wave from 'react-wavify';
 import theme from "../../styles/theme";
@@ -8,10 +7,6 @@ export const Header = styled(Wave)`
   margin-top: -5px;
   height: 300px;
 `;
-
-export const Wrapper = styled.div`
-  position: relative;
-`
 
 export const Text = styled.p`
   position: absolute;

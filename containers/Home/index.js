@@ -1,14 +1,13 @@
 import React, { useState } from "react";
-
 import Head from "next/head";
 import { Container } from "./styles.js";
 import NavBar from "../../components/NavBar";
 import Wave from "../../components/Wave";
+import Footer from "../../components/Footer";
 import Chart from "../../components/Chart";
 import Tabs from "../../components/Tabs";
 import StateOfArtBox from "../../components/StateOfArtBox";
 import Button from "../../components/Button"
-
 import {
   imagenet,
   mscoco,
@@ -121,8 +120,7 @@ export default function Home() {
         <Chart data={data} label={label} />
         <StateOfArtBox />
       </Container>
-
-      <footer></footer>
+      <Footer />
     </div>
   );
 }
