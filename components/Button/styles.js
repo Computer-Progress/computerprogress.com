@@ -12,7 +12,7 @@ export const Button = styled.button`
   background: ${({ primary }) =>
     primary ? theme.colors.white : "transparent"};
   color: ${({ primary, color }) =>
-    color || primary ? theme.colors.primary : theme.colors.white};
+    color || primary ? "#8f00ff" : theme.colors.white};
   font-weight: bold;
   transition: all 0.3s ease-in-out;
   &:hover {
