@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { FooterWave, Text } from './styles';
+import { FooterWave} from './styles';
 import theme from "../../styles/theme";
 
 export default () => {

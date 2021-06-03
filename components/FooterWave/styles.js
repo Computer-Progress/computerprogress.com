@@ -4,15 +4,6 @@ import theme from "../../styles/theme";
 
 export const FooterWave = styled(Wave)`
   position: absolute;
-  margin-bottom: -5px;
-  height: 300px;
+  z-index: -1;
+  height: 400px;
 `;
-
-export const Text = styled.p`
-  position: absolute;
-  left: 72px;
-  font-weight: bold;
-  font-size: 1.5rem;
-  color: ${theme.colors.white};
-  width: 35%;
-`
