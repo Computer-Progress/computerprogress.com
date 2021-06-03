@@ -12,6 +12,7 @@ export const Wrapper = styled.div`
   left: 0;
   right: 0;
   z-index: 10000;
+  background: linear-gradient(to right, #2000e5, #8f00ff, #8f00ff, #8f00ff), #2000e5;
 `;
 
 export const Logo = styled(Button)`

@@ -1,98 +1,109 @@
 import React, { useState } from "react";
-
 import Head from "next/head";
 import { Container } from "./styles.js";
 import NavBar from "../../components/NavBar";
 import Wave from "../../components/Wave";
 import Footer from "../../components/Footer";
-import FooterWave from "../../components/FooterWave";
-import Chart from '../../components/Chart'
+import Chart from "../../components/Chart";
+import Tabs from "../../components/Tabs";
+import StateOfArtBox from "../../components/StateOfArtBox";
+import Button from "../../components/Button"
 import {
   imagenet,
   mscoco,
   squad1_1,
   conll2003,
   wmt2014_enfr,
-  wmt2014_enge
-} from '../../data'
-
+  wmt2014_enge,
+} from "../../data";
 
 export default function Home() {
-  const [data, setData] = useState(imagenet)
-  const [label, setLabel] = useState("TOP 1")
-  const [buttons, setButtons] = useState([{
-    label: 'Imagenet',
-    onPress: () => {}
-  }])
+  const [data, setData] = useState(imagenet);
+  const [label, setLabel] = useState("TOP 1");
+  const [buttons, setButtons] = useState([
+    {
+      label: "Imagenet",
+      onPress: () => { },
+    },
+  ]);
 
   const tabs = [
     {
-      label: 'Image Classification',
+      name: "Image Classification",
       onSelect: () => {
-        setData(imagenet)
-        setLabel("TOP 1")
-        setButtons([{
-          label: 'Imagenet',
-          onPress: () => {}
-        }])
-      }
-    },
-    {
-      label: 'Object Detection',
-      onSelect: () => {
-        setData(mscoco)
-        setLabel("BOX AP")
-        setButtons([{
-          label: 'MS COCO',
-          onPress: () => {}
-        }])
-      }
-    },
-    {
-      label: 'Question Answering',
-      onSelect: () => {
-        setData(squad1_1)
-        setLabel("F1 SCORE")
-        setButtons([{
-          label: 'SQUAD 1.1',
-          onPress: () => {}
-        }])
-      }
-    },
-    {
-      label: 'Named Entity Recognition',
-      onSelect: () => {
-        setData(conll2003)
-        setLabel("F1 SCORE")
-        setButtons([{
-          label: 'Conll 2003',
-          onPress: () => {}
-        }])
-      }
-    },
-    {
-      label: 'Machine Translation',
-      onSelect: () => {
-        setData(wmt2014_enfr)
-        setLabel("BLEU")
+        setData(imagenet);
+        setLabel("TOP 1");
         setButtons([
           {
-            label: 'WMT 2014 EN-FR',
-            onPress: () => {
-              setData(wmt2014_enfr)
-              setLabel("BLEU")
-            }
-          }, {
-            label: 'WMT 2014 EN-GE',
-            onPress: () => {
-              setData(wmt2014_enge)
-              setLabel("BLEU")
-            }
+            name: "Imagenet",
+            onPress: () => { },
           },
-      ])
-      }
+        ]);
+      },
     },
-  ]
+    {
+      name: "Object Detection",
+      onSelect: () => {
+        setData(mscoco);
+        setLabel("BOX AP");
+        setButtons([
+          {
+            name: "MS COCO",
+            onPress: () => { },
+          },
+        ]);
+      },
+    },
+    {
+      name: "Question Answering",
+      onSelect: () => {
+        setData(squad1_1);
+        setLabel("F1 SCORE");
+        setButtons([
+          {
+            name: "SQUAD 1.1",
+            onPress: () => { },
+          },
+        ]);
+      },
+    },
+    {
+      name: "Named Entity Recognition",
+      onSelect: () => {
+        setData(conll2003);
+        setLabel("F1 SCORE");
+        setButtons([
+          {
+            name: "Conll 2003",
+            onPress: () => { },
+          },
+        ]);
+      },
+    },
+    {
+      name: "Machine Translation",
+      onSelect: () => {
+        setData(wmt2014_enfr);
+        setLabel("BLEU");
+        setButtons([
+          {
+            name: "WMT 2014 EN-FR",
+            onPress: () => {
+              setData(wmt2014_enfr);
+              setLabel("BLEU");
+            },
+          },
+          {
+            name: "WMT 2014 EN-GE",
+            onPress: () => {
+              setData(wmt2014_enge);
+              setLabel("BLEU");
+            },
+          },
+        ]);
+      },
+    },
+  ];
 
   return (
     <div>
@@ -104,7 +115,10 @@ export default function Home() {
       <NavBar />
       <Wave />
       <Container>
+        <Tabs selected={0} items={tabs} />
+        <Button>VIEW ALL DOMAINS</Button>
         <Chart data={data} label={label} />
+        <StateOfArtBox />
       </Container>
       <Footer />
     </div>
