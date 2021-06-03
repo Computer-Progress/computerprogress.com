@@ -2,9 +2,8 @@ import styled from "styled-components";
 import theme from "../../styles/theme";
 
 export const Wrapper = styled.div`
-  width: 304px;
+  width: 100%;
   height: 440px;
-  margin: 16px 72px 581px 32px;
   padding: 32px 16px 16px;
   border-radius: 16px;
   box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.25);
@@ -57,22 +56,69 @@ export const Percentage = styled.div`
 `;
 
 export const Line = styled.div`
-  width: 272px;
+  width: 90%;
   height: 1px;
-  margin: 17px 0 15px;
+  margin: 1.5rem auto;
   background-color: #c4c4c4;
 `;
 
-export const Burden = styled.div`
-  height: 44px;
-  margin: 15px 64px 8px 16px;
-  font-family: Montserrat;
-  font-size: 18px;
-  font-weight: 600;
-  font-stretch: normal;
-  font-style: normal;
-  line-height: normal;
-  letter-spacing: normal;
-  text-align: left;
-  color: #1a1515;
+export const Block = styled.div`
+  h4 {
+    width: 171px;
+    height: 44px;
+    margin: 8px 50px 17px 51px;
+    font-family: Montserrat;
+    font-size: 36px;
+    font-weight: bold;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: normal;
+    letter-spacing: normal;
+    text-align: center;
+    color: #1a1515;
+  }
+  p {
+    height: 44px;
+    margin: 15px 64px 8px 16px;
+    font-family: Montserrat;
+    font-size: 18px;
+    font-weight: 600;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: normal;
+    letter-spacing: normal;
+    text-align: left;
+    color: #1a1515;
+  }
+`;
+
+export const ModelBlock = styled.div`
+  p {
+    width: 192px;
+    height: 18px;
+    margin: 15px 64px 8px 16px;
+    font-family: Montserrat;
+    font-size: 18px;
+    font-weight: 600;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: normal;
+    letter-spacing: normal;
+    text-align: left;
+    color: #1a1515;
+  }
+  h5 {
+    width: 255px;
+    height: 29px;
+    margin: 8px 9px 24px 8px;
+    font-family: Montserrat;
+    font-size: 24px;
+    font-weight: 500;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: normal;
+    letter-spacing: normal;
+    text-align: center;
+    color: #000000;
+  }
 `;

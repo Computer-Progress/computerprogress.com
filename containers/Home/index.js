@@ -116,7 +116,7 @@ export default function Home() {
       <Wave />
       <Container>
         <Tabs selected={0} items={tabs} />
-        <>VIEW ALL DOMAINS</>
+        <Button>VIEW ALL DOMAINS</Button>
         <Chart data={data} label={label} />
         <StateOfArtBox />
       </Container>

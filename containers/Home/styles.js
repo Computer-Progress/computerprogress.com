@@ -9,5 +9,5 @@ export const Container = styled.div`
   font-size: 2rem;
   width: 90vw;
   margin: 0 auto;
-  height: 100vh;
+  /* height: 100vh; */
 `;
