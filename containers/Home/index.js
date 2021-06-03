@@ -16,10 +16,12 @@ import {
   wmt2014_enfr,
   wmt2014_enge,
 } from "../../data";
+import theme from "../../styles/theme.js";
 
 export default function Home() {
   const [data, setData] = useState(imagenet);
   const [label, setLabel] = useState("TOP 1");
+  const [selected, setSelected] = useState(0);
   const [buttons, setButtons] = useState([
     {
       label: "Imagenet",
@@ -33,6 +35,7 @@ export default function Home() {
       onSelect: () => {
         setData(imagenet);
         setLabel("TOP 1");
+        setSelected(0);
         setButtons([
           {
             name: "Imagenet",
@@ -46,6 +49,7 @@ export default function Home() {
       onSelect: () => {
         setData(mscoco);
         setLabel("BOX AP");
+        setSelected(1);
         setButtons([
           {
             name: "MS COCO",
@@ -59,6 +63,7 @@ export default function Home() {
       onSelect: () => {
         setData(squad1_1);
         setLabel("F1 SCORE");
+        setSelected(2);
         setButtons([
           {
             name: "SQUAD 1.1",
@@ -72,6 +77,7 @@ export default function Home() {
       onSelect: () => {
         setData(conll2003);
         setLabel("F1 SCORE");
+        setSelected(3);
         setButtons([
           {
             name: "Conll 2003",
@@ -85,6 +91,7 @@ export default function Home() {
       onSelect: () => {
         setData(wmt2014_enfr);
         setLabel("BLEU");
+        setSelected(4);
         setButtons([
           {
             name: "WMT 2014 EN-FR",
@@ -115,10 +122,10 @@ export default function Home() {
       <NavBar />
       <Wave />
       <Container>
-        <Tabs selected={0} items={tabs} />
-        <Button>VIEW ALL DOMAINS</Button>
+        <Tabs selected={selected} items={tabs} />
+        <Button color={theme.colors.black}>VIEW ALL DOMAINS</Button>
         <Chart data={data} label={label} />
-        <StateOfArtBox />
+        <StateOfArtBox data={data} />
       </Container>
       <Footer />
     </div>

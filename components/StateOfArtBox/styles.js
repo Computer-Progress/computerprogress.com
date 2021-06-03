@@ -1,19 +1,14 @@
 import styled from "styled-components";
 import theme from "../../styles/theme";
-
+import DefaultButton from "../../components/Button"
 export const Wrapper = styled.div`
-  width: 100%;
-  height: 470px;
-  padding: 32px 16px 16px;
+  padding: 16px;
   border-radius: 16px;
   box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.25);
   background-color: #f9f9f9;
 `;
 
 export const StateOfArt = styled.div`
-  width: 201px;
-  height: 29px;
-  margin: 0 35px 16px 36px;
   font-family: Montserrat;
   font-size: 22px;
   font-weight: bold;
@@ -26,8 +21,6 @@ export const StateOfArt = styled.div`
 `;
 
 export const Acurracy = styled.div`
-  width: 192px;
-  height: 18px;
   margin: 16px 64px 8px 16px;
   font-family: Montserrat;
   font-size: 18px;
@@ -41,8 +34,6 @@ export const Acurracy = styled.div`
 `;
 
 export const Percentage = styled.div`
-  width: 61px;
-  height: 44px;
   margin: 8px 106px 17px 105px;
   font-family: Montserrat;
   font-size: 36px;
@@ -56,19 +47,19 @@ export const Percentage = styled.div`
 `;
 
 export const Line = styled.div`
-  width: 90%;
-  height: 1px;
+  width: 100%;
   margin: 1.5rem auto;
   background-color: #c4c4c4;
+  height: 1px;
 `;
 
 export const Block = styled.div`
+  padding: 0px 10px;
   h4 {
-    width: 171px;
-    height: 44px;
-    margin: 8px 50px 17px 51px;
     font-family: Montserrat;
     font-size: 36px;
+    padding: 0px 0px 0px 0px;
+    margin: 0px 0px 0px 0px;
     font-weight: bold;
     font-stretch: normal;
     font-style: normal;
@@ -78,8 +69,6 @@ export const Block = styled.div`
     color: #1a1515;
   }
   p {
-    height: 44px;
-    margin: 15px 64px 8px 16px;
     font-family: Montserrat;
     font-size: 18px;
     font-weight: 600;
@@ -94,9 +83,6 @@ export const Block = styled.div`
 
 export const ModelBlock = styled.div`
   p {
-    width: 192px;
-    height: 18px;
-    margin: 15px 64px 8px 16px;
     font-family: Montserrat;
     font-size: 18px;
     font-weight: 600;
@@ -108,12 +94,12 @@ export const ModelBlock = styled.div`
     color: #1a1515;
   }
   h5 {
-    width: 255px;
-    height: 29px;
-    margin: 8px 9px 24px 8px;
-    font-family: Montserrat;
-    font-size: 24px;
+    flex: 1;
+    width: 100%;
+    font-size: 15px;
     font-weight: 500;
+    padding: 0px 0px 20px 0px;
+    margin: 0px 0px 0px 0px;
     font-stretch: normal;
     font-style: normal;
     line-height: normal;
@@ -123,18 +109,9 @@ export const ModelBlock = styled.div`
   }
 `;
 
-export const Button = styled.div`
-  flex-grow: 0;
-  padding: 4px 0;
-  font-family: Montserrat;
-  font-size: 16px;
-  font-weight: bold;
-  font-stretch: normal;
-  font-style: normal;
-  line-height: 1.78;
-  letter-spacing: normal;
-  text-align: center;
-  color: #2000e5;
+export const Button = styled(DefaultButton)`
+  padding: 0px 0px 0px 0px;
+  margin: 0px 0px 0px 0px;
 `;
 
 export const ButtonWrapper = styled.div`
