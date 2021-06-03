@@ -7,9 +7,11 @@ import {
   Line,
   Block,
   ModelBlock,
+  ButtonWrapper
 } from "./styles";
 
 import theme from "../../styles/theme";
+import Button from "../../components/Button"
 
 const StateOfArtBox = ({ items, onClick }) => {
   return (
@@ -27,6 +29,9 @@ const StateOfArtBox = ({ items, onClick }) => {
         <p>Model</p>
         <h5>NASNetA (6@4032)</h5>
       </ModelBlock>
+      <ButtonWrapper>
+        <Button primary link='/domains'>ViewPaper</Button>
+      </ButtonWrapper>
     </Wrapper>
   );
 };

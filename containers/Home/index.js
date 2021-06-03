@@ -7,6 +7,7 @@ import Wave from "../../components/Wave";
 import Chart from "../../components/Chart";
 import Tabs from "../../components/Tabs";
 import StateOfArtBox from "../../components/StateOfArtBox";
+import Button from "../../components/Button"
 
 import {
   imagenet,
@@ -23,7 +24,7 @@ export default function Home() {
   const [buttons, setButtons] = useState([
     {
       label: "Imagenet",
-      onPress: () => {},
+      onPress: () => { },
     },
   ]);
 
@@ -36,7 +37,7 @@ export default function Home() {
         setButtons([
           {
             name: "Imagenet",
-            onPress: () => {},
+            onPress: () => { },
           },
         ]);
       },
@@ -49,7 +50,7 @@ export default function Home() {
         setButtons([
           {
             name: "MS COCO",
-            onPress: () => {},
+            onPress: () => { },
           },
         ]);
       },
@@ -62,7 +63,7 @@ export default function Home() {
         setButtons([
           {
             name: "SQUAD 1.1",
-            onPress: () => {},
+            onPress: () => { },
           },
         ]);
       },
@@ -75,7 +76,7 @@ export default function Home() {
         setButtons([
           {
             name: "Conll 2003",
-            onPress: () => {},
+            onPress: () => { },
           },
         ]);
       },

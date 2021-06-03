@@ -3,7 +3,7 @@ import theme from "../../styles/theme";
 
 export const Wrapper = styled.div`
   width: 100%;
-  height: 440px;
+  height: 470px;
   padding: 32px 16px 16px;
   border-radius: 16px;
   box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.25);
@@ -121,4 +121,23 @@ export const ModelBlock = styled.div`
     text-align: center;
     color: #000000;
   }
+`;
+
+export const Button = styled.div`
+  flex-grow: 0;
+  padding: 4px 0;
+  font-family: Montserrat;
+  font-size: 16px;
+  font-weight: bold;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 1.78;
+  letter-spacing: normal;
+  text-align: center;
+  color: #2000e5;
+`;
+
+export const ButtonWrapper = styled.div`
+  display: flex;
+  justify-content: center;
 `;
