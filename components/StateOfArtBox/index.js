@@ -2,16 +2,12 @@ import React, { useEffect, useState } from "react";
 import {
   Wrapper,
   StateOfArt,
-  Acurracy,
-  Percentage,
   Line,
   Block,
   ModelBlock,
   ButtonWrapper,
   Button,
 } from "./styles";
-
-import theme from "../../styles/theme";
 
 const StateOfArtBox = ({ data }) => {
 
@@ -33,20 +29,20 @@ const StateOfArtBox = ({ data }) => {
       <StateOfArt>{"State-Of-The-Art"}</StateOfArt>
       <Block>
         <p> {"Acurracy:"}</p>
-        <h4>{Math.trunc(stateOfArt.accuracy * 100)}%</h4>
+        <h4>{stateOfArt.accuracy * 100}%</h4>
       </Block>
       <Line />
       <Block>
-        <p>Computation - Hardware burden</p>
+        <p>Hardware Burden:</p>
         <h4>10<sup>{Math.log10(stateOfArt.hardware_burden).toFixed(2)}</sup></h4>
       </Block>
       <Line />
       <ModelBlock>
-        <p>Model</p>
+        <p>Model:</p>
         <h5>{stateOfArt.model}</h5>
       </ModelBlock>
       <ButtonWrapper>
-        <Button primary link='/domains'>ViewPaper</Button>
+        <Button primary link='/domains'>View Paper</Button>
       </ButtonWrapper>
     </Wrapper>
   );

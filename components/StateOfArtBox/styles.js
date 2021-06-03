@@ -5,7 +5,7 @@ export const Wrapper = styled.div`
   padding: 16px;
   border-radius: 16px;
   box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.25);
-  background-color: #f9f9f9;
+  background-color: ${theme.colors.white};
 `;
 
 export const StateOfArt = styled.div`
@@ -54,7 +54,7 @@ export const Line = styled.div`
 `;
 
 export const Block = styled.div`
-  padding: 0px 10px;
+  padding: 7px 10px;
   h4 {
     font-family: Montserrat;
     font-size: 36px;
