@@ -29,7 +29,8 @@ const chart = ({ data, label, isByYear }) => {
         name: element.model,
         marker: {
           symbol: "circle",
-          radius: 3,
+          fillColor: "#8f00ff",
+          radius: 4,
           states: {
             hover: {
               enabled: true
@@ -68,7 +69,7 @@ const chart = ({ data, label, isByYear }) => {
           }
         },
         line: {
-          color: "#00b4d8"
+          color: "#000000"
         }
       },
 
@@ -77,47 +78,55 @@ const chart = ({ data, label, isByYear }) => {
         {
           type: "line",
           showInLegend: true,
+          color:"#000000",
           name: result.string
-            .replace("x", isByYear ? " Year" : " log(Computation)")
+            .replace("x", isByYear ? " Year" : " log(Hardware Burden)")
             .replace("+ -", " - ")
-            .replace("y", "1 / Error"),
+            .replace("y", label),
           data: [result.points[0], result.points[result.points.length - 1]],
           marker: {
             enabled: false
           },
           states: {
             hover: {
-              lineWidth: 2
+              lineWidth: 3
             }
           },
-          enableMouseTracking: true
+          enableMouseTracking: false
         }
       ],
 
       legend: {
         layout: "vertical",
         align: "center",
-        verticalAlign: "top"
+        verticalAlign: "top",
+        symbolHeight: .001,
+        symbolWidth: .001,
+        symbolRadius: .001,
+        fontFamily: "Montserrat, sans-serif"
       },
-
+      credits: {
+        enabled: false
+      },
       title: {
-        text: ""
+        text: "",
       },
       xAxis: {
         title: {
-          text: isByYear ? 'YEAR' : "COMPUTATION (HARDWARE BURDEN)",
+          text: isByYear ? 'Year' : "Computation (Hardware Burden)",
           margin: 20,
           style: {
             color: "#333",
             fontWeight: "bold",
             fontSize: "18px",
-            fontFamily: "Trebuchet MS, Verdana, sans-serif"
+            fontFamily: "Montserrat, sans-serif"
           }
         },
         tickInterval: 1,
         labels: {
           style: {
-            fontSize: 13
+            fontSize: 15,
+            fontFamily: "Montserrat, sans-serif"
           },
           formatter: function () {
             return isByYear ? this.value : "10e+" + this.value;
@@ -132,12 +141,13 @@ const chart = ({ data, label, isByYear }) => {
             color: "#333",
             fontWeight: "bold",
             fontSize: "18px",
-            fontFamily: "Trebuchet MS, Verdana, sans-serif"
+            fontFamily: "Montserrat, sans-serif"
           }
         },
         labels: {
           style: {
-            fontSize: 13
+            fontSize: 15,
+            fontFamily: "Montserrat, sans-serif"
           },
           formatter: function () {
             let label = (1 - 1 / this.value) * 100;
