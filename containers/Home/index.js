@@ -25,9 +25,10 @@ export default function Home() {
   const [data, setData] = useState(imagenet);
   const [label, setLabel] = useState("TOP 1");
   const [selected, setSelected] = useState(0);
+  const [selectedButton, setSelectedButton] = useState(0);
   const [buttons, setButtons] = useState([
     {
-      label: "Imagenet",
+      name: "Imagenet",
       onPress: () => { },
     },
   ]);
@@ -39,6 +40,7 @@ export default function Home() {
         setData(imagenet);
         setLabel("TOP 1");
         setSelected(0);
+        setSelectedButton(0);
         setButtons([
           {
             name: "Imagenet",
@@ -53,6 +55,7 @@ export default function Home() {
         setData(mscoco);
         setLabel("BOX AP");
         setSelected(1);
+        setSelectedButton(0);
         setButtons([
           {
             name: "MS COCO",
@@ -67,6 +70,7 @@ export default function Home() {
         setData(squad1_1);
         setLabel("F1 SCORE");
         setSelected(2);
+        setSelectedButton(0);
         setButtons([
           {
             name: "SQUAD 1.1",
@@ -81,6 +85,7 @@ export default function Home() {
         setData(conll2003);
         setLabel("F1 SCORE");
         setSelected(3);
+        setSelectedButton(0);
         setButtons([
           {
             name: "Conll 2003",
@@ -95,11 +100,13 @@ export default function Home() {
         setData(wmt2014_enfr);
         setLabel("BLEU");
         setSelected(4);
+        setSelectedButton(0);
         setButtons([
           {
             name: "WMT 2014 EN-FR",
             onPress: () => {
               setData(wmt2014_enfr);
+              setSelectedButton(0);
               setLabel("BLEU");
             },
           },
@@ -107,6 +114,7 @@ export default function Home() {
             name: "WMT 2014 EN-GE",
             onPress: () => {
               setData(wmt2014_enge);
+              setSelectedButton(1);
               setLabel("BLEU");
             },
           },
@@ -127,13 +135,13 @@ export default function Home() {
         <Wave />
       </Header>
       <Container>
-        <h4> TASKS</h4>
+        <h4>TASKS</h4>
         <Tabs selected={selected} items={tabs} />
         <div className="viewAll">
           <Button color={theme.colors.black}>VIEW ALL TASKS</Button>
         </div>
         <div className="chart">
-          <Dataset />
+          <Dataset buttons={buttons} selected={selectedButton} />
           <Chart data={data} label={label} />
         </div>
         <StateOfArtBox data={data} />
