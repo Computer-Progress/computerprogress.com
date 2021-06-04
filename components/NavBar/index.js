@@ -11,7 +11,7 @@ export default function Navbar() {
           <LogoName>Computer Progress</LogoName>
         </Logo>
         <Menu>
-          <Button link='/domains'>Domains</Button>
+          <Button link='/domains'>Tasks</Button>
           <Button link='/about_us'>About Us</Button>
         </Menu>
         <Auth>

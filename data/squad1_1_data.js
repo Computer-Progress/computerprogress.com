@@ -93,7 +93,7 @@ export default [
   {
     index: 52,
     year: 2019,
-    model: "(ensemble)",
+    model: "SpanBERT",
     hardware_burden: 585792000000.0,
     accuracy: 0.946
   },
