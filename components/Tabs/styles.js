@@ -8,11 +8,9 @@ export const Wrapper = styled.div`
   justify-content: space-evenly;
   align-items: center;
   flex-direction: row;
-  padding: 0px;
-  border-radius: 8px 8px 0 0;
-  -webkit-box-shadow: 0px 3px 5px 0px rgba(0, 0, 0, 0.15);
-  box-shadow: 0px 3px 5px 0px rgba(0, 0, 0, 0.15);
-  margin: 10px;
+  border-radius: 16px 16px 0 0;
+box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.25);
+  height: 100%;
 `;
 
 export const ItemWrapper = styled.div`
@@ -21,9 +19,9 @@ export const ItemWrapper = styled.div`
   justify-content: center;
   align-items: center;
   flex-direction: row;
-  padding: 10px;
+  transition: all 0.3s ease-out;
   border-bottom: ${({ selected }) =>
-    selected ? `2px solid ${theme.colors.secondary}` : "0px"};
+    selected ? `2px solid ${theme.colors.secondary}` : "2px solid white"};
 `;
 
 export const Item = styled.div`
@@ -33,12 +31,18 @@ export const Item = styled.div`
 `;
 
 export const Separator = styled.div`
-  height: 30px;
+  height: 81%;
   width: 1px;
   background-color: ${theme.colors.grey};
 `;
 
 export const StyledButton = styled(Button)`
-  padding: 0px 0px 0px 0px;
-  color: black;
+  /* padding: ; */
+  padding: 24px 0px;
+  width: 100%;
+  margin: 0;
+
+  color: ${theme.colors.black};
+  font-weight: 500;
+  ${({selected}) => selected && `color: ${theme.colors.secondary}; font-weight: 600;`}
 `;

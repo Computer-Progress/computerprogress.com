@@ -1,7 +1,7 @@
 export default function Circuit() {
     return (
 
-      <svg className="svg" width="100%" viewBox="0 0 1920 500" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlnsXlink="http://www.w3.org/1999/xlink">
+      <svg className="svg" width="100%" viewBox="0 0 1920 600" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlnsXlink="http://www.w3.org/1999/xlink">
         <defs>
           <linearGradient id="linear" x1="0%" y1="0%" x2="100%" y2="0%">
             <stop offset="0%" stopColor="#148BB1" />

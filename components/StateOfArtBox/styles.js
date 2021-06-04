@@ -2,14 +2,24 @@ import styled from "styled-components";
 import theme from "../../styles/theme";
 import DefaultButton from "../../components/Button"
 export const Wrapper = styled.div`
-  padding: 16px;
+  display: flex;
+  padding: 32px;
+  padding-bottom: 20px;
+  flex-direction: column;
+  justify-content: space-between;
   border-radius: 16px;
-  box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.25);
-  background-color: ${theme.colors.white};
+box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.25);
+    background-color: ${theme.colors.white};
+  .blockWrapper {
+    flex: 1 1 100%;
+    display: flex;
+    flex-direction: column;
+  justify-content: space-between;
+  }
 `;
 
 export const StateOfArt = styled.div`
-  font-family: Montserrat;
+  font-family: 'Montserrat';
   font-size: 22px;
   font-weight: bold;
   font-stretch: normal;
@@ -22,7 +32,7 @@ export const StateOfArt = styled.div`
 
 export const Acurracy = styled.div`
   margin: 16px 64px 8px 16px;
-  font-family: Montserrat;
+  font-family: 'Montserrat';
   font-size: 18px;
   font-weight: 600;
   font-stretch: normal;
@@ -35,7 +45,7 @@ export const Acurracy = styled.div`
 
 export const Percentage = styled.div`
   margin: 8px 106px 17px 105px;
-  font-family: Montserrat;
+  font-family: 'Montserrat';
   font-size: 36px;
   font-weight: bold;
   font-stretch: normal;
@@ -48,28 +58,34 @@ export const Percentage = styled.div`
 
 export const Line = styled.div`
   width: 100%;
-  margin: 1.5rem auto;
+  margin: 0rem auto;
   background-color: #c4c4c4;
   height: 1px;
 `;
 
 export const Block = styled.div`
-  padding: 7px 10px;
   h4 {
-    font-family: Montserrat;
+    font-family: 'Montserrat';
     font-size: 36px;
-    padding: 0px 0px 0px 0px;
-    margin: 0px 0px 0px 0px;
     font-weight: bold;
     font-stretch: normal;
     font-style: normal;
     line-height: normal;
     letter-spacing: normal;
-    text-align: center;
+    justify-content: center;
     color: #1a1515;
+    span{
+    font-size: 18px;
+    bottom: 0;
+
+    }
+    sup{
+    font-size: 28px;
+      margin-bottom: 15px;
+    }
   }
   p {
-    font-family: Montserrat;
+    font-family: 'Montserrat';
     font-size: 18px;
     font-weight: 600;
     font-stretch: normal;
@@ -83,7 +99,7 @@ export const Block = styled.div`
 
 export const ModelBlock = styled.div`
   p {
-    font-family: Montserrat;
+    font-family: 'Montserrat';
     font-size: 18px;
     font-weight: 600;
     font-stretch: normal;
@@ -110,9 +126,7 @@ export const ModelBlock = styled.div`
 `;
 
 export const Button = styled(DefaultButton)`
-  padding: 0px 0px 0px 0px;
-  margin: 0px 0px 0px 0px;
-`;
+font-size: 16px;`;
 
 export const ButtonWrapper = styled.div`
   display: flex;

@@ -1,8 +1,8 @@
 import { useState, useEffect } from 'react';
-import { Header, Text } from './styles';
+import { Wave, Text, TextWrapper } from './styles';
 import theme from "../../styles/theme";
 
-const Wave = () => {
+export default () => {
   const [animated, setAnimated] = useState(false);
 
   useEffect(() => {
@@ -13,7 +13,7 @@ const Wave = () => {
 
   return (
     <>
-      <Header fill="url(#gradient)"
+      <Wave fill="url(#gradient)"
         paused={animated}
         options={{
           height: 50,
@@ -28,10 +28,12 @@ const Wave = () => {
             <stop offset="100%" stopColor="#2000e5" />
           </linearGradient>
         </defs>
-      </Header>
+      </Wave>
+      <TextWrapper>
+
       <Text>Understand the growing computational burden in the history of computer progress.</Text>
+      </TextWrapper>
     </>
   );
 }
 
-export default Wave;

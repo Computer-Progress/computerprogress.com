@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-
+import { ChartWrapper } from './styles'
 import HighchartsReact from "highcharts-react-official";
 import Highcharts from "highcharts/highcharts.src.js";
 import HighchartsExporting from "highcharts/modules/exporting";
@@ -78,7 +78,7 @@ const chart = ({ data, label, isByYear }) => {
         {
           type: "line",
           showInLegend: true,
-          color:"#000000",
+          color: "#000000",
           name: result.string
             .replace("x", isByYear ? " Year" : " log(Hardware Burden)")
             .replace("+ -", " - ")
@@ -169,10 +169,13 @@ const chart = ({ data, label, isByYear }) => {
   }
 
   return (
-    <HighchartsReact
-      highcharts={Highcharts}
-      options={chartOptions}
-    />
+    <ChartWrapper>
+
+      <HighchartsReact
+        highcharts={Highcharts}
+        options={chartOptions}
+      />
+    </ChartWrapper>
   );
 }
 export default chart;

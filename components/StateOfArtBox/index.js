@@ -12,7 +12,7 @@ import {
 const StateOfArtBox = ({ data }) => {
 
   const [stateOfArt, setStateOfArt] = useState({});
-  
+
   useEffect(() => {
     let bestIndex = 0;
     const accuracy = data.reduce((sum, curr, index) => {
@@ -26,23 +26,28 @@ const StateOfArtBox = ({ data }) => {
 
   return (
     <Wrapper>
-      <StateOfArt>{"State-Of-The-Art"}</StateOfArt>
-      <Block>
-        <p> {"Acurracy:"}</p>
-        <h4>{stateOfArt.accuracy * 100}%</h4>
-      </Block>
-      <Line />
-      <Block>
-        <p>Hardware Burden:</p>
-        <h4>10<sup>{Math.log10(stateOfArt.hardware_burden).toFixed(2)}</sup></h4>
-      </Block>
-      <Line />
-      <ModelBlock>
-        <p>Model:</p>
-        <h5>{stateOfArt.model}</h5>
-      </ModelBlock>
+      <StateOfArt>State-Of-The-Art</StateOfArt>
+      <div className="blockWrapper">
+        <Block>
+          <p>Acurracy:</p>
+          <h4>{stateOfArt.accuracy * 100}<span>
+            %
+          </span>
+          </h4>
+        </Block>
+        <Line />
+        <Block>
+          <p>Hardware Burden:</p>
+          <h4>10<sup>{Math.log10(stateOfArt.hardware_burden).toFixed(2)}</sup></h4>
+        </Block>
+        <Line />
+        <ModelBlock>
+          <p>Model:</p>
+          <h5>{stateOfArt.model}</h5>
+        </ModelBlock>
+      </div>
       <ButtonWrapper>
-        <Button primary link='/domains'>View Paper</Button>
+        <Button primary link='/domains'>VIEW PAPER</Button>
       </ButtonWrapper>
     </Wrapper>
   );

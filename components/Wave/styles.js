@@ -1,19 +1,27 @@
 import styled from "styled-components";
-import Wave from 'react-wavify';
+import ReactWave from 'react-wavify';
 import theme from "../../styles/theme";
 
-export const Header = styled(Wave)`
+export const Wave = styled(ReactWave)`
   transform: rotate(180deg);
-  margin-top: -5px;
+  position: absolute;
+  top: 0;
+  z-index: -1;
   height: 300px;
 `;
 
 export const Text = styled.p`
-  position: absolute;
-  top: 100px;
-  left: 72px;
-  font-weight: bold;
+   font-weight: bold;
   font-size: 1.5rem;
   color: ${theme.colors.white};
-  width: 35%;
+  width: 45%;
+`
+
+export const TextWrapper = styled.div`
+width: 100%;
+padding: 60px 3.75%;
+margin: 0 auto;
+max-width: 1920px;
+position: relative;
+
 `

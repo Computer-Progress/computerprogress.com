@@ -9,10 +9,14 @@ export const Button = styled.button`
   border-radius: 100px;
   border: none;
   cursor: pointer;
-  background: ${({ primary }) =>
-    primary ? theme.colors.white : "transparent"};
+  background: ${({ primary, background }) =>
+    background || primary ? theme.colors.white : "transparent"};
   color: ${({ primary, color }) =>
     color || primary ? "#8f00ff" : theme.colors.white};
+  ${({cta}) => cta && `
+  background: #2000E5;
+  color: white;
+  `}
   font-weight: bold;
   transition: all 0.3s ease-in-out;
   &:hover {

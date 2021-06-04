@@ -10,27 +10,28 @@ export const Wrapper = styled.div`
 export const Container = styled.div`
   display: flex;
   flex-direction: column;
-  padding-top: 100px;
   width: 100%;
+  padding:0 3.75%;
+  padding-top: 100px;
+  max-width: 1920px;
+  margin: 0 auto;
 `;
 
 export const Logos = styled.div`
   display: flex;
-  justify-content: space-between;
-  padding: 25px 150px;
+  justify-content: space-around;
 `;
 
 export const Text = styled.p`
   display: flex;
   font-weight: bold;
   font-size: 1.5rem;
-  margin-left:50px;
+  margin-bottom: 2rem;
   color: ${theme.colors.white};
 `
 
 export const Copyright = styled.p`
   display: flex;
   justify-content: flex-end;
-  margin-right:50px;
   color: ${theme.colors.white};
 `

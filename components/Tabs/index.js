@@ -10,6 +10,7 @@ const Tabs = ({ items, onClick, selected }) => {
         <>
           <ItemWrapper selected={selected === index}>
             <StyledButton
+            selected={selected === index}
               color={theme.colors.black}
               onClick={item.onSelect}
             >

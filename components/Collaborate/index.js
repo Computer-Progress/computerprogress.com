@@ -6,11 +6,11 @@ export default function Collaborate() {
   return (
     <Wrapper>
       <Container>
-      <Circuit/>
-      <Text> Your help can change everything! </Text>
-      <Call> Collaborate for the understanding of hardware <br/> burden influence in machine learning.</Call>
-      <Button link='/collaborate' primary>SEE HOW TO COLLABORATE</Button>
+        <Circuit />
+        <Text> Your help can change everything! </Text>
+        <Call> Collaborate for the understanding of hardware <br /> burden influence in machine learning.</Call>
+        <Button link='/collaborate' cta>SEE HOW TO COLLABORATE</Button>
       </Container>
     </Wrapper>
-    );
+  );
 }
