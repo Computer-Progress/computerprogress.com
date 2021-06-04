@@ -29,7 +29,7 @@ export const Text = styled.p`
   margin-bottom: 3rem;
 
   font-size: 2.25rem;
-  color: ${theme.colors.primary};
+  color: "#2000E5";
 `
 
 export const Call = styled.p`
@@ -38,6 +38,6 @@ export const Call = styled.p`
   margin-top: 0;
   font-weight: 500;
   font-size: 1.5rem;
-  color: ${theme.colors.primary};
+  color: "#2000E5";
 `
 

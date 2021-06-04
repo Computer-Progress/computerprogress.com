@@ -8,9 +8,10 @@ export default function Collaborate() {
       <Container>
         <Circuit />
         <Text> Your help can change everything! </Text>
-        <Call> Collaborate for the understanding of hardware <br /> burden influence in machine learning.</Call>
+        <Call> Collaborate on the understanding of the hardware <br /> burden influence on machine learning.</Call>
         <Button link='/collaborate' cta>SEE HOW TO COLLABORATE</Button>
       </Container>
     </Wrapper>
   );
 }
+

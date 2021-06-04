@@ -17,7 +17,6 @@ export const Button = styled.button`
   background: #2000E5;
   color: white;
   `}
-  font-weight: bold;
   transition: all 0.3s ease-in-out;
   &:hover {
     opacity: 0.8;

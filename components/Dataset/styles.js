@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import { Button } from "../Button/styles";
+import theme from "../../styles/theme";
 
 export const Wrapper = styled.div`
     flex: 1 1 20%;
@@ -31,7 +32,6 @@ line-height: 20px;
 display: flex;
 align-items: center;
 text-align: center;
-color: #2000E5;
-${({ selected }) => selected && `border: 1px solid #2000E5`}
-
+color: #8f00ff;
+${({ selected }) => selected && `border: 1px solid #1A1515`}
 `;

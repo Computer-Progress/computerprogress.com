@@ -127,10 +127,10 @@ export default function Home() {
         <Wave />
       </Header>
       <Container>
-        <h4> DOMAINS</h4>
+        <h4> TASKS</h4>
         <Tabs selected={selected} items={tabs} />
         <div className="viewAll">
-          <Button color={theme.colors.black}>VIEW ALL DOMAINS</Button>
+          <Button color={theme.colors.black}>VIEW ALL TASKS</Button>
         </div>
         <div className="chart">
           <Dataset />
