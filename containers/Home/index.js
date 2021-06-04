@@ -8,6 +8,8 @@ import Chart from "../../components/Chart";
 import Tabs from "../../components/Tabs";
 import StateOfArtBox from "../../components/StateOfArtBox";
 import Button from "../../components/Button"
+import Collaborate from "../../components/Collaborate";
+
 import {
   imagenet,
   mscoco,
@@ -127,6 +129,7 @@ export default function Home() {
         <Chart data={data} label={label} />
         <StateOfArtBox data={data} />
       </Container>
+      <Collaborate/>
       <Footer />
     </div>
   );

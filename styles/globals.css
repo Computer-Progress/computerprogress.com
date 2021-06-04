@@ -15,3 +15,41 @@ a {
 }
 
 @import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;700&display=swap");
+
+.svg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  background-color: transparent;
+  z-index: -1;
+ }
+ .path {
+  animation: draw 20s infinite;
+  animation-timing-function: linear;
+ }
+ .path-01 {
+  animation-delay: 0s;
+ }
+ .path-02 {
+  animation-delay: 1s;
+ }
+ .path-03 {
+  animation-delay: 2s;
+ }
+ .path-04 {
+  animation-delay: 3s;
+ }
+ .path-05 {
+  animation-delay: 4s;
+ }
+ 
+ 
+ 
+ @keyframes draw {
+  0% {
+  }
+  100% {
+    stroke-dashoffset: 0;
+    stroke-opacity: 1;
+  }
+ }
