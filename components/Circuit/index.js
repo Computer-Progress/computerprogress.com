@@ -9,149 +9,8 @@ export default function Circuit() {
           </linearGradient>
         </defs>
         <g id="module-01" transform="translate(-1.000000, 0.000000)" className="path path-01" stroke="url(#linear)" strokeWidth={4} fill="none" fillRule="evenodd" strokeLinecap="butt" strokeLinejoin="round" strokeOpacity={1} strokeDasharray="8,960,24,960,16,400" strokeDashoffset={6400}>
-          <g id="C23" transform="translate(177.000000, 0.000000)">
-            <polyline points="52 92 84 92 116 60 116 0" />
-            <polyline points="52 84 80 84 108 56 108 0" />
-            <polyline points="52 76 76 76 100 52 100 0" />
-            <polyline points="52 68 72 68 92 48 92 0" />
-            <polyline points="52 60 68 60 84 44 84 0" />
-            <path d="M16,56 L16,0" />
-            <path d="M8,56 L8,0" />
-            <path d="M24,56 L24,0" />
-            <path d="M32,56 L32,0" />
-            <path d="M40,56 L40,0" />
-            <path d="M48,56 L48,0" />
-            <path d="M0,92 L4,92" />
-            <polyline points="52 100 56 100 72 100 80.0156098 108.01561 80.0156098 124.007338" />
-            <path d="M0,100 L4,100" />
-            <path d="M0,84 L4,84" />
-            <path d="M0,76 L4,76" />
-            <path d="M0,68 L4,68" />
-            <path d="M0,60 L4,60" />
-            <polyline points="96 284 88 284 84 288 32 288 16 272 16 108 16 104" />
-            <polyline points="104 439 104 372 8 276 8 108 8 104" />
-            <polyline points="124 272 88 272 80 280 36 280 24 268 24 108 24 104" />
-            <polyline points="68 268 36 268 32 264 32 108 32 104" />
-            <polyline points="44.0311289 252.000061 44.0311289 244.031129 40 240 40 108 40 104" />
-            <polyline points="48 108 48 104 48 184 56 192 60 192 64 192" />
-          </g>
-          <g id="C22" transform="translate(0.000000, 239.000000)">
-            <polyline points="1 0 25 0 57 32 57 156 69 168 69 172" />
-            <polyline points="1 8 21 8 50 37 50 161 53 164 53 172" />
-            <polyline points="1 32 8 32 24 48 24 169 12.954639 180.045361 13 248 13 257 0 270" />
-            <polyline points="0 282 21 261 21 185 33 173 33 45 12 24 1 24" />
-            <polyline points="0 317 0 293 29 264 29 189 41 177 41 40 17 16 1 16" />
-          </g>
-          <g id="C21" transform="translate(1.000000, 115.000000)">
-            <polyline points="300 361 360 361 376.03122 344.96878 424 344.96878 471.000005 344.96878" />
-            <polyline points="0 41 76 41 120 85 120 201 156 237 176 237 208 269 208 285 196 297 196 337 228 369 252 369" />
-            <polyline points="300 369 391 369 395 365 464 365 468 361 476 361 520 405 556 405" />
-            <polyline points="300 353 356 353 372 337 376 337 380 333" />
-            <polyline points="0 17 88 17 144 73 144 181 224 261 224 293 212 305 212 329 236 353 252 353" />
-            <polyline points="300 345 352 345 384 313" />
-            <polyline points="224 317 224 329 240 345 252 345" />
-            <polyline points="300 337 347 337 376 308 376 305 385 296" />
-            <polyline points="136 12 136 21 152 37 152 177 232 257 232 293 236 297 236 329 244 337 252 337" />
-            <polyline points="300 329 316 329 320 325 336 325" />
-            <polyline points="348 597 328 597 304 573 304 409 296 401 296 373" />
-            <polyline points="244 281 244 325 248 329 252 329" />
-            <polyline points="264 325 264 265 168 169 168 29 160 21 160 12" />
-            <polyline points="260 489 259.984385 441.015635 247.96878 429.000031 247.96878 413.03122 264 397 264 373" />
-            <polyline points="256 325 256 269 160 173 160 33 148 21 148 0" />
-            <polyline points="239 406 256 389 256 373" />
-            <polyline points="272 325 272 261 176 165 176 25 172 21 172 1" />
-            <polyline points="259 417 259 414 272 401 272 373" />
-            <polyline points="272 433 272 413 280 405 280 373" />
-            <polyline points="288 325 288 237 304 221 304 212" />
-            <polyline points="348 605 323 605 296 578 296 414 288 406 288 373" />
-            <polyline points="296 325 296 241 316 221 316 201" />
-            <polyline points="0 33 79.9895845 32.9895845 128 81 128 197 144 213 164 213 216 265 216 289 204 301.285714 204 333.571429 231.428571 361 252 361" />
-          </g>
-          <g id="C20" transform="translate(1.000000, 622.000000)">
-            <polyline points="0 21 88 21 101 8 101 1" />
-            <polyline points="0 29 93 29 117.020824 4.9791757 117.020824 0.99994551" />
-            <polyline points="0 37 96 37 133 0" />
-            <polyline points="0 53 4 53 12 44.9377423 100 45 135 10 143 10 152 1" />
-            <polyline points="0 61 9 61 17 53 104 53 140 17 164 17" />
-          </g>
-          <g id="C18" transform="translate(1.000000, 771.000000)">
-            <polyline id="Path-4-Copy-466" points="0 137 60 137 100 97 100 29 100 20 119.026298 0.97370241 128.058497 0.97370241" />
-            <polyline id="Path-4-Copy-467" points="0 129 42 129 56 129 92 93 92 29 92 13 100.513149 4.4868512" />
-            <polyline id="Path-4-Copy-468" points="0 121 42 121 53 121 85 89 85 42 76 33 76 29 76 19" />
-            <polyline id="Path-4-Copy-469" points="0 113 42 113 47 113 75 85 75 43 65 33 65 29 65 5" />
-            <polyline id="Path-4-Copy-470" points="0 105 42 105 44 105 68 81 68 49 52 33 52 29 52 19" />
-            <polyline id="Path-4-Copy-165" points="0 145 67 145 76 136" />
-          </g>
-          <g id="C17" transform="translate(217.000000, 519.000000)">
-            <path d="M188,201 L203,201" />
-            <polyline points="23 48 28 53 28 73 16 85 16 117 64 165 64 181 100 217 132 217" />
-            <path d="M188,217 L203,217" />
-            <polyline points="50.976204 135.999929 50.976204 139.976204 72 161 72 177 104 209 132 209" />
-            <polyline points="0 48.9934213 0 125 48 173 48 189 92 233 132 233" />
-            <path d="M188,233 L203,233" />
-            <polyline points="13 68 8 73 8 121 56 169 56 185 96 225 132 225" />
-            <polyline points="139 185 139 169 107 137 107 105 99 97 99 45" />
-            <polyline points="41 445 41 427 52 416 52 377 140 289 140 281 140 241" />
-            <polyline points="53 433 53 428 61 420 61 380 148 293 148 281 148 241" />
-            <polyline points="65 445 65 428 69 424 69 384 156 296 156 281 156 241" />
-            <polyline points="77 433 77 388 164 301 164 281 164 241" />
-            <polyline points="125 428 125 424 129 420 129 348 172 305 172 281 172 241" />
-            <polyline points="136 448 136 353 180 309 180 281 180 241" />
-            <path d="M188,193 L193,193" />
-            <path d="M188,209 L193,209" />
-            <path d="M188,225 L193,225" />
-            <polyline points="155 185 155 161 124 130 124 46" />
-            <polyline points="147 185 147 164 116 133 116 89 112 85 112 57.9814878" />
-            <polyline points="163 185 163 156 132 125 132 85 140 77 140 45" />
-            <polyline points="171 185 171 153 140 122 140 88.984852 147.99243 80.9924224 147.99243 48.9999991 168.021383 28.9710453 200.000013 28.9710453 227.985533 0.985525461 244.000007 0.985525461 300.007241 56.9927599 316.000002 56.9927599 324.059116 48.9336452 336.000184 48.9336452" />
-            <polyline points="179 185 179 149 148 118 148 92 156 84 156 61 169 48" />
-          </g>
-          <g id="C16" transform="translate(166.000000, 539.000000)">
-            <polyline id="paths" points="43 317 43 261 43 240 72 211 72 173 68 169 68 156" />
-            <polyline id="paths" points="27 317 27 261 27 232 51 208 51 205" />
-            <polyline id="paths" points="59 317 59 261 59 248 88.0172363 218.982764 88.0172363 207.999986 92.1298907 203.887332 92.1298907 197" />
-            <polyline id="paths" points="51 317 51 261 51 244 80 215 80 168" />
-            <polyline id="paths" points="35 317 35 261 35 237 64 208 64 177 51 164 51 129 35 113 35 45 0 10 0 0" />
-            <polyline id="paths" points="19 317 19 261 19 229 36 212 36 137 16 117 16 88" />
-            <polyline id="paths" points="63 361 67 361 83 361 91.0156098 369.01561 91.0156098 385.007338" />
-            <polyline id="paths" points="59 369 59 365 59 445 67 453 71 453 75 453" />
-            <polyline id="paths" points="107 545 99 545 95 549 43 549 27 533 27 369 27 365" />
-            <polyline id="paths" points="79 529 47 529 43 525 43 369 43 365" />
-            <polyline id="paths" points="63 353 95 353 127 321 127 261 127 249 144 232" />
-            <polyline id="paths" points="63 345 91 345 119 317 119 261 119 241 129 231" />
-            <polyline id="paths" points="63 337 87 337 111 313 111 261 111 232" />
-            <polyline id="paths" points="63 329 83 329 103 309 103 261 103 252 99 248 99 244" />
-            <polyline id="paths" points="63 321 79 321 95 305 95 261 95 256 91 252" />
-            <polyline id="paths" points="115 700 115 633 19 537 19 369 19 365" />
-            <polyline id="paths" points="135 533 99 533 91 541 47 541 35 529 35 369 35 365" />
-            <polyline id="paths" points="55.0311289 513.000061 55.0311289 505.031129 51 501 51 369 51 365" />
-          </g>
-          <g id="C14" transform="translate(309.000000, 0.000000)">
-            <polyline points="272 196 288 196 300 208 300 224 324 248 416 248 421 243 428 243" />
-            <polyline points="272 188 292 188 308 204 308 220 328 240 412.005952 240 420.002977 232.002976 480 232.002976 493.001488 219.001488 494 218 494 171" />
-            <path d="M272,180 L284,180" />
-            <path d="M272,172 L284,172" />
-            <polyline points="380.05579 370.996531 371.003473 370.996531 368.000001 367.993058 324.006943 367.993058 296.013886 340.000001 296.013886 267.013886 260 231 260 216" />
-            <polyline points="-2.52347418e-05 167.966704 20.9667036 167.966704 36 183 136 183 165 212 224 212" />
-            <polyline points="272 212 280 212 284 216 284 232 312 260 312 296 368 352 396 352 400 348 408 348" />
-            <polyline points="272 204 284 204 292 212 292 227 320 255 320 292.013511 371.993245 344.006756 392.02464 344.006756 401.069416 334.96198 420.000038 334.96198" />
-            <polyline points="248 360 248 356 265 339 265 320 248 303 248 267 228 247 228 216" />
-            <polyline points="280 352 280 276 244 240 244 216" />
-            <polyline points="223 196 172 196 144 168 144 0" />
-            <polyline points="236 168 236 148 272 112 272 0" />
-            <polyline points="224 204 169 204 136 171 136 0" />
-            <polyline points="228 167 228 144 264 108 264 0" />
-            <polyline points="264.003967 360.000001 264.003967 351.003969 272 343.007936 272 280 236 244 236 216" />
-            <polyline points="295.996576 360.000001 295.996576 352.003425 288 344.006849 288 271 252 235 252 216" />
-            <path d="M420.005435,359 L328,359 L304,335 L304,264 L268,228 L268,216" />
-            <polyline points="224.010169 188.022424 177.017751 188.022424 152 163.004673 152 56 152 0" />
-            <polyline points="244 168 244 152 280 116 280 0" />
-            <polyline points="224 180 181 180 160 159 160 0" />
-            <polyline points="252 168 252 156 288 120 288 0" />
-            <polyline points="224 172 185 172 168 155 168 0" />
-            <polyline points="260 168 260 160 296 124 296 0" />
-            <polyline points="268 168 268 164 304 128 304 0" />
-          </g>
+          
+          
         </g>
         <g id="module-02" transform="translate(599.000000, 0.000000)" className="path path-02" stroke="url(#linear)" strokeWidth={4} fill="none" fillRule="evenodd" strokeLinecap="butt" strokeLinejoin="round" strokeOpacity={1} strokeDasharray="8,960,24,960,16,400" strokeDashoffset={6400}>
           <g id="C12" transform="translate(377.000000, 0.000000)">
@@ -471,37 +330,6 @@ export default function Circuit() {
           </g>
         </g>
         <g id="static" transform="translate(48.000000, 56.000000)" stroke="#DDE0E2" strokeWidth={2} fill="none" fillRule="evenodd" strokeLinecap="round" strokeLinejoin="round">
-          <rect x={132} y={0} width={48} height={48} rx={4} />
-          <circle cx={172} cy={200} r={4} />
-          <circle cx={200} cy={212} r={4} />
-          <circle cx={228} cy={228} r={4} />
-          <circle cx={256} cy={216} r={4} />
-          <circle cx={208} cy={72} r={4} />
-          <circle cx={20} cy={359} r={4} />
-          <circle cx={4} cy={359} r={4} />
-          <rect x={204} y={384} width={48} height={48} rx={4} />
-          <circle cx={268} cy={256} r={4} />
-          <circle cx={256} cy={267} r={4} />
-          <circle cx={512} cy={464} r={4} />
-          <circle cx={427} cy={404} r={4} />
-          <circle cx={88} cy={67} r={4} />
-          <circle cx={100} cy={55} r={4} />
-          <circle cx={112} cy={67} r={4} />
-          <circle cx={124} cy={55} r={4} />
-          <circle cx={335} cy={388} r={4} />
-          <circle cx={339} cy={368} r={4} />
-          <circle cx={340} cy={352} r={4} />
-          <circle cx={292} cy={384} r={4} />
-          <circle cx={188} cy={468} r={4} />
-          <circle cx={196} cy={336} r={4} />
-          <circle cx={176} cy={372} r={4} />
-          <circle cx={224} cy={496} r={4} />
-          <circle cx={211} cy={480} r={4} />
-          <circle cx={53} cy={563} r={4} />
-          <circle cx={120} cy={583} r={4} />
-          <circle cx={69} cy={563} r={4} />
-          <circle cx={107} cy={563} r={4} />
-          <circle cx={88} cy={563} r={4} />
           <rect x={1804} y={384} width={48} height={48} rx={4} />
           <circle cx={1868} cy={256} r={4} />
           <circle cx={1856} cy={267} r={4} />
@@ -529,42 +357,6 @@ export default function Circuit() {
           <circle cx={84} cy={716} r={4} />
           <circle cx={28} cy={729} r={4} />
           <circle cx={31} cy={848} r={4} />
-          <rect x={300} y={648} width={56} height={56} rx={4} />
-          <circle cx={508} cy={512} r={4} />
-          <circle cx={340} cy={508} r={4} />
-          <circle cx={168} cy={508} r={4} />
-          <circle cx={188} cy={508} r={4} />
-          <circle cx={184} cy={528} r={4} />
-          <circle cx={308} cy={504} r={4} />
-          <circle cx={292} cy={504} r={4} />
-          <circle cx={267} cy={504} r={4} />
-          <circle cx={280} cy={517} r={4} />
-          <circle cx={304} cy={915} r={4} />
-          <circle cx={293} cy={895} r={4} />
-          <circle cx={245} cy={900} r={4} />
-          <circle cx={221} cy={900} r={4} />
-          <circle cx={233} cy={912} r={4} />
-          <circle cx={209} cy={912} r={4} />
-          <circle cx={375} cy={696} r={4} />
-          <circle cx={375} cy={680} r={4} />
-          <circle cx={375} cy={664} r={4} />
-          <circle cx={185} cy={635} r={4} />
-          <circle cx={168} cy={684} r={4} />
-          <rect x={132} y={800} width={48} height={48} rx={4} />
-          <circle cx={117} cy={479} r={4} />
-          <circle cx={133} cy={567} r={4} />
-          <circle cx={209} cy={676} r={4} />
-          <circle cx={197} cy={647} r={4} />
-          <circle cx={228} cy={1028} r={4} />
-          <circle cx={208} cy={872} r={4} />
-          <circle cx={264} cy={711} r={4} />
-          <circle cx={249} cy={711} r={4} />
-          <circle cx={228} cy={711} r={4} />
-          <circle cx={216} cy={723} r={4} />
-          <circle cx={205} cy={731} r={4} />
-          <circle cx={256} cy={1016} r={4} />
-          <circle cx={200} cy={1012} r={4} />
-          <circle cx={172} cy={1000} r={4} />
           <circle cx={1785} cy={635} r={4} />
           <circle cx={1768} cy={684} r={4} />
           <rect x={1732} y={800} width={48} height={48} rx={4} />
@@ -582,16 +374,6 @@ export default function Circuit() {
           <circle cx={1856} cy={1016} r={4} />
           <circle cx={1800} cy={1012} r={4} />
           <circle cx={1772} cy={1000} r={4} />
-          <rect x={484} y={112} width={48} height={48} rx={4} />
-          <circle cx={508} cy={308} r={4} />
-          <circle cx={524} cy={308} r={4} />
-          <circle cx={540} cy={300} r={4} />
-          <circle cx={556} cy={308} r={4} />
-          <circle cx={684} cy={279} r={4} />
-          <circle cx={684} cy={303} r={4} />
-          <circle cx={672} cy={292} r={4} />
-          <circle cx={754} cy={111} r={4} />
-          <circle cx={256} cy={112} r={4} />
           <rect x={2084} y={112} width={48} height={48} rx={4} />
           <circle cx={2108} cy={308} r={4} />
           <circle cx={2124} cy={308} r={4} />
@@ -777,71 +559,7 @@ export default function Circuit() {
           <circle cx={1811} cy={1280} r={4} />
         </g>
         <g id="paths-bg" transform="translate(0.000000, 0.000000)" stroke="#DDE0E2" strokeWidth={2} fill="none" fillRule="evenodd" strokeLinecap="round" strokeLinejoin="round">
-          <g id="C23" transform="translate(176.000000, 0.000000)">
-            <polyline id="path" points="52 92 84 92 116 60 116 0" />
-            <polyline id="path" points="52 84 80 84 108 56 108 0" />
-            <polyline id="path" points="52 76 76 76 100 52 100 0" />
-            <polyline id="path" points="52 68 72 68 92 48 92 0" />
-            <polyline id="path" points="52 60 68 60 84 44 84 0" />
-            <path d="M16,56 L16,0" id="path" />
-            <path d="M8,56 L8,0" id="path" />
-            <path d="M24,56 L24,0" id="path" />
-            <path d="M32,56 L32,0" id="path" />
-            <path d="M40,56 L40,0" id="path" />
-            <path d="M48,56 L48,0" id="path" />
-            <path d="M0,92 L4,92" id="path" />
-            <polyline id="path" points="52 100 56 100 72 100 80.0156098 108.01561 80.0156098 124.007338" />
-            <path d="M0,100 L4,100" id="path" />
-            <path d="M0,84 L4,84" id="path" />
-            <path d="M0,76 L4,76" id="path" />
-            <path d="M0,68 L4,68" id="path" />
-            <path d="M0,60 L4,60" id="path" />
-            <polyline id="path" points="96 284 88 284 84 288 32 288 16 272 16 108 16 104" />
-            <polyline id="path" points="104 439 104 372 8 276 8 108 8 104" />
-            <polyline id="path" points="124 272 88 272 80 280 36 280 24 268 24 108 24 104" />
-            <polyline id="path" points="68 268 36 268 32 264 32 108 32 104" />
-            <polyline id="path" points="44.0311289 252.000061 44.0311289 244.031129 40 240 40 108 40 104" />
-            <polyline id="path" points="48 108 48 104 48 184 56 192 60 192 64 192" />
-          </g>
-          <g id="C22" transform="translate(-1.000000, 239.000000)">
-            <polyline id="path" points="1 0 25 0 57 32 57 156 69 168 69 172" />
-            <polyline id="path" points="1 8 21 8 50 37 50 161 53 164 53 172" />
-            <polyline id="path" points="1 32 8 32 24 48 24 169 12.954639 180.045361 13 248 13 257 0 270" />
-            <polyline id="path" points="0 282 21 261 21 185 33 173 33 45 12 24 1 24" />
-            <polyline id="path" points="0 317 0 293 29 264 29 189 41 177 41 40 17 16 1 16" />
-          </g>
-          <g id="C21" transform="translate(0.000000, 115.000000)">
-            <polyline id="path" points="300 361 360 361 376.03122 344.96878 424 344.96878 471.000005 344.96878" />
-            <polyline id="path" points="0 41 76 41 120 85 120 201 156 237 176 237 208 269 208 285 196 297 196 337 228 369 252 369" />
-            <polyline id="path" points="300 369 391 369 395 365 464 365 468 361 476 361 520 405 556 405" />
-            <polyline id="path" points="300 353 356 353 372 337 376 337 380 333" />
-            <polyline id="path" points="0 17 88 17 144 73 144 181 224 261 224 293 212 305 212 329 236 353 252 353" />
-            <polyline id="path" points="300 345 352 345 384 313" />
-            <polyline id="path" points="224 317 224 329 240 345 252 345" />
-            <polyline id="path" points="300 337 347 337 376 308 376 305 385 296" />
-            <polyline id="path" points="136 12 136 21 152 37 152 177 232 257 232 293 236 297 236 329 244 337 252 337" />
-            <polyline id="path" points="300 329 316 329 320 325 336 325" />
-            <polyline id="path" points="348 597 328 597 304 573 304 409 296 401 296 373" />
-            <polyline id="path" points="244 281 244 325 248 329 252 329" />
-            <polyline id="path" points="264 325 264 265 168 169 168 29 160 21 160 12" />
-            <polyline id="path" points="260 489 259.984385 441.015635 247.96878 429.000031 247.96878 413.03122 264 397 264 373" />
-            <polyline id="path" points="256 325 256 269 160 173 160 33 148 21 148 0" />
-            <polyline id="path" points="239 406 256 389 256 373" />
-            <polyline id="path" points="272 325 272 261 176 165 176 25 172 21 172 1" />
-            <polyline id="path" points="259 417 259 414 272 401 272 373" />
-            <polyline id="path" points="272 433 272 413 280 405 280 373" />
-            <polyline id="path" points="288 325 288 237 304 221 304 212" />
-            <polyline id="path" points="348 605 323 605 296 578 296 414 288 406 288 373" />
-            <polyline id="path" points="296 325 296 241 316 221 316 201" />
-            <polyline id="path" points="0 33 79.9895845 32.9895845 128 81 128 197 144 213 164 213 216 265 216 289 204 301.285714 204 333.571429 231.428571 361 252 361" />
-          </g>
-          <g id="C20" transform="translate(0.000000, 622.000000)">
-            <polyline id="path" points="0 21 88 21 101 8 101 1" />
-            <polyline id="path" points="0 29 93 29 117.020824 4.9791757 117.020824 0.99994551" />
-            <polyline id="path" points="0 37 96 37 133 0" />
-            <polyline id="path" points="0 53 4 53 12 44.9377423 100 45 135 10 143 10 152 1" />
-            <polyline id="path" points="0 61 9 61 17 53 104 53 140 17 164 17" />
-          </g>
+          
           <g id="C19" transform="translate(1532.000000, 115.000000)">
             <polyline id="path" points="368 361 428 361 444.03122 344.96878 492 344.96878 539.000005 344.96878" />
             <polyline id="path" points="0 52 12 52 23 41 68 41 144 41 188 85 188 201 224 237 244 237 276 269 276 285 264 297 264 337 296 369 320 369" />
@@ -867,58 +585,6 @@ export default function Circuit() {
             <polyline id="path" points="364 325 364 241 384 221 384 201" />
             <polyline id="path" points="0 36 17 36 20 33 68 33 147.989584 32.9895845 196 81 196 197 212 213 232 213 284 265 284 289 272 301.285714 272 333.571429 299.428571 361 320 361" />
           </g>
-          <g id="C18" transform="translate(0.000000, 771.000000)">
-            <polyline id="Path-4-Copy-466" points="0 137 60 137 100 97 100 29 100 20 119.026298 0.97370241 128.058497 0.97370241" />
-            <polyline id="Path-4-Copy-467" points="0 129 42 129 56 129 92 93 92 29 92 13 100.513149 4.4868512" />
-            <polyline id="Path-4-Copy-468" points="0 121 42 121 53 121 85 89 85 42 76 33 76 29 76 19" />
-            <polyline id="Path-4-Copy-469" points="0 113 42 113 47 113 75 85 75 43 65 33 65 29 65 5" />
-            <polyline id="Path-4-Copy-470" points="0 105 42 105 44 105 68 81 68 49 52 33 52 29 52 19" />
-            <polyline id="Path-4-Copy-165" points="0 145 67 145 76 136" />
-          </g>
-          <g id="C17" transform="translate(216.000000, 519.000000)">
-            <path d="M188,201 L203,201" id="path" />
-            <polyline id="path" points="23 48 28 53 28 73 16 85 16 117 64 165 64 181 100 217 132 217" />
-            <path d="M188,217 L203,217" id="path" />
-            <polyline id="path" points="50.976204 135.999929 50.976204 139.976204 72 161 72 177 104 209 132 209" />
-            <polyline id="path" points="0 48.9934213 0 125 48 173 48 189 92 233 132 233" />
-            <path d="M188,233 L203,233" id="path" />
-            <polyline id="path" points="13 68 8 73 8 121 56 169 56 185 96 225 132 225" />
-            <polyline id="path" points="139 185 139 169 107 137 107 105 99 97 99 45" />
-            <polyline id="path" points="41 445 41 427 52 416 52 377 140 289 140 281 140 241" />
-            <polyline id="path" points="53 433 53 428 61 420 61 380 148 293 148 281 148 241" />
-            <polyline id="path" points="65 445 65 428 69 424 69 384 156 296 156 281 156 241" />
-            <polyline id="path" points="77 433 77 388 164 301 164 281 164 241" />
-            <polyline id="path" points="125 428 125 424 129 420 129 348 172 305 172 281 172 241" />
-            <polyline id="path" points="136 448 136 353 180 309 180 281 180 241" />
-            <path d="M188,193 L193,193" id="path" />
-            <path d="M188,209 L193,209" id="path" />
-            <path d="M188,225 L193,225" id="path" />
-            <polyline id="path" points="155 185 155 161 124 130 124 46" />
-            <polyline id="path" points="147 185 147 164 116 133 116 89 112 85 112 57.9814878" />
-            <polyline id="path" points="163 185 163 156 132 125 132 85 140 77 140 45" />
-            <polyline id="path" points="171 185 171 153 140 122 140 88.984852 147.99243 80.9924224 147.99243 48.9999991 168.021383 28.9710453 200.000013 28.9710453 227.985533 0.985525461 244.000007 0.985525461 300.007241 56.9927599 316.000002 56.9927599 324.059116 48.9336452 336.000184 48.9336452" />
-            <polyline id="path" points="179 185 179 149 148 118 148 92 156 84 156 61 169 48" />
-          </g>
-          <g id="C16" transform="translate(165.000000, 539.000000)">
-            <polyline id="paths" points="43 317 43 261 43 240 72 211 72 173 68 169 68 156" />
-            <polyline id="paths" points="27 317 27 261 27 232 51 208 51 205" />
-            <polyline id="paths" points="59 317 59 261 59 248 88.0172363 218.982764 88.0172363 207.999986 92.1298907 203.887332 92.1298907 197" />
-            <polyline id="paths" points="51 317 51 261 51 244 80 215 80 168" />
-            <polyline id="paths" points="35 317 35 261 35 237 64 208 64 177 51 164 51 129 35 113 35 45 0 10 0 0" />
-            <polyline id="paths" points="19 317 19 261 19 229 36 212 36 137 16 117 16 88" />
-            <polyline id="paths" points="63 361 67 361 83 361 91.0156098 369.01561 91.0156098 385.007338" />
-            <polyline id="paths" points="59 369 59 365 59 445 67 453 71 453 75 453" />
-            <polyline id="paths" points="107 545 99 545 95 549 43 549 27 533 27 369 27 365" />
-            <polyline id="paths" points="79 529 47 529 43 525 43 369 43 365" />
-            <polyline id="paths" points="63 353 95 353 127 321 127 261 127 249 144 232" />
-            <polyline id="paths" points="63 345 91 345 119 317 119 261 119 241 129 231" />
-            <polyline id="paths" points="63 337 87 337 111 313 111 261 111 232" />
-            <polyline id="paths" points="63 329 83 329 103 309 103 261 103 252 99 248 99 244" />
-            <polyline id="paths" points="63 321 79 321 95 305 95 261 95 256 91 252" />
-            <polyline id="paths" points="115 700 115 633 19 537 19 369 19 365" />
-            <polyline id="paths" points="135 533 99 533 91 541 47 541 35 529 35 369 35 365" />
-            <polyline id="paths" points="55.0311289 513.000061 55.0311289 505.031129 51 501 51 369 51 365" />
-          </g>
           <g id="C15" transform="translate(1765.000000, 539.000000)">
             <polyline id="path" points="43 317 43 261 43 240 72 211 72 173 68 169 68 156" />
             <polyline id="path" points="27 317 27 261 27 232 51 208 51 205" />
@@ -938,32 +604,6 @@ export default function Circuit() {
             <polyline id="path" points="115 700 115 633 19 537 19 369 19 365" />
             <polyline id="path" points="135 533 99 533 91 541 47 541 35 529 35 369 35 365" />
             <polyline id="path" points="55.0311289 513.000061 55.0311289 505.031129 51 501 51 369 51 365" />
-          </g>
-          <g id="C14" transform="translate(308.000000, 0.000000)">
-            <polyline id="path" points="272 196 288 196 300 208 300 224 324 248 416 248 421 243 428 243" />
-            <polyline id="path" points="272 188 292 188 308 204 308 220 328 240 412.005952 240 420.002977 232.002976 480 232.002976 493.001488 219.001488 494 218 494 171" />
-            <path d="M272,180 L284,180" id="path" />
-            <path d="M272,172 L284,172" id="path" />
-            <polyline id="path" points="380.05579 370.996531 371.003473 370.996531 368.000001 367.993058 324.006943 367.993058 296.013886 340.000001 296.013886 267.013886 260 231 260 216" />
-            <polyline id="path" points="-2.52347418e-05 167.966704 20.9667036 167.966704 36 183 136 183 165 212 224 212" />
-            <polyline id="path" points="272 212 280 212 284 216 284 232 312 260 312 296 368 352 396 352 400 348 408 348" />
-            <polyline id="path" points="272 204 284 204 292 212 292 227 320 255 320 292.013511 371.993245 344.006756 392.02464 344.006756 401.069416 334.96198 420.000038 334.96198" />
-            <polyline id="path" points="248 360 248 356 265 339 265 320 248 303 248 267 228 247 228 216" />
-            <polyline id="path" points="280 352 280 276 244 240 244 216" />
-            <polyline id="path" points="223 196 172 196 144 168 144 0" />
-            <polyline id="path" points="236 168 236 148 272 112 272 0" />
-            <polyline id="path" points="224 204 169 204 136 171 136 0" />
-            <polyline id="path" points="228 167 228 144 264 108 264 0" />
-            <polyline id="path" points="264.003967 360.000001 264.003967 351.003969 272 343.007936 272 280 236 244 236 216" />
-            <polyline id="path" points="295.996576 360.000001 295.996576 352.003425 288 344.006849 288 271 252 235 252 216" />
-            <path d="M420.005435,359 L328,359 L304,335 L304,264 L268,228 L268,216" id="path" />
-            <polyline id="path" points="224.010169 188.022424 177.017751 188.022424 152 163.004673 152 56 152 0" />
-            <polyline id="path" points="244 168 244 152 280 116 280 0" />
-            <polyline id="path" points="224 180 181 180 160 159 160 0" />
-            <polyline id="path" points="252 168 252 156 288 120 288 0" />
-            <polyline id="path" points="224 172 185 172 168 155 168 0" />
-            <polyline id="path" points="260 168 260 160 296 124 296 0" />
-            <polyline id="path" points="268 168 268 164 304 128 304 0" />
           </g>
           <g id="C13" transform="translate(1908.000000, 0.000000)">
             <polyline id="path" points="272 196 288 196 300 208 300 224 324 248 416 248 421 243 428 243" />

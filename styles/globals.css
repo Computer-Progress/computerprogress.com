@@ -30,19 +30,19 @@ a {
   animation-timing-function: linear;
  }
  .path-01 {
-  animation-delay: 0s;
- }
- .path-02 {
-  animation-delay: 1s;
- }
- .path-03 {
   animation-delay: 2s;
  }
+ .path-02 {
+  animation-delay: 4s;
+ }
+ .path-03 {
+  animation-delay: 8s;
+ }
  .path-04 {
-  animation-delay: 3s;
+  animation-delay: 16s;
  }
  .path-05 {
-  animation-delay: 4s;
+  animation-delay: 32s;
  }
  
  
