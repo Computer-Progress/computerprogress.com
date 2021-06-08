@@ -1,10 +1,24 @@
 import styled from "styled-components";
 import theme from "../../styles/theme";
 
-export const Wrapper = styled.div`
+export const HomeWrapper = styled.div`
   display: flex;
   justify-content: flex-end;
   position: relative;
+`;
+
+export const Wrapper = styled.div`
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  flex-wrap: wrap;
+  background: linear-gradient(to right, #2000e5, #8f00ff, #8f00ff, #8f00ff), #2000e5;
+  font-size: .8rem;
+  width: 100%;
+  padding: 0 3.75%;
+  bottom: 0;
+  position: absolute;
+  margin: 0 auto;
 `;
 
 export const Container = styled.div`
@@ -34,4 +48,5 @@ export const Copyright = styled.p`
   display: flex;
   justify-content: flex-end;
   color: ${theme.colors.white};
+  text-align: right;
 `

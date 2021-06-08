@@ -8,6 +8,7 @@
     "start": "next start"
   },
   "dependencies": {
+    "@material-ui/core": "^4.11.4",
     "@svgr/webpack": "^5.5.0",
     "highcharts": "^9.1.0",
     "highcharts-react-official": "^3.0.0",

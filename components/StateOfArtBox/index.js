@@ -47,7 +47,7 @@ const StateOfArtBox = ({ data }) => {
         </ModelBlock>
       </div>
       <ButtonWrapper>
-        <Button primary link='/domains'>VIEW PAPER</Button>
+        <Button primary link='/tasks'>VIEW PAPER</Button>
       </ButtonWrapper>
     </Wrapper>
   );
