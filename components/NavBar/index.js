@@ -2,16 +2,16 @@ import { Wrapper, Logo, Menu, Auth, LogoName } from "./styles.js";
 import LogoIcon from "../../public/logo_icon.svg";
 import Button from "../Button";
 
-export default function Navbar() {
+export default function Navbar({ transparentBackground }) {
   return (
     <div>
-      <Wrapper>
+      <Wrapper transparentBackground={transparentBackground}>
         <Logo link='/'>
           <LogoIcon />
           <LogoName>Computer Progress</LogoName>
         </Logo>
         <Menu>
-          <Button link='/domains'>Tasks</Button>
+          <Button link='/tasks'>Tasks</Button>
           <Button link='/about_us'>About Us</Button>
         </Menu>
         <Auth>

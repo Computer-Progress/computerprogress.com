@@ -1,17 +1,16 @@
 import styled from "styled-components";
 import Button from "../Button";
+import theme from "../../styles/theme";
 
 export const Wrapper = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
   flex-wrap: wrap;
-  background: transparent;
+  background: ${({ transparentBackground }) => transparentBackground ? 'transparent' :  'linear-gradient(to right, #2000e5, #8f00ff, #8f00ff, #8f00ff), #2000e5;'};
   width: 100%;
   padding:0 3.75%;
-  max-width: 1920px;
   margin: 0 auto;
-
 `;
 
 export const Logo = styled(Button)`
