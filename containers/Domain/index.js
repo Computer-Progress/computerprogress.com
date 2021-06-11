@@ -4,6 +4,7 @@ import Chart from "../../components/Chart";
 import ChartOptions from "../../components/ChartOptions";
 import Tabs from "../../components/Tabs";
 import PageTemplate from "../../components/PageTemplate";
+import PapersList from "../../components/PapersList";
 
 import {
   imagenet,
@@ -120,6 +121,7 @@ function Domain({ router, query }) {
           <ChartOptions title="Accuracy" buttons={buttons} selected={selectedButton} />
           <Chart data={data} label={label} isByYear={type} />
         </div>
+        <PapersList papers={data} accuracy={label} />
       </Container>
     </PageTemplate>
   );

@@ -16,9 +16,6 @@ export const Wrapper = styled.div`
   font-size: .8rem;
   width: 100%;
   padding: 0 3.75%;
-  bottom: 0;
-  position: absolute;
-  margin: 0 auto;
 `;
 
 export const Container = styled.div`
