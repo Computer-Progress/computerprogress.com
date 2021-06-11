@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import PageTemplate from "../../components/PageTemplate";
 import Task from "../../components/Task";
+import Link from 'next/link'
 
 import ImageClassification from "../../public/image-classification.svg";
 import ObjectDetection from "../../public/object-detection.svg";
@@ -44,8 +45,12 @@ export default function Tasks() {
     },
   ])
 
-  const renderItem = (item) => (
-    <Task item={item} />
+  const renderItem = (item, index) => (
+    <Link href={{ pathname: 'task', query: { id: index }}}>
+      <a>
+        <Task item={item} />
+      </a>
+    </Link>
   )
 
   return (
@@ -53,7 +58,7 @@ export default function Tasks() {
       <Container>
         <h1>Tasks</h1>
         <ItemsWrapper>
-          {tasks.map(item => renderItem(item))}
+          {tasks.map((item, index) => renderItem(item, index))}
         </ItemsWrapper>
       </Container>
     </PageTemplate>

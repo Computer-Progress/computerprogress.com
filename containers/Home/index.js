@@ -5,7 +5,7 @@ import NavBar from "../../components/NavBar";
 import Wave from "../../components/Wave";
 import Footer from "../../components/Footer";
 import Chart from "../../components/Chart";
-import Dataset from "../../components/Dataset";
+import ChartOptions from "../../components/ChartOptions";
 import Tabs from "../../components/Tabs";
 import StateOfArtBox from "../../components/StateOfArtBox";
 import Button from "../../components/Button"
@@ -129,10 +129,10 @@ export default function Home() {
       <Container>
         <Tabs selected={selected} items={tabs} />
         <div className="viewAll">
-          <Button color={theme.colors.black}>VIEW ALL TASKS</Button>
+          <Button link='/tasks' color={theme.colors.black}>VIEW ALL TASKS</Button>
         </div>
         <div className="chart">
-          <Dataset buttons={buttons} selected={selectedButton} />
+          <ChartOptions title="Datasets" buttons={buttons} selected={selectedButton} />
           <Chart data={data} label={label} />
         </div>
         <StateOfArtBox data={data} />

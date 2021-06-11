@@ -4,7 +4,7 @@ import Button from "../Button";
 
 export const Wrapper = styled.div`
   display: flex;
-  align-self: center;
+  align-self: stretch;
   justify-content: space-evenly;
   align-items: center;
   flex-direction: row;
