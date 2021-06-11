@@ -12,3 +12,9 @@ export const Container = styled.div`
 export const Header = styled.header`
 position: relative;
 `
+
+export const Page = styled.div`
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+`
