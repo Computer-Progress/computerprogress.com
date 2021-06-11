@@ -9,6 +9,7 @@
   },
   "dependencies": {
     "@material-ui/core": "^4.11.4",
+    "@material-ui/icons": "^4.11.2",
     "@svgr/webpack": "^5.5.0",
     "highcharts": "^9.1.0",
     "highcharts-react-official": "^3.0.0",
