@@ -37,8 +37,6 @@ export const Container = styled.div`
   }
 `;
 
-
-
 export const Title = styled.h3`
   color: ${theme.colors.secondary};
   font-weight: normal;

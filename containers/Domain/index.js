@@ -5,6 +5,7 @@ import ChartOptions from "../../components/ChartOptions";
 import Tabs from "../../components/Tabs";
 import PageTemplate from "../../components/PageTemplate";
 import PapersList from "../../components/PapersList";
+import ButtonToTop from "../../components/ButtonToTop";
 
 import {
   imagenet,
@@ -15,7 +16,7 @@ import {
   wmt2014_enge,
 } from "../../data";
 
-function Domain({ router, query }) {
+function Domain({ query }) {
   const [domain, setDomain] = useState(0)
   const [data, setData] = useState(imagenet);
   const [label, setLabel] = useState("TOP 1");
@@ -43,7 +44,7 @@ function Domain({ router, query }) {
 
   useEffect(() => {
     setDomain(query?.id);
-  }, [])
+  }, []);
 
   useEffect(() => {
     switch (domain) {
@@ -123,6 +124,7 @@ function Domain({ router, query }) {
         </div>
         <PapersList papers={data} accuracy={label} />
       </Container>
+      <ButtonToTop />
     </PageTemplate>
   );
 }
