@@ -1,1 +1,1 @@
-export {default} from '../containers/Domain';
+export {default} from '../containers/Benchmark';

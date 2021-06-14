@@ -46,7 +46,7 @@ export default function Tasks() {
   ])
 
   const renderItem = (item, index) => (
-    <Link href={{ pathname: 'task', query: { id: index }}}>
+    <Link href={{ pathname: 'benchmark', query: { id: index }}}>
       <a>
         <Task item={item} />
       </a>

@@ -16,7 +16,7 @@ import {
   wmt2014_enge,
 } from "../../data";
 
-function Domain({ query }) {
+function Benchmark({ query }) {
   const [domain, setDomain] = useState(0)
   const [data, setData] = useState(imagenet);
   const [label, setLabel] = useState("TOP 1");
@@ -129,8 +129,8 @@ function Domain({ query }) {
   );
 }
 
-Domain.getInitialProps = ({query}) => {
+Benchmark.getInitialProps = ({query}) => {
   return {query}
 }
 
-export default Domain;
+export default Benchmark;
