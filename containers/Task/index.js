@@ -1,10 +1,11 @@
 import { useRouter } from "next/router";
 import { useState, useEffect } from "react";
+import { Card } from "@material-ui/core";
 
 import PageTemplate from "../../components/PageTemplate";
 import tasksData from "./tasksData.json";
 
-import { Container } from "./styles";
+import { Container, SectionWrapper } from "./styles";
 
 export default function Task() {
   const router = useRouter();
@@ -36,7 +37,13 @@ export default function Task() {
         {isPageLoading ? (
           <span>Page is loading.</span>
         ) : (
-          <span>{`URL /${taskId} is correct!`}</span>
+          <SectionWrapper>
+            <img src={`/${task.icon}`} />
+
+            <h1>{task.title}</h1>
+
+            <p>{task.description}</p>
+          </SectionWrapper>
         )}
       </Container>
     </PageTemplate>
