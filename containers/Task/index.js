@@ -4,6 +4,7 @@ import { Box, Divider, Grid, Typography } from "@material-ui/core";
 
 import PageTemplate from "../../components/PageTemplate";
 import CardDescription from "../../components/CardDescription";
+import CardBenchmark from "../../components/CardBenchmark";
 
 import tasksData from "./tasksData.json";
 
@@ -70,44 +71,12 @@ export default function Task() {
             {/* Benchmarks */}
             {benchmarks.length > 0 && (
               <>
-                <Typography variant="h4">Benchmarks</Typography>
+                <h2>Benchmarks</h2>
 
                 <Grid container spacing={2}>
                   {benchmarks.map((benchmark, index) => (
                     <Grid item xs={12} key={index}>
-                      <Box boxShadow={1} borderRadius={10} px={3} py={1}>
-                        <Typography variant="h5">{benchmark.title}</Typography>
-
-                        <Divider />
-
-                        <Grid container spacing={2}>
-                          <Grid item xs={12} sm={12} lg={2}>
-                            <Typography>Best model</Typography>
-
-                            <Typography>{benchmark.bestModel}</Typography>
-                          </Grid>
-                          <Grid item xs={12} sm={12} lg={4}>
-                            <Typography>Paper</Typography>
-
-                            <Typography>{benchmark.paper}</Typography>
-                          </Grid>
-                          <Grid item xs={12} sm={4} lg={2}>
-                            <Typography>BLEU</Typography>
-
-                            <Typography>{benchmark.BLEU}%</Typography>
-                          </Grid>
-                          <Grid item xs={12} sm={4} lg={2}>
-                            <Typography>Hardware Burden</Typography>
-
-                            <Typography>{benchmark.hardwareBurden}</Typography>
-                          </Grid>
-                          <Grid item xs={12} sm={4} lg={2}>
-                            <Typography>Publication date</Typography>
-
-                            <Typography>{benchmark.publicationDate}</Typography>
-                          </Grid>
-                        </Grid>
-                      </Box>
+                      <CardBenchmark benchmark={benchmark} />
                     </Grid>
                   ))}
                 </Grid>
