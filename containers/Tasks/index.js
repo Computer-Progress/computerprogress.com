@@ -1,7 +1,7 @@
-import { useState } from 'react';
+import { useState } from "react";
 import PageTemplate from "../../components/PageTemplate";
 import Task from "../../components/Task";
-import Link from 'next/link'
+import Link from "next/link";
 
 import ImageClassification from "../../public/image-classification.svg";
 import ObjectDetection from "../../public/object-detection.svg";
@@ -9,49 +9,49 @@ import QuestionAnswering from "../../public/question-answering.svg";
 import NamedEntityRecognition from "../../public/named-entity-recognition.svg";
 import MachineTranslation from "../../public/machine-translation.svg";
 import PoseEstimation from "../../public/pose-estimation.svg";
-import { ItemsWrapper, Container } from './styles';
+import { ItemsWrapper, Container } from "./styles";
 
 export default function Tasks() {
   const [tasks] = useState([
     {
-      name: 'Image Classification',
+      name: "Image Classification",
       icon: ImageClassification,
-      banchmark: 1
+      taskId: "image-classification",
     },
     {
-      name: 'Object Detection',
+      name: "Object Detection",
       icon: ObjectDetection,
-      banchmark: 1
+      taskId: "object-detection",
     },
     {
-      name: 'Question Answering',
+      name: "Question Answering",
       icon: QuestionAnswering,
-      banchmark: 1
+      taskId: "question-answering",
     },
     {
-      name: 'Named Entity Recognition',
+      name: "Named Entity Recognition",
       icon: NamedEntityRecognition,
-      banchmark: 1
+      taskId: "named-entity-recognition",
     },
     {
-      name: 'Machine Translation',
+      name: "Machine Translation",
       icon: MachineTranslation,
-      banchmark: 1
+      taskId: "machine-translation",
     },
     {
-      name: 'Pose Estimation',
+      name: "Pose Estimation",
       icon: PoseEstimation,
-      banchmark: 1
+      taskId: "pose-estimation",
     },
-  ])
+  ]);
 
-  const renderItem = (item, index) => (
-    <Link href={{ pathname: 'benchmark', query: { id: index }}}>
+  const renderItem = (item) => (
+    <Link href={{ pathname: `/tasks/${item.taskId}` }} key={item.taskId}>
       <a>
         <Task item={item} />
       </a>
     </Link>
-  )
+  );
 
   return (
     <PageTemplate>
@@ -62,5 +62,5 @@ export default function Tasks() {
         </ItemsWrapper>
       </Container>
     </PageTemplate>
-  )
+  );
 }
