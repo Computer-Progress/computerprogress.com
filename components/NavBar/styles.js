@@ -7,7 +7,7 @@ export const Wrapper = styled.div`
   justify-content: space-between;
   align-items: center;
   flex-wrap: wrap;
-  background: ${({ transparentBackground }) => transparentBackground ? 'transparent' :  'linear-gradient(to right, #2000e5, #8f00ff, #8f00ff, #8f00ff), #2000e5;'};
+  background: ${({ transparentBackground }) => transparentBackground ? 'transparent' :  'linear-gradient(to left, #2000e5, #8f00ff, #8f00ff, #8f00ff), #2000e5;'};
   width: 100%;
   padding:0 3.75%;
   margin: 0 auto;
