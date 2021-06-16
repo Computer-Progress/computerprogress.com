@@ -12,9 +12,9 @@ export const Button = styled.button`
   background: ${({ primary, background }) =>
     background || primary ? theme.colors.white : "transparent"};
   color: ${({ primary, color }) =>
-    color || primary ? "#8f00ff" : theme.colors.white};
+    color || primary ? theme.colors.black : theme.colors.white};
   ${({cta}) => cta && `
-  background: #2000E5;
+  background: linear-gradient(268.88deg, rgba(255, 255, 255, 0.1) -7.38%, #9E1FFF 104.79%), #6047FF;
   color: white;
   `}
   transition: all 0.3s ease-in-out;

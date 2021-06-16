@@ -29,7 +29,7 @@ const chart = ({ data, label, isByYear }) => {
         name: element.model,
         marker: {
           symbol: "circle",
-          fillColor: "#8f00ff",
+          fillColor: "#9E1FFF",
           radius: 4,
           states: {
             hover: {
@@ -64,7 +64,7 @@ const chart = ({ data, label, isByYear }) => {
               let y = (1 - 1 / this.y) * 100;
               y = Math.round(y * 100) / 100;
               let x = Math.round(this.x * 100) / 100;
-              return `${label}: ${y}% - ${isByYear ? `Year: ${x}` : `Computation: 10e+${x}`} `;
+              return `${label}: ${y}% - ${isByYear ? `Year: ${x}` : `Computation: 10e+${x.toFixed(1)}`} `;
             }
           }
         },
@@ -103,7 +103,7 @@ const chart = ({ data, label, isByYear }) => {
         symbolHeight: .001,
         symbolWidth: .001,
         symbolRadius: .001,
-        fontFamily: "Montserrat, sans-serif"
+        fontFamily: "Montserrat, sans-serif",
       },
       credits: {
         enabled: false
@@ -135,7 +135,7 @@ const chart = ({ data, label, isByYear }) => {
       },
       yAxis: {
         title: {
-          text: label,
+          text: "Accuracy (" + label + ")",
           margin: 20,
           style: {
             color: "#333",

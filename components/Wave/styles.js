@@ -7,12 +7,12 @@ export const Wave = styled(ReactWave)`
   position: absolute;
   top: 0;
   z-index: -1;
-  height: 300px;
+  height: 350px;
 `;
 
 export const Text = styled.p`
-   font-weight: bold;
   font-size: 1.5rem;
+  padding-bottom: 50px;
   color: ${theme.colors.white};
   width: 45%;
 `

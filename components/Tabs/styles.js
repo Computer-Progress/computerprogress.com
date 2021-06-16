@@ -38,11 +38,11 @@ export const Separator = styled.div`
 
 export const StyledButton = styled(Button)`
   /* padding: ; */
-  padding: 24px 0px;
+  padding: 24px 50px;
   width: 100%;
   margin: 0;
-
+  font-size: 14px;
   color: ${theme.colors.black};
   font-weight: 500;
-  ${({selected}) => selected && `color: ${theme.colors.secondary}; font-weight: 600;`}
+  ${({selected}) => selected && `color: ${theme.colors.secondary}; font-weight: 450;`}
 `;
