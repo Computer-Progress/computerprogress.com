@@ -24,8 +24,8 @@ export default () => {
       >
         <defs>
           <linearGradient id="gradient" gradientTransform="rotate(0)">
-            <stop offset="60%"  stopColor="#8f00ff" />
-            <stop offset="100%" stopColor="#2000e5" />
+            <stop offset="5%" stopColor="#4361ee" />
+            <stop offset="50%"  stopColor="#8f00ff" />
           </linearGradient>
         </defs>
       </Wave>
@@ -36,4 +36,3 @@ export default () => {
     </>
   );
 }
-
