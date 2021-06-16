@@ -38,7 +38,7 @@ const StateOfArtBox = ({ data }) => {
         <Line />
         <Block>
           <p>Hardware Burden:</p>
-          <h4>10<sup>{Math.log10(stateOfArt.hardware_burden).toFixed(2)}</sup></h4>
+          <h4>10<sup>{Math.log10(stateOfArt.hardware_burden).toFixed(1)}</sup></h4>
         </Block>
         <Line />
         <ModelBlock>
