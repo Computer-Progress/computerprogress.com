@@ -1,11 +1,13 @@
 import { useRouter } from "next/router";
 import { useState, useEffect } from "react";
-import { Box, Divider, Grid, Typography, CardMedia } from "@material-ui/core";
+import { Box, Divider, Grid, Typography } from "@material-ui/core";
 
 import PageTemplate from "../../components/PageTemplate";
+import CardDescription from "../../components/CardDescription";
+
 import tasksData from "./tasksData.json";
 
-import { Container, SectionWrapper } from "./styles";
+import { Container } from "./styles";
 
 const benchmarks = [
   {
@@ -59,14 +61,11 @@ export default function Task() {
           <span>Page is loading.</span>
         ) : (
           <>
-            {/* Description */}
-            <SectionWrapper>
-              <img src={`/${task.icon}`} />
-
-              <h1>{task.title}</h1>
-
-              <p>{task.description}</p>
-            </SectionWrapper>
+            <CardDescription
+              icon={task.icon}
+              title={task.title}
+              description={task.description}
+            />
 
             {/* Benchmarks */}
             {benchmarks.length > 0 && (
