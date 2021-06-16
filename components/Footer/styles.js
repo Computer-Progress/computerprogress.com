@@ -12,7 +12,7 @@ export const Wrapper = styled.div`
   justify-content: flex-end;
   align-items: center;
   flex-wrap: wrap;
-  background: linear-gradient(to right, #2000e5, #8f00ff, #8f00ff, #8f00ff), #2000e5;
+  background: linear-gradient(268.88deg, rgba(255, 255, 255, 0.1) -7.38%, #9E1FFF 104.79%), #4e33ff;
   font-size: .8rem;
   width: 100%;
   padding: 0 3.75%;

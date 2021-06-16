@@ -22,8 +22,8 @@ export default () => {
       >
         <defs>
           <linearGradient id="gradient" gradientTransform="rotate(0)">
-            <stop offset="60%"  stopColor="#9d4edd" />
-            <stop offset="100%" stopColor="#03045e" />
+            <stop offset="60%"  stopColor="#4e33ff" />
+            <stop offset="100%" stopColor="#9E1FFF" />
           </linearGradient>
         </defs>
       </FooterWave>

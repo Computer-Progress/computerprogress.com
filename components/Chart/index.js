@@ -29,7 +29,7 @@ const chart = ({ data, label, isByYear }) => {
         name: element.model,
         marker: {
           symbol: "circle",
-          fillColor: "#8f00ff",
+          fillColor: "#9E1FFF",
           radius: 4,
           states: {
             hover: {

@@ -18,7 +18,7 @@ export default function Footer({ home }) {
               <Yonsei />
               <MitIbm />
             </Logos>
-            <Copyright>© 2021 Massachusetts Institute of Technology</Copyright>
+            <Copyright>© 2021 Computer Progress</Copyright>
           </Container>
           <FooterWave />
       </HomeWrapper>
@@ -27,7 +27,7 @@ export default function Footer({ home }) {
 
   return (
     <Wrapper>
-      <Copyright>© 2021 Massachusetts Institute of Technology</Copyright>
+      <Copyright>© 2021 Computer Progress</Copyright>
     </Wrapper>
   )
 }

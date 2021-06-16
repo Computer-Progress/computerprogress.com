@@ -41,8 +41,8 @@ export const StyledButton = styled(Button)`
   padding: 24px 50px;
   width: 100%;
   margin: 0;
-  font-size: 17px;
+  font-size: 14px;
   color: ${theme.colors.black};
   font-weight: 500;
-  ${({selected}) => selected && `color: ${theme.colors.secondary}; font-weight: 550;`}
+  ${({selected}) => selected && `color: ${theme.colors.secondary}; font-weight: 450;`}
 `;
