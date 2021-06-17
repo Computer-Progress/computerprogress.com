@@ -25,7 +25,9 @@ export const StyledDivider = styled(Divider).attrs({
 
 export const FlexBox = styled(Box).attrs({
   display: "flex",
-})``;
+})`
+  justify-content: 'space-between'
+`;
 
 export const FlexItem = styled(Box).attrs({
   //
