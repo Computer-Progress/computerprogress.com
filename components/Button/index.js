@@ -1,7 +1,7 @@
 import { Button } from "./styles.js";
 import Link from "next/link";
 
-export default function Navbar({ link, primary, children, ...props }) {
+export default function MyButton({ link, primary, children, ...props }) {
   if (link) {
     return (
       <div>

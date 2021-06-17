@@ -5,6 +5,7 @@ export default {
     white: "#ffffff",
     grey: "#c4c4c4",
     black: "#1A1515",
+    greyText: '#7f7f84',
   },
   fonts: {
     families: {
