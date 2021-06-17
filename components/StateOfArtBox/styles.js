@@ -17,6 +17,10 @@ box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.25);
     flex-direction: column;
   justify-content: space-between;
   }
+
+  @media only screen and (max-width: 1200px) {
+    display: none
+  }
 `;
 
 export const StateOfArt = styled.div`
