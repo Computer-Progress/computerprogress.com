@@ -8,6 +8,7 @@ export const Wrapper = styled.div`
   flex-direction: column;
   justify-content: space-between;
   border-radius: 16px;
+  width: 300px !important;
 box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.25);
     background-color: ${theme.colors.white};
   .blockWrapper {

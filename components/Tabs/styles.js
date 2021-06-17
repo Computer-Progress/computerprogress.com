@@ -43,6 +43,7 @@ export const StyledButton = styled(Button)`
   width: 100%;
   height: 100%;
   border-radius: 0px !important;
+  padding: 10px 0px 10px 0px !important;
   margin: 0;
   font-size: 14px;
   color: ${theme.colors.black} !important;
