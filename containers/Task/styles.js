@@ -1,10 +1,8 @@
 import styled from "styled-components";
 
-export const Container = styled.div`
-  width: 70%;
-  margin: 0 auto;
+import { Container } from "@material-ui/core";
 
-  @media (max-width: 600px) {
-    width: 85%;
-  }
+export const StyledContainer = styled(Container)`
+  margin-top: 2rem;
+  margin-bottom: 5rem;
 `;
