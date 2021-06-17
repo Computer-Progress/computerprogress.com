@@ -1,1 +1,1 @@
-export {default} from '../containers/Benchmark';
+export {default} from '../containers/ark';
