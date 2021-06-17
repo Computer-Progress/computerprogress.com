@@ -26,13 +26,13 @@ export default function ContributorsContainer({ contributors }) {
 
       <ContributorsFlexBox>
         {researchers.map((contributor) => (
-          <ContributorCard contributor={contributor} />
+          <ContributorCard contributor={contributor} key={contributor.name} />
         ))}
       </ContributorsFlexBox>
 
       <ContributorsFlexBox>
         {otherContributors.map((contributor) => (
-          <ContributorCard contributor={contributor} />
+          <ContributorCard contributor={contributor} key={contributor.name} />
         ))}
       </ContributorsFlexBox>
     </>
