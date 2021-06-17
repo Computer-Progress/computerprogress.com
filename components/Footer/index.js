@@ -15,19 +15,19 @@ export default function Footer({ home }) {
             <Text big>Developed by:</Text>
             <Logos>
               <div>
-                <p>Neil Weasfdgf</p>
+                <p>Neil C. Thompson</p>
                 <Mit />
               </div>
               <div>
-                <p>Neil Weasfdgf</p>
+                <p>Gabriel F. Manso</p>
                 <Unb />
               </div>
               <div>
-                <p>Neil Weasfdgf</p>
+                <p>Keeheon Lee</p>
                 <Yonsei />
               </div>
               <div>
-                <p>Neil Weasfdgf</p>
+                <p>Kristjan Greenewald</p>
                 <MitIbm />
               </div>
             </Logos>

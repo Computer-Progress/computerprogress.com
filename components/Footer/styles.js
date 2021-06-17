@@ -32,6 +32,13 @@ export const Logos = styled.div`
   display: flex;
   justify-content: space-around;
 
+  div {
+    align-items: center;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+  }
+
   div p {
     padding-bottom: 0px;
     margin-bottom: 5px;
@@ -52,4 +59,5 @@ export const Copyright = styled.p`
   justify-content: flex-end;
   color: ${theme.colors.white};
   text-align: right;
+  font-size: 14px;
 `

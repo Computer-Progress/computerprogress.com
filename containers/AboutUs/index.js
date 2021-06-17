@@ -7,7 +7,7 @@ const contributors = [
   {
     name: "Neil C. Thompson",
     workPlace: "MIT",
-    position: "Researcher",
+    position: "Researcher Scientist",
     imageName: "neil-thompson.png",
   },
   {
@@ -19,13 +19,13 @@ const contributors = [
   {
     name: "Keeheon Lee",
     workPlace: "Yonsei University",
-    position: "Researcher",
+    position: "Assistant Professor",
     imageName: "keeheon-lee.png",
   },
   {
     name: "Gabriel F. Manso",
-    workPlace: "UnB/MIT",
-    position: "Researcher",
+    workPlace: "UnB",
+    position: "Undergraduate Student",
     imageName: "gabriel-manso.png",
   },
   {
@@ -37,7 +37,7 @@ const contributors = [
   {
     name: "Guilherme Banci",
     workPlace: "UnB",
-    position: "Front-end Engineer",
+    position: "Front-end Developer",
     imageName: "guilherme-banci.png",
   },
   {
@@ -52,12 +52,12 @@ const contributors = [
     position: "UI/UX Designer",
     imageName: "joao-egewarth.png",
   },
-  {
-    name: "João Zarbiélli",
-    workPlace: "UnB",
-    position: "Software Engineer",
-    imageName: "joao-zarbielli.png",
-  },
+  // {
+  //   name: "João Zarbiélli",
+  //   workPlace: "UnB",
+  //   position: "Software Engineer",
+  //   imageName: "joao-zarbielli.png",
+  // },
 ];
 
 import {
@@ -80,25 +80,25 @@ export default function Home() {
           <GridContainer $mobile={isMobile}>
             <img src="/icon-background-1.svg" />
 
-            <h2>Our paper</h2>
+            <h2>Our paper (abstract)</h2>
 
             <p>
-              Computer progress is a platform for viewing paper data that
-              addresses the computational limits of deep learning. Our
-              inspiration for creating this site was the paper The Computational
-              Limits of Deep Learning, where one of the group members, Gabriel
-              F. Manso, is one of the authors of the paper.
-              <br />
-              <br />
-              The platform was created in conjunction with students and
-              professors from YONSEI University, who validated our product, and
-              helped us to improve it. This platform is open source and is open
-              to contributions from new employees.
+              Deep learning's recent history has been one of achievement:
+              from triumphing over humans in the game of Go to world-leading 
+              performance in image recognition, voice recognition, translation, 
+              and other tasks. But this progress has come with a voracious appetite for computing power. 
+              This article reports on the computational demands of Deep Learning applications in five 
+              prominent application areas and shows that progress in all five is strongly reliant on 
+              increases in computing power. Extrapolating forward this reliance reveals that progress 
+              along current lines is rapidly becoming economically, technically, and environmentally 
+              unsustainable. Thus, continued progress in these applications will require dramatically 
+              more computationally-efficient methods, which will either have to come from changes to 
+              deep learning or from moving to other machine learning methods.
             </p>
           </GridContainer>
 
           <ButtonContainer>
-            <StyledButton>See our paper</StyledButton>
+            <StyledButton>Read our paper</StyledButton>
           </ButtonContainer>
 
           <GridContainer $mobile={isMobile}>
@@ -107,11 +107,12 @@ export default function Home() {
             <h2>Our mission</h2>
 
             <p>
-              Our mission is to make it easier to view paper data that deal with
-              Deep Learning, and concentrate that knowledge in a platform. In
-              addition, we also want to engage researchers in the field to put
-              their papers on our platform and also become contributors and
-              reviewers of papers to be submitted by other contributors.
+              Understanding the role that computing power plays in Deep Learning is extremely important.
+              Our study (link) shows that over 1000 Deep Learning papers were visited, and only 12.9% of 
+              them reported computer resource data correctly.  Our mission is to make clear the huge role 
+              that computing power has played in this area. We really want to encourage the computer science 
+              community to pay attention to this issue and contribute to understanding the progress of Deep 
+              Learning from this prespective.
             </p>
           </GridContainer>
 
