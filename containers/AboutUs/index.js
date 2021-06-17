@@ -1,6 +1,64 @@
-import Head from "next/head";
 import { Container, useTheme, useMediaQuery } from "@material-ui/core";
+
 import PageTemplate from "../../components/PageTemplate";
+import ContributorsContainer from "../../components/ContributorsContainer";
+
+const contributors = [
+  {
+    name: "Neil C. Thompson",
+    workPlace: "MIT",
+    position: "Researcher",
+    imageName: "neil-thompson.png",
+  },
+  {
+    name: "Kristjan Greenewald",
+    workPlace: "MIT-IBM Watson AI Lab",
+    position: "Researcher",
+    imageName: "kristjan-greenewald.png",
+  },
+  {
+    name: "Keeheon Lee",
+    workPlace: "Yonsei University",
+    position: "Researcher",
+    imageName: "keeheon-lee.png",
+  },
+  {
+    name: "Gabriel F. Manso",
+    workPlace: "UnB/MIT",
+    position: "Researcher",
+    imageName: "gabriel-manso.png",
+  },
+  {
+    name: "Andrew Lucas",
+    workPlace: "UnB",
+    position: "Software Engineer",
+    imageName: "andrew-lucas.png",
+  },
+  {
+    name: "Guilherme Banci",
+    workPlace: "UnB",
+    position: "Front-end Engineer",
+    imageName: "guilherme-banci.png",
+  },
+  {
+    name: "Irwin Schmitt",
+    workPlace: "UnB",
+    position: "Front-end Developer",
+    imageName: "irwin-schmitt.png",
+  },
+  {
+    name: "João Egewarth",
+    workPlace: "UnB",
+    position: "UI/UX Designer",
+    imageName: "joao-egewarth.png",
+  },
+  {
+    name: "João Zarbiélli",
+    workPlace: "UnB",
+    position: "Software Engineer",
+    imageName: "joao-zarbielli.png",
+  },
+];
 
 import {
   StyledTitle,
@@ -56,6 +114,8 @@ export default function Home() {
               reviewers of papers to be submitted by other contributors.
             </p>
           </GridContainer>
+
+          <ContributorsContainer contributors={contributors} />
         </Container>
       </PageTemplate>
     </div>
