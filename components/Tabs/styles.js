@@ -20,6 +20,7 @@ export const ItemWrapper = styled.div`
   align-items: center;
   flex-direction: row;
   transition: all 0.3s ease-out;
+  height: 100%;
   border-bottom: ${({ selected }) =>
     selected ? `2px solid ${theme.colors.secondary}` : "2px solid white"};
 `;
@@ -40,9 +41,11 @@ export const StyledButton = styled(Button)`
   /* padding: ; */
   padding: 24px 50px;
   width: 100%;
+  height: 100%;
+  border-radius: 0px !important;
   margin: 0;
   font-size: 14px;
-  color: ${theme.colors.black};
+  color: ${theme.colors.black} !important;
   font-weight: 500;
   ${({selected}) => selected && `color: ${theme.colors.secondary}; font-weight: 450;`}
 `;

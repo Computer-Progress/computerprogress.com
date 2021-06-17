@@ -8,10 +8,10 @@ export const Button = styled(MaterialButton).attrs(({ variant, primary }) => ({
 }))`
   border-radius: 100px !important;
   cursor: pointer;
-  background: ${({ primary, background }) =>
-    background || primary ? theme.colors.white : "transparent"} !important;
+  background: ${({ primary, background, contained }) =>
+    background || contained ? 'linear-gradient(268.88deg, rgba(255, 255, 255, 0.1) -7.38%, #9E1FFF 104.79%), #6047FF' : primary ? theme.colors.white : "transparent"} !important;
   color: ${({ primary, color }) =>
-    color || primary ? theme.colors.black : theme.colors.white} !important;
+    color || primary ? theme.colors.secondary : theme.colors.white} !important;
   ${({cta}) => cta && `
   background: linear-gradient(268.88deg, rgba(255, 255, 255, 0.1) -7.38%, #9E1FFF 104.79%), #6047FF;
   color: white;
