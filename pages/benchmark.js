@@ -3,7 +3,7 @@ export {default} from '../containers/Benchmark';
 export const getServerSideProps = async ({ query }) => {
     try {
       const res = await fetch(
-        `http://localhost:3000/api/benchmark/${query.benchmarkId}`
+        `/api/benchmark/${query.benchmarkId}`
       );
       const benchmark = await res.json();
   
