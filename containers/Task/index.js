@@ -1,14 +1,14 @@
 import { useRouter } from "next/router";
 import { useState, useEffect } from "react";
-import { Box, Divider, Grid, Typography } from "@material-ui/core";
+import { Grid } from "@material-ui/core";
 
 import PageTemplate from "../../components/PageTemplate";
-import CardDescription from "../../components/CardDescription";
+import DescriptionCard from "../../components/DescriptionCard";
 import CardBenchmark from "../../components/CardBenchmark";
 
 import tasksData from "./tasksData.json";
 
-import { Container } from "./styles";
+import { StyledContainer } from "./styles";
 
 const benchmarks = [
   {
@@ -57,15 +57,17 @@ export default function Task() {
 
   return (
     <PageTemplate>
-      <Container>
+      <StyledContainer>
         {isPageLoading ? (
           <span>Page is loading.</span>
         ) : (
           <>
-            <CardDescription
+            <DescriptionCard
               icon={task.icon}
               title={task.title}
               description={task.description}
+              isH1
+              imageBorder
             />
 
             {/* Benchmarks */}
@@ -84,7 +86,7 @@ export default function Task() {
             )}
           </>
         )}
-      </Container>
+      </StyledContainer>
     </PageTemplate>
   );
 }

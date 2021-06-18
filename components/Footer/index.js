@@ -10,29 +10,17 @@ export default function Footer({ home }) {
   if (home) {
     return (
       <HomeWrapper>
-          <FooterWave />
           <Container>
             <Text big>Developed by:</Text>
             <Logos>
-              <div>
-                <p>Neil Weasfdgf</p>
-                <Mit />
-              </div>
-              <div>
-                <p>Neil Weasfdgf</p>
-                <Unb />
-              </div>
-              <div>
-                <p>Neil Weasfdgf</p>
-                <Yonsei />
-              </div>
-              <div>
-                <p>Neil Weasfdgf</p>
-                <MitIbm />
-              </div>
+              <Mit />
+              <Unb />
+              <Yonsei />
+              <MitIbm />
             </Logos>
             <Copyright>© 2021 Computer Progress</Copyright>
           </Container>
+          <FooterWave />
       </HomeWrapper>
     );
   }

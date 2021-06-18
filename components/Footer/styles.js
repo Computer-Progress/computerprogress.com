@@ -31,12 +31,6 @@ export const Container = styled.div`
 export const Logos = styled.div`
   display: flex;
   justify-content: space-around;
-
-  div p {
-    padding-bottom: 0px;
-    margin-bottom: 5px;
-    color: ${theme.colors.white};
-  }
 `;
 
 export const Text = styled.p`

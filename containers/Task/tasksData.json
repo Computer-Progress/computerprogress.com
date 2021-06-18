@@ -6,27 +6,27 @@
   },
   "object-detection": {
     "title": "Object Detection",
-    "description": "Object detection is the task of detecting instances of objects of a certain class within an image. The state-of-the-art methods can be categorized into two main types: one-stage methods and two stage-methods. One-stage methods prioritize inference speed, and example models include YOLO, SSD and RetinaNet. Two-stage methods prioritize detection accuracy, and example models include Faster R-CNN, Mask R-CNN and Cascade R-CNN. The most popular benchmark is the MSCOCO dataset. Models are typically evaluated according to a Mean Average Precision metric.",
+    "description": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Facere placeat beatae dolores dignissimos enim. Suscipit, inventore libero. Porro, atque tempora inventore veritatis eum ea dolor nobis similique odio, minima voluptate.",
     "icon": "object-detection.svg"
   },
   "question-answering": {
     "title": "Question Answering",
-    "description": "Question Answering is the task of answering questions (typically reading comprehension questions), but abstaining when presented with a question that cannot be answered based on the provided context.",
+    "description": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Facere placeat beatae dolores dignissimos enim. Suscipit, inventore libero. Porro, atque tempora inventore veritatis eum ea dolor nobis similique odio, minima voluptate.",
     "icon": "question-answering.svg"
   },
   "named-entity-recognition": {
     "title": "Named Entity Recognition",
-    "description": "Named entity recognition (NER) is the task of tagging entities in text with their corresponding type. Approaches typically use BIO notation, which differentiates the beginning (B) and the inside (I) of entities. O is used for non-entity tokens.",
+    "description": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Facere placeat beatae dolores dignissimos enim. Suscipit, inventore libero. Porro, atque tempora inventore veritatis eum ea dolor nobis similique odio, minima voluptate.",
     "icon": "named-entity-recognition.svg"
   },
   "machine-translation": {
     "title": "Machine Translation",
-    "description": "Machine translation is the task of translating a sentence in a source language to a different target language.",
+    "description": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Facere placeat beatae dolores dignissimos enim. Suscipit, inventore libero. Porro, atque tempora inventore veritatis eum ea dolor nobis similique odio, minima voluptate.",
     "icon": "machine-translation.svg"
   },
   "pose-estimation": {
     "title": "Pose Estimation",
-    "description": "Pose Estimation is a general problem in Computer Vision where we detect the position and orientation of an object.",
+    "description": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Facere placeat beatae dolores dignissimos enim. Suscipit, inventore libero. Porro, atque tempora inventore veritatis eum ea dolor nobis similique odio, minima voluptate.",
     "icon": "pose-estimation.svg"
   }
 }
