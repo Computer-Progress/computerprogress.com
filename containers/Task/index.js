@@ -36,7 +36,7 @@ export default function Task({ benchmarks }) {
 
   return (
     <PageTemplate>
-      <StyledContainer>
+      <Container>
         {!isPageLoading && (
           <>
             <DescriptionCard
