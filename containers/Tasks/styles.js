@@ -2,8 +2,15 @@ import styled from "styled-components";
 import theme from "../../styles/theme";
 
 export const Container = styled.div`
-  width: 70%;
+  width: 90%;
   margin: 0 auto;
+  h1 {
+    font-family: 'Montserrat';
+    font-weight: 500;
+    font-size: 24px;
+    display: flex;
+    margin: 50px 0px;
+    }
 `;
 
 export const ItemsWrapper = styled.div`
@@ -15,4 +22,6 @@ export const ItemsWrapper = styled.div`
   flex-direction: row;
   flex-wrap: wrap;
   justify-content: space-between;
+  text-transform: uppercase;
+  font-size: 12px;
 `;

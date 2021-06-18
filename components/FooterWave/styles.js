@@ -5,4 +5,5 @@ export const FooterWave = styled(Wave)`
   position: absolute;
   z-index: -1;
   height: 400px;
+  bottom: 0;
 `;

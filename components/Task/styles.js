@@ -9,12 +9,17 @@ export const Wrapper = styled.div`
   flex-direction: column;
   border-radius: 16px;
   box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.25);
+  transition: all 0.3s ease-in !important;
+  &:hover {
+    opacity: 0.55;
+  }
 `;
 
 export const Separator = styled.div`
   height: 1px;
   width: 100%;
-  background-color: ${theme.colors.primary};
+  margin-top: 5px;
+  background-color: #9E1FFF;
 `;
 
 export const ImageWrapper = styled.div`
@@ -23,7 +28,9 @@ export const ImageWrapper = styled.div`
   align-items: center;
   padding-bottom: 5px;
   h3 {
-    margin: 0 0 0 1px;
+    font-family: 'Montserrat';
+    font-weight: 500;
+    margin: 0 0 0 20px;
     padding-top: 0;
     flex: 1;
     text-align: center;

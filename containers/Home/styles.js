@@ -3,7 +3,7 @@ import theme from "../../styles/theme";
 
 export const Container = styled.div`
   display: grid;
-  grid-template-columns: 4fr 1fr;
+  grid-template-columns: 5fr 2fr;
   grid-column-gap: 32px;
   grid-row-gap: 16px;
   background: ${theme.colors.white};
@@ -37,6 +37,17 @@ export const Container = styled.div`
     width: 100%;
     display: flex;
   }
+
+  @media only screen and (max-width: 1200px) {
+    display: flex;
+    flex-direction: column;
+    > .chart{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+  }
+  }
+  
 `;
 
 

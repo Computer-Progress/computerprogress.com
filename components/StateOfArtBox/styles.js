@@ -8,6 +8,7 @@ export const Wrapper = styled.div`
   flex-direction: column;
   justify-content: space-between;
   border-radius: 16px;
+  width: 300px !important;
 box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.25);
     background-color: ${theme.colors.white};
   .blockWrapper {
@@ -16,12 +17,16 @@ box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.25);
     flex-direction: column;
   justify-content: space-between;
   }
+
+  @media only screen and (max-width: 1200px) {
+    display: none
+  }
 `;
 
 export const StateOfArt = styled.div`
   font-family: 'Montserrat';
   font-size: 22px;
-  font-weight: bold;
+  font-weight: 600 ;
   font-stretch: normal;
   font-style: normal;
   line-height: normal;
@@ -34,7 +39,7 @@ export const Acurracy = styled.div`
   margin: 16px 64px 8px 16px;
   font-family: 'Montserrat';
   font-size: 18px;
-  font-weight: 600;
+  font-weight: 500;
   font-stretch: normal;
   font-style: normal;
   line-height: normal;
@@ -87,7 +92,7 @@ export const Block = styled.div`
   p {
     font-family: 'Montserrat';
     font-size: 18px;
-    font-weight: 600;
+    font-weight: 500;
     font-stretch: normal;
     font-style: normal;
     line-height: normal;
@@ -101,7 +106,7 @@ export const ModelBlock = styled.div`
   p {
     font-family: 'Montserrat';
     font-size: 18px;
-    font-weight: 600;
+    font-weight: 500;
     font-stretch: normal;
     font-style: normal;
     line-height: normal;
@@ -113,7 +118,7 @@ export const ModelBlock = styled.div`
     flex: 1;
     width: 100%;
     font-size: 15px;
-    font-weight: 500;
+    font-weight: 700;
     padding: 0px 0px 20px 0px;
     margin: 0px 0px 0px 0px;
     font-stretch: normal;
