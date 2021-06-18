@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import theme from "../../styles/theme";
+import Mit from "../../public/mit.svg";
 
 export const HomeWrapper = styled.div`
   display: flex;
@@ -35,8 +36,16 @@ export const Logos = styled.div`
   div {
     align-items: center;
     display: flex;
+    justify-content: flex-start;
+    flex-direction: column;
+  }
+
+  div div {
+    align-items: center;
+    display: flex;
     justify-content: center;
     flex-direction: column;
+    height: 120px;
   }
 
   div p {
