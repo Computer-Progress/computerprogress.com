@@ -29,7 +29,7 @@ export const contributors = [
   {
     name: "Neil C. Thompson",
     workPlace: "MIT",
-    position: "Researcher",
+    position: "Researcher Scientist",
     imageName: "neil-thompson.png",
   },
   {
@@ -41,13 +41,13 @@ export const contributors = [
   {
     name: "Keeheon Lee",
     workPlace: "Yonsei University",
-    position: "Researcher",
+    position: "Assistant Professor",
     imageName: "keeheon-lee.png",
   },
   {
     name: "Gabriel F. Manso",
-    workPlace: "UnB/MIT",
-    position: "Researcher",
+    workPlace: "UnB",
+    position: "Undergraduate Student",
     imageName: "gabriel-manso.png",
   },
   {
@@ -59,7 +59,7 @@ export const contributors = [
   {
     name: "Guilherme Banci",
     workPlace: "UnB",
-    position: "Front-end Engineer",
+    position: "Front-end Developer",
     imageName: "guilherme-banci.png",
   },
   {
@@ -73,11 +73,5 @@ export const contributors = [
     workPlace: "UnB",
     position: "UI/UX Designer",
     imageName: "joao-egewarth.png",
-  },
-  {
-    name: "João Zarbiélli",
-    workPlace: "UnB",
-    position: "Software Engineer",
-    imageName: "joao-zarbielli.png",
   },
 ];

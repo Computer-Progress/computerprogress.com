@@ -12,7 +12,6 @@ import {
 } from "./styles";
 
 import { Tooltip, IconButton } from '@material-ui/core';
-import InfoIcon from '@material-ui/icons/Info';
 
 const StateOfArtBox = ({ data }) => {
 
