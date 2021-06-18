@@ -6,7 +6,7 @@ import ContributorsContainer from "../../components/ContributorsContainer";
 
 const textBlocks = [
   {
-    icon: "icon-background-1.svg",
+    icon: "icon-background-filetext.svg",
     title: "Our paper",
     description:
       "Computer progress is a platform for viewing paper data that\
@@ -20,7 +20,7 @@ const textBlocks = [
               to contributions from new employees.",
   },
   {
-    icon: "icon-background-2.svg",
+    icon: "icon-background-target.svg",
     title: "Our mission",
     description:
       "Our mission is to make it easier to view paper data that deal with\
