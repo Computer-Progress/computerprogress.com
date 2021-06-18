@@ -53,6 +53,19 @@ export const Logos = styled.div`
     margin-bottom: 5px;
     color: ${theme.colors.white};
   }
+
+  @media only screen and (max-width: 1250px) {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    > div:last-child {
+      grid-column: span 3;
+      justify-content: flex-end;
+      margin-top: 20px;
+      svg {
+        width: 100%;
+      }
+    }
+  }
 `;
 
 export const Text = styled.p`

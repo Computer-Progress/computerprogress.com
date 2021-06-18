@@ -20,6 +20,12 @@ export const Wrapper = styled.div`
     text-align: center;
     margin-bottom: 1.5rem;
   }
+
+  @media only screen and (max-width: 1015px) {
+    max-width: 100%;
+    border-radius: 16px 16px 16px 16px;
+    margin-bottom: 10px;
+  }
 `;
 
 export const Item = styled(Chip)`

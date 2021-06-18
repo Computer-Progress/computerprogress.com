@@ -20,6 +20,9 @@ export const Wrapper = styled.div`
     flex-direction: column;
   justify-content: space-between;
   }
+
+  @media only screen and (max-width: 1235px) {
+    display: none;
 `;
 
 export const StateOfArt = styled.div`
