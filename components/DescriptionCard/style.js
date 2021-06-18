@@ -11,6 +11,13 @@ export const ContainerGrid = styled.div`
 
   grid-column-gap: ${(props) => (props.$isMobile ? "1rem" : "2rem")};
 
+  margin-top: 50px;
+
+  h1 {
+    font-size: 1.7rem;
+    font-weight: 500;
+  }
+
   h2 {
     font-size: 1.9rem;
     font-weight: 400;

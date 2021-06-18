@@ -6,7 +6,7 @@ import {
   Block,
   ModelBlock,
   ButtonWrapper,
-  Button,
+  ViewPaperButton,
   HardwareBurdenTooltip,
   PurpleInfoIcon
 } from "./styles";
@@ -59,7 +59,7 @@ const StateOfArtBox = ({ data }) => {
         </ModelBlock>
       </div>
       <ButtonWrapper>
-        <Button primary link='/tasks'>VIEW PAPER</Button>
+        <ViewPaperButton primary link='/tasks'>VIEW PAPER</ViewPaperButton>
       </ButtonWrapper>
     </Wrapper>
   );
