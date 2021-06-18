@@ -13,10 +13,22 @@ export default function Footer({ home }) {
           <Container>
             <Text big>Developed by:</Text>
             <Logos>
-              <Mit />
-              <Unb />
-              <Yonsei />
-              <MitIbm />
+              <div>
+                <p>Neil C. Thompson</p>
+                <Mit />
+              </div>
+              <div>
+                <p>Gabriel F. Manso</p>
+                <Unb />
+              </div>
+              <div>
+                <p>Keeheon Lee</p>
+                <Yonsei />
+              </div>
+              <div>
+                <p>Kristjan Greenewald</p>
+                <MitIbm />
+              </div>
             </Logos>
             <Copyright>© 2021 Computer Progress</Copyright>
           </Container>

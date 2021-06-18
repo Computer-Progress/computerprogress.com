@@ -32,6 +32,7 @@ export const GridContainer = styled.div`
     align-self: top;
     margin-top: 0;
   }
+  text-align: justify;
 `;
 
 export const ButtonContainer = styled.div`
@@ -51,9 +52,5 @@ export const StyledButton = styled(Button).attrs({
   text-align: center;
   border-radius: 30px !important;
   color: white;
-  background: linear-gradient(
-    to right,
-    ${theme.colors.primary},
-    ${theme.colors.secondary}
-  );
+  background: linear-gradient(268.88deg, rgba(255, 255, 255, 0.1) -7.38%, #9E1FFF 104.79%), #4e33ff;;
 `;

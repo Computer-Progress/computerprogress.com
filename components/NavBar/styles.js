@@ -17,6 +17,10 @@ export const Logo = styled(Button)`
 padding: 0;
 `;
 
+export const SignInButton = styled(Button)`
+color: #000000 !important;
+`;
+
 export const LogoName = styled.h1`
 padding: 0;
 

@@ -17,17 +17,16 @@ export const Container = styled.div`
   box-shadow: inset 0px 60px 40px -10px rgba(255, 255, 255, 1); /* change to alter the effect*/
   padding: 60px 3.75%;
   padding-bottom: 300px;
-margin: 0 auto;
-margin-top: 100px;
-
-max-width: 1920px;
+  height: 500px;
+  margin: 0 auto;
+  margin-top: 100px;
+  max-width: 1920px;
 `;
 
 export const Text = styled.p`
   display: flex;
   font-weight: bold;
   margin-bottom: 3rem;
-
   font-size: 2.25rem;
   color: "#2000E5";
 `
