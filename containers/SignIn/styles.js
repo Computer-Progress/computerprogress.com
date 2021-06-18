@@ -54,7 +54,7 @@ export const Question = styled.p`
 export const SignButton = styled(Button)`
   align-self: stretch !important;
   width: 100% !important;
-  background: ${({ variant }) => variant ? 'transparent' : theme.colors.secondary} !important;
+  background: ${({ variant }) => variant ? 'transparent' : 'linear-gradient(268.88deg, rgba(255, 255, 255, 0.1) -7.38%, #9E1FFF 104.79%), #6047FF'} !important;
   color: ${({ variant }) => variant ? theme.colors.secondary : theme.colors.white} !important;
   border: 1px solid ${theme.colors.secondary} !important;
 `;
