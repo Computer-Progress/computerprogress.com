@@ -1,6 +1,7 @@
-import { Container, useTheme, useMediaQuery } from "@material-ui/core";
+import { Container } from "@material-ui/core";
 
 import PageTemplate from "../../components/PageTemplate";
+import DescriptionCard from "../../components/DescriptionCard";
 import ContributorsContainer from "../../components/ContributorsContainer";
 
 const contributors = [
@@ -60,6 +61,8 @@ const contributors = [
   // },
 ];
 
+import { textBlocks, contributors } from "./aboutUsData";
+
 import {
   StyledTitle,
   GridContainer,
@@ -68,9 +71,6 @@ import {
 } from "./styles.js";
 
 export default function Home() {
-  const theme = useTheme();
-  const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
-
   return (
     <div>
       <PageTemplate>
@@ -120,5 +120,28 @@ export default function Home() {
         </Container>
       </PageTemplate>
     </div>
+    <PageTemplate>
+      <Container>
+        <StyledTitle>About us</StyledTitle>
+
+        <DescriptionCard
+          icon={textBlocks[0].icon}
+          title={textBlocks[0].title}
+          description={textBlocks[0].description}
+        />
+
+        <ButtonContainer>
+          <StyledButton>See our paper</StyledButton>
+        </ButtonContainer>
+
+        <DescriptionCard
+          icon={textBlocks[1].icon}
+          title={textBlocks[1].title}
+          description={textBlocks[1].description}
+        />
+
+        <ContributorsContainer contributors={contributors} />
+      </Container>
+    </PageTemplate>
   );
 }

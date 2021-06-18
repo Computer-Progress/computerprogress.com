@@ -37,17 +37,6 @@ export const Container = styled.div`
     width: 100%;
     display: flex;
   }
-
-  @media only screen and (max-width: 1200px) {
-    display: flex;
-    flex-direction: column;
-    > .chart{
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-  }
-  }
-  
 `;
 
 

@@ -132,7 +132,7 @@ export default function Home() {
           <Button link='/tasks' color={theme.colors.black}>VIEW ALL TASKS</Button>
         </div>
         <div className="chart">
-          <ChartOptions title="Benchmarks" buttons={buttons} selected={selectedButton} />
+          <ChartOptions title="Datasets" buttons={buttons} selected={selectedButton} />
           <Chart data={data} label={label} />
         </div>
         <StateOfArtBox data={data} />

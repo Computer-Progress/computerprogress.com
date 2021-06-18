@@ -10,7 +10,6 @@ export default function Footer({ home }) {
   if (home) {
     return (
       <HomeWrapper>
-          <FooterWave />
           <Container>
             <Text big>Developed by:</Text>
             <Logos>
@@ -33,6 +32,7 @@ export default function Footer({ home }) {
             </Logos>
             <Copyright>© 2021 Computer Progress</Copyright>
           </Container>
+          <FooterWave />
       </HomeWrapper>
     );
   }
