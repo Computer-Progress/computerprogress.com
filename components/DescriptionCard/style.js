@@ -20,17 +20,17 @@ export const ContainerGrid = styled.div`
   p {
     grid-column: ${(props) => (props.$isMobile ? "1 / span 2" : 0)};
     align-self: top;
-    margin-top: 0;
+    margin-top: 20;
+    text-align: justify;
+    font-size: 14px;
   }
 `;
 
 export const StyledTitle = styled.div`
-  h1 {
-    /* margin: 0; */
-  }
+
 
   h2 {
-    font-size: 1.9rem;
+    font-size: 1.4rem;
     font-weight: 400;
     align-self: bottom;
   }

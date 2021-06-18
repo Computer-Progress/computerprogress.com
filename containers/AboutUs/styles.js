@@ -3,7 +3,9 @@ import theme from "../../styles/theme";
 import { Button } from "@material-ui/core";
 
 export const StyledTitle = styled.h1`
-  font-weight: 500;
+  font-weight: 400;
+  margin-top: 50px;
+  font-size: 30px;
 `;
 
 export const GridContainer = styled.div`
@@ -16,7 +18,6 @@ export const GridContainer = styled.div`
 
   img {
     width: 100%;
-
     grid-row: ${(props) => (props.$mobile ? 1 : "1 / span 2")};
     align-self: center;
   }
@@ -30,15 +31,13 @@ export const GridContainer = styled.div`
   p {
     grid-column: ${(props) => (props.$mobile ? "1 / span 2" : 0)};
     align-self: top;
-    margin-top: 0;
   }
-  text-align: justify;
 `;
 
 export const ButtonContainer = styled.div`
   width: 100%;
   text-align: center;
-  margin: 1rem 0;
+  margin: 2rem 0;
 `;
 
 export const StyledButton = styled(Button).attrs({
