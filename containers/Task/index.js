@@ -10,28 +10,7 @@ import tasksData from "./tasksData.json";
 
 import { StyledContainer } from "./styles";
 
-const benchmarks = [
-  {
-    title: "ImageNet",
-    bestModel: "Multi Scale Spatial Attention",
-    paper:
-      "Semantic Segmentation With Multi Scale Spatial Attention For Self Driving Cars",
-    BLEU: 83.69,
-    hardwareBurden: "10²²",
-    publicationDate: "Aug./2021",
-  },
-  {
-    title: "ImageNet",
-    bestModel: "Multi Scale Spatial Attention",
-    paper:
-      "Semantic Segmentation With Multi Scale Spatial Attention For Self Driving Cars",
-    BLEU: 83.69,
-    hardwareBurden: "10²²",
-    publicationDate: "Aug./2021",
-  },
-];
-
-export default function Task() {
+export default function Task({ benchmarks }) {
   const router = useRouter();
 
   const [taskId, setTaskId] = useState("");
@@ -58,9 +37,7 @@ export default function Task() {
   return (
     <PageTemplate>
       <StyledContainer>
-        {isPageLoading ? (
-          <span>Page is loading.</span>
-        ) : (
+        {!isPageLoading && (
           <>
             <DescriptionCard
               icon={task.icon}
@@ -71,14 +48,14 @@ export default function Task() {
             />
 
             {/* Benchmarks */}
-            {benchmarks.length > 0 && (
+            {benchmarks?.length > 0 && (
               <>
                 <h2>Benchmarks</h2>
 
                 <Grid container spacing={2}>
                   {benchmarks.map((benchmark, index) => (
                     <Grid item xs={12} key={index}>
-                      <CardBenchmark benchmark={benchmark} />
+                      <CardBenchmark benchmark={benchmark} taskId={taskId} />
                     </Grid>
                   ))}
                 </Grid>
