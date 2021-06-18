@@ -18,7 +18,7 @@ padding: 0;
 `;
 
 export const SignInButton = styled(Button)`
-color: #000000 !important;
+color: #9E1FFF !important;
 `;
 
 export const LogoName = styled.h1`

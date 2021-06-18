@@ -13,7 +13,7 @@ export const Wrapper = styled.div`
     font-family: 'Montserrat';
     font-style: normal;
     font-weight: 500;
-    font-size: 24px;
+    font-size: 18px;
     line-height: 29px;
     display: flex;
     align-items: center;

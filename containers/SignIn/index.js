@@ -11,7 +11,7 @@ import {
   Divider
 } from './styles';
 
-export default function Tasks() {
+export default function SignIn() {
   return (
     <PageTemplate>
       <Container>
@@ -26,11 +26,11 @@ export default function Tasks() {
           <h2>Sign In</h2>
           <Input label="Email" />
           <Input label="Password" />
-          <Question button>Forgot your password?</Question>
+          <Question >Forgot your password?</Question>
           <SignButton>SIGN IN</SignButton>
           <Divider />
           <Question>Don't have an account?</Question>
-          <SignButton variant="outlined">SIGN IN</SignButton>
+          <SignButton variant="outlined">SIGN UP</SignButton>
         </StyledBox>
       </Container>
     </PageTemplate>

@@ -1,9 +1,5 @@
 import React, { useState } from "react";
-import Head from "next/head";
-import { Container, Header } from "./styles.js";
-import NavBar from "../../components/NavBar";
-import Wave from "../../components/Wave";
-import Footer from "../../components/Footer";
+import { Container, AllTasksButton } from "./styles.js";
 import Chart from "../../components/Chart";
 import ChartOptions from "../../components/ChartOptions";
 import Tabs from "../../components/Tabs";
@@ -129,10 +125,10 @@ export default function Home() {
       <Container>
         <Tabs selected={selected} items={tabs} />
         <div className="viewAll">
-          <Button link='/tasks' color={theme.colors.black}>VIEW ALL TASKS</Button>
+          <AllTasksButton link='/tasks' >VIEW ALL TASKS</AllTasksButton>
         </div>
         <div className="chart">
-          <ChartOptions title="Datasets" buttons={buttons} selected={selectedButton} />
+          <ChartOptions title="Benchmarks:" buttons={buttons} selected={selectedButton} />
           <Chart data={data} label={label} />
         </div>
         <StateOfArtBox data={data} />

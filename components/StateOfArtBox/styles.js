@@ -3,6 +3,7 @@ import theme from "../../styles/theme";
 import DefaultButton from "../../components/Button"
 import InfoIcon from '@material-ui/icons/Info';
 
+
 export const Wrapper = styled.div`
   display: flex;
   padding: 32px;
@@ -59,7 +60,7 @@ export const Percentage = styled.div`
 `;
 
 export const PurpleInfoIcon = styled(InfoIcon)`
-color: #9E1FFF !important;
+  color: linear-gradient(268.88deg, rgba(255, 255, 255, 0.1) -7.38%, #9E1FFF 104.79%), #4e33ff !important;
 `;
 
 export const HardwareBurdenTooltip = styled.div`
@@ -74,11 +75,15 @@ export const Line = styled.div`
   height: 1px;
 `;
 
+export const ViewPaperButton = styled(DefaultButton)`
+  color: #9E1FFF !important;
+`;
+
 export const Block = styled.div`
   h4 {
     font-family: 'Montserrat';
     font-size: 36px;
-    font-weight: bold;
+    font-weight: 200;
     font-stretch: normal;
     font-style: normal;
     line-height: normal;
@@ -137,7 +142,7 @@ export const ModelBlock = styled.div`
 `;
 
 export const Button = styled(DefaultButton)`
-font-size: 16px;`;
+  font-size: 16px;`;
 
 export const ButtonWrapper = styled.div`
   display: flex;

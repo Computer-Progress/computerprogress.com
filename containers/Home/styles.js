@@ -1,5 +1,7 @@
 import styled from "styled-components";
 import theme from "../../styles/theme";
+import Button from "../../components/Button"
+
 
 export const Container = styled.div`
   display: grid;
@@ -39,7 +41,9 @@ export const Container = styled.div`
   }
 `;
 
-
+export const AllTasksButton = styled(Button)`
+  color: #9E1FFF !important;
+`;
 
 export const Header = styled.header`
 position: relative;

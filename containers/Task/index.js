@@ -8,7 +8,7 @@ import CardBenchmark from "../../components/CardBenchmark";
 
 import tasksData from "./tasksData.json";
 
-import { StyledContainer } from "./styles";
+import { Container } from "./styles";
 
 export default function Task({ benchmarks }) {
   const router = useRouter();
@@ -63,7 +63,7 @@ export default function Task({ benchmarks }) {
             )}
           </>
         )}
-      </StyledContainer>
+      </Container>
     </PageTemplate>
   );
 }
