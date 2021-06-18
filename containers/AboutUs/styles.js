@@ -45,6 +45,8 @@ export const StyledButton = styled(Button).attrs({
   color: "primary",
   size: "large",
   disableElevation: true,
+  href: "https://arxiv.org/abs/2007.05558",
+  target: "_blank",
 })`
   text-align: center;
   border-radius: 30px !important;
