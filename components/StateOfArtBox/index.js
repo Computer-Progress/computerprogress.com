@@ -7,7 +7,12 @@ import {
   ModelBlock,
   ButtonWrapper,
   Button,
+  HardwareBurdenTooltip,
+  PurpleInfoIcon
 } from "./styles";
+
+import { Tooltip, IconButton } from '@material-ui/core';
+import InfoIcon from '@material-ui/icons/Info';
 
 const StateOfArtBox = ({ data }) => {
 
@@ -37,7 +42,15 @@ const StateOfArtBox = ({ data }) => {
         </Block>
         <Line />
         <Block>
-          <p>Hardware Burden:</p>
+          <HardwareBurdenTooltip>
+            <p>Hardware Burden</p>
+            <Tooltip title="The computational capability of the hardware used to train the model, calculated as the number of processors multiplied by the computation rate and time.">
+              <IconButton aria-label="info">
+                <PurpleInfoIcon />
+              </IconButton>
+            </Tooltip>
+            <p>  :</p>
+          </HardwareBurdenTooltip>
           <h4>10<sup>{Math.log10(stateOfArt.hardware_burden).toFixed(1)}</sup></h4>
         </Block>
         <Line />

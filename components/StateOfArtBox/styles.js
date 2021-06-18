@@ -1,6 +1,8 @@
 import styled from "styled-components";
 import theme from "../../styles/theme";
 import DefaultButton from "../../components/Button"
+import InfoIcon from '@material-ui/icons/Info';
+
 export const Wrapper = styled.div`
   display: flex;
   padding: 32px;
@@ -59,6 +61,15 @@ export const Percentage = styled.div`
   letter-spacing: normal;
   text-align: center;
   color: #1a1515;
+`;
+
+export const PurpleInfoIcon = styled(InfoIcon)`
+color: #9E1FFF !important;
+`;
+
+export const HardwareBurdenTooltip = styled.div`
+  display: flex;
+  flex-direction: row;
 `;
 
 export const Line = styled.div`
