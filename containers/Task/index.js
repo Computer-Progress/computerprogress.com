@@ -8,7 +8,7 @@ import CardBenchmark from "../../components/CardBenchmark";
 
 import tasksData from "./tasksData.json";
 
-import { StyledContainer } from "./styles";
+import { Container } from "./styles";
 
 const benchmarks = [
   {
@@ -57,7 +57,7 @@ export default function Task() {
 
   return (
     <PageTemplate>
-      <StyledContainer>
+      <Container>
         {isPageLoading ? (
           <span>Page is loading.</span>
         ) : (
@@ -86,7 +86,7 @@ export default function Task() {
             )}
           </>
         )}
-      </StyledContainer>
+      </Container>
     </PageTemplate>
   );
 }

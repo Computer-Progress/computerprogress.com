@@ -59,7 +59,7 @@ export const Percentage = styled.div`
 `;
 
 export const PurpleInfoIcon = styled(InfoIcon)`
-color: #9E1FFF !important;
+color: linear-gradient(268.88deg, rgba(255, 255, 255, 0.1) -7.38%, #9E1FFF 104.79%), #4e33ff !important;
 `;
 
 export const HardwareBurdenTooltip = styled.div`

@@ -11,7 +11,7 @@ import {
   Divider
 } from './styles';
 
-export default function Tasks() {
+export default function SignUp() {
   return (
     <PageTemplate>
       <Container>
