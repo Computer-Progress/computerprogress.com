@@ -25,7 +25,7 @@ export const textBlocks = [
   },
 ];
 
-export const contributors = [
+export const researchers = [
   {
     name: "Neil C. Thompson",
     workPlace: "MIT",
@@ -50,6 +50,9 @@ export const contributors = [
     position: "Undergraduate Student",
     imageName: "gabriel-manso.png",
   },
+];
+
+export const otherContributors = [
   {
     name: "Andrew Lucas",
     workPlace: "UnB",

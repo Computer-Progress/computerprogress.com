@@ -2,14 +2,9 @@ import { Container } from "@material-ui/core";
 import PageTemplate from "../../components/PageTemplate";
 import DescriptionCard from "../../components/DescriptionCard";
 import ContributorsContainer from "../../components/ContributorsContainer";
-import { textBlocks, contributors } from "./aboutUsData";
+import { textBlocks, researchers, otherContributors } from "./aboutUsData";
 
-import {
-  StyledTitle,
-  GridContainer,
-  StyledButton,
-  ButtonContainer,
-} from "./styles.js";
+import { StyledTitle, StyledButton, ButtonContainer } from "./styles.js";
 
 export default function AboutUs() {
   return (
@@ -33,7 +28,10 @@ export default function AboutUs() {
           description={textBlocks[1].description}
         />
 
-        <ContributorsContainer contributors={contributors} />
+        <ContributorsContainer
+          researchers={researchers}
+          otherContributors={otherContributors}
+        />
       </Container>
     </PageTemplate>
   );

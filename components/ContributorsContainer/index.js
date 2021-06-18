@@ -3,23 +3,10 @@ import ContributorCard from "../ContributorCard";
 
 import { StyledH2, ContributorsFlexBox } from "./style";
 
-export default function ContributorsContainer({ contributors }) {
-  const [researchers, setResearchers] = useState([]);
-  const [otherContributors, setOtherContributors] = useState([]);
-
-  useEffect(() => {
-    const researchers = contributors.filter(
-      ({ position }) => position === "Researcher"
-    );
-
-    const otherContributors = contributors.filter(
-      ({ position }) => position !== "Researcher"
-    );
-
-    setResearchers(researchers);
-    setOtherContributors(otherContributors);
-  }, [contributors]);
-
+export default function ContributorsContainer({
+  researchers,
+  otherContributors,
+}) {
   return (
     <>
       <StyledH2>Our team</StyledH2>
