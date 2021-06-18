@@ -39,6 +39,17 @@ export const Container = styled.div`
     width: 100%;
     display: flex;
   }
+
+  @media only screen and (max-width: 1235px) {
+    display: flex;
+    flex-direction: column;
+  }
+
+  @media only screen and (max-width: 1015px) {
+    > .chart{
+      flex-direction: column;
+    }
+  }
 `;
 
 export const AllTasksButton = styled(Button)`

@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import theme from "../../styles/theme";
+import Mit from "../../public/mit.svg";
 
 export const HomeWrapper = styled.div`
   display: flex;
@@ -35,14 +36,35 @@ export const Logos = styled.div`
   div {
     align-items: center;
     display: flex;
+    justify-content: flex-start;
+    flex-direction: column;
+  }
+
+  div div {
+    align-items: center;
+    display: flex;
     justify-content: center;
     flex-direction: column;
+    height: 120px;
   }
 
   div p {
     padding-bottom: 0px;
     margin-bottom: 5px;
     color: ${theme.colors.white};
+  }
+
+  @media only screen and (max-width: 1250px) {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    > div:last-child {
+      grid-column: span 3;
+      justify-content: flex-end;
+      margin-top: 20px;
+      svg {
+        width: 100%;
+      }
+    }
   }
 `;
 

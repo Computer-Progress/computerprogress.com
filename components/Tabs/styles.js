@@ -16,6 +16,7 @@ box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.25);
 export const ItemWrapper = styled.div`
   display: flex;
   flex: 1;
+  height: 100%;
   justify-content: center;
   align-items: center;
   flex-direction: row;
@@ -40,6 +41,8 @@ export const StyledButton = styled(Button)`
   /* padding: ; */
   padding: 24px 50px;
   width: 100%;
+  height: 100% !important;
+  border-radius: 0px !important;
   margin: 0;
   font-size: 14px;
   color: ${theme.colors.black};

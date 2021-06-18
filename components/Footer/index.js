@@ -15,19 +15,27 @@ export default function Footer({ home }) {
             <Logos>
                 <div>
                   <p>Neil C. Thompson</p>
-                  <Mit />
+                  <div>
+                    <Mit />
+                  </div>
                 </div>
                 <div>
                   <p>Gabriel F. Manso</p>
-                  <Unb />
+                  <div>
+                    <Unb />
+                  </div>
                 </div>
                 <div>
                   <p>Keeheon Lee</p>
-                  <Yonsei />
+                  <div>
+                    <Yonsei />
+                  </div>
                 </div>
                 <div>
                   <p>Kristjan Greenewald</p>
-                  <MitIbm />
+                  <div>
+                    <MitIbm />
+                  </div>
                 </div>
             </Logos>
             <Copyright>© 2021 Computer Progress</Copyright>

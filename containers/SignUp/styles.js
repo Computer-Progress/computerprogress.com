@@ -9,11 +9,10 @@ export const Container = styled.div`
   flex-direction: row;
   align-self: center;
   justify-content: space-between;
-  width: 90%;
+  max-width: 1100px;
   margin: 50px 0px 20px 0px;
    div p {
-     font-size: 13px;
-     text-align: justify;
+     font-size: 15px;
    }
 
   @media only screen and (max-width: 950px) {
@@ -24,7 +23,7 @@ export const Container = styled.div`
 export const InfoContainer = styled.div`
    display: flex;
    flex-direction: column;
-   flex: 0.60;
+   flex: 0.50;
 `;
 
 
@@ -34,7 +33,7 @@ export const StyledBox = styled(Box).attrs({
   padding: 3,
   paddingBottom: 5
 })`
-  flex: 0.30;
+  flex: 0.35;
   h2 {
     font-weight: normal;
   }

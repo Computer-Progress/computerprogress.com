@@ -8,4 +8,8 @@ export const ChartWrapper = styled.div`
     box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.25);
     padding: 32px;
   padding-bottom: 20px;
+
+  @media only screen and (max-width: 1015px) {
+    border-radius: 16px 16px 16px 16px;
+  }
 `

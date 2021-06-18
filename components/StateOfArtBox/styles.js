@@ -9,9 +9,10 @@ export const Wrapper = styled.div`
   padding: 32px;
   padding-bottom: 20px;
   flex-direction: column;
+  width: 300px;
   justify-content: space-between;
   border-radius: 16px;
-box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.25);
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.25);
     background-color: ${theme.colors.white};
   .blockWrapper {
     flex: 1 1 100%;
@@ -19,6 +20,9 @@ box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.25);
     flex-direction: column;
   justify-content: space-between;
   }
+
+  @media only screen and (max-width: 1235px) {
+    display: none;
 `;
 
 export const StateOfArt = styled.div`
