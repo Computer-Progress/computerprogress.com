@@ -1,5 +1,4 @@
-import { ThemeProvider } from "@material-ui/core/styles";
-import { AppBar, Toolbar, Box, Typography } from "@material-ui/core";
+import { Container, Toolbar, Box, Typography } from "@material-ui/core";
 import useMediaQuery from "@material-ui/core/useMediaQuery";
 import { MuiTheme } from "../../styles/theme";
 
@@ -29,9 +28,9 @@ export default function Header() {
   ];
 
   return (
-    <ThemeProvider theme={MuiTheme}>
-      <StyledAppBar>
-        <Toolbar>
+    <StyledAppBar>
+      <Container>
+        <Toolbar disableGutters>
           <StyledToolbarBox>
             <Box mr={1}>
               <Logo />
@@ -48,7 +47,7 @@ export default function Header() {
             {!isMobileSM && (
               <>
                 {links.map(({ text, href }) => (
-                  <Box mr={2}>
+                  <Box mr={2} key={href}>
                     <Button href={href} color="secondary">
                       {text}
                     </Button>
@@ -80,10 +79,10 @@ export default function Header() {
         </Toolbar>
 
         {isMobileSM && (
-          <Toolbar>
+          <Toolbar disableGutters>
             <StyledToolbarBox justifyContent="space-between">
               {links.map(({ text, href }) => (
-                <Box>
+                <Box key={href}>
                   <Button
                     href={href}
                     size={isMobileSM ? "small" : "medium"}
@@ -96,7 +95,7 @@ export default function Header() {
             </StyledToolbarBox>
           </Toolbar>
         )}
-      </StyledAppBar>
-    </ThemeProvider>
+      </Container>
+    </StyledAppBar>
   );
 }

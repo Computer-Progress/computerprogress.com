@@ -5,6 +5,7 @@ import { AppBar as MuiAppBar, Box as MuiBox } from "@material-ui/core";
 import Button from "../Button";
 
 export const StyledAppBar = styled(MuiAppBar).attrs({
+  position: "static",
   elevation: 0,
 })`
   background: linear-gradient(
