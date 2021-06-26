@@ -21,7 +21,7 @@ export const StyledButton = styled(MuiButton).attrs({
   variant: "contained",
   disableElevation: true,
 })`
-  border-radius: 100px;
+  border-radius: 100px !important;
 
   color: ${({ color = "default" }) => theme[color].color} !important;
 
