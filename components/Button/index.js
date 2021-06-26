@@ -1,22 +1,16 @@
-import { Button } from "./styles.js";
+import { StyledButton } from "./styles.js";
 import Link from "next/link";
 
-export default function MyButton({ link, primary, children, ...props }) {
-  if (link) {
-    return (
-      <div>
-        <Link href={link || ""}>
-          <Button primary={primary} {...props}>
-            {children}
-          </Button>
-        </Link>
-      </div>
-    );
-  }
-
+export default function Button({ href, children, ...props }) {
   return (
-    <Button primary={primary} {...props}>
-      {children}
-    </Button>
+    <>
+      {href ? (
+        <Link href={href} passHref>
+          <StyledButton {...props}>{children}</StyledButton>
+        </Link>
+      ) : (
+        <StyledButton {...props}>{children}</StyledButton>
+      )}
+    </>
   );
 }
