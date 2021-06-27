@@ -8,22 +8,20 @@ import { useEffect, useState } from "react";
 
 export default function TaskTable({ tasks }) {
   const isMobile = useMediaQuery(MuiTheme.breakpoints.down("sm"));
-  const [tabs, setTabs] = useState([]);
+  const [selectedTab, setSelectedTab] = useState(0);
 
-  useEffect(() => {
-    const tabs = tasks.map((task) => ({
-      id: task.task_id,
-      identifier: task.task_identifier,
-      name: task.task_name,
-    }));
-
-    setTabs(tabs);
-  }, []);
+  // useEffect(() => {
+  //   console.log(selectedTab);
+  // }, [selectedTab]);
 
   return (
     <Grid container spacing={1}>
       <StyledGridItem $order={1}>
-        <TaskTableTabs />
+        <TaskTableTabs
+          tasks={tasks}
+          selectedTab={selectedTab}
+          setSelectedTab={setSelectedTab}
+        />
       </StyledGridItem>
 
       <StyledGridItem $order={2} sm={6} md={2}>
