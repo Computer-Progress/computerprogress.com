@@ -4,10 +4,10 @@ import Wave from 'react-wavify';
 export const FooterWave = styled(Wave)`
   position: absolute;
   z-index: -1;
-  height: 400px;
+  height: 350px;
   bottom: 0;
 
   @media only screen and (max-width: 1250px) {
-    height: 550px;
+    height: 450px;
   }
 `;

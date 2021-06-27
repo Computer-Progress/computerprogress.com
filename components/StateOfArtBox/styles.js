@@ -21,7 +21,7 @@ export const Wrapper = styled.div`
   justify-content: space-between;
   }
 
-  @media only screen and (max-width: 1235px) {
+  @media only screen and (max-width: 1450px) {
     display: none;
 `;
 

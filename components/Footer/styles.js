@@ -49,8 +49,16 @@ export const Logos = styled.div`
   }
 
   div p {
-    padding-bottom: 0px;
-    margin-bottom: 5px;
+    color: ${theme.colors.white};
+    text-align: center;
+  }
+
+
+  div h3 {
+    font-weight: bold;
+    margin-bottom: 0;
+    padding-bottom: 0;
+    text-align: center;
     color: ${theme.colors.white};
   }
 
@@ -66,6 +74,17 @@ export const Logos = styled.div`
       }
     }
   }
+
+  @media only screen and (max-width: 720px) {
+    grid-template-columns: 1fr 1fr;
+    > div:last-child {
+      grid-column: span 1;
+      justify-content: flex-end;
+      margin-top: 0px;
+    }
+  }
+
+
 `;
 
 export const Text = styled.p`

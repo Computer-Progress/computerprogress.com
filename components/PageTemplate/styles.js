@@ -6,4 +6,11 @@ export const StyledContainer = styled(Container).attrs({
 })`
   margin: 1rem 0;
   max-width: 1500px !important;
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+
+  @media only screen and (max-width: 1450px) {
+    margin: 0px 0px;
+  }
 `;

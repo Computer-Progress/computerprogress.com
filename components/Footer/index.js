@@ -11,31 +11,23 @@ export default function Footer({ home }) {
     return (
       <HomeWrapper>
           <Container>
-            <Text big>Developed by:</Text>
+            <Text big>Idealized by:</Text>
             <Logos>
                 <div>
-                  <p>Neil C. Thompson</p>
-                  <div>
-                    <Mit />
-                  </div>
+                  <h3>Neil C. Thompson</h3>
+                  <p>MIT's Computer Science and Artificial Inteligence Lab</p>
                 </div>
                 <div>
-                  <p>Gabriel F. Manso</p>
-                  <div>
-                    <Unb />
-                  </div>
+                  <h3>Gabriel F. Manso</h3>
+                  <p>MIT-IBM Watson AI Lab</p>
                 </div>
                 <div>
-                  <p>Keeheon Lee</p>
-                  <div>
-                    <Yonsei />
-                  </div>
+                  <h3>Keeheon Lee</h3>
+                  <p>Yonsey University</p>
                 </div>
                 <div>
-                  <p>Kristjan Greenewald</p>
-                  <div>
-                    <MitIbm />
-                  </div>
+                  <h3>Kristjan Greenewald</h3>
+                  <p>University of Brasilia</p>
                 </div>
             </Logos>
             <Copyright>© 2021 Computer Progress</Copyright>
