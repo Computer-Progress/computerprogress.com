@@ -7,8 +7,6 @@ export default function TaskTableTabs({ tasks, selectedTab, setSelectedTab }) {
 
   return (
     <>
-      <Typography variant="h2">Tasks</Typography>
-
       <Card>
         <Tabs
           value={selectedTab}
@@ -17,7 +15,12 @@ export default function TaskTableTabs({ tasks, selectedTab, setSelectedTab }) {
           onChange={handleChange}
         >
           {tasks.map((task) => (
-            <Tab label={task.task_name} wrapped key={task.task_id} />
+            <Tab
+              label={task.task_name}
+              wrapped
+              key={task.task_id}
+              style={{ flexGrow: 1 }}
+            />
           ))}
         </Tabs>
       </Card>
