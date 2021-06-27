@@ -1,19 +1,24 @@
 import Link from "next/link";
 import { useEffect, useState } from "react";
-import TaskTableTabs from "../TabsTableTabs";
+import { useMediaQuery } from "@material-ui/core";
 
-import { Typography, Grid, Card, Box, useMediaQuery } from "@material-ui/core";
+import { Typography, Grid, Card, Box } from "@material-ui/core";
+
+import TaskTableTabs from "../TaskTableTabs";
+import TaskTableDatasets from "../TaskTableDatasets";
 
 import { MuiTheme } from "../../styles/theme";
 import { StyledGridItem, StyledFlexbox } from "./styles";
 
 export default function TaskTable({ tasks }) {
   const isMobile = useMediaQuery(MuiTheme.breakpoints.down("sm"));
-  const [selectedTab, setSelectedTab] = useState(0);
 
-  // useEffect(() => {
-  //   console.log(selectedTab);
-  // }, [selectedTab]);
+  const [selectedTab, setSelectedTab] = useState(0);
+  const [selectedDataset, setSelectedDataset] = useState(0);
+
+  useEffect(() => {
+    setSelectedDataset(0);
+  }, [selectedTab]);
 
   return (
     <>
@@ -39,11 +44,15 @@ export default function TaskTable({ tasks }) {
         </StyledGridItem>
 
         <StyledGridItem $order={2} xs={12} sm={6} md={2}>
-          <Card>Datasets</Card>
+          <TaskTableDatasets
+            datasets={tasks[selectedTab].datasets}
+            selectedDataset={selectedDataset}
+            setSelectedDataset={setSelectedDataset}
+          />
         </StyledGridItem>
 
         <StyledGridItem $order={isMobile ? 4 : 3} xs={12} md={8}>
-          <Card>Chart</Card>
+          <Card>Chart for {selectedDataset}</Card>
         </StyledGridItem>
 
         <StyledGridItem $order={isMobile ? 3 : 4} xs={12} sm={6} md={2}>
