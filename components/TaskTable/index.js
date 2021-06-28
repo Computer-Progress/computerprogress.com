@@ -42,7 +42,9 @@ export default function TaskTable({ tasks }) {
 
   return (
     <>
-      <Typography variant="h3">Tasks</Typography>
+      <Box mb={2}>
+        <Typography variant="h3">Tasks</Typography>
+      </Box>
 
       <Grid container spacing={1}>
         <StyledGridItem $order={0} xs={12} md={9}>
