@@ -2,7 +2,7 @@ import Link from "next/link";
 import { useEffect, useState } from "react";
 import { useMediaQuery } from "@material-ui/core";
 
-import { Typography, Grid, Card, Box } from "@material-ui/core";
+import { Typography, Grid, Card, Box, Button } from "@material-ui/core";
 
 import TaskTableTabs from "../TaskTableTabs";
 import TaskTableDatasets from "../TaskTableDatasets";
@@ -45,7 +45,7 @@ export default function TaskTable({ tasks }) {
       <Typography variant="h3">Tasks</Typography>
 
       <Grid container spacing={1}>
-        <StyledGridItem $order={0} xs={9}>
+        <StyledGridItem $order={0} xs={12} md={9}>
           <TaskTableTabs
             tasks={tasks}
             selectedTask={selectedTask}
@@ -54,15 +54,15 @@ export default function TaskTable({ tasks }) {
           />
         </StyledGridItem>
 
-        <StyledGridItem $order={1} xs={3}>
-          <Link href="/tasks">
-            <StyledFlexbox>
-              <Box>
-                <Typography variant="button">View all tasks</Typography>
-              </Box>
-            </StyledFlexbox>
-          </Link>
-        </StyledGridItem>
+        {!isMobile && (
+          <StyledGridItem $order={1} xs={3}>
+            <Link href="/tasks">
+              <StyledFlexbox>
+                <Button color="primary">View all tasks</Button>
+              </StyledFlexbox>
+            </Link>
+          </StyledGridItem>
+        )}
 
         <StyledGridItem $order={2} xs={12} sm={6} md={3}>
           <TaskTableDatasets
