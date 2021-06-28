@@ -2,7 +2,12 @@ import { Container, Toolbar, Box, Typography } from "@material-ui/core";
 import useMediaQuery from "@material-ui/core/useMediaQuery";
 import { MuiTheme } from "../../styles/theme";
 
-import { StyledAppBar, StyledToolbarBox, StyledSpacer } from "./styles";
+import {
+  StyledAppBar,
+  StyledToolbarBox,
+  StyledSpacer,
+  StyledButton,
+} from "./styles";
 
 import Button from "../Button";
 
@@ -48,32 +53,32 @@ export default function Header() {
               <>
                 {links.map(({ text, href }) => (
                   <Box mr={2} key={href}>
-                    <Button href={href} color="secondary">
+                    <StyledButton href={href} color="secondary">
                       {text}
-                    </Button>
+                    </StyledButton>
                   </Box>
                 ))}
               </>
             )}
 
             <Box mr={2}>
-              <Button
+              <StyledButton
                 size={isMobileSM ? "small" : "medium"}
                 color="secondary"
                 href="/sign_up"
               >
                 Sign up
-              </Button>
+              </StyledButton>
             </Box>
 
             <Box>
-              <Button
+              <StyledButton
                 size={isMobileSM ? "small" : "medium"}
                 color="primary"
                 href="/sign_in"
               >
                 Sign in
-              </Button>
+              </StyledButton>
             </Box>
           </StyledToolbarBox>
         </Toolbar>
@@ -83,13 +88,13 @@ export default function Header() {
             <StyledToolbarBox justifyContent="space-between">
               {links.map(({ text, href }) => (
                 <Box key={href}>
-                  <Button
+                  <StyledButton
                     href={href}
                     size={isMobileSM ? "small" : "medium"}
                     color="secondary"
                   >
                     {text}
-                  </Button>
+                  </StyledButton>
                 </Box>
               ))}
             </StyledToolbarBox>

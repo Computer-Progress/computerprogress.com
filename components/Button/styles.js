@@ -1,29 +1,23 @@
 import styled from "styled-components";
-import { Button as MuiButton } from "@material-ui/core";
+import theme from "../../styles/theme";
+import { Button as MaterialButton } from '@material-ui/core';
 
-const theme = {
-  default: {
-    background:
-      "linear-gradient(268.88deg, rgba(255, 255, 255, 0.1) -7.38%, #7100C9 104.79%), #2000E5",
-    color: "#ffffff",
-  },
-  primary: {
-    background: "#ffffff",
-    color: "#7100C9",
-  },
-  secondary: {
-    background: "transparent",
-    color: "white",
-  },
-};
-
-export const StyledButton = styled(MuiButton).attrs(({ size }) => ({
-  variant: `${size === "small" ? "text" : "contained"}`,
+export const Button = styled(MaterialButton).attrs(({ variant, primary }) => ({
+  variant: variant || primary ? 'default' : 'contained',
   disableElevation: true,
 }))`
   border-radius: 100px !important;
-
-  color: ${({ color = "default" }) => theme[color].color} !important;
-
-  background: ${({ color = "default" }) => theme[color].background} !important;
+  cursor: pointer;
+  background: ${({ primary, background, contained }) =>
+    background || contained ? 'linear-gradient(268.88deg, rgba(255, 255, 255, 0.1) -7.38%, #9E1FFF 104.79%), #6047FF' : primary ? theme.colors.white : "transparent"} !important;
+  color: ${({ primary, color }) =>
+    color || primary ? theme.colors.secondary : theme.colors.white} !important;
+  ${({cta}) => cta && `
+  background: linear-gradient(268.88deg, rgba(255, 255, 255, 0.1) -7.38%, #9E1FFF 104.79%), #6047FF !important;
+  color: white !important;
+  `}
+  transition: all 0.3s ease-in-out !important;
+  &:hover {
+    opacity: 0.8;
+  }
 `;

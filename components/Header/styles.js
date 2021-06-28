@@ -1,8 +1,21 @@
 import styled from "styled-components";
+import {
+  AppBar as MuiAppBar,
+  Box as MuiBox,
+  Button as MuiButton,
+} from "@material-ui/core";
 
-import { AppBar as MuiAppBar, Box as MuiBox } from "@material-ui/core";
-
-import Button from "../Button";
+const theme = {
+  default: {},
+  primary: {
+    text: "#7100c9",
+    background: "white",
+  },
+  secondary: {
+    text: "white",
+    background: "",
+  },
+};
 
 export const StyledAppBar = styled(MuiAppBar).attrs({
   position: "static",
@@ -26,3 +39,9 @@ export const StyledToolbarBox = styled(MuiBox).attrs({
 export const StyledSpacer = styled(MuiBox).attrs({
   flexGrow: 1,
 })``;
+
+export const StyledButton = styled(MuiButton).attrs({})`
+  color: ${({ color }) => theme[color].text} !important;
+  background: ${({ color }) => theme[color].background} !important;
+  border-radius: 100px !important;
+`;
