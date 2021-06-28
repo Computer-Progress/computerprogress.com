@@ -1,6 +1,7 @@
-import { Card, Typography, Box, Divider } from "@material-ui/core";
+import { Card, Typography, Box, Divider, Button } from "@material-ui/core";
+import parseExponential from "parse-exponential";
 
-export default function TaskTableSOTA() {
+export default function TaskTableSOTA({ sota }) {
   return (
     <Card>
       <Box display="flex" flexDirection="column" alignItems="center" p={2}>
@@ -16,7 +17,10 @@ export default function TaskTableSOTA() {
 
         <Box mt={1}>
           <Typography variant="h2" component="span">
-            00
+            {sota.sota_accuracy_value}
+          </Typography>
+          <Typography variant="h3" component="span">
+            %
           </Typography>
         </Box>
 
@@ -30,7 +34,7 @@ export default function TaskTableSOTA() {
 
         <Box mt={1}>
           <Typography variant="h2" component="span">
-            00
+            {sota.sota_hardware_burden.toExponential()}
           </Typography>
         </Box>
 
@@ -51,8 +55,12 @@ export default function TaskTableSOTA() {
           }}
         >
           <Typography variant="h3" component="span" noWrap>
-            NASNetA (6@4032) sasas
+            {sota.sota_name}
           </Typography>
+        </Box>
+
+        <Box mt={1}>
+          <Button color="primary" href={sota.sota_paper_link}>View paper</Button>
         </Box>
       </Box>
     </Card>

@@ -17,10 +17,6 @@ export default function TaskTable({ tasks }) {
   const [selectedTab, setSelectedTab] = useState(0);
   const [selectedDataset, setSelectedDataset] = useState(0);
 
-  useEffect(() => {
-    setSelectedDataset(0);
-  }, [selectedTab]);
-
   return (
     <>
       <Typography variant="h3">Tasks</Typography>
@@ -31,6 +27,7 @@ export default function TaskTable({ tasks }) {
             tasks={tasks}
             selectedTab={selectedTab}
             setSelectedTab={setSelectedTab}
+            setSelectedDataset={setSelectedDataset}
           />
         </StyledGridItem>
 
@@ -44,7 +41,7 @@ export default function TaskTable({ tasks }) {
           </Link>
         </StyledGridItem>
 
-        <StyledGridItem $order={2} xs={12} sm={6} md={3} lg={2}>
+        <StyledGridItem $order={2} xs={12} sm={6} md={3}>
           <TaskTableDatasets
             datasets={tasks[selectedTab].datasets}
             selectedDataset={selectedDataset}
@@ -52,12 +49,12 @@ export default function TaskTable({ tasks }) {
           />
         </StyledGridItem>
 
-        <StyledGridItem $order={isMobile ? 4 : 3} xs={12} md={6} lg={8}>
+        <StyledGridItem $order={isMobile ? 4 : 3} xs={12} md={6}>
           <Card>Chart for {selectedDataset}</Card>
         </StyledGridItem>
 
-        <StyledGridItem $order={isMobile ? 3 : 4} xs={12} sm={6} md={3} lg={2}>
-          <TaskTableSOTA />
+        <StyledGridItem $order={isMobile ? 3 : 4} xs={12} sm={6} md={3}>
+          <TaskTableSOTA sota={tasks[selectedTab].datasets[selectedDataset]} />
         </StyledGridItem>
       </Grid>
     </>

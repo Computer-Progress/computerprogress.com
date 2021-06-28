@@ -1,8 +1,14 @@
 import { Card, Typography, Tabs, Tab } from "@material-ui/core";
 
-export default function TaskTableTabs({ tasks, selectedTab, setSelectedTab }) {
+export default function TaskTableTabs({
+  tasks,
+  selectedTab,
+  setSelectedTab,
+  setSelectedDataset,
+}) {
   function handleChange(event, newValue) {
     setSelectedTab(newValue);
+    setSelectedDataset(0);
   }
 
   return (
