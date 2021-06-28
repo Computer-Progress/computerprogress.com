@@ -8,18 +8,13 @@ import PapersList from "../../components/PapersList";
 import ButtonToTop from "../../components/ButtonToTop";
 
 function Benchmark({ benchmark }) {
-  const [data, setData] = useState(benchmark.data);
-  const [label, setLabel] = useState(benchmark.label);
+  const [data, setData] = useState(benchmark.models);
+  const [label, setLabel] = useState(benchmark.accuracy_types?.[0]?.name);
   const [selected, setSelected] = useState(0);
   const [selectedButton, setSelectedButton] = useState(0);
-  const [name, setName] = useState(benchmark.name);
+  const [name, setName] = useState(benchmark.task_name);
   const [type, setType] = useState(0);
-  const [buttons, setButtons] = useState([
-    {
-      name: benchmark.label,
-      onPress: () => {},
-    },
-  ]);
+  const [buttons, setButtons] = useState(benchmark.accuracy_types);
 
   const tabs = [
     {
@@ -32,10 +27,11 @@ function Benchmark({ benchmark }) {
     },
   ];
 
-  // useEffect(() => {
-  //   setDomain(query.benchmarkId);
-  //   console.log(domain);
-  // }, []);
+  useEffect(() => {
+    console.log('vaai vai', benchmark)
+    // setDomain(query.benchmarkId);
+    // console.log(domain);
+  }, []);
 
   // useEffect(() => {
   //   switch (domain) {

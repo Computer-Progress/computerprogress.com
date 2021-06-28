@@ -19,6 +19,8 @@ export default function Task({ benchmarks }) {
   const [task, setTask] = useState({});
 
   useEffect(() => {
+    console.log('benchmarks', benchmarks);
+    
     if (!router.isReady) return;
 
     const { taskId } = router.query;
@@ -26,7 +28,7 @@ export default function Task({ benchmarks }) {
 
     if (isTaskIdCorrect) {
       setTaskId(taskId);
-      setTask(tasksData[taskId]);
+      setTask(benchmarks);
 
       setPageIsLoading(false);
     } else {
@@ -40,20 +42,19 @@ export default function Task({ benchmarks }) {
         {!isPageLoading && (
           <>
             <DescriptionCard
-              icon={task.icon}
-              title={task.title}
-              description={task.description}
+              icon={task.task_image}
+              title={task.task_name}
+              description={task.task_description}
               isH1
               imageBorder
             />
 
             {/* Benchmarks */}
-            {benchmarks?.length > 0 && (
+            {task?.datasets?.length > 0 && (
               <>
                 <h2>Benchmarks</h2>
-
                 <Grid container spacing={2}>
-                  {benchmarks.map((benchmark, index) => (
+                  {task.datasets.map((benchmark, index) => (
                     <Grid item xs={12} key={index}>
                       <CardBenchmark benchmark={benchmark} taskId={taskId} />
                     </Grid>
