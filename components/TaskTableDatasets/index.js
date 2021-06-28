@@ -18,7 +18,9 @@ export default function TaskTableDatasets({
               $active={selectedDataset === index}
               onClick={() => setSelectedDataset(index)}
             >
-              {dataset.dataset_name}
+              <Typography variant="button" noWrap>
+                {dataset.dataset_name}
+              </Typography>
             </StyledButton>
           </Box>
         ))}

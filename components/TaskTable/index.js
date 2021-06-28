@@ -6,6 +6,7 @@ import { Typography, Grid, Card, Box } from "@material-ui/core";
 
 import TaskTableTabs from "../TaskTableTabs";
 import TaskTableDatasets from "../TaskTableDatasets";
+import TaskTableSOTA from "../TaskTableSOTA";
 
 import { MuiTheme } from "../../styles/theme";
 import { StyledGridItem, StyledFlexbox } from "./styles";
@@ -43,7 +44,7 @@ export default function TaskTable({ tasks }) {
           </Link>
         </StyledGridItem>
 
-        <StyledGridItem $order={2} xs={12} sm={6} md={2}>
+        <StyledGridItem $order={2} xs={12} sm={6} md={3} lg={2}>
           <TaskTableDatasets
             datasets={tasks[selectedTab].datasets}
             selectedDataset={selectedDataset}
@@ -51,12 +52,12 @@ export default function TaskTable({ tasks }) {
           />
         </StyledGridItem>
 
-        <StyledGridItem $order={isMobile ? 4 : 3} xs={12} md={8}>
+        <StyledGridItem $order={isMobile ? 4 : 3} xs={12} md={6} lg={8}>
           <Card>Chart for {selectedDataset}</Card>
         </StyledGridItem>
 
-        <StyledGridItem $order={isMobile ? 3 : 4} xs={12} sm={6} md={2}>
-          <Card>SOTA</Card>
+        <StyledGridItem $order={isMobile ? 3 : 4} xs={12} sm={6} md={3} lg={2}>
+          <TaskTableSOTA />
         </StyledGridItem>
       </Grid>
     </>
