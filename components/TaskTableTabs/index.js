@@ -17,6 +17,7 @@ export default function TaskTableTabs({
         <Tabs
           value={selectedTask}
           variant="scrollable"
+          indicatorColor="primary"
           scrollButtons="on"
           onChange={handleChange}
         >
