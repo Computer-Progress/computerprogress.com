@@ -2,12 +2,12 @@ import { Card, Typography, Tabs, Tab } from "@material-ui/core";
 
 export default function TaskTableTabs({
   tasks,
-  selectedTab,
-  setSelectedTab,
+  selectedTask,
+  setSelectedTask,
   setSelectedDataset,
 }) {
   function handleChange(event, newValue) {
-    setSelectedTab(newValue);
+    setSelectedTask(newValue);
     setSelectedDataset(0);
   }
 
@@ -15,7 +15,7 @@ export default function TaskTableTabs({
     <>
       <Card>
         <Tabs
-          value={selectedTab}
+          value={selectedTask}
           variant="scrollable"
           scrollButtons="on"
           onChange={handleChange}
