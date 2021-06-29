@@ -35,7 +35,7 @@ export default function TaskTableSOTA({ sota }) {
 
         <Box mt={1}>
           <Typography variant="h2" component="span">
-            {sota.sota_accuracy_value}
+            {sota.sota_accuracy_value ?? "-"}
           </Typography>
           <Typography variant="h3" component="span">
             %
@@ -62,7 +62,7 @@ export default function TaskTableSOTA({ sota }) {
 
         <Box mt={1}>
           <Typography variant="h2" component="span">
-            {sota.sota_hardware_burden.toExponential()}
+            {sota.sota_hardware_burden?.toExponential() ?? "-"}
           </Typography>
         </Box>
 
@@ -78,12 +78,15 @@ export default function TaskTableSOTA({ sota }) {
 
         <Box mt={1}>
           <Typography variant="subtitle1" component="span" noWrap>
-            <Box fontWeight="500">{sota.sota_name}</Box>
+            <Box fontWeight="500">{sota.sota_name ?? "-"}</Box>
           </Typography>
         </Box>
 
         <Box mt={1}>
-          <Button href={sota.sota_paper_link}>
+          <Button
+            href={sota.sota_paper_link ?? ""}
+            disabled={!sota.sota_paper_link}
+          >
             <Typography variant="button" style={{ color: "#9E1FFF" }}>
               View paper
             </Typography>
