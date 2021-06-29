@@ -8,7 +8,7 @@ export default function DefaultLayout({ children }) {
     <>
       <Header />
       <StyledContainer>{children}</StyledContainer>
-      <Footer />
+      {/* <Footer /> */}
     </>
   );
 }
