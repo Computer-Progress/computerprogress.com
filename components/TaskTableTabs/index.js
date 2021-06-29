@@ -1,4 +1,4 @@
-import { Tabs, Tab } from "@material-ui/core";
+import { Tabs, Tab, Typography } from "@material-ui/core";
 import { StyledCard } from "./styles";
 
 export default function TaskTableTabs({
@@ -23,7 +23,11 @@ export default function TaskTableTabs({
       >
         {tasks.map((task) => (
           <Tab
-            label={task.task_name}
+            label={
+              <Typography variant="subtitle2" color="primary">
+                {task.task_name}
+              </Typography>
+            }
             wrapped
             key={task.task_id}
             style={{ flexGrow: 1 }}
