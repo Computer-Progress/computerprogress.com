@@ -33,4 +33,10 @@ export const MuiTheme = createMuiTheme({
       fontSize: "1.1rem",
     },
   },
+  palette: {
+    primary: {
+      main: "#7100C9",
+      contrastText: "#FFFFFF",
+    },
+  },
 });
