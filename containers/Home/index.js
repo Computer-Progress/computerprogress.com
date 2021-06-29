@@ -1,7 +1,7 @@
 import { ThemeProvider } from "@material-ui/core/styles";
 import { MuiTheme } from "../../styles/theme";
 
-import DefaultLayout from "../../layouts/DefaultLayout";
+import PageTemplate from "../../components/PageTemplate";
 
 import TaskTable from "../../components/TaskTable";
 import CollaborateInvite from "../../components/CollaborateInvite";
@@ -12,7 +12,7 @@ export default function Home({ tasks }) {
 
   return (
     <ThemeProvider theme={MuiTheme}>
-      <DefaultLayout>
+      <PageTemplate isHome>
         <Box display="flex" flexDirection="column">
           <Box my={3}>
             <TaskTable tasks={tasks} />
@@ -22,7 +22,7 @@ export default function Home({ tasks }) {
             <CollaborateInvite />
           </Box>
         </Box>
-      </DefaultLayout>
+      </PageTemplate>
     </ThemeProvider>
   );
 }

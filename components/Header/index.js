@@ -9,8 +9,6 @@ import {
   StyledButton,
 } from "./styles";
 
-import Wave from "../Wave";
-
 import Logo from "../../public/logo_icon.svg";
 
 export default function Header() {
@@ -101,8 +99,6 @@ export default function Header() {
           </Toolbar>
         )}
       </Container>
-
-      {!isMobileSM && <Wave />}
     </StyledAppBar>
   );
 }
