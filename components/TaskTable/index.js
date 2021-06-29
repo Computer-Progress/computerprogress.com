@@ -13,7 +13,7 @@ import { MuiTheme } from "../../styles/theme";
 import { StyledGridItem, StyledFlexbox } from "./styles";
 
 export default function TaskTable({ tasks }) {
-  const isMobile = useMediaQuery(MuiTheme.breakpoints.down("sm"));
+  const isMobile = useMediaQuery(MuiTheme.breakpoints.down("md"));
 
   const [selectedTask, setSelectedTask] = useState(0);
   const [selectedDataset, setSelectedDataset] = useState(0);
@@ -47,7 +47,7 @@ export default function TaskTable({ tasks }) {
       </Box>
 
       <Grid container spacing={1}>
-        <StyledGridItem $order={0} xs={12} md={9}>
+        <StyledGridItem $order={0} xs={12} lg={9}>
           <TaskTableTabs
             tasks={tasks}
             selectedTask={selectedTask}
@@ -66,7 +66,7 @@ export default function TaskTable({ tasks }) {
           </StyledGridItem>
         )}
 
-        <StyledGridItem $order={2} xs={12} sm={6} md={3}>
+        <StyledGridItem $order={2} xs={12} sm={6} lg={2}>
           <TaskTableDatasets
             datasets={tasks[selectedTask].datasets}
             selectedDataset={selectedDataset}
@@ -74,15 +74,19 @@ export default function TaskTable({ tasks }) {
           />
         </StyledGridItem>
 
-        <StyledGridItem $order={isMobile ? 4 : 3} xs={12} md={6}>
+        <StyledGridItem $order={isMobile ? 4 : 3} xs={12} lg={7}>
           <TaskTableChart
             isLoading={isDatasetModelsLoading}
             datasetModels={datasetModels}
           />
         </StyledGridItem>
 
-        <StyledGridItem $order={isMobile ? 3 : 4} xs={12} sm={6} md={3}>
-          <TaskTableSOTA sota={tasks[selectedTask].datasets[selectedDataset]} />
+        <StyledGridItem $order={isMobile ? 3 : 4} xs={12} sm={6} lg={3}>
+          <Box style={{ height: "100%" }} ml={isMobile ? 0 : 2}>
+            <TaskTableSOTA
+              sota={tasks[selectedTask].datasets[selectedDataset]}
+            />
+          </Box>
         </StyledGridItem>
       </Grid>
     </>

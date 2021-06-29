@@ -23,12 +23,14 @@ export const MuiTheme = createMuiTheme({
   typography: {
     fontFamily: ['"Montserrat"', "sans-serif"].join(","),
     h2: {
-      fontSize: "2rem",
-      fontWeight: 600,
+      fontSize: "2.2rem",
     },
     h3: {
-      fontSize: "1.2rem",
+      fontSize: "1.3rem",
       fontWeight: 500,
+    },
+    h6: {
+      fontSize: "1.1rem",
     },
   },
 });

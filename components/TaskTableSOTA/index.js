@@ -1,18 +1,36 @@
-import { Card, Typography, Box, Divider, Button } from "@material-ui/core";
-import parseExponential from "parse-exponential";
+import {
+  Card,
+  Typography,
+  Box,
+  Divider,
+  Button,
+  Tooltip,
+  IconButton,
+} from "@material-ui/core";
+
+import InfoIcon from "@material-ui/icons/Info";
 
 export default function TaskTableSOTA({ sota }) {
   return (
-    <Card>
-      <Box display="flex" flexDirection="column" alignItems="center" p={2}>
+    <Card style={{ height: "100%", borderRadius: "16px" }}>
+      <Box
+        style={{ height: "100%" }}
+        display="flex"
+        flexDirection="column"
+        justifyContent="space-between"
+        alignItems="center"
+        p={4}
+      >
         <Box>
           <Typography variant="h3">
-            <Box fontWeight="bold">State-of-the-Art</Box>
+            <Box fontWeight="bold">State-Of-The-Art</Box>
           </Typography>
         </Box>
 
         <Box alignSelf="flex-start" mt={1}>
-          <Typography variant="subtitle2">Accuracy</Typography>
+          <Typography variant="h6">
+            <Box fontWeight="bold">Accuracy:</Box>
+          </Typography>
         </Box>
 
         <Box mt={1}>
@@ -29,7 +47,17 @@ export default function TaskTableSOTA({ sota }) {
         </Box>
 
         <Box alignSelf="flex-start" mt={1}>
-          <Typography variant="subtitle2">Hardware Burden</Typography>
+          <Typography variant="h6">
+            <Box fontWeight="bold">
+              Hardware Burden
+              <Tooltip title="The computational capability of the hardware used to train the model, calculated as the number of processors multiplied by the computation rate and time.">
+                <IconButton size="small" edge="end">
+                  <InfoIcon fontSize="small" />
+                </IconButton>
+              </Tooltip>
+              :
+            </Box>
+          </Typography>
         </Box>
 
         <Box mt={1}>
@@ -43,24 +71,23 @@ export default function TaskTableSOTA({ sota }) {
         </Box>
 
         <Box alignSelf="flex-start" mt={1}>
-          <Typography variant="subtitle2">Model</Typography>
-        </Box>
-
-        <Box
-          mt={1}
-          style={{
-            overflow: "hidden",
-            textOverflow: "ellipsis",
-            width: "100%",
-          }}
-        >
-          <Typography variant="h3" component="span" noWrap>
-            {sota.sota_name}
+          <Typography variant="h6">
+            <Box fontWeight="bold">Model:</Box>
           </Typography>
         </Box>
 
         <Box mt={1}>
-          <Button color="primary" href={sota.sota_paper_link}>View paper</Button>
+          <Typography variant="subtitle1" component="span" noWrap>
+            <Box fontWeight="500">{sota.sota_name}</Box>
+          </Typography>
+        </Box>
+
+        <Box mt={1}>
+          <Button href={sota.sota_paper_link}>
+            <Typography variant="button" style={{ color: "#9E1FFF" }}>
+              View paper
+            </Typography>
+          </Button>
         </Box>
       </Box>
     </Card>
