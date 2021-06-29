@@ -1,6 +1,9 @@
+import { Avatar } from "@material-ui/core";
+import { Icon } from "@material-ui/core";
 import { Card, Typography, Box } from "@material-ui/core";
+import DoneIcon from "@material-ui/icons/Done";
 
-import { StyledButton } from "./styles";
+import { StyledChip } from "./styles";
 
 export default function TaskTableDatasets({
   datasets,
@@ -14,14 +17,11 @@ export default function TaskTableDatasets({
 
         {datasets.map((dataset, index) => (
           <Box mt={2} key={dataset.dataset_id}>
-            <StyledButton
-              $active={selectedDataset === index}
+            <StyledChip
+              label={dataset.dataset_name}
+              avatar={selectedDataset === index ? <DoneIcon /> : <Icon />}
               onClick={() => setSelectedDataset(index)}
-            >
-              <Typography variant="button" noWrap>
-                {dataset.dataset_name}
-              </Typography>
-            </StyledButton>
+            />
           </Box>
         ))}
       </Box>
