@@ -82,7 +82,7 @@ export default function TaskTable({ tasks }) {
         </StyledGridItem>
 
         <StyledGridItem $order={isMobile ? 3 : 4} xs={12} sm={6} lg={3}>
-          <Box style={{ height: "100%" }} ml={isMobile ? 0 : 2}>
+          <Box style={{ height: "100%" }} ml={2}>
             <TaskTableSOTA
               sota={tasks[selectedTask].datasets[selectedDataset]}
             />

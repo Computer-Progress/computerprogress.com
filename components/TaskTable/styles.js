@@ -6,6 +6,8 @@ export const StyledGridItem = styled(Grid).attrs({
   item: true,
 })`
   order: ${({ $order }) => $order};
+  padding-left: 0 !important;
+  padding-right: 0 !important;
 `;
 
 export const StyledFlexbox = styled(Box).attrs({

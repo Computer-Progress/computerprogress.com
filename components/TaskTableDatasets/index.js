@@ -8,7 +8,7 @@ export default function TaskTableDatasets({
   setSelectedDataset,
 }) {
   return (
-    <Card style={{ height: "100%" }}>
+    <Card style={{ height: "100%", borderRadius: "16px 0 0 16px" }}>
       <Box display="flex" flexDirection="column" p={2}>
         <Typography variant="h3">Datasets</Typography>
 
