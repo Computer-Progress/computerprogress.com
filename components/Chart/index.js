@@ -14,36 +14,36 @@ const chart = ({ data, label, isByYear }) => {
 
     for (let index = 0; index < list.length; index++) {
       const element = list[index];
-      let x, y;
-      x = isByYear ? element.year : Math.log10(element.hardware_burden);
-      y = 1 / (1 - element.accuracy);
+      if (element[label] && element.hardware_burden) {
+        let x, y;
+        x = isByYear ? element.year : Math.log10(element.hardware_burden);
+        y = 1 / (1 - (element[label] / 100));
+        const point = [x, y];
 
-      const point = [x, y];
+        data_points.push(point);
 
-      data_points.push(point);
-
-      const info = {
-        type: "scatter",
-        data: [point],
-        showInLegend: false,
-        name: element.model,
-        marker: {
-          symbol: "circle",
-          fillColor: "#9E1FFF",
-          radius: 4,
-          states: {
-            hover: {
-              enabled: true
+        const info = {
+          type: "scatter",
+          data: [point],
+          showInLegend: false,
+          name: element.name,
+          marker: {
+            symbol: "circle",
+            fillColor: "#9E1FFF",
+            radius: 4,
+            states: {
+              hover: {
+                enabled: true
+              }
             }
           }
-        }
-      };
-      info_points.push(info);
+        };
+        info_points.push(info);
+      }
     }
 
     const result = regression.linear(data_points);
     result.points.sort((a, b) => a[1] - b[1]);
-    console.log("regression", result);
 
     const chart = {
       chart: {
@@ -60,7 +60,6 @@ const chart = ({ data, label, isByYear }) => {
           tooltip: {
             headerFormat: "<b>{series.name}</b><br>",
             pointFormatter: function () {
-              console.log("Format", this);
               let y = (1 - 1 / this.y) * 100;
               y = Math.round(y * 100) / 100;
               let x = Math.round(this.x * 100) / 100;

@@ -1,3 +1,5 @@
+import { createMuiTheme } from "@material-ui/core/styles";
+
 export default {
   colors: {
     primary: "#2000e5",
@@ -5,7 +7,7 @@ export default {
     white: "#ffffff",
     grey: "#c4c4c4",
     black: "#1A1515",
-    greyText: '#7f7f84',
+    greyText: "#7f7f84",
   },
   fonts: {
     families: {
@@ -16,3 +18,25 @@ export default {
     },
   },
 };
+
+export const MuiTheme = createMuiTheme({
+  typography: {
+    fontFamily: ['"Montserrat"', "sans-serif"].join(","),
+    h2: {
+      fontSize: "2.2rem",
+    },
+    h3: {
+      fontSize: "1.3rem",
+      fontWeight: 500,
+    },
+    h6: {
+      fontSize: "1.1rem",
+    },
+  },
+  palette: {
+    primary: {
+      main: "#7100C9",
+      contrastText: "#FFFFFF",
+    },
+  },
+});
