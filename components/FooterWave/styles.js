@@ -10,4 +10,8 @@ export const FooterWave = styled(Wave)`
   @media only screen and (max-width: 1250px) {
     height: 450px;
   }
+
+  @media only screen and (max-width: 380px) {
+    height: 600px;
+  }
 `;

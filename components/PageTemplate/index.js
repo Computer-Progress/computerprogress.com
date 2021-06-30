@@ -27,7 +27,7 @@ export default function PageTemplate({ isHome, children }) {
 
       <StyledContainer>{children}</StyledContainer>
 
-      <Footer />
+      <Footer isHome={isHome} />
     </>
   );
 }

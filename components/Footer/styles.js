@@ -84,6 +84,10 @@ export const Logos = styled.div`
     }
   }
 
+  @media only screen and (max-width: 380px) {
+    grid-template-columns: 1fr;
+  }
+
 
 `;
 
