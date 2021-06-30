@@ -38,6 +38,7 @@ export default function TaskTable({ tasks }) {
 
       const response = await fetch(`${URL}/models/${taskId}/${datasetId}`);
       const datasetModels = await response.json();
+      console.log('datasetModels', datasetModels);
       const newModelObject = {};
       newModelObject[taskId] = {};
       newModelObject[taskId][datasetId] = datasetModels;
