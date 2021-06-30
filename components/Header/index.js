@@ -4,6 +4,7 @@ import { MuiTheme } from "../../styles/theme";
 
 import {
   StyledAppBar,
+  StyledContainer,
   StyledToolbarBox,
   StyledSpacer,
   StyledButton,
@@ -32,13 +33,10 @@ export default function Header({ isHome }) {
 
   return (
     <StyledAppBar isHome={isHome && !isMobileSM}>
-      <Container>
+      <StyledContainer>
         <Toolbar disableGutters>
           <StyledToolbarBox>
-            <StyledButton
-              color="secondary"
-              href="/"
-            >
+            <StyledButton color="secondary" href="/">
               <Box mr={1}>
                 <Logo />
               </Box>
@@ -103,7 +101,7 @@ export default function Header({ isHome }) {
             </StyledToolbarBox>
           </Toolbar>
         )}
-      </Container>
+      </StyledContainer>
     </StyledAppBar>
   );
 }
