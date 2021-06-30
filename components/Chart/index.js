@@ -16,7 +16,7 @@ const chart = ({ data, label, isByYear }) => {
       const element = list[index];
       if (element[label] && element.hardware_burden) {
         let x, y;
-        x = isByYear ? element.year : Math.log10(element.hardware_burden);
+        x = isByYear ? new Date(element.paper_publication_date).getFullYear() : Math.log10(element.hardware_burden);
         y = 1 / (1 - (element[label] / 100));
         const point = [x, y];
 

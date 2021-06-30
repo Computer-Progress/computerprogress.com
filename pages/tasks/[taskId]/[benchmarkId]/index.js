@@ -10,6 +10,8 @@ export const getServerSideProps = async ({ query }) => {
     return {
       props: {
         benchmark,
+        taskId: query.taskId,
+        benchmarkId: query.benchmarkId,
       },
     };
   } catch {

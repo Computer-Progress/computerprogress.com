@@ -11,42 +11,10 @@ import MachineTranslation from "../../public/machine-translation.svg";
 import PoseEstimation from "../../public/pose-estimation.svg";
 import { ItemsWrapper, Container } from "./styles";
 
-export default function Tasks() {
-  const [tasks] = useState([
-    {
-      name: "Image Classification",
-      icon: ImageClassification,
-      taskId: "image-classification",
-    },
-    {
-      name: "Object Detection",
-      icon: ObjectDetection,
-      taskId: "object-detection",
-    },
-    {
-      name: "Question Answering",
-      icon: QuestionAnswering,
-      taskId: "question-answering",
-    },
-    {
-      name: "Named Entity Recognition",
-      icon: NamedEntityRecognition,
-      taskId: "named-entity-recognition",
-    },
-    {
-      name: "Machine Translation",
-      icon: MachineTranslation,
-      taskId: "machine-translation",
-    },
-    {
-      name: "Pose Estimation",
-      icon: PoseEstimation,
-      taskId: "pose-estimation",
-    },
-  ]);
-
+export default function Tasks({ tasks }) {
+  console.log(tasks);
   const renderItem = (item) => (
-    <Link href={{ pathname: `/tasks/${item.taskId}` }} key={item.taskId}>
+    <Link href={{ pathname: `/tasks/${item.identifier}` }} key={item.identifier}>
       <a>
         <Task item={item} />
       </a>
