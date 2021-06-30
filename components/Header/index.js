@@ -22,8 +22,8 @@ export default function Header({ isHome }) {
       href: "/tasks",
     },
     {
-      text: "Contribute",
-      href: "/contribute",
+      text: "Collaborate",
+      href: "/collaborate",
     },
     {
       text: "About us",
