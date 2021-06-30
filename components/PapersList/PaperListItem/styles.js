@@ -3,7 +3,7 @@ import theme from "../../../styles/theme";
 
 export const Wrapper = styled.div`
   display: grid;
-  grid-template-columns: 1fr 2fr 4fr 1fr 1fr 1fr;
+  grid-template-columns: 1fr 1fr 2fr ${({ accuracy_list }) => accuracy_list.map(item => '1fr ')} 1fr 1fr;
   width: 100%;
   padding: 15px 20px;
   flex-direction: row;
