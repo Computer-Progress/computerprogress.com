@@ -3,13 +3,15 @@ export { default } from "../../../../containers/Benchmark";
 export const getServerSideProps = async ({ query }) => {
   try {
     const res = await fetch(
-      `http://localhost:3000/api/benchmark/${query.benchmarkId}`
+      `http://ec2-3-129-18-205.us-east-2.compute.amazonaws.com/api/v1/models/${query.taskId}/${query.benchmarkId}`
     );
     const benchmark = await res.json();
 
     return {
       props: {
         benchmark,
+        taskId: query.taskId,
+        benchmarkId: query.benchmarkId,
       },
     };
   } catch {

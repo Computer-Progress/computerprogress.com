@@ -14,7 +14,7 @@ export default function DescriptionCard({
   return (
     <ContainerGrid $isMobile={isMobile} $imageBorder={imageBorder}>
       <ImageBox $imageBorder={imageBorder} $isMobile={isMobile}>
-        <img src={`/${icon}`} />
+        <img src={`${icon}`} />
       </ImageBox>
 
       <StyledTitle>{isH1 ? <h1>{title}</h1> : <h2>{title}</h2>}</StyledTitle>

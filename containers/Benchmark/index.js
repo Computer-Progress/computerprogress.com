@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Container, Title } from "./styles.js";
+import { Container, Title, Download } from "./styles.js";
 import Chart from "../../components/Chart";
 import ChartOptions from "../../components/ChartOptions";
 import Tabs from "../../components/Tabs";
@@ -7,19 +7,14 @@ import PageTemplate from "../../components/PageTemplate";
 import PapersList from "../../components/PapersList";
 import ButtonToTop from "../../components/ButtonToTop";
 
-function Benchmark({ benchmark }) {
-  const [data, setData] = useState(benchmark.data);
-  const [label, setLabel] = useState(benchmark.label);
+function Benchmark({ benchmark, taskId, benchmarkId }) {
+  const [data, setData] = useState(benchmark.models);
+  const [label, setLabel] = useState(benchmark.accuracy_types?.[0]?.name);
   const [selected, setSelected] = useState(0);
   const [selectedButton, setSelectedButton] = useState(0);
-  const [name, setName] = useState(benchmark.name);
+  const [name, setName] = useState(benchmark.task_name);
   const [type, setType] = useState(0);
-  const [buttons, setButtons] = useState([
-    {
-      name: benchmark.label,
-      onPress: () => {},
-    },
-  ]);
+  const [buttons, setButtons] = useState(benchmark.accuracy_types);
 
   const tabs = [
     {
@@ -32,77 +27,16 @@ function Benchmark({ benchmark }) {
     },
   ];
 
-  // useEffect(() => {
-  //   setDomain(query.benchmarkId);
-  //   console.log(domain);
-  // }, []);
+  useEffect(() => {
+    console.log('vaai vai', benchmark)
+    // setDomain(query.benchmarkId);
+    // console.log(domain);
+  }, []);
 
-  // useEffect(() => {
-  //   switch (domain) {
-  //     case "imagenet":
-  //       setData(imagenet);
-  //       setLabel("TOP 1");
-  //       setSelectedButton(0);
-  //       setName("Image Classification / Imagenet");
-  //       setButtons([
-  //         {
-  //           name: "TOP 1",
-  //           onPress: () => {},
-  //         },
-  //       ]);
-  //       break;
-  //     case "mscoco":
-  //       setData(mscoco);
-  //       setLabel("BOX AP");
-  //       setSelectedButton(0);
-  //       setName("Object Detection / MS COCO");
-  //       setButtons([
-  //         {
-  //           name: "BOX AP",
-  //           onPress: () => {},
-  //         },
-  //       ]);
-  //       break;
-  //     case "squad1_1":
-  //       setData(squad1_1);
-  //       setLabel("F1 SCORE");
-  //       setSelectedButton(0);
-  //       setName("Question Answering / SQUAD 1.1");
-  //       setButtons([
-  //         {
-  //           name: "F1 SCORE",
-  //           onPress: () => {},
-  //         },
-  //       ]);
-  //       break;
-  //     case "conll2003":
-  //       setData(conll2003);
-  //       setLabel("F1 SCORE");
-  //       setSelectedButton(0);
-  //       setName("Named Entity Recognition / Conll 2003");
-  //       setButtons([
-  //         {
-  //           name: "F1 SCORE",
-  //           onPress: () => {},
-  //         },
-  //       ]);
-  //       break;
-  //     case "wmt2014_enfr":
-  //       setData(wmt2014_enfr);
-  //       setLabel("BLEU");
-  //       setSelectedButton(0);
-  //       setName("Machine Translation / WMT 2014 EN-FR");
-  //       setButtons([
-  //         {
-  //           name: "BLEU",
-  //           onPress: () => {},
-  //         },
-  //       ]);
-  //       break;
-  //     default:
-  //       break;
-  //   }
-  // }, [domain]);
+  const onSelectAccuracy = (accuracy, index) => {
+    setLabel(accuracy.name);
+    setSelectedButton(index);
+  }
 
   return (
     <PageTemplate>
@@ -114,10 +48,12 @@ function Benchmark({ benchmark }) {
             title="Accuracy"
             buttons={buttons}
             selected={selectedButton}
+            onPress={onSelectAccuracy}
           />
           <Chart data={data} label={label} isByYear={type} />
         </div>
-        <PapersList papers={data} accuracy={label} />
+        <Download contained href={`http://ec2-3-129-18-205.us-east-2.compute.amazonaws.com/api/v1/models/${taskId}/${benchmarkId}/csv`}>Download</Download>
+        <PapersList papers={data} accuracy={label} accuracy_list={buttons} />
       </Container>
       <ButtonToTop />
     </PageTemplate>

@@ -12,7 +12,6 @@ export const Container = styled.div`
   font-size: 2rem;
   width: 100%;
   padding: 0 3.75%;
-  max-width: 1920px;
   margin: 0 auto;
   h4 {
     grid-column: span 2;
@@ -40,7 +39,7 @@ export const Container = styled.div`
     display: flex;
   }
 
-  @media only screen and (max-width: 1235px) {
+  @media only screen and (max-width: 1450px) {
     display: flex;
     flex-direction: column;
   }

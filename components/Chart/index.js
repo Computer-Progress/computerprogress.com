@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { ChartWrapper } from './styles'
 import HighchartsReact from "highcharts-react-official";
-import Highcharts from "highcharts/highcharts.src.js";
+import Highcharts from "highcharts";
 import HighchartsExporting from "highcharts/modules/exporting";
 import regression from "regression";
 
@@ -16,7 +16,7 @@ const chart = ({ data, label, isByYear }) => {
       const element = list[index];
       if (element[label] && element.hardware_burden) {
         let x, y;
-        x = isByYear ? element.year : Math.log10(element.hardware_burden);
+        x = isByYear ? new Date(element.paper_publication_date).getFullYear() : Math.log10(element.hardware_burden);
         y = 1 / (1 - (element[label] / 100));
         const point = [x, y];
 

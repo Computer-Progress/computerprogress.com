@@ -16,6 +16,7 @@ export default function TaskTable({ tasks }) {
   const isMobile = useMediaQuery(MuiTheme.breakpoints.down("md"));
 
   const [selectedTask, setSelectedTask] = useState(0);
+  const [loadedTasks, setLoadedTasks] = useState({});
   const [selectedDataset, setSelectedDataset] = useState(0);
   const [datasetModels, setDatasetModels] = useState({});
   const [isDatasetModelsLoading, setIsDatasetModelsLoading] = useState(true);
@@ -27,12 +28,24 @@ export default function TaskTable({ tasks }) {
     const taskId = tasks[selectedTask].task_id;
     const datasetId = tasks[selectedTask].datasets[selectedDataset].dataset_id;
 
-    setIsDatasetModelsLoading(true);
-
     try {
+      if (loadedTasks[taskId]?.[datasetId]) {
+        setDatasetModels(loadedTasks[taskId][datasetId])
+        return;
+      }
+
+      setIsDatasetModelsLoading(true);
+
       const response = await fetch(`${URL}/models/${taskId}/${datasetId}`);
       const datasetModels = await response.json();
-
+      console.log('datasetModels', datasetModels);
+      const newModelObject = {};
+      newModelObject[taskId] = loadedTasks[taskId] || {};
+      newModelObject[taskId][datasetId] = datasetModels;
+      setLoadedTasks({
+        ...loadedTasks,
+        ...newModelObject,
+      });
       setDatasetModels(datasetModels);
       setIsDatasetModelsLoading(false);
     } catch {

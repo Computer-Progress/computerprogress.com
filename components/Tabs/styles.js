@@ -9,8 +9,18 @@ export const Wrapper = styled.div`
   align-items: center;
   flex-direction: row;
   border-radius: 16px 16px 0 0;
-box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.25);
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.25);
   height: 100%;
+  overflow-x: auto;
+  border-collapse: collapse;
+  justify-content: space-between;
+
+  @media only screen and (max-width: 1450px) {
+    white-space: nowrap;
+    overflow: scroll;
+    width: 100%;
+    height: 60px;
+  }
 `;
 
 export const ItemWrapper = styled.div`
@@ -43,6 +53,7 @@ export const StyledButton = styled(Button)`
   width: 100%;
   height: 100% !important;
   border-radius: 0px !important;
+  overflow: hidden !important;
   margin: 0;
   font-size: 14px;
   color: ${theme.colors.black};

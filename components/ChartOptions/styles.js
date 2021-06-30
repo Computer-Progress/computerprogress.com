@@ -29,7 +29,7 @@ export const Wrapper = styled.div`
 `;
 
 export const Item = styled(Chip)`
-  margin-bottom: 1rem;
+  margin: 0px 10px 10px 0 !important;
   font-family: 'Montserrat';
   font-style: normal;
   font-weight: 500;

@@ -18,7 +18,7 @@ export default function Home({ tasks }) {
             <TaskTable tasks={tasks} />
           </Box>
 
-          <Box my={3} height="70vh" width={isMobile ? "100%" : "50%"}>
+          <Box my={3} height="50vh" width={isMobile ? "100%" : "50%"}>
             <CollaborateInvite />
           </Box>
         </Box>

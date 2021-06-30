@@ -21,12 +21,10 @@ export const StyledAppBar = styled(MuiAppBar).attrs({
   position: "static",
   elevation: 0,
 })`
-  background: linear-gradient(
-      268.88deg,
-      rgba(255, 255, 255, 0.1) -7.38%,
-      #7100c9 104.79%
-    ),
-    #2000e5;
+${({ isHome }) => isHome ? 'background-color: transparent !important;' : `
+  background-color: #4e33ff !important;
+  background: linear-gradient(268.88deg, rgba(255, 255, 255, 0.1) -7.38%, #9E1FFF 104.79%), #4e33ff;
+  `}
 `;
 
 export const StyledToolbarBox = styled(MuiBox).attrs({

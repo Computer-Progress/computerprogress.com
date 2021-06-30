@@ -15,6 +15,15 @@ export default class MyDocument extends Document {
         </Head>
         <body>
           <Main />
+          <style jsx global>{`
+            /* Other global styles such as 'html, body' etc... */
+
+            #__next {
+              min-height: 100vh;
+              display: flex;
+              flex-direction: column;
+            }
+          `}</style>
           <NextScript />
         </body>
       </Html>

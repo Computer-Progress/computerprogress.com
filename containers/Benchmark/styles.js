@@ -1,5 +1,7 @@
 import styled from "styled-components";
 import theme from "../../styles/theme";
+import Button from '../../components/Button';
+
 
 export const Container = styled.div`
   display: flex;
@@ -26,9 +28,8 @@ export const Container = styled.div`
     justify-content: center;
     align-items: center;
     button{
-
       font-weight: 500;
-  font-size: 16px;
+      font-size: 16px;
     }
   }
   > .chart{
@@ -41,3 +42,8 @@ export const Title = styled.h3`
   color: ${theme.colors.secondary};
   font-weight: normal;
 `
+
+export const Download = styled(Button)`
+  align-self: flex-end;
+  margin-top: 20px !important;
+`;

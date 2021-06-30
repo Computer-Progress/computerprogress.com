@@ -21,13 +21,13 @@ export default function PageTemplate({ isHome, children }) {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <Header />
+      <Header isHome={isHome} />
 
       {isHome && !isMobile ? <Wave /> : null}
 
       <StyledContainer>{children}</StyledContainer>
 
-      <Footer />
+      <Footer isHome={isHome} />
     </>
   );
 }
