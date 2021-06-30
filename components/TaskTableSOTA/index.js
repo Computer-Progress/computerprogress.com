@@ -34,8 +34,10 @@ export default function TaskTableSOTA({ sota }) {
         </Box>
 
         <Box mt={1}>
-          <Typography variant="h2" component="span">
-            {sota.sota_accuracy_value ?? "-"}
+          <Typography fontSize="2.2rem" component="span">
+            <Box display="inline" fontSize="2.2rem">
+              {sota.sota_accuracy_value ?? "-"}
+            </Box>
           </Typography>
           <Typography variant="h3" component="span">
             %
@@ -61,15 +63,17 @@ export default function TaskTableSOTA({ sota }) {
         </Box>
 
         <Box mt={1}>
-          <Typography variant="h2" component="span">
-            {sota.sota_hardware_burden ? (
-              <>
-                10
-                <sup>
-                  {Math.log10(sota.sota_hardware_burden).toFixed(1)}
-                </sup>
-              </>
-            ) : "-"}
+          <Typography fontSize="2.2rem" component="span">
+            <Box display="inline" fontSize="2.2rem">
+              {sota.sota_hardware_burden ? (
+                <>
+                  10
+                  <sup>{Math.log10(sota.sota_hardware_burden).toFixed(1)}</sup>
+                </>
+              ) : (
+                "-"
+              )}
+            </Box>
           </Typography>
         </Box>
 
