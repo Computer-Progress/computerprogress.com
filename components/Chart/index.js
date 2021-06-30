@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { ChartWrapper } from './styles'
 import HighchartsReact from "highcharts-react-official";
-import Highcharts from "highcharts/highcharts.src.js";
+import Highcharts from "highcharts";
 import HighchartsExporting from "highcharts/modules/exporting";
 import regression from "regression";
 

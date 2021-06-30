@@ -11,7 +11,7 @@ import {
 
 import Logo from "../../public/logo_icon.svg";
 
-export default function Header() {
+export default function Header({ isHome }) {
   const isMobileSM = useMediaQuery(MuiTheme.breakpoints.down("sm"));
   const isMobileXS = useMediaQuery(MuiTheme.breakpoints.down("xs"));
 
@@ -31,19 +31,24 @@ export default function Header() {
   ];
 
   return (
-    <StyledAppBar>
+    <StyledAppBar isHome={isHome}>
       <Container>
         <Toolbar disableGutters>
           <StyledToolbarBox>
-            <Box mr={1}>
-              <Logo />
-            </Box>
+            <StyledButton
+              color="secondary"
+              href="/"
+            >
+              <Box mr={1}>
+                <Logo />
+              </Box>
 
-            {!isMobileXS && (
-              <Typography variant="h6">
-                <Box fontWeight="fontWeightBold">Computer Progress</Box>
-              </Typography>
-            )}
+              {!isMobileXS && (
+                <Typography variant="h6">
+                  <Box fontWeight="fontWeightBold">Computer Progress</Box>
+                </Typography>
+              )}
+            </StyledButton>
 
             <StyledSpacer />
 
