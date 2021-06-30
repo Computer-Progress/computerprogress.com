@@ -62,7 +62,14 @@ export default function TaskTableSOTA({ sota }) {
 
         <Box mt={1}>
           <Typography variant="h2" component="span">
-            {sota.sota_hardware_burden?.toExponential() ?? "-"}
+            {sota.sota_hardware_burden ? (
+              <>
+                10
+                <sup>
+                  {Math.log10(sota.sota_hardware_burden).toFixed(1)}
+                </sup>
+              </>
+            ) : "-"}
           </Typography>
         </Box>
 
