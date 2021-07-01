@@ -62,7 +62,7 @@ export default function Header({ isHome }) {
               </>
             )}
 
-            <Box mr={2}>
+            <Box mr={2} ml={10}>
               <StyledButton
                 size={isMobileSM ? "small" : "medium"}
                 color="secondary"

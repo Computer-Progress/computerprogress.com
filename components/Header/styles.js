@@ -31,8 +31,10 @@ export const StyledAppBar = styled(MuiAppBar).attrs({
   `}
 `;
 
-export const StyledContainer = styled(MuiContainer).attrs({})`
-  max-width: 1500px !important;
+export const StyledContainer = styled(MuiContainer).attrs({
+  maxWidth: "xl",
+})`
+  /* max-width: 1500px !important; */
 `;
 
 export const StyledToolbarBox = styled(MuiBox).attrs({
