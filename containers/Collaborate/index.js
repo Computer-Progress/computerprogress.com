@@ -1,7 +1,6 @@
 import { ThemeProvider } from "@material-ui/core/styles";
 import { MuiTheme } from "../../styles/theme";
 
-import PageTemplate from "../../components/PageTemplate";
 import {
   List,
   ListItem,
@@ -9,8 +8,12 @@ import {
   ListItemText,
   Chip,
   Typography,
+  Card,
 } from "@material-ui/core";
-import FolderIcon from "@material-ui/icons/Folder";
+
+import PageTemplate from "../../components/PageTemplate";
+import CollaborateImportance from "../../components/CollaborateImportance";
+
 import { StyledBox, StyledTypographyBody1, StyledListIcon } from "./styles";
 
 export default function Collaborate() {
@@ -106,6 +109,10 @@ export default function Collaborate() {
               />
             </ListItem>
           </List>
+        </StyledBox>
+
+        <StyledBox>
+          <CollaborateImportance />
         </StyledBox>
       </PageTemplate>
     </ThemeProvider>
