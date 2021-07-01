@@ -12,7 +12,9 @@ import {
 } from "@material-ui/core";
 
 import PageTemplate from "../../components/PageTemplate";
+
 import CollaborateImportance from "../../components/CollaborateImportance";
+import CollaborateJoin from "../../components/CollaborateJoin";
 
 import { StyledBox, StyledTypographyBody1, StyledListIcon } from "./styles";
 
@@ -113,6 +115,10 @@ export default function Collaborate() {
 
         <StyledBox>
           <CollaborateImportance />
+        </StyledBox>
+
+        <StyledBox>
+          <CollaborateJoin />
         </StyledBox>
       </PageTemplate>
     </ThemeProvider>

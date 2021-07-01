@@ -18,14 +18,14 @@ export default function CollaborateImportance() {
   ];
 
   return (
-    <>
+    <Box py={3}>
       <Typography variant="h1" align="center">
         People talking about the importance of computing power
       </Typography>
 
       <Box
         display="flex"
-        mt={3}
+        mt={5}
         borderRadius={10}
         boxShadow={2}
         alignItems="center"
@@ -47,7 +47,7 @@ export default function CollaborateImportance() {
           ))}
         </Carousel>
       </Box>
-    </>
+    </Box>
   );
 }
 
