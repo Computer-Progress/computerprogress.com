@@ -15,6 +15,7 @@ import PageTemplate from "../../components/PageTemplate";
 
 import CollaborateImportance from "../../components/CollaborateImportance";
 import CollaborateJoin from "../../components/CollaborateJoin";
+import CollaborateQuestion from "../../components/CollaborateQuestion";
 
 import { StyledBox, StyledTypographyBody1, StyledListIcon } from "./styles";
 
@@ -119,6 +120,10 @@ export default function Collaborate() {
 
         <StyledBox>
           <CollaborateJoin />
+        </StyledBox>
+
+        <StyledBox>
+          <CollaborateQuestion />
         </StyledBox>
       </PageTemplate>
     </ThemeProvider>
