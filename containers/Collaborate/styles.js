@@ -1,6 +1,10 @@
 import styled from "styled-components";
 
-import { Box, Button, ListItem, Typography } from "@material-ui/core";
+import { Box, Button, Typography, Container } from "@material-ui/core";
+
+export const StyledContainer = styled(Container)`
+  max-width: 1500px !important;
+`;
 
 export const StyledFlexboxSection = styled(Box).attrs({
   my: 5,
@@ -30,6 +34,7 @@ export const StyledButton = styled(Button).attrs({
   padding-left: 50px !important;
 
   border-radius: 100px !important;
+  box-shadow: none !important;
 
   color: white !important;
   background: linear-gradient(

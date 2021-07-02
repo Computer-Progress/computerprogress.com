@@ -11,11 +11,13 @@ import QuotesClose from "../../public/quotes-close.svg";
 
 export const StyledFlexboxCard = styled(Box).attrs({
   display: "flex",
-  height: "300px",
+  // minHeight: "300px",
   borderRadius: 10,
   boxShadow: 2,
   alignItems: "center",
-})``;
+})`
+  background: white;
+`;
 
 export const StyledCarousel = styled(Carousel).attrs({
   interval: 6 /* segundos */ * 1000,
@@ -34,7 +36,7 @@ export const StyledFlexboxContainer = styled(Box).attrs({
   display: "flex",
   justifyContent: "center",
   alignItems: "center",
-  height: "250px",
+  // height: "250px",
 })``;
 
 export const StyledFlexboxContent = styled(Box).attrs({
@@ -42,19 +44,19 @@ export const StyledFlexboxContent = styled(Box).attrs({
   flexDirection: "column",
   justifyContent: "center",
   alignItems: "center",
-  height: "80%",
+  height: "90%",
   width: "85%",
   position: "relative",
 })``;
 
 export const StyledArrowPrev = styled(ArrowBackIosIcon).attrs({
   color: "primary",
-  fontSize: "large",
+  // fontSize: "large",
 })``;
 
 export const StyledArrowNext = styled(ArrowForwardIosIcon).attrs({
   color: "primary",
-  fontSize: "large",
+  // fontSize: "large",
 })``;
 
 export const StyledQuotesOpen = styled(QuotesOpen)`

@@ -10,7 +10,7 @@ import Wave from "../Wave";
 import { MuiTheme } from "../../styles/theme";
 import { StyledContainer } from "./styles.js";
 
-export default function PageTemplate({ isHome, children }) {
+export default function PageTemplate({ isHome, ignoreContainer, children }) {
   const isMobile = useMediaQuery(MuiTheme.breakpoints.down("sm"));
 
   return (
@@ -25,7 +25,11 @@ export default function PageTemplate({ isHome, children }) {
 
       {isHome && !isMobile ? <Wave /> : null}
 
-      <StyledContainer>{children}</StyledContainer>
+      {ignoreContainer ? (
+        children
+      ) : (
+        <StyledContainer>{children}</StyledContainer>
+      )}
 
       <Footer isHome={isHome} />
     </>
