@@ -26,7 +26,7 @@ export default function CardBenchmark({ taskId, benchmark }) {
                 <FlexItem pl={2}>
                   <p>Paper</p>
 
-                  <a href={benchmark.sota_paper_link}><h4>{benchmark.sota_paper_link}</h4></a>
+                  <a href={benchmark.sota_paper_link}><h4>{benchmark.sota_paper_title}</h4></a>
                 </FlexItem>
                 <FlexItem pl={2} textAlign="center">
                   <p>{benchmark.accuracy_name}</p>

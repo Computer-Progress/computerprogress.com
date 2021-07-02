@@ -3,7 +3,7 @@ import theme from "../../../styles/theme";
 
 export const Wrapper = styled.div`
   display: grid;
-  grid-template-columns: 1fr 1fr 2fr ${({ accuracy_list }) => accuracy_list.map(item => '1fr ')} 1fr 1fr;
+  grid-template-columns: 1fr 1fr 2fr ${({ accuracy_list }) => accuracy_list.map(item => '1fr ')} 1fr 1fr 1fr 1fr;
   width: 100%;
   padding: 15px 20px;
   flex-direction: row;
@@ -19,6 +19,7 @@ export const Separator = styled.div`
 
 export const Text = styled.p`
   font-weight: normal;
+  padding: 0px 3px;
   font-size: ${({title}) => title ? '14px' : '12px'};
   color: ${({link}) => link ? theme.colors.secondary : theme.colors.black};
   text-align: ${({right}) => right ? 'right' : 'left'}

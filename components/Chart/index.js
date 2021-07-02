@@ -5,18 +5,18 @@ import Highcharts from "highcharts";
 import HighchartsExporting from "highcharts/modules/exporting";
 import regression from "regression";
 
-const chart = ({ data, label, isByYear }) => {
+const chart = ({ data, label, isByYear, computingPower }) => {
   const [chartOptions, setChartOptions] = useState({})
-
+  console.log('dentro', computingPower)
   const generateChart = (list, label) => {
     let data_points = [];
     let info_points = [];
 
     for (let index = 0; index < list.length; index++) {
       const element = list[index];
-      if (element[label] && element.hardware_burden) {
+      if (element[label] && element[computingPower.value]) {
         let x, y;
-        x = isByYear ? new Date(element.paper_publication_date).getFullYear() : Math.log10(element.hardware_burden);
+        x = isByYear ? new Date(element.paper_publication_date).getFullYear() : Math.log10(element[computingPower.value]);
         y = 1 / (1 - (element[label] / 100));
         const point = [x, y];
 
@@ -79,7 +79,7 @@ const chart = ({ data, label, isByYear }) => {
           showInLegend: true,
           color: "#000000",
           name: result.string
-            .replace("x", isByYear ? " Year" : " log(Hardware Burden)")
+            .replace("x", isByYear ? " Year" : ` log(${computingPower.name})`)
             .replace("+ -", " - ")
             .replace("y", label),
           data: [result.points[0], result.points[result.points.length - 1]],
@@ -112,7 +112,7 @@ const chart = ({ data, label, isByYear }) => {
       },
       xAxis: {
         title: {
-          text: isByYear ? 'Year' : "Computation (Hardware Burden)",
+          text: isByYear ? 'Year' : `Computation (${computingPower.name})`,
           margin: 20,
           style: {
             color: "#333",
@@ -160,7 +160,7 @@ const chart = ({ data, label, isByYear }) => {
 
   useEffect(() => {
     generateChart(data, label);
-  }, [data, label, isByYear])
+  }, [data, label, isByYear, computingPower])
 
 
   if (typeof Highcharts === "object") {
