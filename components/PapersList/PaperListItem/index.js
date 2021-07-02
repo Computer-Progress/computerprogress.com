@@ -2,7 +2,7 @@ import { Wrapper, Text, Separator } from './styles';
 
 export default function PaperListItem({ item, index, accuracy, accuracy_list, length }) {
   return (
-    <>
+    <a href={item.paper_code_link}>
         {index === 0 && (
             <>
                 <Wrapper accuracy_list={accuracy_list}>
@@ -23,7 +23,7 @@ export default function PaperListItem({ item, index, accuracy, accuracy_list, le
         <Wrapper accuracy_list={accuracy_list}>
             <Text>000</Text>
             <Text>{item.name}</Text>
-            <Text link><a href={item.paper_code_link}>{item.paper_title || '-'}</a></Text>
+            <Text link>{item.paper_title || '-'}</Text>
             {accuracy_list?.map(accuracy => (
                 <Text right>{item[accuracy.name] || '-'}</Text>
             ))}
@@ -44,6 +44,6 @@ export default function PaperListItem({ item, index, accuracy, accuracy_list, le
             <Text right>{new Date(item.paper_publication_date).getFullYear()}</Text>
         </Wrapper>
         {index < length - 1 ? <Separator /> : null}
-    </>
+    </a>
   )
 }
