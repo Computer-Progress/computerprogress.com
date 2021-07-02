@@ -2,7 +2,7 @@ import { Wrapper, Text, Separator } from './styles';
 
 export default function PaperListItem({ item, index, accuracy, accuracy_list, length }) {
   return (
-    <a href={item.paper_code_link}>
+    <a href={item.paper_link} target="_blank">
         {index === 0 && (
             <>
                 <Wrapper accuracy_list={accuracy_list}>
