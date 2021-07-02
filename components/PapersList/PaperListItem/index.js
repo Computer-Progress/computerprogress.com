@@ -21,7 +21,7 @@ export default function PaperListItem({ item, index, accuracy, accuracy_list, le
             </>
         )}
         <Wrapper accuracy_list={accuracy_list}>
-            <Text>000</Text>
+            <Text>{index + 1}</Text>
             <Text>{item.name}</Text>
             <Text link>{item.paper_title || '-'}</Text>
             {accuracy_list?.map(accuracy => (
