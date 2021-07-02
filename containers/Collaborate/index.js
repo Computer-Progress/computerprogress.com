@@ -14,7 +14,6 @@ import {
 import PageTemplate from "../../components/PageTemplate";
 
 import CollaborateImportance from "../../components/CollaborateImportance";
-import CollaborateQuestion from "../../components/CollaborateQuestion";
 
 import {
   StyledFlexboxSection,
@@ -161,7 +160,23 @@ export default function Collaborate() {
         </StyledFlexboxSection>
 
         <StyledFlexboxSection>
-          <CollaborateQuestion />
+          <StyledBox>
+            <Typography variant="h2" align="center">
+              Any question?
+            </Typography>
+          </StyledBox>
+
+          <StyledBox>
+            <Typography align="center">
+              Don’t hesitate to contact our team:{" "}
+              <strong>
+                <a href="mailto:contact@computerprogress.com">
+                  contact@computerprogress.com
+                </a>
+              </strong>
+              .
+            </Typography>
+          </StyledBox>
         </StyledFlexboxSection>
       </PageTemplate>
     </ThemeProvider>
