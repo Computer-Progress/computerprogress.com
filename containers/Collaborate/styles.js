@@ -30,6 +30,7 @@ export const StyledButton = styled(Button).attrs({
   padding-left: 50px !important;
 
   border-radius: 100px !important;
+  box-shadow: none !important;
 
   color: white !important;
   background: linear-gradient(
