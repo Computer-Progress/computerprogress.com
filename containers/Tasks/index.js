@@ -1,34 +1,25 @@
-import { useState } from "react";
+import { ThemeProvider } from "@material-ui/core/styles";
+import { MuiTheme } from "../../styles/theme";
+
 import PageTemplate from "../../components/PageTemplate";
 import Task from "../../components/Task";
-import Link from "next/link";
 
-import ImageClassification from "../../public/image-classification.svg";
-import ObjectDetection from "../../public/object-detection.svg";
-import QuestionAnswering from "../../public/question-answering.svg";
-import NamedEntityRecognition from "../../public/named-entity-recognition.svg";
-import MachineTranslation from "../../public/machine-translation.svg";
-import PoseEstimation from "../../public/pose-estimation.svg";
-import { ItemsWrapper, Container } from "./styles";
+import { Box, Grid } from "@material-ui/core";
 
 export default function Tasks({ tasks }) {
-  console.log(tasks);
-  const renderItem = (item) => (
-    <Link href={{ pathname: `/tasks/${item.identifier}` }} key={item.identifier}>
-      <a>
-        <Task item={item} />
-      </a>
-    </Link>
-  );
-
   return (
-    <PageTemplate>
-      <Container>
-        <h1>Tasks</h1>
-        <ItemsWrapper>
-          {tasks.map((item, index) => renderItem(item, index))}
-        </ItemsWrapper>
-      </Container>
-    </PageTemplate>
+    <ThemeProvider theme={MuiTheme}>
+      <PageTemplate>
+        <Box my={3}>
+          <Grid container spacing={5} wrap="wrap">
+            {tasks.map((item) => (
+              <Grid item xs={12} sm={6} md={4} key={item.identifier}>
+                <Task item={item} />
+              </Grid>
+            ))}
+          </Grid>
+        </Box>
+      </PageTemplate>
+    </ThemeProvider>
   );
 }
