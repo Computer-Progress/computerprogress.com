@@ -1,6 +1,10 @@
 import styled from "styled-components";
 
-import { Box, Button, ListItem, Typography } from "@material-ui/core";
+import { Box, Button, Typography, Container } from "@material-ui/core";
+
+export const StyledContainer = styled(Container)`
+  max-width: 1500px !important;
+`;
 
 export const StyledFlexboxSection = styled(Box).attrs({
   my: 5,
