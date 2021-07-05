@@ -4,7 +4,7 @@ import PaperListItem from "./PaperListItem";
 
 import { ItemsWrapper } from './styles';
 
-import { DataGrid } from '@material-ui/data-grid';
+// import { DataGrid } from '@material-ui/data-grid';
 
 export default function PapersList({ papers, accuracy, accuracy_list, selectedAccuracy }) {
   const renderItem = (item, index) => (

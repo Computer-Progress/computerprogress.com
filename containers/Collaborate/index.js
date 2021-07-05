@@ -40,7 +40,7 @@ export default function Collaborate() {
             <StyledBox>
               <StyledTypographyBody1>
                 Two are the most usual ways used to report the computational
-                burden of Deep Learning:
+                burden in Deep Learning:
               </StyledTypographyBody1>
             </StyledBox>
 

@@ -9,13 +9,15 @@ export default function ContributorsContainer({
 }) {
   return (
     <>
-      <StyledH2>Our team</StyledH2>
+      <StyledH2>Research Team</StyledH2>
 
       <ContributorsFlexBox>
         {researchers.map((contributor) => (
           <ContributorCard contributor={contributor} key={contributor.name} />
         ))}
       </ContributorsFlexBox>
+      
+      <StyledH2>Web Development Team</StyledH2>
 
       <ContributorsFlexBox>
         {otherContributors.map((contributor) => (
