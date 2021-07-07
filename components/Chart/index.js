@@ -62,7 +62,7 @@ const chart = ({ data, label, isByYear, computingPower }) => {
               let y = (1 - 1 / this.y) * 100;
               y = Math.round(y * 100) / 100;
               let x = Math.round(this.x * 100) / 100;
-              return `${label}: ${y}% - ${isByYear ? `Year: ${x}` : `Computation: 10e+${x.toFixed(1)}`} `;
+              return `${label}: ${y}% - ${isByYear ? `Year: ${x}` : `Computation: 10e${x < 0 ? '' : '+'}${x.toFixed(1)}`} `;
             }
           }
         },
@@ -127,7 +127,7 @@ const chart = ({ data, label, isByYear, computingPower }) => {
             fontFamily: "Montserrat, sans-serif"
           },
           formatter: function () {
-            return isByYear ? this.value : "10e+" + this.value;
+            return isByYear ? this.value : `10e${parseFloat(this.value) < 0 ? '' : '+'}` + this.value;
           }
         }
       },

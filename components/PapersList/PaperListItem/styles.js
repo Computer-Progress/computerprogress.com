@@ -25,4 +25,5 @@ export const Text = styled.p`
   font-size: ${({title}) => title ? '14px' : '12px'};
   color: ${({link}) => link ? theme.colors.secondary : theme.colors.black};
   text-align: ${({right}) => right ? 'right' : 'left'}
+  cursor: ${({ hover }) => hover ? 'pointer' : 'auto'}
 `;

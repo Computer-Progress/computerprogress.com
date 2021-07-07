@@ -6,9 +6,9 @@ import { ItemsWrapper } from './styles';
 
 // import { DataGrid } from '@material-ui/data-grid';
 
-export default function PapersList({ papers, accuracy, accuracy_list, selectedAccuracy }) {
+export default function PapersList({ papers, accuracy, accuracy_list, selectedAccuracy, onSelectAccuracy }) {
   const renderItem = (item, index) => (
-    <PaperListItem selectedAccuracy={selectedAccuracy} item={item} index={index} length={papers.length} accuracy={accuracy} accuracy_list={accuracy_list} />
+    <PaperListItem onSelectAccuracy={onSelectAccuracy} selectedAccuracy={selectedAccuracy} item={item} index={index} length={papers.length} accuracy={accuracy} accuracy_list={accuracy_list} />
   )
 
   // const [columns] = useState([

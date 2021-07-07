@@ -28,7 +28,7 @@ function Benchmark({ benchmark, taskId, benchmarkId }) {
   const [selected, setSelected] = useState(0);
   const [selectedButton, setSelectedButton] = useState(0);
   const [selectedSecondButton, setSelectedSecondButton] = useState(0);
-  const [name, setName] = useState(`${benchmark.task_name} / ${benchmark.dataset_name}`);
+  const [name, setName] = useState();
   const [type, setType] = useState(0);
   const [buttons] = useState(benchmark.accuracy_types);
 
@@ -62,7 +62,7 @@ function Benchmark({ benchmark, taskId, benchmarkId }) {
   return (
     <PageTemplate>
       <Container>
-        <Title>{name}</Title>
+        <Title><a href={`/tasks/${taskId}`}>{benchmark.task_name}</a> / {benchmark.dataset_name}</Title>
         <Tabs selected={type} items={tabs} />
         <div className="chart">
           <ChartOptions
@@ -78,7 +78,7 @@ function Benchmark({ benchmark, taskId, benchmarkId }) {
           <Chart data={data} label={label} isByYear={type} computingPower={computingPower} />
         </div>
         <Download contained href={`http://ec2-3-129-18-205.us-east-2.compute.amazonaws.com/api/v1/models/${taskId}/${benchmarkId}/csv`}>Download</Download>
-        <PapersList selectedAccuracy={label} papers={data} accuracy={label} accuracy_list={buttons} />
+        <PapersList onSelectAccuracy={onSelectAccuracy} selectedAccuracy={label} papers={data} accuracy={label} accuracy_list={buttons} />
       </Container>
       <ButtonToTop />
     </PageTemplate>
