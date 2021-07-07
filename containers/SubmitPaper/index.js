@@ -3,7 +3,7 @@ import { MuiTheme } from "../../styles/theme";
 
 import PageTemplate from "../../components/PageTemplate";
 import SubmitPaperInfo from "../../components/SubmitPaperInfo";
-// import SubmitPaperModel from "../../components/SubmitPaperModel";
+import SubmitPaperModel from "../../components/SubmitPaperModel";
 
 import { Grid } from "@material-ui/core/";
 
@@ -22,9 +22,9 @@ export default function SubmitPaper() {
             <SubmitPaperInfo />
           </Grid>
 
-          {/* <Grid item>
+          <Grid item>
             <SubmitPaperModel />
-          </Grid> */}
+          </Grid>
         </Grid>
       </PageTemplate>
     </ThemeProvider>
