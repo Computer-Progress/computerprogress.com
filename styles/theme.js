@@ -34,6 +34,10 @@ export const MuiTheme = createMuiTheme({
       fontSize: "1.3rem",
       fontWeight: 500,
     },
+    h4: {
+      fontSize: "1rem",
+      fontWeight: 500,
+    },
     h6: {
       fontSize: "1.1rem",
     },
