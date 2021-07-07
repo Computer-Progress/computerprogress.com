@@ -74,7 +74,7 @@ export default function Header({ isHome }) {
 
             <Box>
               <StyledButton
-                size={isMobileSM ? "small" : "medium"}
+                size={"medium"}
                 color="primary"
                 href="/sign_in"
               >

@@ -52,4 +52,5 @@ export const StyledButton = styled(MuiButton).attrs({})`
   color: ${({ color }) => theme[color].text} !important;
   background: ${({ color }) => theme[color].background} !important;
   border-radius: 100px !important;
+  padding: 5px 20px !important;
 `;
