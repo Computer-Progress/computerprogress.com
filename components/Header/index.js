@@ -53,7 +53,7 @@ export default function Header({ isHome }) {
             {!isMobileSM && (
               <>
                 {links.map(({ text, href }) => (
-                  <Box mr={2} key={href}>
+                  <Box key={href}>
                     <StyledButton href={href} color="secondary">
                       {text}
                     </StyledButton>
@@ -62,7 +62,7 @@ export default function Header({ isHome }) {
               </>
             )}
 
-            <Box mr={2} ml={10}>
+            <Box ml={8}>
               <StyledButton
                 size={isMobileSM ? "small" : "medium"}
                 color="secondary"

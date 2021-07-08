@@ -6,6 +6,7 @@ import Tabs from "../../components/Tabs";
 import PageTemplate from "../../components/PageTemplate";
 import PapersList from "../../components/PapersList";
 import ButtonToTop from "../../components/ButtonToTop";
+import Table from '../../components/Table';
 
 function Benchmark({ benchmark, taskId, benchmarkId }) {
   const [data, setData] = useState(benchmark.models);
@@ -31,12 +32,12 @@ function Benchmark({ benchmark, taskId, benchmarkId }) {
 
   const tabs = [
     {
-      name: "Performance x Computing power",
-      onSelect: () => setType(0),
+      task_name: "Performance x Computing power",
+      task_id: 0,
     },
     {
-      name: "Performance x Year",
-      onSelect: () => setType(1),
+      task_name: "Performance x Year",
+      task_id: 1,
     },
   ];
 
@@ -55,13 +56,13 @@ function Benchmark({ benchmark, taskId, benchmarkId }) {
     // console.log(domain);
   }, []);
 
-  const onSelectAccuracy = (accuracy, index) => {
-    setLabel(accuracy.name);
+  const onSelectAccuracy = ({option, index}) => {
+    setLabel(option.name);
     setSelectedButton(index);
   }
 
-  const onSelectComputingPower = (computingPower, index) => {
-    setComputingPower(computingPower);
+  const onSelectComputingPower = ({option, index}) => {
+    setComputingPower(option);
     setSelectedSecondButton(index);
   }
 
@@ -69,7 +70,25 @@ function Benchmark({ benchmark, taskId, benchmarkId }) {
     <PageTemplate>
       <Container>
         <Title><a href={`/tasks/${taskId}`}>{benchmark.task_name}</a> / {benchmark.dataset_name}</Title>
-        <Tabs selected={type} items={tabs} />
+        <Table
+          tabs={tabs}
+          selectedTab={type}
+          onSelectTab={(index) => setType(index)}
+          options={buttons}
+          fieldName="name"
+          optionsTitle="Accuracy"
+          selectedOptions={secondButtons}
+          setSelectedOption={onSelectAccuracy}
+          secondaryOptions={secondButtons}
+          selectedSecondaryOption={selectedSecondButton}
+          setSelectedSecondaryOption={onSelectComputingPower}
+          secondaryOptionsTitle="Computing Power"
+          data={data}
+          label={label}
+          isByYear={type}
+          computingPower={computingPower}
+        />
+        {/* <Tabs selected={type} items={tabs} />
         <div className="chart">
           <ChartOptions
             title="Accuracy"
@@ -82,7 +101,7 @@ function Benchmark({ benchmark, taskId, benchmarkId }) {
             selectedSecond={selectedSecondButton}
           />
           <Chart data={data} label={label} isByYear={type} computingPower={computingPower} />
-        </div>
+        </div> */}
         <Download
           contained
           href={`http://ec2-3-129-18-205.us-east-2.compute.amazonaws.com/api/v1/models/${taskId}/${benchmarkId}/csv`}

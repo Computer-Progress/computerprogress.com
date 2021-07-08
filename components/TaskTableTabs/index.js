@@ -1,36 +1,35 @@
 import { Tabs, Tab, Typography } from "@material-ui/core";
 import { StyledCard } from "./styles";
 
-export default function TaskTableTabs({
-  tasks,
-  selectedTask,
-  setSelectedTask,
-  setSelectedDataset,
+export default function TableTabs({
+  tabs,
+  selectedTab,
+  onSelectTab
 }) {
   function handleChange(event, newValue) {
-    setSelectedTask(newValue);
-    setSelectedDataset(0);
+    onSelectTab(newValue);
   }
 
   return (
     <StyledCard>
       <Tabs
-        value={selectedTask}
+        value={selectedTab}
         variant="scrollable"
         indicatorColor="primary"
         scrollButtons="on"
         onChange={handleChange}
+        style={{ alignItems: 'center' }}
       >
-        {tasks.map((task) => (
+        {tabs.map((tab) => (
           <Tab
             label={
               <Typography variant="subtitle2" color="primary">
-                {task.task_name}
+                {tab.task_name}
               </Typography>
             }
             wrapped
-            key={task.task_id}
-            style={{ flexGrow: 1 }}
+            key={tab.task_id}
+            style={{ flexGrow: 1, maxWidth: '50%' }}
           />
         ))}
       </Tabs>
