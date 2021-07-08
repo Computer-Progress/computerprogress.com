@@ -59,10 +59,11 @@ export default function Header({ isHome }) {
                     </StyledButton>
                   </Box>
                 ))}
+                <StyledSpacer />
               </>
             )}
 
-            <Box ml={8}>
+            <Box>
               <StyledButton
                 size={isMobileSM ? "small" : "medium"}
                 color="secondary"
