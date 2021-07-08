@@ -14,6 +14,6 @@ export const StyledBoxItem = styled(Box).attrs({
 })``;
 
 export const StyledTextField = styled(TextField).attrs({
-  variant: "outlined",
   fullWidth: true,
+  margin: "dense",
 })``;
