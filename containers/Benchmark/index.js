@@ -9,7 +9,7 @@ import ButtonToTop from "../../components/ButtonToTop";
 
 function Benchmark({ benchmark, taskId, benchmarkId }) {
   const [data, setData] = useState(benchmark.models);
-  const [secondButtons] = useState([
+  const [secondButtons, setSecondButtons] = useState([
     {
       name: 'Hardware Burden',
       value: 'hardware_burden',
@@ -19,6 +19,7 @@ function Benchmark({ benchmark, taskId, benchmarkId }) {
       value: 'operation_per_network_pass',
     },
   ]);
+  const [showOperations, setShowOperations] = useState(true);
   const [computingPower, setComputingPower] = useState(secondButtons[0]);
   const [label, setLabel] = useState(benchmark.accuracy_types?.[0]?.name);
   const [selected, setSelected] = useState(0);
@@ -41,7 +42,16 @@ function Benchmark({ benchmark, taskId, benchmarkId }) {
 
   useEffect(() => {
     console.log('benchmark', benchmark)
-    // setDomain(query.benchmarkId);
+    const has_operation_per_network_pass = data.some(item => !!item.operation_per_network_pass);
+    if (!has_operation_per_network_pass) {
+      setSecondButtons([
+        {
+          name: 'Hardware Burden',
+          value: 'hardware_burden',
+        }
+      ])
+      setShowOperations(false);
+    }
     // console.log(domain);
   }, []);
 
@@ -73,8 +83,20 @@ function Benchmark({ benchmark, taskId, benchmarkId }) {
           />
           <Chart data={data} label={label} isByYear={type} computingPower={computingPower} />
         </div>
-        <Download contained href={`http://ec2-3-129-18-205.us-east-2.compute.amazonaws.com/api/v1/models/${taskId}/${benchmarkId}/csv`}>Download</Download>
-        <PapersList onSelectAccuracy={onSelectAccuracy} selectedAccuracy={label} papers={data} accuracy={label} accuracy_list={buttons} />
+        <Download
+          contained
+          href={`http://ec2-3-129-18-205.us-east-2.compute.amazonaws.com/api/v1/models/${taskId}/${benchmarkId}/csv`}
+        >
+          Download
+        </Download>
+        <PapersList 
+          onSelectAccuracy={onSelectAccuracy}
+          selectedAccuracy={label}
+          papers={data}
+          accuracy={label}
+          accuracy_list={buttons}
+          showOperations={showOperations}
+        />
       </Container>
       <ButtonToTop />
     </PageTemplate>
