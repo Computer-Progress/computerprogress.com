@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { useEffect, useState } from "react";
-import { useMediaQuery } from "@material-ui/core";
+
 
 import { Typography, Grid, Card, Box, Button } from "@material-ui/core";
 
@@ -15,8 +15,6 @@ import { StyledGridItem, StyledFlexbox } from "./styles";
 import Table from '../Table';
 
 export default function TaskTable({ tasks }) {
-  const isMobile = useMediaQuery(MuiTheme.breakpoints.down("md"));
-
   const [selectedTask, setSelectedTask] = useState(0);
   const [loadedTasks, setLoadedTasks] = useState({});
   const [selectedDataset, setSelectedDataset] = useState(0);

@@ -1,5 +1,7 @@
 import { Tabs, Tab, Typography } from "@material-ui/core";
 import { StyledCard } from "./styles";
+import { useMediaQuery } from "@material-ui/core";
+import { MuiTheme } from "../../styles/theme";
 
 export default function TableTabs({
   tabs,
@@ -10,6 +12,8 @@ export default function TableTabs({
     onSelectTab(newValue);
   }
 
+  const isMobile = useMediaQuery(MuiTheme.breakpoints.down(500));
+
   return (
     <StyledCard>
       <Tabs
@@ -18,7 +22,6 @@ export default function TableTabs({
         indicatorColor="primary"
         scrollButtons="on"
         onChange={handleChange}
-        style={{ alignItems: 'center' }}
       >
         {tabs.map((tab) => (
           <Tab
@@ -29,7 +32,7 @@ export default function TableTabs({
             }
             wrapped
             key={tab.task_id}
-            style={{ flexGrow: 1, maxWidth: '50%' }}
+            style={{ flexGrow: 1, maxWidth: isMobile ? '300px' : '50%' }}
           />
         ))}
       </Tabs>
