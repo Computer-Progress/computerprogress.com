@@ -4,8 +4,13 @@ import HighchartsReact from "highcharts-react-official";
 import Highcharts from "highcharts";
 import HighchartsExporting from "highcharts/modules/exporting";
 import regression from "regression";
+import useMediaQuery from "@material-ui/core/useMediaQuery";
+import { MuiTheme } from "../../styles/theme";
+
 
 const chart = ({ data, label, isByYear, computingPower }) => {
+  const isMobileXS = useMediaQuery(MuiTheme.breakpoints.down("xs"));
+
   const [chartOptions, setChartOptions] = useState({
     title: {
       text: "Loading...",
@@ -49,9 +54,6 @@ const chart = ({ data, label, isByYear, computingPower }) => {
     result.points.sort((a, b) => a[1] - b[1]);
 
     const chart = {
-      chart: {
-        height: 500
-      },
       plotOptions: {
         scatter: {
           dataLabels: {
