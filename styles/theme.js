@@ -1,4 +1,4 @@
-import { createMuiTheme } from "@material-ui/core/styles";
+import { createTheme } from "@material-ui/core/styles";
 
 export default {
   colors: {
@@ -19,7 +19,7 @@ export default {
   },
 };
 
-export const MuiTheme = createMuiTheme({
+export const MuiTheme = createTheme({
   typography: {
     fontFamily: ['"Montserrat"', "sans-serif"].join(","),
     h1: {
