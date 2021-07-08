@@ -57,6 +57,7 @@ function Benchmark({ benchmark, taskId, benchmarkId }) {
   }, []);
 
   const onSelectAccuracy = ({option, index}) => {
+    console.log('index', index)
     setLabel(option.name);
     setSelectedButton(index);
   }
@@ -77,7 +78,7 @@ function Benchmark({ benchmark, taskId, benchmarkId }) {
           options={buttons}
           fieldName="name"
           optionsTitle="Accuracy"
-          selectedOptions={secondButtons}
+          selectedOption={selectedButton}
           setSelectedOption={onSelectAccuracy}
           secondaryOptions={secondButtons}
           selectedSecondaryOption={selectedSecondButton}
