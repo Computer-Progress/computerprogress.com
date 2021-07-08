@@ -15,12 +15,8 @@ function Benchmark({ benchmark, taskId, benchmarkId }) {
       value: 'hardware_burden',
     },
     {
-      name: 'Gigaflops',
-      value: 'gflops',
-    },
-    {
-      name: 'Multiply-adds',
-      value: 'multiply_adds',
+      name: `Operations Per\nNetwork Pass`,
+      value: 'operation_per_network_pass',
     },
   ]);
   const [computingPower, setComputingPower] = useState(secondButtons[0]);

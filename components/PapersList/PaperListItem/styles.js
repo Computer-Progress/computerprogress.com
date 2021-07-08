@@ -3,7 +3,7 @@ import theme from "../../../styles/theme";
 
 export const Wrapper = styled.div`
   display: grid;
-  grid-template-columns: minmax(50px, 1fr) minmax(100px, 2fr) minmax(150px, 2fr) ${({ accuracy_list }) => accuracy_list.map(item => 'minmax(100px, 1fr)')} minmax(100px, 1fr) minmax(100px, 1fr) minmax(100px, 1fr) minmax(100px, 1fr);
+  grid-template-columns: minmax(50px, 1fr) minmax(100px, 2fr) minmax(150px, 2fr) ${({ accuracy_list }) => accuracy_list.map(item => 'minmax(100px, 1fr)')} minmax(100px, 1fr) minmax(100px, 1fr) minmax(100px, 1fr);
   width: 100%;
   padding: 15px 20px;
   flex-direction: row;

@@ -14,9 +14,9 @@ export default function PaperListItem({ item, index, accuracy, accuracy_list, le
                             <Text hover title right>{accuracy.name}</Text>
                         </a>
                     ))}
-                    <Text title right>Gigaflops</Text>
-                    <Text title right>Multiply-adds</Text>
+                    <Text title right>Operations Per Network Pass</Text>
                     <Text title right>Hardware Burden</Text>
+                    
                     <Text title right>Publication Date</Text>
                 </Wrapper>
                 <Separator />
@@ -30,9 +30,7 @@ export default function PaperListItem({ item, index, accuracy, accuracy_list, le
                 {accuracy_list?.map(accuracy => (
                     <Text right>{item[accuracy.name] || '-'}</Text>
                 ))}
-
-                <Text right>{item.gflops || '-'}</Text>
-                <Text right>{item.multiply_adds || '-'}</Text>
+                <Text right>{item.operation_per_network_pass || '-'}</Text>
 
                 <Text right>
                     {item.hardware_burden ? (
