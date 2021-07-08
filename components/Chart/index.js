@@ -6,7 +6,11 @@ import HighchartsExporting from "highcharts/modules/exporting";
 import regression from "regression";
 
 const chart = ({ data, label, isByYear, computingPower }) => {
-  const [chartOptions, setChartOptions] = useState({})
+  const [chartOptions, setChartOptions] = useState({
+    title: {
+      text: "Loading...",
+    }
+  })
   const generateChart = (list, label) => {
     let data_points = [];
     let info_points = [];
