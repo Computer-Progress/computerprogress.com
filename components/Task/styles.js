@@ -10,6 +10,7 @@ export const Wrapper = styled.div`
   transition: all 0.3s ease-in !important;
   &:hover {
     opacity: 0.55;
+    cursor: pointer;
   }
 `;
 

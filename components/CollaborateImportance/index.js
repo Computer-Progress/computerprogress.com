@@ -16,17 +16,27 @@ import { MuiTheme } from "../../styles/theme";
 const quotes = [
   {
     quote:
-      "Deep learning is not computationally expensive by accident, but by design. The same flexibility that makes it excellent at modeling diverse phenomena and outperforming expert models also makes it dramatically more computationally expensive.",
-    source: "Thompson et al, 2021",
+      "Significant improvements in computing power is, the field of Deep Learning (DL) is growing at breakneck speed.",
+    source: "AI Index Report, 2021",
   },
   {
     quote:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent fermentum sem nec lacus tincidunt commodo. Morbi nec dolor nulla. Integer.",
-    source: "Praesent fermentum, 2021",
+      "The computing power needed to train AI is now rising seven times faster than ever before.",
+    source: "MIT Technology Review, 2019",
   },
   {
-    quote: "a",
-    source: "Praesent fermentum, 2021",
+    quote:
+      "Improvements in Computing Power and Reduction in Hardware Costs will Drive the Industry Growth.",
+    source: "Emergen Research, 2021",
+  },
+  {
+    quote:
+      "Deep neural networks are very computationally expensive. This is a critical issue.",
+    source: "Song Han, MIT",
+  },
+  {
+    quote: "The actual computational burden of deep learning models is scaling more rapidly than (known) lower bounds from theory.",
+    source: "Thompson et al, 2021",
   },
 ];
 

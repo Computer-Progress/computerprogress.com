@@ -3,12 +3,13 @@ import theme from "../../../styles/theme";
 
 export const Wrapper = styled.div`
   display: grid;
-  grid-template-columns: 1fr 1fr 2fr ${({ accuracy_list }) => accuracy_list.map(item => '1fr ')} 1fr 1fr;
+  grid-template-columns: minmax(50px, 1fr) minmax(100px, 2fr) minmax(150px, 2fr) ${({ accuracy_list }) => accuracy_list.map(item => 'minmax(100px, 1fr)')} ${({ showOperations }) => showOperations ? 'minmax(100px, 1fr)' : ''} minmax(100px, 1fr) minmax(100px, 1fr);
   width: 100%;
   padding: 15px 20px;
   flex-direction: row;
   flex-wrap: wrap;
   justify-content: space-between;
+  height: 100%;
 `;
 
 export const Separator = styled.div`
@@ -19,7 +20,10 @@ export const Separator = styled.div`
 
 export const Text = styled.p`
   font-weight: normal;
+  word-wrap:break-word;
+  padding: 0px 3px;
   font-size: ${({title}) => title ? '14px' : '12px'};
   color: ${({link}) => link ? theme.colors.secondary : theme.colors.black};
-  text-align: ${({right}) => right ? 'right' : 'left'}
+  text-align: ${({right}) => right ? 'right' : 'left'};
+  cursor: ${({ hover }) => hover ? 'pointer' : 'auto'}
 `;

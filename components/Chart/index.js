@@ -4,19 +4,27 @@ import HighchartsReact from "highcharts-react-official";
 import Highcharts from "highcharts";
 import HighchartsExporting from "highcharts/modules/exporting";
 import regression from "regression";
+import useMediaQuery from "@material-ui/core/useMediaQuery";
+import { MuiTheme } from "../../styles/theme";
 
-const chart = ({ data, label, isByYear }) => {
-  const [chartOptions, setChartOptions] = useState({})
 
+const chart = ({ data, label, isByYear, computingPower }) => {
+  const isMobileXS = useMediaQuery(MuiTheme.breakpoints.down("xs"));
+
+  const [chartOptions, setChartOptions] = useState({
+    title: {
+      text: "Loading...",
+    }
+  })
   const generateChart = (list, label) => {
     let data_points = [];
     let info_points = [];
 
     for (let index = 0; index < list.length; index++) {
       const element = list[index];
-      if (element[label] && element.hardware_burden) {
+      if (element[label] && element[computingPower.value]) {
         let x, y;
-        x = isByYear ? new Date(element.paper_publication_date).getFullYear() : Math.log10(element.hardware_burden);
+        x = isByYear ? new Date(element.paper_publication_date).getFullYear() : Math.log10(element[computingPower.value]);
         y = 1 / (1 - (element[label] / 100));
         const point = [x, y];
 
@@ -46,9 +54,6 @@ const chart = ({ data, label, isByYear }) => {
     result.points.sort((a, b) => a[1] - b[1]);
 
     const chart = {
-      chart: {
-        height: 500
-      },
       plotOptions: {
         scatter: {
           dataLabels: {
@@ -63,7 +68,7 @@ const chart = ({ data, label, isByYear }) => {
               let y = (1 - 1 / this.y) * 100;
               y = Math.round(y * 100) / 100;
               let x = Math.round(this.x * 100) / 100;
-              return `${label}: ${y}% - ${isByYear ? `Year: ${x}` : `Computation: 10e+${x.toFixed(1)}`} `;
+              return `${label}: ${y}% - ${isByYear ? `Year: ${x}` : `Computation: 10e${x < 0 ? '' : '+'}${x.toFixed(1)}`} `;
             }
           }
         },
@@ -79,7 +84,7 @@ const chart = ({ data, label, isByYear }) => {
           showInLegend: true,
           color: "#000000",
           name: result.string
-            .replace("x", isByYear ? " Year" : " log(Hardware Burden)")
+            .replace("x", isByYear ? " Year" : ` log(${computingPower.name})`)
             .replace("+ -", " - ")
             .replace("y", label),
           data: [result.points[0], result.points[result.points.length - 1]],
@@ -112,7 +117,7 @@ const chart = ({ data, label, isByYear }) => {
       },
       xAxis: {
         title: {
-          text: isByYear ? 'Year' : "Computation (Hardware Burden)",
+          text: isByYear ? 'Year' : `Computation (${computingPower.name})`,
           margin: 20,
           style: {
             color: "#333",
@@ -128,7 +133,7 @@ const chart = ({ data, label, isByYear }) => {
             fontFamily: "Montserrat, sans-serif"
           },
           formatter: function () {
-            return isByYear ? this.value : "10e+" + this.value;
+            return isByYear ? this.value : `10e${parseFloat(this.value) < 0 ? '' : '+'}` + this.value;
           }
         }
       },
@@ -150,7 +155,7 @@ const chart = ({ data, label, isByYear }) => {
           },
           formatter: function () {
             let label = (1 - 1 / this.value) * 100;
-            return `${parseInt(label)}%`;
+            return `${label.toFixed(1)}%`;
           }
         }
       }
@@ -160,7 +165,7 @@ const chart = ({ data, label, isByYear }) => {
 
   useEffect(() => {
     generateChart(data, label);
-  }, [data, label, isByYear])
+  }, [data, label, isByYear, computingPower])
 
 
   if (typeof Highcharts === "object") {

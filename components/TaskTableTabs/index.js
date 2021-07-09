@@ -1,36 +1,38 @@
 import { Tabs, Tab, Typography } from "@material-ui/core";
 import { StyledCard } from "./styles";
+import { useMediaQuery } from "@material-ui/core";
+import { MuiTheme } from "../../styles/theme";
 
-export default function TaskTableTabs({
-  tasks,
-  selectedTask,
-  setSelectedTask,
-  setSelectedDataset,
+export default function TableTabs({
+  tabs,
+  selectedTab,
+  onSelectTab
 }) {
   function handleChange(event, newValue) {
-    setSelectedTask(newValue);
-    setSelectedDataset(0);
+    onSelectTab(newValue);
   }
+
+  const isMobile = useMediaQuery(MuiTheme.breakpoints.down(500));
 
   return (
     <StyledCard>
       <Tabs
-        value={selectedTask}
+        value={selectedTab}
         variant="scrollable"
         indicatorColor="primary"
         scrollButtons="on"
         onChange={handleChange}
       >
-        {tasks.map((task) => (
+        {tabs.map((tab) => (
           <Tab
             label={
               <Typography variant="subtitle2" color="primary">
-                {task.task_name}
+                {tab.task_name}
               </Typography>
             }
             wrapped
-            key={task.task_id}
-            style={{ flexGrow: 1 }}
+            key={tab.task_id}
+            style={{ flexGrow: 1, maxWidth: isMobile ? '300px' : '50%' }}
           />
         ))}
       </Tabs>

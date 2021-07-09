@@ -6,49 +6,100 @@ import Tabs from "../../components/Tabs";
 import PageTemplate from "../../components/PageTemplate";
 import PapersList from "../../components/PapersList";
 import ButtonToTop from "../../components/ButtonToTop";
+import Table from '../../components/Table';
 
 function Benchmark({ benchmark, taskId, benchmarkId }) {
   const [data, setData] = useState(benchmark.models);
+  const [secondButtons, setSecondButtons] = useState([
+    {
+      name: 'Hardware Burden',
+      value: 'hardware_burden',
+    },
+    {
+      name: `Operations Per\nNetwork Pass`,
+      value: 'operation_per_network_pass',
+    },
+  ]);
+  const [showOperations, setShowOperations] = useState(true);
+  const [computingPower, setComputingPower] = useState(secondButtons[0]);
   const [label, setLabel] = useState(benchmark.accuracy_types?.[0]?.name);
   const [selected, setSelected] = useState(0);
   const [selectedButton, setSelectedButton] = useState(0);
-  const [name, setName] = useState(benchmark.task_name);
+  const [selectedSecondButton, setSelectedSecondButton] = useState(0);
+  const [name, setName] = useState();
   const [type, setType] = useState(0);
-  const [buttons, setButtons] = useState(benchmark.accuracy_types);
+  const [buttons] = useState(benchmark.accuracy_types);
 
   const tabs = [
     {
-      name: "Performance x Computing power",
-      onSelect: () => setType(0),
+      task_name: "Performance x Computing power",
+      task_id: 0,
     },
     {
-      name: "Performance x Year",
-      onSelect: () => setType(1),
+      task_name: "Performance x Year",
+      task_id: 1,
     },
   ];
 
   useEffect(() => {
-    console.log('vaai vai', benchmark)
-    // setDomain(query.benchmarkId);
+    console.log('benchmark', benchmark)
+    const has_operation_per_network_pass = data.some(item => !!item.operation_per_network_pass);
+    if (!has_operation_per_network_pass) {
+      setSecondButtons([
+        {
+          name: 'Hardware Burden',
+          value: 'hardware_burden',
+        }
+      ])
+      setShowOperations(false);
+    }
     // console.log(domain);
   }, []);
 
-  const onSelectAccuracy = (accuracy, index) => {
-    setLabel(accuracy.name);
+  const onSelectAccuracy = ({option, index}) => {
+    console.log('index', index)
+    setLabel(option.name);
     setSelectedButton(index);
+  }
+
+  const onSelectComputingPower = ({option, index}) => {
+    setComputingPower(option);
+    setSelectedSecondButton(index);
   }
 
   return (
     <PageTemplate>
       <Container>
-        <Title>{name}</Title>
-        <Tabs selected={type} items={tabs} />
+        <Title><a href={`/tasks/${taskId}`}>{benchmark.task_name}</a> / {benchmark.dataset_name}</Title>
+        <Table
+          tabs={tabs}
+          selectedTab={type}
+          onSelectTab={(index) => setType(index)}
+          options={buttons}
+          fieldName="name"
+          optionsTitle="Accuracy"
+          selectedOption={selectedButton}
+          setSelectedOption={onSelectAccuracy}
+          secondaryOptions={secondButtons}
+          selectedSecondaryOption={selectedSecondButton}
+          setSelectedSecondaryOption={onSelectComputingPower}
+          secondaryOptionsTitle="Computing Power"
+          data={data}
+          label={label}
+          isByYear={type}
+          computingPower={computingPower}
+        />
+        {/* <Tabs selected={type} items={tabs} />
         <div className="chart">
           <ChartOptions
             title="Accuracy"
             buttons={buttons}
             selected={selectedButton}
             onPress={onSelectAccuracy}
+            secondButtons={secondButtons}
+            secondTitle="Computing Power"
+            onPressSecond={onSelectComputingPower}
+            selectedSecond={selectedSecondButton}
           />
           <Chart data={data} label={label} isByYear={type} />
         </div>

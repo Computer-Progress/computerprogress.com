@@ -1,15 +1,15 @@
-import Link from "next/link";
+// import Link from "next/link";
 import { useTheme } from "@material-ui/core/styles";
 import { useMediaQuery } from "@material-ui/core";
-import { StyledBox, FlexBox, FlexItem, StyledDivider } from "./style";
+import { StyledBox, FlexBox, FlexItem, StyledDivider, Link, Container } from "./style";
 
 export default function CardBenchmark({ taskId, benchmark }) {
   const theme = useTheme();
   const isLargeScreen = useMediaQuery(theme.breakpoints.up("md"));
 
   return (
-    <Link href={{ pathname: `/tasks/${taskId}/${benchmark.dataset_identifier}` }}>
-      <a>
+    <Container>
+      <Link href={`/tasks/${taskId}/${benchmark.dataset_identifier}`}></Link>
         <StyledBox px={3} py={1}>
           <h3>{benchmark.dataset_name}</h3>
 
@@ -26,7 +26,7 @@ export default function CardBenchmark({ taskId, benchmark }) {
                 <FlexItem pl={2}>
                   <p>Paper</p>
 
-                  <a href={benchmark.sota_paper_link}><h4>{benchmark.sota_paper_link}</h4></a>
+                  <a target="_blank" href={benchmark.sota_paper_link}><h4>{benchmark.sota_paper_title}</h4></a>
                 </FlexItem>
                 <FlexItem pl={2} textAlign="center">
                   <p>{benchmark.accuracy_name}</p>
@@ -56,7 +56,6 @@ export default function CardBenchmark({ taskId, benchmark }) {
             </>
           )}
         </StyledBox>
-      </a>
-    </Link>
+      </Container>
   );
 }

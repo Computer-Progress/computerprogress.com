@@ -13,6 +13,8 @@ export const Container = styled.div`
     }
 `;
 
+
+
 export const ItemsWrapper = styled.div`
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;

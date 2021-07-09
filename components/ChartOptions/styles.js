@@ -21,11 +21,16 @@ export const Wrapper = styled.div`
     margin-bottom: 1.5rem;
   }
 
+  div {
+    margin-bottom: 30px;
+  }
+
   @media only screen and (max-width: 1015px) {
     max-width: 100%;
     border-radius: 16px 16px 16px 16px;
     margin-bottom: 10px;
   }
+
 `;
 
 export const Item = styled(Chip)`

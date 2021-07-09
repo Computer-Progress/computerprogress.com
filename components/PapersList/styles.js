@@ -8,4 +8,7 @@ export const ItemsWrapper = styled.div`
   border-radius: 20px;
   margin: 20px 0px;
   box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.25);
+  overflow: auto;
+  overflow-x: auto;
+  width: 100%;
 `;

@@ -32,7 +32,7 @@ export const Container = styled.div`
 export const Logos = styled.div`
   display: flex;
   justify-content: space-around;
-
+  margin-bottom: 30px;
   div {
     align-items: center;
     display: flex;
