@@ -52,7 +52,7 @@ function Benchmark({ benchmark, taskId, benchmarkId }) {
           />
           <Chart data={data} label={label} isByYear={type} />
         </div>
-        <Download contained href={`http://ec2-3-129-18-205.us-east-2.compute.amazonaws.com/api/v1/models/${taskId}/${benchmarkId}/csv`}>Download</Download>
+        <Download contained href={`https://computerprogress.xyz/api/v1/models/${taskId}/${benchmarkId}/csv`}>Download</Download>
         <PapersList papers={data} accuracy={label} accuracy_list={buttons} />
       </Container>
       <ButtonToTop />

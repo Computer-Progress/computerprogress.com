@@ -23,7 +23,7 @@ export default function TaskTable({ tasks }) {
 
   useEffect(async () => {
     const URL =
-      "http://ec2-3-129-18-205.us-east-2.compute.amazonaws.com/api/v1";
+      "https://computerprogress.xyz/api/v1";
 
     const taskId = tasks[selectedTask].task_id;
     const datasetId = tasks[selectedTask].datasets[selectedDataset].dataset_id;
