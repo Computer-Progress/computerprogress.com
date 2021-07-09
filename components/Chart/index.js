@@ -154,7 +154,7 @@ const chart = ({ data, label, isByYear, computingPower }) => {
             fontFamily: "Montserrat, sans-serif"
           },
           formatter: function () {
-            let label = (1 - 1 / this.value) * 100;
+            let label = (1 - (1 / this.value)) * 100;
             return `${this.value ? label.toFixed(1) : 0}%`;
           }
         }
