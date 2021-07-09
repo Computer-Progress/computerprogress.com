@@ -89,22 +89,15 @@ function Benchmark({ benchmark, taskId, benchmarkId }) {
           isByYear={type}
           computingPower={computingPower}
         />
-        {/* <Tabs selected={type} items={tabs} />
-        <div className="chart">
-          <ChartOptions
-            title="Accuracy"
-            buttons={buttons}
-            selected={selectedButton}
-            onPress={onSelectAccuracy}
-            secondButtons={secondButtons}
-            secondTitle="Computing Power"
-            onPressSecond={onSelectComputingPower}
-            selectedSecond={selectedSecondButton}
-          />
-          <Chart data={data} label={label} isByYear={type} />
-        </div>
         <Download contained href={`https://computerprogress.xyz/api/v1/models/${taskId}/${benchmarkId}/csv`}>Download</Download>
-        <PapersList papers={data} accuracy={label} accuracy_list={buttons} />
+        <PapersList 
+          onSelectAccuracy={onSelectAccuracy}
+          selectedAccuracy={label}
+          papers={data}
+          accuracy={label}
+          accuracy_list={buttons}
+          showOperations={showOperations}
+        />
       </Container>
       <ButtonToTop />
     </PageTemplate>
