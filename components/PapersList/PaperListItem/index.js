@@ -18,7 +18,7 @@ export default function PaperListItem({
                     <Text title>Paper</Text>
                     {accuracy_list?.map((accuracy, index) => (
                         <a onClick={() => onSelectAccuracy({option: accuracy, index})}>
-                            <Text hover title right>{accuracy.name}</Text>
+                            <Text title right hover>{accuracy.name}</Text>
                         </a>
                     ))}
 
