@@ -155,7 +155,7 @@ const chart = ({ data, label, isByYear, computingPower }) => {
           },
           formatter: function () {
             let label = (1 - 1 / this.value) * 100;
-            return `${label.toFixed(1)}%`;
+            return `${this.value ? label.toFixed(1) : 0}%`;
           }
         }
       }
