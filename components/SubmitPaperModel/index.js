@@ -4,8 +4,9 @@ import {
   TextField,
   Divider,
   IconButton,
-  MenuItem,
+  useMediaQuery,
 } from "@material-ui/core";
+import { useTheme } from "@material-ui/core/styles";
 import AdjustIcon from "@material-ui/icons/Adjust";
 import Add from "@material-ui/icons/Add";
 import CloseIcon from "@material-ui/icons/Close";
@@ -20,11 +21,20 @@ import {
 import { InputAdornment } from "@material-ui/core";
 
 export default function SubmitPaperModel() {
+  const theme = useTheme();
+  const isLargeScreen = useMediaQuery(theme.breakpoints.up("md"));
   return (
     <StyledCard>
       <StyledBoxContainer>
         <Grid container spacing={3}>
-          <Grid item xs={6} container spacing={3} alignContent="flex-start">
+          <Grid
+            item
+            xs={12}
+            md={6}
+            container
+            spacing={3}
+            alignContent="flex-start"
+          >
             <Grid item xs={12}>
               <Typography variant="h3">Model</Typography>
             </Grid>
@@ -77,11 +87,20 @@ export default function SubmitPaperModel() {
             </Grid>
           </Grid>
 
-          <Grid item>
-            <Divider orientation="vertical" />
-          </Grid>
+          {isLargeScreen && (
+            <Grid item>
+              <Divider orientation="vertical" />
+            </Grid>
+          )}
 
-          <Grid item xs={6} container spacing={3} alignContent="flex-start">
+          <Grid
+            item
+            xs={12}
+            md={6}
+            container
+            spacing={3}
+            alignContent="flex-start"
+          >
             <Grid item xs={12}>
               <Typography variant="h3">Computing power information</Typography>
             </Grid>
