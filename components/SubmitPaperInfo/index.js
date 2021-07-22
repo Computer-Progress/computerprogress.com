@@ -16,6 +16,7 @@ import {
   StyledBoxContainer,
   StyledBoxItem,
   StyledTextField,
+  StyledDivider,
 } from "./styles";
 import { InputAdornment } from "@material-ui/core";
 import { useState } from "react";
@@ -55,9 +56,13 @@ export default function SubmitPaperInfo() {
     <StyledCard>
       <StyledBoxContainer>
         <Grid container spacing={3}>
-          <Grid item xs={6} container spacing={1} alignContent="flex-start">
+          <Grid item xs={12} md={6} container spacing={1} alignContent="flex-start">
             <Grid item xs={12}>
-              <Typography variant="h3">Paper</Typography>
+              <Typography variant="h3">Paper information</Typography>
+            </Grid>
+
+            <Grid item xs={12}>
+              <StyledDivider />
             </Grid>
 
             <Grid item xs={12}>
@@ -104,15 +109,21 @@ export default function SubmitPaperInfo() {
             <Divider orientation="vertical" />
           </Grid> */}
 
-          <Grid item xs={6} container spacing={1} alignContent="flex-start">
+          <Grid item xs={12} md={6} container spacing={1} alignContent="flex-start">
             <Grid item xs={12}>
               <Typography variant="h3">Authors</Typography>
             </Grid>
 
             <Grid item xs={12}>
+              <StyledDivider />
+            </Grid>
+
+            <Grid item xs={12}>
               <form onSubmit={addAuthor}>
-                <StyledTextField
+                <TextField
                   placeholder="Author name"
+                  margin="normal"
+                  fullWidth
                   InputProps={{
                     startAdornment: (
                       <InputAdornment position="start">
