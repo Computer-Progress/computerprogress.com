@@ -21,16 +21,8 @@ export const Separator = styled.div`
 export const SearchWrapper = styled.div`
   display: flex;
   flex-direction: row;
-  align-items: center;
+  align-items: flex-end;
   padding-bottom: 10px;
-  h3 {
-    font-family: 'Montserrat';
-    font-weight: 500;
-    margin: 0 0 0 20px;
-    padding-top: 0;
-    flex: 1;
-    text-align: center;
-  }
 `;
 
 export const Header = styled.div`
@@ -48,13 +40,13 @@ export const Input = styled(TextField).attrs({
   size: "small",
 })`
   border-bottom-widht: 0px !important;
-
+  margin-left: 10px !important;
   &&:before {
-    borderBottom: "none"
+    borderBottom: none !important;
   }
 
   &&:after {
-    borderBottom: "none"
+    borderBottom: none !important;
   }
 `
 

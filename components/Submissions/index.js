@@ -3,6 +3,7 @@ import React from "react";
 import { Wrapper, SearchWrapper, Separator, Image, Input, Header } from "./styles";
 import { Select, MenuItem } from '@material-ui/core'
 import Submission from "./Submission";
+import * as Icon from 'react-feather';
 
 export default function ({ papers }) {
   const [age, setAge] = React.useState(10);
@@ -16,6 +17,7 @@ export default function ({ papers }) {
       <Header>
         <SearchWrapper>
           {/* <Image src={item.image} /> */}
+          <Icon.Search />
           <Input label="Search" />
         </SearchWrapper>
         <Select
