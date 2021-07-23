@@ -53,7 +53,7 @@ const cpuModels = [
 
 const gpuModels = [
   { id: 0, title: "GPU A" },
-  { id: 1, title: "GPU  B" },
+  { id: 1, title: "GPU B" },
 ];
 
 const tpuModels = [
@@ -63,14 +63,8 @@ const tpuModels = [
 
 const emptyModel = {
   name: "",
-  task: {
-    id: "",
-    title: "",
-  },
-  dataset: {
-    id: "",
-    title: "",
-  },
+  task: null,
+  dataset: null,
   accuracies: [{ type: "", value: "" }],
   training: {
     time: "",
@@ -78,15 +72,15 @@ const emptyModel = {
     extra: false,
   },
   cpu: {
-    model: "",
+    model: null,
     qty: "",
   },
   gpu: {
-    model: "",
+    model: null,
     qty: "",
   },
   tpu: {
-    model: "",
+    model: null,
     qty: "",
   },
   gigaflops: "",
@@ -102,7 +96,7 @@ export default function SubmitPaperModel() {
 
   function addAccuracy() {
     const newModel = { ...model };
-    newModel.accuracies.push({ type: "", value: "" });
+    newModel.accuracies.push(null);
 
     setModel(newModel);
   }
@@ -143,10 +137,16 @@ export default function SubmitPaperModel() {
         newModel.training.extra = !newModel.training.extra;
         break;
 
-      case "cpu":
-      case "gpu":
-      case "tpu":
-        // ...and
+      case "cpuQty":
+        newModel.cpu.qty = value;
+
+        break;
+      case "gpuQty":
+        newModel.gpu.qty = value;
+        break;
+      case "tpuQty":
+        newModel.tpu.qty = value;
+        break;
         break;
 
       default:
@@ -344,6 +344,13 @@ export default function SubmitPaperModel() {
 
             <Grid item xs={12} md={8}>
               <StyledAutocomplete
+                value={model.cpu.model}
+                onChange={(event, newValue) => {
+                  setModel({
+                    ...model,
+                    cpu: { ...model.cpu, model: newValue },
+                  });
+                }}
                 options={cpuModels}
                 getOptionLabel={(option) => option.title}
                 renderInput={(params) => (
@@ -353,11 +360,23 @@ export default function SubmitPaperModel() {
             </Grid>
 
             <Grid item xs={6} sm={4}>
-              <StyledTextField label="# of CPUs" />
+              <StyledTextField
+                label="# of CPUs"
+                name="cpuQty"
+                value={model.cpu.qty}
+                onChange={handleChange}
+              />
             </Grid>
 
             <Grid item xs={12} md={8}>
               <StyledAutocomplete
+                value={model.gpu.model}
+                onChange={(event, newValue) => {
+                  setModel({
+                    ...model,
+                    gpu: { ...model.cpu, model: newValue },
+                  });
+                }}
                 options={gpuModels}
                 getOptionLabel={(option) => option.title}
                 renderInput={(params) => (
@@ -367,11 +386,23 @@ export default function SubmitPaperModel() {
             </Grid>
 
             <Grid item xs={6} sm={4}>
-              <StyledTextField label="# of GPUs" />
+              <StyledTextField
+                label="# of GPUs"
+                name="gpuQty"
+                value={model.gpu.qty}
+                onChange={handleChange}
+              />
             </Grid>
 
             <Grid item xs={12} md={8}>
               <StyledAutocomplete
+                value={model.tpu.model}
+                onChange={(event, newValue) => {
+                  setModel({
+                    ...model,
+                    tpu: { ...model.tpu, model: newValue },
+                  });
+                }}
                 options={tpuModels}
                 getOptionLabel={(option) => option.title}
                 renderInput={(params) => (
@@ -381,7 +412,12 @@ export default function SubmitPaperModel() {
             </Grid>
 
             <Grid item xs={6} sm={4}>
-              <StyledTextField label="# of TPUs" />
+              <StyledTextField
+                label="# of TPUs"
+                name="tpuQty"
+                value={model.tpu.qty}
+                onChange={handleChange}
+              />
             </Grid>
 
             <Grid item xs={12}>
