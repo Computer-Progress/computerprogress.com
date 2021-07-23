@@ -5,7 +5,7 @@ import { Grid, Box, Button } from "@material-ui/core";
 import TaskTable from "../../components/TaskTable";
 import CollaborateInvite from "../../components/CollaborateInvite";
 import { useMediaQuery } from "@material-ui/core";
-import { GridItem, Route, Menu } from './styles';
+import { GridItem, Route, Menu, MainGrid } from './styles';
 import theme from '../../styles/theme';
 
 export default function UserPageTemplate({ selectedPage, children }) {
@@ -28,7 +28,7 @@ export default function UserPageTemplate({ selectedPage, children }) {
 
   return (
       <PageTemplate>
-        <Grid container spacing={1}>
+        <MainGrid container spacing={1}>
           <GridItem xs={3}>
             <Menu flexDirection={isMobile ? 'row' : 'column'}>
               {!isMobile ? (
@@ -46,7 +46,7 @@ export default function UserPageTemplate({ selectedPage, children }) {
               {children}
             </Box>
           </GridItem>
-        </Grid>
+        </MainGrid>
       </PageTemplate>
   );
 }

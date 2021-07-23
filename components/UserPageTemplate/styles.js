@@ -12,6 +12,13 @@ export const GridItem = styled(Grid).attrs({
   padding-right: 0 !important;
 `;
 
+export const MainGrid = styled(Grid).attrs({
+  container: true,
+  spacing: 1
+})`
+  margin-bottom: 50px !important;
+`
+
 
 export const AllTasksButton = styled(Button)`
   color: #9E1FFF !important;
@@ -36,6 +43,7 @@ export const Menu = styled(Box).attrs({
 
   h3 {
     margin-bottom: 30px;
+    font-weight: 500;
   }
 
   a {

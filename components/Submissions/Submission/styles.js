@@ -10,7 +10,7 @@ export const Wrapper = styled.div`
 `;
 
 export const Info = styled.p`
-  font-size: 10px;
+  font-size: 12px;
   text-align: right;
   align-self: ${({ right }) => right ? 'right' : 'left'};
 `

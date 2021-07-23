@@ -7,7 +7,7 @@ import { Grid, Box, Button } from "@material-ui/core";
 import UserPageTemplate from "../../components/UserPageTemplate";
 import Submissions from '../../components/Submissions';
 import { MuiTheme } from "../../styles/theme";
-import { StyledGridItem, StyledFlexbox } from "./styles";
+import { StyledGridItem, StyledFlexbox, Title } from "./styles";
 
 export default function Review() {
   // const isMobile = useMediaQuery(MuiTheme.breakpoints.down("md"));
@@ -43,7 +43,7 @@ export default function Review() {
 
   return (
     <UserPageTemplate selectedPage={1}>
-      <h2>Submissions</h2>
+      <Title>Submissions</Title>
       <Submissions papers={papers} />
     </UserPageTemplate>
   );
