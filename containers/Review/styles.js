@@ -17,3 +17,7 @@ export const StyledFlexbox = styled(Box).attrs({
 })`
   height: 100%;
 `;
+
+export const Title = styled.h2`
+  font-weight: 500;
+`;
