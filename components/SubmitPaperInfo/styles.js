@@ -26,5 +26,5 @@ export const StyledDivider = styled(Divider).attrs({
 
 export const StyledTextField = styled(TextField).attrs({
   fullWidth: true,
-  margin: "dense",
+  // margin: "dense",
 })``;

@@ -6,6 +6,8 @@ import {
   IconButton,
   Box,
   FormControl,
+  useTheme,
+  useMediaQuery,
 } from "@material-ui/core";
 import PersonAddOutlinedIcon from "@material-ui/icons/PersonAddOutlined";
 import AddIcon from "@material-ui/icons/Add";
@@ -22,6 +24,9 @@ import { InputAdornment } from "@material-ui/core";
 import { useState } from "react";
 
 export default function SubmitPaperInfo() {
+  const theme = useTheme();
+  const isLargeScreen = useMediaQuery(theme.breakpoints.up("md"));
+
   const [paperInfo, setPaperInfo] = useState({
     title: "",
     link: "",
@@ -56,7 +61,14 @@ export default function SubmitPaperInfo() {
     <StyledCard>
       <StyledBoxContainer>
         <Grid container spacing={3}>
-          <Grid item xs={12} md={6} container spacing={1} alignContent="flex-start">
+          <Grid
+            item
+            xs={12}
+            md={6}
+            container
+            spacing={3}
+            alignContent="flex-start"
+          >
             <Grid item xs={12}>
               <Typography variant="h3">Paper information</Typography>
             </Grid>
@@ -105,11 +117,20 @@ export default function SubmitPaperInfo() {
               />
             </Grid>
           </Grid>
-          {/* <Grid item>
-            <Divider orientation="vertical" />
-          </Grid> */}
+          {isLargeScreen && (
+            <Grid item>
+              <Divider orientation="vertical" />
+            </Grid>
+          )}
 
-          <Grid item xs={12} md={6} container spacing={1} alignContent="flex-start">
+          <Grid
+            item
+            xs={12}
+            md={6}
+            container
+            spacing={3}
+            alignContent="flex-start"
+          >
             <Grid item xs={12}>
               <Typography variant="h3">Authors</Typography>
             </Grid>
