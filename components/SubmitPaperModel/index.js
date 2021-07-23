@@ -1,3 +1,6 @@
+import { useState } from "react";
+import { useTheme } from "@material-ui/core/styles";
+
 import {
   Grid,
   Typography,
@@ -8,15 +11,13 @@ import {
   MenuItem,
   useMediaQuery,
   FormControl,
-  Input,
   InputLabel,
   FormControlLabel,
   Switch,
-  Button,
   Box,
+  InputAdornment,
 } from "@material-ui/core";
-import { useTheme } from "@material-ui/core/styles";
-import AdjustIcon from "@material-ui/icons/Adjust";
+
 import AddIcon from "@material-ui/icons/Add";
 import CloseIcon from "@material-ui/icons/Close";
 import { Target as TargetIcon } from "react-feather";
@@ -24,14 +25,11 @@ import { Target as TargetIcon } from "react-feather";
 import {
   StyledCard,
   StyledBoxContainer,
-  StyledBoxItem,
   StyledTextField,
   StyledAutocomplete,
   StyledDivider,
   StyledButton,
 } from "./styles";
-import { InputAdornment } from "@material-ui/core";
-import { useState } from "react";
 
 const task = [
   { id: 0, title: "Task 1" },
@@ -63,32 +61,103 @@ const tpuModels = [
   { id: 1, title: "TPU B" },
 ];
 
+const emptyModel = {
+  name: "",
+  task: {
+    id: "",
+    title: "",
+  },
+  dataset: {
+    id: "",
+    title: "",
+  },
+  accuracies: [{ type: "", value: "" }],
+  training: {
+    time: "",
+    epochs: "",
+    extra: false,
+  },
+  cpu: {
+    model: "",
+    qty: "",
+  },
+  gpu: {
+    model: "",
+    qty: "",
+  },
+  tpu: {
+    model: "",
+    qty: "",
+  },
+  gigaflops: "",
+  multiplyAdds: "",
+  parametersQty: "",
+};
+
 export default function SubmitPaperModel() {
   const theme = useTheme();
   const isLargeScreen = useMediaQuery(theme.breakpoints.up("md"));
 
-  const [modelInfo, setModelInfo] = useState({
-    name: "",
-    task: null,
-    dataset: null,
-    accuracies: [{ id: null, title: "" }],
-  });
+  const [model, setModel] = useState(emptyModel);
 
   function addAccuracy() {
-    const newModelInfo = { ...modelInfo };
-    newModelInfo.accuracies.push({ id: null, title: "" });
+    const newModel = { ...model };
+    newModel.accuracies.push({ type: "", value: "" });
 
-    setModelInfo(newModelInfo);
+    setModel(newModel);
   }
 
   function removeAccuracy(index) {
-    const newModelInfo = { ...modelInfo };
+    const newModel = { ...model };
 
-    newModelInfo.accuracies[index];
-    newModelInfo.accuracies.splice(index, 1);
+    newModel.accuracies[index];
+    newModel.accuracies.splice(index, 1);
 
-    setModelInfo(newModelInfo);
+    setModel(newModel);
   }
+
+  function handleChange(event, index) {
+    const key = event.target.name;
+    const value = event.target.value;
+
+    const newModel = { ...model };
+
+    switch (key) {
+      case "accuracyType":
+        newModel.accuracies[index].type = value;
+        break;
+
+      case "accuracyValue":
+        newModel.accuracies[index].value = value;
+        break;
+
+      case "trainingTime":
+        newModel.training.time = value;
+        break;
+
+      case "trainingEpochs":
+        newModel.training.epochs = value;
+        break;
+
+      case "trainingExtra":
+        newModel.training.extra = !newModel.training.extra;
+        break;
+
+      case "cpu":
+      case "gpu":
+      case "tpu":
+        // ...and
+        break;
+
+      default:
+        newModel[key] = value;
+        break;
+    }
+
+    setModel(newModel);
+  }
+
+  console.log(model);
 
   return (
     <StyledCard>
@@ -111,11 +180,20 @@ export default function SubmitPaperModel() {
             </Grid>
 
             <Grid item xs={12}>
-              <StyledTextField label="Model name" />
+              <StyledTextField
+                label="Model name"
+                name="name"
+                value={model.name}
+                onChange={handleChange}
+              />
             </Grid>
 
             <Grid item xs={12}>
               <StyledAutocomplete
+                value={model.task}
+                onChange={(event, newValue) => {
+                  setModel({ ...model, task: newValue });
+                }}
                 options={task}
                 getOptionLabel={(option) => option.title}
                 renderInput={(params) => (
@@ -126,6 +204,10 @@ export default function SubmitPaperModel() {
 
             <Grid item xs={12}>
               <StyledAutocomplete
+                value={model.dataset}
+                onChange={(event, newValue) => {
+                  setModel({ ...model, dataset: newValue });
+                }}
                 options={dataset}
                 getOptionLabel={(option) => option.title}
                 fullWidth
@@ -136,13 +218,17 @@ export default function SubmitPaperModel() {
             </Grid>
 
             <Grid item xs={12}>
-              {modelInfo.accuracies.map((accuracy, index) => (
+              {model.accuracies.map((accuracy, index) => (
                 <Grid container key={index}>
                   <Grid item xs={8}>
                     <FormControl fullWidth>
                       <InputLabel>Accuracy type</InputLabel>
 
-                      <Select>
+                      <Select
+                        value={model.accuracies[index].type}
+                        onChange={(event) => handleChange(event, index)}
+                        inputProps={{ name: "accuracyType" }}
+                      >
                         {accuracyTypes.map((accuracyType) => (
                           <MenuItem
                             value={accuracyType.id}
@@ -156,7 +242,13 @@ export default function SubmitPaperModel() {
                   </Grid>
 
                   <Grid item xs={3}>
-                    <TextField placeholder="Value" margin="normal" />
+                    <TextField
+                      placeholder="Value"
+                      margin="normal"
+                      name="accuracyValue"
+                      value={model.accuracies[index].value}
+                      onChange={(event) => handleChange(event, index)}
+                    />
                   </Grid>
 
                   <Grid
@@ -188,18 +280,35 @@ export default function SubmitPaperModel() {
             </Grid>
 
             <Grid item xs={6} md={5} lg={4} xl={3}>
-              <StyledTextField label="Training time" />
+              <StyledTextField
+                label="Training time"
+                name="trainingTime"
+                value={model.training.time}
+                onChange={handleChange}
+              />
             </Grid>
 
             <Grid item xs={6} md={5} lg={4} xl={3}>
-              <StyledTextField label="# of Epochs" />
+              <StyledTextField
+                label="# of Epochs"
+                name="trainingEpochs"
+                value={model.training.epochs}
+                onChange={handleChange}
+              />
             </Grid>
 
             <Grid item xs={12}>
               <FormControl>
                 <FormControlLabel
                   value="top"
-                  control={<Switch color="primary" />}
+                  control={
+                    <Switch
+                      color="primary"
+                      name="trainingExtra"
+                      value={model.training.extra}
+                      onChange={handleChange}
+                    />
+                  }
                   label="Uses extra training data?"
                   labelPlacement="start"
                 />
@@ -280,11 +389,21 @@ export default function SubmitPaperModel() {
             </Grid>
 
             <Grid item xs={6} md={5} lg={4} xl={3}>
-              <StyledTextField label="Gigaflops" />
+              <StyledTextField
+                label="Gigaflops"
+                name="gigaflops"
+                value={model.gigaflops}
+                onChange={handleChange}
+              />
             </Grid>
 
             <Grid item xs={6} md={5} lg={4} xl={3}>
-              <StyledTextField label="Multiply-adds" />
+              <StyledTextField
+                label="Multiply-adds"
+                name="multiplyAdds"
+                value={model.multiplyAdds}
+                onChange={handleChange}
+              />
             </Grid>
 
             <Grid item xs={12}>
@@ -292,7 +411,12 @@ export default function SubmitPaperModel() {
             </Grid>
 
             <Grid item xs={6} md={5} lg={4} xl={3}>
-              <StyledTextField label="# of parameters" />
+              <StyledTextField
+                label="# of parameters"
+                name="parametersQty"
+                value={model.parametersQty}
+                onChange={handleChange}
+              />
             </Grid>
 
             <Grid item xs={12}>
