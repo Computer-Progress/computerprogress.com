@@ -2,7 +2,9 @@ import styled from "styled-components";
 import { Card, Box, TextField, Select, Divider } from "@material-ui/core";
 import { Autocomplete } from "@material-ui/lab";
 
-export const StyledCard = styled(Card).attrs({})``;
+export const StyledCard = styled(Card).attrs({})`
+  border-radius: 16px !important;
+`;
 
 // export const StyledGridContainer = styled(Grid).attrs({})``;
 
@@ -14,8 +16,7 @@ export const StyledBoxItem = styled(Box).attrs({
   p: 0,
 })``;
 
-export const StyledDivider = styled(Divider).attrs({
-})`
+export const StyledDivider = styled(Divider).attrs({})`
   height: 2px !important;
   background: linear-gradient(
       268.88deg,
