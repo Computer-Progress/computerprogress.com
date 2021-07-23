@@ -12,6 +12,8 @@ import {
   InputLabel,
   FormControlLabel,
   Switch,
+  Button,
+  Box,
 } from "@material-ui/core";
 import { useTheme } from "@material-ui/core/styles";
 import AdjustIcon from "@material-ui/icons/Adjust";
@@ -26,6 +28,7 @@ import {
   StyledTextField,
   StyledAutocomplete,
   StyledDivider,
+  StyledButton,
 } from "./styles";
 import { InputAdornment } from "@material-ui/core";
 import { useState } from "react";
@@ -290,6 +293,14 @@ export default function SubmitPaperModel() {
 
             <Grid item xs={6} md={5} lg={4} xl={3}>
               <StyledTextField label="# of parameters" />
+            </Grid>
+
+            <Grid item xs={12}>
+              <Box display="flex" justifyContent="flex-end">
+                <StyledButton>
+                  <Box px={3}>Add model</Box>
+                </StyledButton>
+              </Box>
             </Grid>
           </Grid>
         </Grid>
