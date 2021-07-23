@@ -19,7 +19,7 @@ export default function Review() {
         'Panoptic Segmentation',
       ],
       last_update: '2 dias atrás',
-      status: 'Review pending'
+      status: 0,
     },
     {
       name: 'Segmentation Transformer: Object Contextual Representations',
@@ -28,7 +28,7 @@ export default function Review() {
         'Panoptic Segmentation',
       ],
       last_update: '2 dias atrás',
-      status: 'Review pending'
+      status: 2,
     },
     {
       name: 'Segmentation Transformer: Object Contextual Representations',
@@ -37,7 +37,7 @@ export default function Review() {
         'Panoptic Segmentation',
       ],
       last_update: '2 dias atrás',
-      status: 'Review pending'
+      status: 1,
     },
   ]
 

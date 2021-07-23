@@ -2,6 +2,7 @@ import PageTemplate from "../../components/PageTemplate";
 import { MuiTheme } from "../../styles/theme";
 
 import TaskTable from "../../components/TaskTable";
+
 import CollaborateInvite from "../../components/CollaborateInvite";
 import { Box, useMediaQuery } from "@material-ui/core";
 

@@ -29,9 +29,20 @@ position: relative;
 `
 
 export const Route = styled.a`
+`
+
+export const Path = styled.div`
+  display: flex;
+  flex-direction: row;
+  align-items: center;
   color: ${({ selected }) => selected ? theme.colors.primary : theme.colors.black};
   font-weight: ${({ selected }) => selected ? 'bold' : 'normal'};
   font-size: 20px;
+
+  p {
+    margin: 0px 0px 0px 20px;
+    padding: 0px 0px 0px 0px;
+  }
 `
 
 export const Menu = styled(Box).attrs({

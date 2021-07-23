@@ -19,7 +19,7 @@ export default () => {
         'Panoptic Segmentation',
       ],
       last_update: '2 dias atrás',
-      status: 'Review pending',
+      status: 0,
       submitted_by: 'João Agewarth'
     },
     {
@@ -29,7 +29,7 @@ export default () => {
         'Panoptic Segmentation',
       ],
       last_update: '2 dias atrás',
-      status: 'Review pending',
+      status: 0,
       submitted_by: 'João Agewarth'
     },
     {
@@ -39,7 +39,7 @@ export default () => {
         'Panoptic Segmentation',
       ],
       last_update: '2 dias atrás',
-      status: 'Review pending',
+      status: 0,
       submitted_by: 'João Agewarth'
     },
   ]

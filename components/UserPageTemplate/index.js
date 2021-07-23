@@ -1,11 +1,12 @@
 import PageTemplate from "../../components/PageTemplate";
 import { MuiTheme } from "../../styles/theme";
 import { Grid, Box, Button } from "@material-ui/core";
+import * as Icon from 'react-feather';
 
 import TaskTable from "../../components/TaskTable";
 import CollaborateInvite from "../../components/CollaborateInvite";
 import { useMediaQuery } from "@material-ui/core";
-import { GridItem, Route, Menu, MainGrid } from './styles';
+import { GridItem, Route, Menu, MainGrid, Path } from './styles';
 import theme from '../../styles/theme';
 
 export default function UserPageTemplate({ selectedPage, children }) {
@@ -15,14 +16,17 @@ export default function UserPageTemplate({ selectedPage, children }) {
     {
       name: 'Profile',
       path: '/',
+      icon: <Icon.User /> 
     },
     {
       name: 'Submissions',
       path: '/papers/submissions',
+      icon: <Icon.File />
     },
     {
       name: 'Review',
       path: '/papers/review',
+      icon: <Icon.Clipboard />
     },
   ]
 
@@ -35,8 +39,14 @@ export default function UserPageTemplate({ selectedPage, children }) {
                 <h3>Account</h3>
               ) : null}
               {pages.map((page, index) => (
-                <Route selected={index === selectedPage} href={page.path}>
-                  {page.name}
+
+                <Route href={page.path}>
+                  <Path selected={index === selectedPage}>
+                    {page.icon}
+                    <p>
+                      {page.name}
+                    </p>
+                  </Path>
                 </Route>
               ))}
             </Menu>
