@@ -1,0 +1,44 @@
+import styled from "styled-components";
+import theme from "../../styles/theme";
+import Button from "../../components/Button"
+import { Grid, Box } from "@material-ui/core";
+
+
+export const GridItem = styled(Grid).attrs({
+  item: true,
+})`
+  order: ${({ $order }) => $order};
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+`;
+
+
+export const AllTasksButton = styled(Button)`
+  color: #9E1FFF !important;
+`;
+
+export const Header = styled.header`
+position: relative;
+`
+
+export const Route = styled.a`
+  color: ${({ selected }) => selected ? theme.colors.primary : theme.colors.black};
+  font-weight: ${({ selected }) => selected ? 'bold' : 'normal'};
+  font-size: 20px;
+`
+
+export const Menu = styled(Box).attrs({
+  display: "flex",
+  lg: 9,
+})`
+  border-right-width: 1;
+  border-right-color: ${theme.colors.grey};
+
+  h3 {
+    margin-bottom: 30px;
+  }
+
+  a {
+    padding: 20px;
+  }
+`

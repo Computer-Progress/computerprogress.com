@@ -1,7 +1,5 @@
-import { ThemeProvider } from "@material-ui/core/styles";
-import { MuiTheme } from "../../styles/theme";
-
 import PageTemplate from "../../components/PageTemplate";
+import { MuiTheme } from "../../styles/theme";
 
 import TaskTable from "../../components/TaskTable";
 import CollaborateInvite from "../../components/CollaborateInvite";
@@ -11,7 +9,6 @@ export default function Home({ tasks }) {
   const isMobile = useMediaQuery(MuiTheme.breakpoints.down("md"));
 
   return (
-    <ThemeProvider theme={MuiTheme}>
       <PageTemplate isHome>
         <Box display="flex" flexDirection="column">
           <Box my={3}>
@@ -23,6 +20,5 @@ export default function Home({ tasks }) {
           </Box>
         </Box>
       </PageTemplate>
-    </ThemeProvider>
   );
 }
