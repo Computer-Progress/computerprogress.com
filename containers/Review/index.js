@@ -29,7 +29,7 @@ export default () => {
         'Panoptic Segmentation',
       ],
       last_update: '2 dias atrás',
-      status: 0,
+      status: 3,
       submitted_by: 'João Agewarth'
     },
     {
@@ -39,7 +39,7 @@ export default () => {
         'Panoptic Segmentation',
       ],
       last_update: '2 dias atrás',
-      status: 0,
+      status: 1,
       submitted_by: 'João Agewarth'
     },
   ]

@@ -33,7 +33,8 @@ export default ({ paper }) => {
                     <Info>Submitted by: {paper.submitted_by}</Info>
                     <SmallDetails></SmallDetails>
                     <UpdateDetails>
-                        <Info right>Last update {paper.last_update}. {paper.status}</Info>
+                        <Info right>Last update {paper.last_update}. {status[paper.status].text}</Info>
+                        {status[paper.status].icon}
                     </UpdateDetails>
                 </SmallDetails>
             ) : (
