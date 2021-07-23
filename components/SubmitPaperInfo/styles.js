@@ -1,7 +1,9 @@
 import styled from "styled-components";
 import { Card, Box, TextField, Divider } from "@material-ui/core";
 
-export const StyledCard = styled(Card).attrs({})``;
+export const StyledCard = styled(Card).attrs({})`
+  border-radius: 16px !important;
+`;
 
 // export const StyledGridContainer = styled(Grid).attrs({})``;
 
