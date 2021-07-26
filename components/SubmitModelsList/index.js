@@ -8,7 +8,9 @@ import {
   TableRow,
   Typography,
 } from "@material-ui/core";
-import { StyledCard, StyledBoxContainer, StyledDivider } from "./styles";
+import { StyledCard, StyledBoxContainer } from "./styles";
+
+import Divider from "../Divider";
 
 export default function SubmitModelsList({ models }) {
   return (
@@ -20,7 +22,7 @@ export default function SubmitModelsList({ models }) {
           </Grid>
 
           <Grid item xs={12}>
-            <StyledDivider />
+            <Divider />
           </Grid>
 
           <Grid item xs={12}>

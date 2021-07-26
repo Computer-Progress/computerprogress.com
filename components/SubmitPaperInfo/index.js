@@ -1,27 +1,24 @@
+import { useState } from "react";
+
 import {
   Grid,
   Typography,
   TextField,
-  Divider,
+  Divider as MuiDivider,
   IconButton,
   Box,
-  FormControl,
   useTheme,
   useMediaQuery,
+  InputAdornment,
 } from "@material-ui/core";
+
 import PersonAddOutlinedIcon from "@material-ui/icons/PersonAddOutlined";
 import AddIcon from "@material-ui/icons/Add";
 import CloseIcon from "@material-ui/icons/Close";
 
-import {
-  StyledCard,
-  StyledBoxContainer,
-  StyledBoxItem,
-  StyledTextField,
-  StyledDivider,
-} from "./styles";
-import { InputAdornment } from "@material-ui/core";
-import { useState } from "react";
+import Divider from "../Divider";
+
+import { StyledCard, StyledBoxContainer, StyledTextField } from "./styles";
 
 export default function SubmitPaperInfo() {
   const theme = useTheme();
@@ -74,7 +71,7 @@ export default function SubmitPaperInfo() {
             </Grid>
 
             <Grid item xs={12}>
-              <StyledDivider />
+              <Divider />
             </Grid>
 
             <Grid item xs={12}>
@@ -119,7 +116,7 @@ export default function SubmitPaperInfo() {
           </Grid>
           {isLargeScreen && (
             <Grid item>
-              <Divider orientation="vertical" />
+              <MuiDivider orientation="vertical" />
             </Grid>
           )}
 
@@ -136,7 +133,7 @@ export default function SubmitPaperInfo() {
             </Grid>
 
             <Grid item xs={12}>
-              <StyledDivider />
+              <Divider />
             </Grid>
 
             <Grid item xs={12}>
@@ -180,7 +177,7 @@ export default function SubmitPaperInfo() {
                     </Box>
                   </Box>
 
-                  <Divider />
+                  <MuiDivider />
                 </Grid>
               ))}
             </Grid>

@@ -5,7 +5,6 @@ import {
   Grid,
   Typography,
   TextField,
-  Divider,
   IconButton,
   Select,
   MenuItem,
@@ -15,8 +14,10 @@ import {
   FormControlLabel,
   Switch,
   Box,
-  InputAdornment,
 } from "@material-ui/core";
+
+import MuiDivider from "@material-ui/core/Divider"
+import Divider from "../Divider";
 
 import AddIcon from "@material-ui/icons/Add";
 import CloseIcon from "@material-ui/icons/Close";
@@ -27,7 +28,6 @@ import {
   StyledBoxContainer,
   StyledTextField,
   StyledAutocomplete,
-  StyledDivider,
   StyledButton,
 } from "./styles";
 
@@ -176,7 +176,7 @@ export default function SubmitPaperModel() {
             </Grid>
 
             <Grid item xs={12}>
-              <StyledDivider />
+              <Divider />
             </Grid>
 
             <Grid item xs={12}>
@@ -318,7 +318,7 @@ export default function SubmitPaperModel() {
 
           {isLargeScreen && (
             <Grid item>
-              <Divider orientation="vertical" />
+              <MuiDivider orientation="vertical" />
             </Grid>
           )}
 
@@ -335,7 +335,7 @@ export default function SubmitPaperModel() {
             </Grid>
 
             <Grid item xs={12}>
-              <StyledDivider />
+              <Divider />
             </Grid>
 
             <Grid item xs={12}>
