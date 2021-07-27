@@ -1,6 +1,7 @@
 import styled from "styled-components";
-import TextField from '@material-ui/core/TextField';
+import { TextField, Select } from '@material-ui/core';
 import theme from "../../styles/theme";
+import * as Icon from 'react-feather';
 
 export const Wrapper = styled.div`
   display: flex;
@@ -21,7 +22,8 @@ export const Separator = styled.div`
 export const SearchWrapper = styled.div`
   display: flex;
   flex-direction: row;
-  align-items: flex-end;
+  align-items: center;
+  justify-content: center;
   padding-bottom: 10px;
 `;
 
@@ -36,19 +38,19 @@ export const Image = styled.img`
   width: 50px;
 `;
 
-export const Input = styled(TextField).attrs({
-  size: "small",
-})`
-  border-bottom-widht: 0px !important;
-  margin-left: 10px !important;
-  &&:before {
-    borderBottom: none !important;
-  }
-
-  &&:after {
-    borderBottom: none !important;
-  }
+export const SearchIcon = styled(Icon.Search)`
+  margin: 12px 10px 0px 0px;
 `
 
+export const Input = styled(TextField).attrs({
+  size: "small",
+  fullWidth: true,
+  InputProps: { disableUnderline: true }
+})``
 
-
+export const Selector = styled(Select).attrs({
+  disableUnderline: true,
+})`
+  min-width: 150px;
+  margin-top: 12px;
+`

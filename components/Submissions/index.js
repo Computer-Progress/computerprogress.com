@@ -1,9 +1,8 @@
 import Link from "next/link";
 import React from "react";
-import { Wrapper, SearchWrapper, Separator, Image, Input, Header } from "./styles";
-import { Select, MenuItem } from '@material-ui/core'
+import { Wrapper, SearchWrapper, Separator, Image, Input, Header, SearchIcon, Selector } from "./styles";
+import { MenuItem } from '@material-ui/core'
 import Submission from "./Submission";
-import * as Icon from 'react-feather';
 
 export default function ({ papers }) {
   const [age, setAge] = React.useState(10);
@@ -15,22 +14,18 @@ export default function ({ papers }) {
   return (
     <Wrapper>
       <Header>
-        <SearchWrapper>
           {/* <Image src={item.image} /> */}
-          <Icon.Search />
-          <Input label="Search" />
-        </SearchWrapper>
-        <Select
-          labelId="demo-simple-select-label"
-          id="demo-simple-select"
+        <SearchIcon />
+        <Input label="Search" />
+        <Selector
           value={age}
           onChange={handleChange}
-          style={{ minWidth: 150 }}
+          InputProps={{ disableUnderline: true }}
         >
-          <MenuItem value={10}>All</MenuItem>
+          <MenuItem value={10}>Select</MenuItem>
           <MenuItem value={20}>Twenty</MenuItem>
           <MenuItem value={30}>Thirty</MenuItem>
-        </Select>
+        </Selector>
       </Header>
       <Separator blue />
       {papers.map((paper, index) => (

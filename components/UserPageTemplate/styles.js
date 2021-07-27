@@ -14,7 +14,7 @@ export const GridItem = styled(Grid).attrs({
 
 export const MainGrid = styled(Grid).attrs({
   container: true,
-  spacing: 1
+  spacing: 3
 })`
   margin-bottom: 50px !important;
 `
@@ -47,10 +47,11 @@ export const Path = styled.div`
 
 export const Menu = styled(Box).attrs({
   display: "flex",
-  lg: 9,
+  flex: 1,
 })`
-  border-right-width: 1;
-  border-right-color: ${theme.colors.grey};
+  border-right: ${({ inside, isMobile }) => inside && !isMobile ? `1px solid ${theme.colors.grey}` : '0px'};
+  margin-right: ${({ inside }) => inside ? `30px` : '0px'};
+  padding-bottom: ${({ inside, isMobile }) => inside && !isMobile ? '200px' : '0px'};
 
   h3 {
     margin-bottom: 30px;

@@ -38,17 +38,19 @@ export default function UserPageTemplate({ selectedPage, children }) {
               {!isMobile ? (
                 <h3>Account</h3>
               ) : null}
-              {pages.map((page, index) => (
+              <Menu inside flexDirection={isMobile ? 'row' : 'column'} isMobile={isMobile}>
+                {pages.map((page, index) => (
 
-                <Route href={page.path}>
-                  <Path selected={index === selectedPage}>
-                    {page.icon}
-                    <p>
-                      {page.name}
-                    </p>
-                  </Path>
-                </Route>
-              ))}
+                  <Route href={page.path}>
+                    <Path selected={index === selectedPage}>
+                      {page.icon}
+                      <p>
+                        {page.name}
+                      </p>
+                    </Path>
+                  </Route>
+                ))}
+              </Menu>
             </Menu>
           </GridItem>
           <GridItem xs={12} lg={9}>
