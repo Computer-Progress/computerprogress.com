@@ -8,12 +8,15 @@
     "start": "next start"
   },
   "dependencies": {
+    "@date-io/date-fns": "1.x",
     "@material-ui/core": "^4.12.2",
     "@material-ui/data-grid": "^4.0.0-alpha.33",
     "@material-ui/icons": "^4.11.2",
     "@material-ui/lab": "^4.0.0-alpha.60",
+    "@material-ui/pickers": "^3.3.10",
     "@svgr/webpack": "^5.5.0",
-    "highcharts": "9.0.0",
+    "date-fns": "^2.23.0",
+    "highcharts": "^9.1.0",
     "highcharts-react-official": "^3.0.0",
     "next": "10.2.3",
     "parse-exponential": "^1.0.1",
