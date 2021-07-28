@@ -49,19 +49,19 @@ export default function SubmitPaper() {
               <SubmitPaperModel />
             </Grid>
 
-            <Grid item xs={12}>
+            {/* <Grid item xs={12}>
               <SubmitModelsList models={models} />
-            </Grid>
+            </Grid> */}
 
-            <Grid item xs={12}>
+            {/* <Grid item xs={12}>
               <Box display="flex" justifyContent="flex-end">
-                <StyledButton>
+                <StyledButton >
                   <Box px={5} py={1}>
                     Submit paper
                   </Box>
                 </StyledButton>
               </Box>
-            </Grid>
+            </Grid> */}
           </Grid>
         </Box>
       </PageTemplate>

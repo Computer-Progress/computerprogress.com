@@ -14,9 +14,10 @@ import {
   FormControlLabel,
   Switch,
   Box,
+  InputAdornment,
 } from "@material-ui/core";
 
-import MuiDivider from "@material-ui/core/Divider"
+import MuiDivider from "@material-ui/core/Divider";
 import Divider from "../Divider";
 
 import AddIcon from "@material-ui/icons/Add";
@@ -217,7 +218,47 @@ export default function SubmitPaperModel() {
               />
             </Grid>
 
-            <Grid item xs={12}>
+            <Grid item xs={12} container spacing={1}>
+              <Grid item xs={8}>
+                <TextField
+                  placeholder="Accuracy type"
+                  fullWidth
+                  InputProps={{
+                    startAdornment: (
+                      <InputAdornment position="start">
+                        <TargetIcon />
+                      </InputAdornment>
+                    ),
+                  }}
+                />
+              </Grid>
+
+              <Grid item xs={4}>
+                <TextField
+                  placeholder="Accuracy"
+                  fullWidth
+                  InputProps={{
+                    endAdornment: (
+                      <InputAdornment position="end">
+                        <IconButton size="small">
+                          <AddIcon />
+                        </IconButton>
+                      </InputAdornment>
+                    ),
+                  }}
+                />
+              </Grid>
+
+              {/* <Grid item xs={1}>
+                <Box display="flex" justifyContent="flex-end">
+                  <IconButton size="small">
+                    <AddIcon />
+                  </IconButton>
+                </Box>
+              </Grid> */}
+            </Grid>
+
+            {/* <Grid item xs={12}>
               {model.accuracies.map((accuracy, index) => (
                 <Grid container key={index}>
                   <Grid item xs={8}>
@@ -273,7 +314,7 @@ export default function SubmitPaperModel() {
                   </Grid>
                 </Grid>
               ))}
-            </Grid>
+            </Grid> */}
 
             <Grid item xs={12}>
               <Typography variant="h4">Training information</Typography>
@@ -455,13 +496,13 @@ export default function SubmitPaperModel() {
               />
             </Grid>
 
-            <Grid item xs={12}>
+            {/* <Grid item xs={12}>
               <Box display="flex" justifyContent="flex-end">
                 <StyledButton>
                   <Box px={3}>Add model</Box>
                 </StyledButton>
               </Box>
-            </Grid>
+            </Grid> */}
           </Grid>
         </Grid>
       </StyledBoxContainer>
