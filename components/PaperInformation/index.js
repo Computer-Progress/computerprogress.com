@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 import {
   Grid,
@@ -26,17 +26,25 @@ import Divider from "../Divider";
 
 import { StyledCard, StyledBoxContainer, StyledTextField } from "./styles";
 
-export default function PaperInformation({ paper, handleChange }) {
+export default function PaperInformation(props) {
   const theme = useTheme();
   const isLargeScreen = useMediaQuery(theme.breakpoints.up("md"));
 
+  const [paper, setPaper] = useState({
+    title: "",
+    link: "",
+    code_link: "",
+    publication_date: null,
+    authors: [],
+  });
   const [newAuthor, setNewAuthor] = useState("");
 
-  function handlePaperInformationChange(obj) {
-    const newPaper = { ...paper };
-    newPaper[obj.target.name] = obj.target.value;
+  useEffect(() => {
+    props.handlePaperInformationChange(paper);
+  }, [paper]);
 
-    handleChange(newPaper);
+  function handleChange({ target: { name, value } }) {
+    setPaper({ ...paper, [name]: value });
   }
 
   function addAuthor(event) {
@@ -49,7 +57,7 @@ export default function PaperInformation({ paper, handleChange }) {
     const newPaper = { ...paper };
     newPaper["authors"].push(newAuthor);
 
-    handleChange(newPaper);
+    setPaper(newPaper);
     setNewAuthor("");
   }
 
@@ -57,7 +65,7 @@ export default function PaperInformation({ paper, handleChange }) {
     const newPaper = { ...paper };
     newPaper.authors.splice(authorIndex, 1);
 
-    handleChange(newPaper);
+    setPaper(newPaper);
   }
 
   return (
@@ -87,7 +95,7 @@ export default function PaperInformation({ paper, handleChange }) {
                   label="Title"
                   value={paper.title}
                   variant="outlined"
-                  onChange={handlePaperInformationChange}
+                  onChange={handleChange}
                 />
               </Grid>
 
@@ -97,7 +105,7 @@ export default function PaperInformation({ paper, handleChange }) {
                   label="Link"
                   value={paper.link}
                   variant="outlined"
-                  onChange={handlePaperInformationChange}
+                  onChange={handleChange}
                 />
               </Grid>
 
@@ -107,7 +115,7 @@ export default function PaperInformation({ paper, handleChange }) {
                   label="Code link"
                   value={paper.code_link}
                   variant="outlined"
-                  onChange={handlePaperInformationChange}
+                  onChange={handleChange}
                 />
               </Grid>
 
@@ -122,7 +130,7 @@ export default function PaperInformation({ paper, handleChange }) {
                   value={paper.publication_date}
                   InputAdornmentProps={{ position: "end" }}
                   onChange={(date) =>
-                    handleChange({
+                    setPaper({
                       ...paper,
                       publication_date: date,
                     })

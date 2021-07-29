@@ -4,7 +4,7 @@ import { MuiTheme } from "../../styles/theme";
 
 import PageTemplate from "../../components/PageTemplate";
 import PaperInformation from "../../components/PaperInformation";
-import SubmitPaperModel from "../../components/SubmitPaperModel";
+import ModelInformation from "../../components/ModelInformation";
 
 import { Box, Grid, Typography } from "@material-ui/core/";
 
@@ -16,12 +16,12 @@ const emptyPaper = {
   authors: [],
   models: [
     {
-      name: "",
-      task: 0,
-      dataset: 0,
-      cpu: 0,
-      gpu: 0,
-      tpu: 0,
+      name: "a",
+      task: null,
+      dataset: null,
+      cpu: null,
+      gpu: null,
+      tpu: null,
       gflops: 0,
       multiply_adds: 0,
       number_of_parameters: 0,
@@ -41,7 +41,14 @@ const emptyPaper = {
 export default function SubmitPaper() {
   const [paper, setPaper] = useState(emptyPaper);
 
-  function handleChange(newPaper) {
+  function handlePaperInformationChange(newPaper) {
+    setPaper(newPaper);
+  }
+
+  function handleModelChange(newModel, modelIndex) {
+    const newPaper = { ...paper };
+    newPaper.models[modelIndex] = newModel;
+
     setPaper(newPaper);
   }
 
@@ -57,12 +64,20 @@ export default function SubmitPaper() {
             </Grid>
 
             <Grid item xs={12}>
-              <PaperInformation paper={paper} handleChange={handleChange} />
+              <PaperInformation
+                paper={paper}
+                handlePaperInformationChange={handlePaperInformationChange}
+              />
             </Grid>
-
-            <Grid item xs={12}>
-              <SubmitPaperModel />
-            </Grid>
+            {/* {paper.models.map((model, index) => (
+              <Grid item xs={12} key={index}>
+                <ModelInformation
+                  model={model}
+                  modelIndex={index}
+                  handleModelChange={handleModelChange}
+                />
+              </Grid>
+            ))} */}
           </Grid>
         </Box>
       </PageTemplate>
