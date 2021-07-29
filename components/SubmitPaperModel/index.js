@@ -158,7 +158,7 @@ export default function SubmitPaperModel() {
     setModel(newModel);
   }
 
-  console.log(model);
+  // console.log(model);
 
   return (
     <StyledCard>

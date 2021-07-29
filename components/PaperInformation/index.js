@@ -26,39 +26,38 @@ import Divider from "../Divider";
 
 import { StyledCard, StyledBoxContainer, StyledTextField } from "./styles";
 
-export default function SubmitPaperInfo() {
+export default function PaperInformation({ paper, handleChange }) {
   const theme = useTheme();
   const isLargeScreen = useMediaQuery(theme.breakpoints.up("md"));
-  // const [selectedDate, handleDateChange] = useState(new Date());
 
-  const [paperInfo, setPaperInfo] = useState({
-    title: "",
-    link: "",
-    codeLink: "",
-    releaseDate: null,
-  });
   const [newAuthor, setNewAuthor] = useState("");
-  const [authorsList, setAuthorsList] = useState([]);
 
-  function handlePaperInfoChange({ target }) {
-    let newPaperInfo = { ...paperInfo };
-    newPaperInfo[target.name] = target.value;
+  function handlePaperInformationChange(obj) {
+    const newPaper = { ...paper };
+    newPaper[obj.target.name] = obj.target.value;
 
-    setPaperInfo(newPaperInfo);
+    handleChange(newPaper);
   }
 
   function addAuthor(event) {
     event.preventDefault();
 
-    if (newAuthor) {
-      setAuthorsList([...authorsList, newAuthor]);
+    if (!newAuthor) {
+      return;
     }
+
+    const newPaper = { ...paper };
+    newPaper["authors"].push(newAuthor);
+
+    handleChange(newPaper);
+    setNewAuthor("");
   }
 
   function removeAuthor(authorIndex) {
-    let newAuthors = [...authorsList];
-    newAuthors.splice(authorIndex, 1);
-    setAuthorsList(newAuthors);
+    const newPaper = { ...paper };
+    newPaper.authors.splice(authorIndex, 1);
+
+    handleChange(newPaper);
   }
 
   return (
@@ -86,9 +85,9 @@ export default function SubmitPaperInfo() {
                 <StyledTextField
                   name="title"
                   label="Title"
-                  value={paperInfo.title}
+                  value={paper.title}
                   variant="outlined"
-                  onChange={handlePaperInfoChange}
+                  onChange={handlePaperInformationChange}
                 />
               </Grid>
 
@@ -96,43 +95,39 @@ export default function SubmitPaperInfo() {
                 <StyledTextField
                   name="link"
                   label="Link"
-                  value={paperInfo.link}
+                  value={paper.link}
                   variant="outlined"
-                  onChange={handlePaperInfoChange}
+                  onChange={handlePaperInformationChange}
                 />
               </Grid>
 
               <Grid item xs={6}>
                 <StyledTextField
-                  name="codeLink"
+                  name="code_link"
                   label="Code link"
-                  value={paperInfo.codeLink}
+                  value={paper.code_link}
                   variant="outlined"
-                  onChange={handlePaperInfoChange}
+                  onChange={handlePaperInformationChange}
                 />
               </Grid>
 
               <Grid item xs={6}>
-                {/* <StyledTextField
-                  name="releaseDate"
-                  label="Release date"
-                  value={paperInfo.releaseDate}
-                  variant="outlined"
-                  onChange={handlePaperInfoChange}
-                /> */}
-
                 <KeyboardDatePicker
-                  name="releaseDate"
+                  name="publication_date"
                   autoOk
                   variant="inline"
                   inputVariant="outlined"
                   label="Release date"
                   format="MM/dd/yyyy"
-                  value={paperInfo.releaseDate}
+                  value={paper.publication_date}
                   InputAdornmentProps={{ position: "end" }}
                   onChange={(date) =>
-                    setPaperInfo({ ...paperInfo, releaseDate: date })
+                    handleChange({
+                      ...paper,
+                      publication_date: date,
+                    })
                   }
+                  invalidDateMessage="Invalid date"
                 />
               </Grid>
             </Grid>
@@ -178,11 +173,12 @@ export default function SubmitPaperInfo() {
                         </InputAdornment>
                       ),
                     }}
+                    value={newAuthor}
                     onChange={(event) => setNewAuthor(event.target.value)}
                   />
                 </form>
 
-                {authorsList.map((author, index) => (
+                {paper.authors.map((author, index) => (
                   <Grid item key={index}>
                     <Box display="flex">
                       <Box my={1} display="inline-block" flexGrow={1}>
