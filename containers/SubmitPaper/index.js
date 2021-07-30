@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { ThemeProvider } from "@material-ui/core/styles";
 import { MuiTheme } from "../../styles/theme";
 
@@ -8,38 +8,40 @@ import ModelInformation from "../../components/ModelInformation";
 
 import { Box, Grid, Typography } from "@material-ui/core/";
 
-const emptyPaper = {
-  title: "",
-  link: "",
-  code_link: "",
-  publication_date: null,
-  authors: [],
-  models: [
-    {
-      name: "a",
-      task: null,
-      dataset: null,
-      cpu: null,
-      gpu: null,
-      tpu: null,
-      gflops: 0,
-      multiply_adds: 0,
-      number_of_parameters: 0,
-      training_time: 0,
-      epochs: 0,
-      extra_training_data: false,
-      accuracies: [
+export default function SubmitPaper() {
+  const [paper, setPaper] = useState({});
+
+  useEffect(() => {
+    setPaper({
+      title: "",
+      link: "",
+      code_link: "",
+      publication_date: null,
+      authors: [],
+      models: [
         {
-          accuracy_type: 0,
-          value: 0,
+          name: "",
+          task: null,
+          dataset: null,
+          cpu: null,
+          gpu: null,
+          tpu: null,
+          gflops: "",
+          multiply_adds: "",
+          number_of_parameters: "",
+          training_time: "",
+          epochs: "",
+          extra_training_data: false,
+          accuracies: [
+            {
+              accuracy_type: "",
+              value: "",
+            },
+          ],
         },
       ],
-    },
-  ],
-};
-
-export default function SubmitPaper() {
-  const [paper, setPaper] = useState(emptyPaper);
+    });
+  }, []);
 
   function handlePaperInformationChange(newPaper) {
     setPaper(newPaper);
@@ -69,7 +71,7 @@ export default function SubmitPaper() {
                 handlePaperInformationChange={handlePaperInformationChange}
               />
             </Grid>
-            {/* {paper.models.map((model, index) => (
+            {paper.models?.map((model, index) => (
               <Grid item xs={12} key={index}>
                 <ModelInformation
                   model={model}
@@ -77,7 +79,7 @@ export default function SubmitPaper() {
                   handleModelChange={handleModelChange}
                 />
               </Grid>
-            ))} */}
+            ))}
           </Grid>
         </Box>
       </PageTemplate>

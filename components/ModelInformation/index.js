@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useTheme } from "@material-ui/core/styles";
 
 import {
@@ -6,159 +6,122 @@ import {
   Typography,
   TextField,
   IconButton,
-  Select,
-  MenuItem,
   useMediaQuery,
   FormControl,
-  InputLabel,
   FormControlLabel,
   Switch,
-  Box,
   InputAdornment,
 } from "@material-ui/core";
-
 import MuiDivider from "@material-ui/core/Divider";
+
+import AutocompleteCreatable from "../AutocompleteCreatable";
+
 import Divider from "../Divider";
 
+import { Target as TargetIcon } from "react-feather";
 import AddIcon from "@material-ui/icons/Add";
 import CloseIcon from "@material-ui/icons/Close";
-import { Target as TargetIcon } from "react-feather";
 
-import {
-  StyledCard,
-  StyledBoxContainer,
-  StyledTextField,
-  StyledAutocomplete,
-  StyledButton,
-} from "./styles";
+import { StyledCard, StyledBoxContainer, StyledTextField } from "./styles";
 
-const task = [
-  { id: 0, title: "Task 1" },
-  { id: 1, title: "Task 2" },
-];
-
-const dataset = [
-  { id: 0, title: "Dataset 1" },
-  { id: 1, title: "Dataset 2" },
-];
-
-const accuracyTypes = [
-  { id: 0, title: "BLEU" },
-  { id: 1, title: "Other" },
-];
-
-const cpuModels = [
-  { id: 0, title: "CPU A" },
-  { id: 1, title: "CPU B" },
-];
-
-const gpuModels = [
-  { id: 0, title: "GPU A" },
-  { id: 1, title: "GPU B" },
-];
-
-const tpuModels = [
-  { id: 0, title: "TPU A" },
-  { id: 1, title: "TPU B" },
-];
-
-const emptyModel = {
-  name: "",
-  task: null,
-  dataset: null,
-  accuracies: [{ type: "", value: "" }],
-  training: {
-    time: "",
-    epochs: "",
-    extra: false,
-  },
-  cpu: {
-    model: null,
-    qty: "",
-  },
-  gpu: {
-    model: null,
-    qty: "",
-  },
-  tpu: {
-    model: null,
-    qty: "",
-  },
-  gigaflops: "",
-  multiplyAdds: "",
-  parametersQty: "",
-};
-
-export default function SubmitPaperModel() {
+export default function ModelInformation(props) {
   const theme = useTheme();
   const isLargeScreen = useMediaQuery(theme.breakpoints.up("md"));
 
-  const [model, setModel] = useState(emptyModel);
+  const [model, setModel] = useState({
+    name: "",
+    task: null,
+    dataset: null,
+    cpu: null,
+    gpu: null,
+    tpu: null,
+    gflops: "",
+    multiply_adds: "",
+    number_of_parameters: "",
+    training_time: "",
+    epochs: "",
+    extra_training_data: false,
+    accuracies: [
+      {
+        accuracy_type: "",
+        value: "",
+      },
+    ],
+  });
 
-  function addAccuracy() {
-    const newModel = { ...model };
-    newModel.accuracies.push(null);
+  console.log(model);
 
-    setModel(newModel);
+  const [taskOptions, setTaskOptions] = useState([]);
+  const [datasetOptions, setDatasetOptions] = useState([]);
+  const [cpuOptions, setCpuOptions] = useState([]);
+  const [gpuOptions, setGpuOptions] = useState([]);
+  const [tpuOptions, setTpuOptions] = useState([]);
+
+  useEffect(() => {
+    setModel(props.model);
+
+    fetchData();
+  }, []);
+
+  useEffect(() => {
+    if (!model.task) {
+      return;
+    }
+
+    let taskIdQueryParam = model.task.hasOwnProperty("id")
+      ? "?task_id=" + model.task.id
+      : "";
+
+    const URL = `https://computerprogress.xyz/api/v1/datasets${taskIdQueryParam}`;
+
+    console.log(URL);
+
+    // fetch(URL)
+    //   .then((response) => response.json())
+    //   .then((data) => setDatasetOptions(data));
+  }, [model.task]);
+
+  function fetchData() {
+    fetch(`https://computerprogress.xyz/api/v1/tasks`)
+      .then((response) => response.json())
+      .then((data) => setTaskOptions(data));
+
+    fetch(`https://computerprogress.xyz/api/v1/cpus`)
+      .then((response) => response.json())
+      .then((data) => setCpuOptions(data));
+
+    fetch(`https://computerprogress.xyz/api/v1/gpus`)
+      .then((response) => response.json())
+      .then((data) => setGpuOptions(data));
+
+    fetch(`https://computerprogress.xyz/api/v1/tpus`)
+      .then((response) => response.json())
+      .then((data) => setTpuOptions(data));
   }
 
-  function removeAccuracy(index) {
+  function handleTextChange({ target: { name, value } }, type) {
     const newModel = { ...model };
 
-    newModel.accuracies[index];
-    newModel.accuracies.splice(index, 1);
-
-    setModel(newModel);
-  }
-
-  function handleChange(event, index) {
-    const key = event.target.name;
-    const value = event.target.value;
-
-    const newModel = { ...model };
-
-    switch (key) {
-      case "accuracyType":
-        newModel.accuracies[index].type = value;
+    switch (type) {
+      case "int":
+        newModel[name] = parseInt(value);
         break;
 
-      case "accuracyValue":
-        newModel.accuracies[index].value = value;
-        break;
-
-      case "trainingTime":
-        newModel.training.time = value;
-        break;
-
-      case "trainingEpochs":
-        newModel.training.epochs = value;
-        break;
-
-      case "trainingExtra":
-        newModel.training.extra = !newModel.training.extra;
-        break;
-
-      case "cpuQty":
-        newModel.cpu.qty = value;
-
-        break;
-      case "gpuQty":
-        newModel.gpu.qty = value;
-        break;
-      case "tpuQty":
-        newModel.tpu.qty = value;
-        break;
+      case "float":
+        newModel[name] = parseFloat(value);
         break;
 
       default:
-        newModel[key] = value;
+        newModel[name] = value;
         break;
     }
 
     setModel(newModel);
   }
 
-  // console.log(model);
+  function handleAutocompleteChange(selected, name) {
+    setModel({ ...model, [name]: selected });
+  }
 
   return (
     <StyledCard>
@@ -182,39 +145,31 @@ export default function SubmitPaperModel() {
 
             <Grid item xs={12}>
               <StyledTextField
-                label="Model name"
                 name="name"
+                label="Model name"
                 value={model.name}
-                onChange={handleChange}
+                onChange={handleTextChange}
               />
             </Grid>
 
             <Grid item xs={12}>
-              <StyledAutocomplete
-                value={model.task}
-                onChange={(event, newValue) => {
-                  setModel({ ...model, task: newValue });
-                }}
-                options={task}
-                getOptionLabel={(option) => option.title}
-                renderInput={(params) => (
-                  <StyledTextField {...params} label="Task" />
-                )}
+              <AutocompleteCreatable
+                name="task"
+                label={"Tasks"}
+                options={taskOptions}
+                optionKey="name"
+                handleAutocompleteChange={handleAutocompleteChange}
               />
             </Grid>
 
             <Grid item xs={12}>
-              <StyledAutocomplete
-                value={model.dataset}
-                onChange={(event, newValue) => {
-                  setModel({ ...model, dataset: newValue });
-                }}
-                options={dataset}
-                getOptionLabel={(option) => option.title}
-                fullWidth
-                renderInput={(params) => (
-                  <StyledTextField {...params} placeholder="Dataset" />
-                )}
+              <AutocompleteCreatable
+                name="dataset"
+                optionKey={"name"}
+                options={datasetOptions}
+                label={"Datasets"}
+                disabled={!model.task}
+                handleAutocompleteChange={handleAutocompleteChange}
               />
             </Grid>
 
@@ -323,18 +278,20 @@ export default function SubmitPaperModel() {
             <Grid item xs={6} md={5} lg={4} xl={3}>
               <StyledTextField
                 label="Training time"
-                name="trainingTime"
-                value={model.training.time}
-                onChange={handleChange}
+                name="training_time"
+                type="number"
+                value={model.training_time}
+                onChange={(event) => handleTextChange(event, "float")}
               />
             </Grid>
 
             <Grid item xs={6} md={5} lg={4} xl={3}>
               <StyledTextField
                 label="# of Epochs"
-                name="trainingEpochs"
-                value={model.training.epochs}
-                onChange={handleChange}
+                name="epochs"
+                type="number"
+                value={model.epochs}
+                onChange={(event) => handleTextChange(event, "int")}
               />
             </Grid>
 
@@ -345,9 +302,15 @@ export default function SubmitPaperModel() {
                   control={
                     <Switch
                       color="primary"
-                      name="trainingExtra"
-                      value={model.training.extra}
-                      onChange={handleChange}
+                      name="extra_training_data"
+                      value={model.extra_training_data}
+                      // onChange={handleModelChange(
+                      //   {
+                      //     ...model,
+                      //     extra_training_data: !model.extra_training_data,
+                      //   },
+                      //   modelIndex
+                      // )}
                     />
                   }
                   label="Uses extra training data?"
@@ -384,80 +347,62 @@ export default function SubmitPaperModel() {
             </Grid>
 
             <Grid item xs={12} md={8}>
-              <StyledAutocomplete
-                value={model.cpu.model}
-                onChange={(event, newValue) => {
-                  setModel({
-                    ...model,
-                    cpu: { ...model.cpu, model: newValue },
-                  });
-                }}
-                options={cpuModels}
-                getOptionLabel={(option) => option.title}
-                renderInput={(params) => (
-                  <StyledTextField {...params} label="CPU model" />
-                )}
+              <AutocompleteCreatable
+                name="cpu"
+                label={"CPUs"}
+                options={cpuOptions}
+                optionKey={"name"}
+                handleAutocompleteChange={handleAutocompleteChange}
               />
             </Grid>
 
             <Grid item xs={6} sm={4}>
               <StyledTextField
                 label="# of CPUs"
-                name="cpuQty"
-                value={model.cpu.qty}
-                onChange={handleChange}
+                name="number_of_cpu"
+                type="number"
+                value={model.cpu_qty}
+                onChange={(event) => handleTextChange(event, "int")}
               />
             </Grid>
 
             <Grid item xs={12} md={8}>
-              <StyledAutocomplete
-                value={model.gpu.model}
-                onChange={(event, newValue) => {
-                  setModel({
-                    ...model,
-                    gpu: { ...model.cpu, model: newValue },
-                  });
-                }}
-                options={gpuModels}
-                getOptionLabel={(option) => option.title}
-                renderInput={(params) => (
-                  <StyledTextField {...params} label="GPU model" />
-                )}
+              <AutocompleteCreatable
+                name="gpu"
+                label={"GPUs"}
+                options={gpuOptions}
+                optionKey={"name"}
+                handleAutocompleteChange={handleAutocompleteChange}
               />
             </Grid>
 
             <Grid item xs={6} sm={4}>
               <StyledTextField
                 label="# of GPUs"
-                name="gpuQty"
-                value={model.gpu.qty}
-                onChange={handleChange}
+                name="number_of_gpu"
+                type="number"
+                value={model.gpu_qty}
+                onChange={(event) => handleTextChange(event, "int")}
               />
             </Grid>
 
             <Grid item xs={12} md={8}>
-              <StyledAutocomplete
-                value={model.tpu.model}
-                onChange={(event, newValue) => {
-                  setModel({
-                    ...model,
-                    tpu: { ...model.tpu, model: newValue },
-                  });
-                }}
-                options={tpuModels}
-                getOptionLabel={(option) => option.title}
-                renderInput={(params) => (
-                  <StyledTextField {...params} label="TPU model" />
-                )}
+              <AutocompleteCreatable
+                name="number_of_tpu"
+                label={"TPUs"}
+                options={tpuOptions}
+                optionKey={"name"}
+                handleAutocompleteChange={handleAutocompleteChange}
               />
             </Grid>
 
             <Grid item xs={6} sm={4}>
               <StyledTextField
                 label="# of TPUs"
-                name="tpuQty"
-                value={model.tpu.qty}
-                onChange={handleChange}
+                name="tpu_qty"
+                type="number"
+                value={model.tpu_qty}
+                onChange={(event) => handleTextChange(event, "int")}
               />
             </Grid>
 
@@ -468,18 +413,20 @@ export default function SubmitPaperModel() {
             <Grid item xs={6} md={5} lg={4} xl={3}>
               <StyledTextField
                 label="Gigaflops"
-                name="gigaflops"
-                value={model.gigaflops}
-                onChange={handleChange}
+                name="gflops"
+                type="number"
+                value={model.gflops}
+                onChange={(event) => handleTextChange(event, "float")}
               />
             </Grid>
 
             <Grid item xs={6} md={5} lg={4} xl={3}>
               <StyledTextField
                 label="Multiply-adds"
-                name="multiplyAdds"
-                value={model.multiplyAdds}
-                onChange={handleChange}
+                name="multiply_adds"
+                type="number"
+                value={model.multiply_adds}
+                onChange={(event) => handleTextChange(event, "float")}
               />
             </Grid>
 
@@ -490,19 +437,12 @@ export default function SubmitPaperModel() {
             <Grid item xs={6} md={5} lg={4} xl={3}>
               <StyledTextField
                 label="# of parameters"
-                name="parametersQty"
-                value={model.parametersQty}
-                onChange={handleChange}
+                name="number_of_parameters"
+                type="number"
+                value={model.number_of_parameters}
+                onChange={handleTextChange}
               />
             </Grid>
-
-            {/* <Grid item xs={12}>
-              <Box display="flex" justifyContent="flex-end">
-                <StyledButton>
-                  <Box px={3}>Add model</Box>
-                </StyledButton>
-              </Box>
-            </Grid> */}
           </Grid>
         </Grid>
       </StyledBoxContainer>
