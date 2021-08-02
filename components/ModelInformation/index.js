@@ -49,7 +49,6 @@ export default function ModelInformation(props) {
     ],
   });
 
-  console.log(model);
 
   const [taskOptions, setTaskOptions] = useState([]);
   const [datasetOptions, setDatasetOptions] = useState([]);
@@ -62,6 +61,12 @@ export default function ModelInformation(props) {
 
     fetchData();
   }, []);
+
+  useEffect(() => {
+    if (props.modelIndex >= 0) {
+      props.handleModelChange(model, props.modelIndex);
+    }
+  }, [model]);
 
   useEffect(() => {
     if (!model.task) {
@@ -388,7 +393,7 @@ export default function ModelInformation(props) {
 
             <Grid item xs={12} md={8}>
               <AutocompleteCreatable
-                name="number_of_tpu"
+                name="tpu"
                 label={"TPUs"}
                 options={tpuOptions}
                 optionKey={"name"}

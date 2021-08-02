@@ -44,7 +44,7 @@ export default function SubmitPaper() {
   }, []);
 
   function handlePaperInformationChange(newPaper) {
-    setPaper(newPaper);
+    setPaper({ ...paper, newPaper });
   }
 
   function handleModelChange(newModel, modelIndex) {
@@ -53,8 +53,6 @@ export default function SubmitPaper() {
 
     setPaper(newPaper);
   }
-
-  // console.log(paper);
 
   return (
     <ThemeProvider theme={MuiTheme}>
