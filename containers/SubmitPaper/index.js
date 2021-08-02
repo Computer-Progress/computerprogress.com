@@ -7,6 +7,28 @@ import PaperInformation from "../../components/PaperInformation";
 import ModelInformation from "../../components/ModelInformation";
 
 import { Box, Grid, Typography } from "@material-ui/core/";
+import { OutlinedButton, ContainedButton } from "./styles";
+
+const emptyModel = {
+  name: "",
+  task: null,
+  dataset: null,
+  cpu: null,
+  gpu: null,
+  tpu: null,
+  gflops: "",
+  multiply_adds: "",
+  number_of_parameters: "",
+  training_time: "",
+  epochs: "",
+  extra_training_data: false,
+  accuracies: [
+    {
+      accuracy_type: "",
+      value: "",
+    },
+  ],
+};
 
 export default function SubmitPaper() {
   const [paper, setPaper] = useState({});
@@ -18,28 +40,7 @@ export default function SubmitPaper() {
       code_link: "",
       publication_date: null,
       authors: [],
-      models: [
-        {
-          name: "",
-          task: null,
-          dataset: null,
-          cpu: null,
-          gpu: null,
-          tpu: null,
-          gflops: "",
-          multiply_adds: "",
-          number_of_parameters: "",
-          training_time: "",
-          epochs: "",
-          extra_training_data: false,
-          accuracies: [
-            {
-              accuracy_type: "",
-              value: "",
-            },
-          ],
-        },
-      ],
+      models: [emptyModel],
     });
   }, []);
 
@@ -52,6 +53,14 @@ export default function SubmitPaper() {
     newPaper.models[modelIndex] = newModel;
 
     setPaper(newPaper);
+  }
+
+  function addNewModel() {
+    setPaper({ ...paper, models: [...paper.models, emptyModel] });
+  }
+
+  function submitPaper() {
+    console.log("submit paper");
   }
 
   return (
@@ -78,6 +87,21 @@ export default function SubmitPaper() {
                 />
               </Grid>
             ))}
+
+            <Grid item xs={12}>
+              <Box display="flex" justifyContent="flex-end">
+                <Box pl={1} borderRadius={10}>
+                  <OutlinedButton onClick={addNewModel}>
+                    New model
+                  </OutlinedButton>
+                </Box>
+                <Box pl={1}>
+                  <ContainedButton onClick={submitPaper}>
+                    Submit paper
+                  </ContainedButton>
+                </Box>
+              </Box>
+            </Grid>
           </Grid>
         </Box>
       </PageTemplate>

@@ -1,7 +1,15 @@
 import styled from "styled-components";
 import { Button } from "@material-ui/core";
 
-export const StyledButton = styled(Button).attrs({
+export const OutlinedButton = styled(Button).attrs({
+  disableElevation: true,
+  color: "primary",
+  variant: "outlined",
+})`
+  border-radius: 100px !important;
+`;
+
+export const ContainedButton = styled(Button).attrs({
   disableElevation: true,
   color: "primary",
   variant: "contained",
