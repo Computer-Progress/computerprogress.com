@@ -11,6 +11,7 @@ import {
   FormControlLabel,
   Switch,
   InputAdornment,
+  Box,
 } from "@material-ui/core";
 import MuiDivider from "@material-ui/core/Divider";
 
@@ -41,20 +42,18 @@ export default function ModelInformation(props) {
     training_time: "",
     epochs: "",
     extra_training_data: false,
-    accuracies: [
-      {
-        accuracy_type: "",
-        value: "",
-      },
-    ],
+    accuracies: [],
   });
-
 
   const [taskOptions, setTaskOptions] = useState([]);
   const [datasetOptions, setDatasetOptions] = useState([]);
   const [cpuOptions, setCpuOptions] = useState([]);
   const [gpuOptions, setGpuOptions] = useState([]);
   const [tpuOptions, setTpuOptions] = useState([]);
+
+  const [accuracyOptions, setAccuracyOptions] = useState([]);
+  const [newAccuracyType, setNewAccuracyType] = useState(null);
+  const [newAccuracyValue, setNewAccuracyValue] = useState("");
 
   useEffect(() => {
     setModel(props.model);
@@ -79,8 +78,6 @@ export default function ModelInformation(props) {
 
     const URL = `https://computerprogress.xyz/api/v1/datasets${taskIdQueryParam}`;
 
-    console.log(URL);
-
     // fetch(URL)
     //   .then((response) => response.json())
     //   .then((data) => setDatasetOptions(data));
@@ -102,6 +99,10 @@ export default function ModelInformation(props) {
     fetch(`https://computerprogress.xyz/api/v1/tpus`)
       .then((response) => response.json())
       .then((data) => setTpuOptions(data));
+
+    fetch(`https://computerprogress.xyz/api/v1/accuracy_types`)
+      .then((response) => response.json())
+      .then((data) => setAccuracyOptions(data));
   }
 
   function handleTextChange({ target: { name, value } }, type) {
@@ -126,6 +127,36 @@ export default function ModelInformation(props) {
 
   function handleAutocompleteChange(selected, name) {
     setModel({ ...model, [name]: selected });
+  }
+
+  function handleAccuracyTypeChange(newAccuracyType) {
+    setNewAccuracyType(newAccuracyType);
+  }
+
+  function handleAccuracyValueChange(event) {
+    setNewAccuracyValue(event.target.value);
+  }
+
+  function addAccuracy() {
+    const isAccuracyEmpty = !newAccuracyType || !newAccuracyValue;
+
+    if (isAccuracyEmpty) {
+      return;
+    }
+
+    const newAccuracy = {
+      accuracy_type: newAccuracyType,
+      value: newAccuracyValue,
+    };
+
+    setModel({ ...model, accuracies: [...model.accuracies, newAccuracy] });
+  }
+
+  function removeAccuracy(accuracyIndex) {
+    const newModel = { ...model };
+    newModel.accuracies.splice(accuracyIndex, 1);
+
+    setModel(newModel);
   }
 
   return (
@@ -180,101 +211,79 @@ export default function ModelInformation(props) {
 
             <Grid item xs={12} container spacing={1}>
               <Grid item xs={8}>
-                <TextField
-                  placeholder="Accuracy type"
-                  fullWidth
-                  InputProps={{
-                    startAdornment: (
-                      <InputAdornment position="start">
-                        <TargetIcon />
-                      </InputAdornment>
-                    ),
-                  }}
+                <AutocompleteCreatable
+                  name="accuracy_type"
+                  label={"Accuracy type"}
+                  options={accuracyOptions}
+                  optionKey="name"
+                  variant="standard"
+                  // InputProps={{
+                  //   startAdornment: (
+                  //     <InputAdornment position="start">
+                  //       <TargetIcon />
+                  //     </InputAdornment>
+                  //   ),
+                  // }}
+                  handleAutocompleteChange={handleAccuracyTypeChange}
                 />
               </Grid>
 
               <Grid item xs={4}>
                 <TextField
-                  placeholder="Accuracy"
+                  label="Value"
+                  value={newAccuracyValue}
                   fullWidth
                   InputProps={{
                     endAdornment: (
                       <InputAdornment position="end">
-                        <IconButton size="small">
+                        <IconButton size="small" onClick={addAccuracy}>
                           <AddIcon />
                         </IconButton>
                       </InputAdornment>
                     ),
                   }}
+                  onChange={handleAccuracyValueChange}
                 />
               </Grid>
 
-              {/* <Grid item xs={1}>
-                <Box display="flex" justifyContent="flex-end">
-                  <IconButton size="small">
-                    <AddIcon />
-                  </IconButton>
-                </Box>
-              </Grid> */}
-            </Grid>
-
-            {/* <Grid item xs={12}>
               {model.accuracies.map((accuracy, index) => (
-                <Grid container key={index}>
-                  <Grid item xs={8}>
-                    <FormControl fullWidth>
-                      <InputLabel>Accuracy type</InputLabel>
+                <>
+                  <Grid item xs={8} key={index}>
+                    <Box display="flex">
+                      <Box mb={1} display="inline-block">
+                        <Typography variant="body2">
+                          {accuracy.accuracy_type.name ??
+                            accuracy.accuracy_type}
+                        </Typography>
+                      </Box>
+                    </Box>
 
-                      <Select
-                        value={model.accuracies[index].type}
-                        onChange={(event) => handleChange(event, index)}
-                        inputProps={{ name: "accuracyType" }}
-                      >
-                        {accuracyTypes.map((accuracyType) => (
-                          <MenuItem
-                            value={accuracyType.id}
-                            key={accuracyType.id}
-                          >
-                            {accuracyType.title}
-                          </MenuItem>
-                        ))}
-                      </Select>
-                    </FormControl>
+                    <MuiDivider />
                   </Grid>
 
-                  <Grid item xs={3}>
-                    <TextField
-                      placeholder="Value"
-                      margin="normal"
-                      name="accuracyValue"
-                      value={model.accuracies[index].value}
-                      onChange={(event) => handleChange(event, index)}
-                    />
-                  </Grid>
+                  <Grid item xs={4}>
+                    <Box display="flex">
+                      <Box mb={1} display="inline-block" flexGrow={1}>
+                        <Typography variant="body2">
+                          {accuracy.value}
+                        </Typography>
+                      </Box>
 
-                  <Grid
-                    item
-                    xs={1}
-                    container
-                    justifyContent="flex-end"
-                    alignContent="center"
-                  >
-                    {index === 0 ? (
-                      <IconButton size="small" onClick={() => addAccuracy()}>
-                        <AddIcon />
-                      </IconButton>
-                    ) : (
-                      <IconButton
-                        size="small"
-                        onClick={() => removeAccuracy(index)}
-                      >
-                        <CloseIcon />
-                      </IconButton>
-                    )}
+                      <Box display="inline-block">
+                        <IconButton
+                          size="small"
+                          onClick={() => removeAccuracy(index)}
+                        >
+                          <CloseIcon />
+                        </IconButton>
+                      </Box>
+                    </Box>
+
+                    <MuiDivider />
                   </Grid>
-                </Grid>
+                </>
               ))}
-            </Grid> */}
+            </Grid>
 
             <Grid item xs={12}>
               <Typography variant="h4">Training information</Typography>
@@ -309,13 +318,12 @@ export default function ModelInformation(props) {
                       color="primary"
                       name="extra_training_data"
                       value={model.extra_training_data}
-                      // onChange={handleModelChange(
-                      //   {
-                      //     ...model,
-                      //     extra_training_data: !model.extra_training_data,
-                      //   },
-                      //   modelIndex
-                      // )}
+                      onChange={() =>
+                        setModel({
+                          ...model,
+                          extra_training_data: !model.extra_training_data,
+                        })
+                      }
                     />
                   }
                   label="Uses extra training data?"

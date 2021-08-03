@@ -22,12 +22,7 @@ const emptyModel = {
   training_time: "",
   epochs: "",
   extra_training_data: false,
-  accuracies: [
-    {
-      accuracy_type: "",
-      value: "",
-    },
-  ],
+  accuracies: [],
 };
 
 export default function SubmitPaper() {
@@ -43,6 +38,8 @@ export default function SubmitPaper() {
       models: [emptyModel],
     });
   }, []);
+
+  console.log(paper);
 
   function handlePaperInformationChange(newPaper) {
     setPaper({ ...paper, newPaper });

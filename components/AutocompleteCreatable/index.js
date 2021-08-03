@@ -3,6 +3,8 @@ import Autocomplete, {
   createFilterOptions,
 } from "@material-ui/lab/Autocomplete";
 import TextField from "@material-ui/core/TextField";
+import { InputAdornment } from "@material-ui/core";
+import { Target as TargetIcon } from "react-feather";
 
 const filter = createFilterOptions();
 
@@ -20,6 +22,9 @@ export default function AutocompleteCreatable({
   }, [props.options]);
 
   useEffect(() => {
+    if (name === "accuracy_type") {
+      handleAutocompleteChange;
+    }
     if (handleAutocompleteChange) {
       handleAutocompleteChange(value, name);
     }
@@ -77,7 +82,11 @@ export default function AutocompleteCreatable({
       fullWidth
       freeSolo
       renderInput={(params) => (
-        <TextField {...params} label={props.label} variant="outlined" />
+        <TextField
+          {...params}
+          label={props.label}
+          variant={props.variant ?? "outlined"}
+        />
       )}
     />
   );
