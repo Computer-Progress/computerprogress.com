@@ -15,6 +15,7 @@
     "@material-ui/lab": "^4.0.0-alpha.60",
     "@material-ui/pickers": "^3.3.10",
     "@svgr/webpack": "^5.5.0",
+    "axios": "^0.21.1",
     "date-fns": "^2.23.0",
     "highcharts": "^9.1.0",
     "highcharts-react-official": "^3.0.0",
@@ -25,7 +26,10 @@
     "react-feather": "^2.0.9",
     "react-hook-form": "^7.12.2",
     "react-material-ui-carousel": "^2.2.6",
+    "react-redux": "^7.2.4",
     "react-wavify": "^1.5.2",
+    "redux": "^4.1.0",
+    "redux-persist": "^6.0.0",
     "regression": "^2.0.1",
     "styled-components": "^5.3.0"
   }

@@ -1,5 +1,6 @@
-// import { useState } from 'react';
+import { useState } from 'react';
 import PageTemplate from "../../components/PageTemplate";
+import Alert from "../../components/Alert";
 
 import {
   Container,
@@ -11,7 +12,25 @@ import {
   Divider
 } from './styles';
 
+import api from '../../services/api';
+
 export default function SignIn() {
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [alert, setAlert] = useState({
+    open: false,
+    message: 'Error',
+  });
+
+  const login = () => {
+    if (!email) {
+      setAlert({
+        open: true,
+        message: 'Por favor, preencha o campo email'
+      })
+    }
+  }
+
   return (
     <PageTemplate>
       <Container>
@@ -24,13 +43,14 @@ export default function SignIn() {
         </InfoContainer>
         <StyledBox>
           <h2>Sign In</h2>
-          <Input label="Email" />
-          <Input label="Password" />
+          <Input label="Email" onChange={(text) => setEmail(text)} />
+          <Input label="Password" onChange={(text) => setPassword(text)} />
           <Question >Forgot your password?</Question>
-          <SignButton>SIGN IN</SignButton>
+          <SignButton onClick={login}>SIGN IN</SignButton>
           <Divider />
           <Question>Don't have an account?</Question>
           <SignButton variant="outlined">SIGN UP</SignButton>
+          <Alert open={alert.open} message={alert.message} close={() => setAlert({ open: false })} severity="warning" />
         </StyledBox>
       </Container>
     </PageTemplate>

@@ -54,3 +54,10 @@ export const Selector = styled(Select).attrs({
   min-width: 150px;
   margin-top: 12px;
 `
+
+export const PaginationBox = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+`
