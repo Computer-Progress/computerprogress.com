@@ -12,9 +12,10 @@ import {
   Divider
 } from './styles';
 
-import api from '../../services/api';
+import useApi from '../../services/useApi';
 
 export default function SignIn() {
+  const api = useApi()
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [alert, setAlert] = useState({
