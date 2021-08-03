@@ -4,6 +4,7 @@ import { MuiTheme } from "../styles/theme";
 import { store, persistor } from '../store';
 import { Provider } from 'react-redux';
 import { PersistGate } from 'redux-persist/integration/react'
+import Alert from '../components/Alert';
 
 function MyApp({ Component, pageProps }) {
   return (
@@ -11,6 +12,7 @@ function MyApp({ Component, pageProps }) {
       <Provider store={store}>
         <PersistGate loading={null} persistor={persistor}>
           <Component {...pageProps} />
+          <Alert />
         </PersistGate>
       </Provider>
     </ThemeProvider>

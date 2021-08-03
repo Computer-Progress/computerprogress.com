@@ -13,23 +13,39 @@ import {
 } from './styles';
 
 import useApi from '../../services/useApi';
+import { useDispatch } from 'react-redux';
+import { Creators as alertActions } from '../../store/ducks/alert';
 
 export default function SignIn() {
+  const dispatch = useDispatch();
   const api = useApi()
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [alert, setAlert] = useState({
-    open: false,
-    message: 'Error',
+  const [userInfo, setUserInfo] = useState({
+    email: '',
+    password: ''
   });
 
+  const onChange = (value, fieldName) => {
+    let myInfo = userInfo;
+
+    myInfo[fieldName] = value;
+    setUserInfo(myInfo);
+  }
+
   const login = () => {
-    if (!email) {
-      setAlert({
-        open: true,
-        message: 'Por favor, preencha o campo email'
-      })
-    }
+    console.log(userInfo)
+    const validations = ['email', 'password']
+    validations.some(item => {
+      console.log(item)
+      if (!userInfo[item]) {
+        dispatch(alertActions.openAlert({
+          open: true,
+          message: `Please, insert the ${item}`,
+          type: 'warning'
+        }));
+        return true;
+      }
+      return false;
+    })
   }
 
   return (
@@ -44,8 +60,8 @@ export default function SignIn() {
         </InfoContainer>
         <StyledBox>
           <h2>Sign In</h2>
-          <Input label="Email" onChange={(text) => setEmail(text)} />
-          <Input label="Password" onChange={(text) => setPassword(text)} />
+          <Input label="Email" onChange={(text) => onChange(text, 'email')} />
+          <Input label="Password" onChange={(text) => onChange(text, 'password')} />
           <Question >Forgot your password?</Question>
           <SignButton onClick={login}>SIGN IN</SignButton>
           <Divider />

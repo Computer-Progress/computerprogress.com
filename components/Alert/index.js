@@ -1,15 +1,20 @@
 import Snackbar from '@material-ui/core/Snackbar';
 import MuiAlert from '@material-ui/lab/Alert';
+import { useDispatch, useSelector } from 'react-redux';
+import { Creators as alertActions } from '../../store/ducks/alert';
 
-export default function Alert({open, close, setOpen, message, ...props}) {
+export default function Alert({...props}) {
+    const dispatch = useDispatch();
+    const alertStatus = useSelector(state => state.AlertReducer);
+
     const handleClose = (event, reason) => {
-        close();
+        dispatch(alertActions.closeAlert());
     };
 
     return (
-        <Snackbar open={open} autoHideDuration={6000} anchorOrigin={{ vertical: 'top', horizontal: 'right' }} onClose={handleClose}>
-            <MuiAlert elevation={6} variant="filled" {...props}>
-                {message}
+        <Snackbar open={alertStatus.open} autoHideDuration={3000} anchorOrigin={{ vertical: 'top', horizontal: 'right' }} onClose={handleClose}>
+            <MuiAlert elevation={6} variant="filled" severity={alertStatus.type} {...props}>
+                {alertStatus.message}
             </MuiAlert>
         </Snackbar>
     );
