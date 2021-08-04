@@ -8,7 +8,7 @@ export default (serverSide) => {
       const state = store.getState()
       user = state.UserReducer
     } else {
-      const user = useSelector(state => state.UserReducer)
+      user = useSelector(state => state.UserReducer)
     }
 
     const api = axios.create({
@@ -19,7 +19,7 @@ export default (serverSide) => {
       ...config,
       headers: {
         ...config.headers,
-        Authorization: user.token
+        Authorization: user.token || ''
       }
     }));
 

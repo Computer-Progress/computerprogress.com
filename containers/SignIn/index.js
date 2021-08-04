@@ -31,11 +31,10 @@ export default function SignIn() {
     setUserInfo(myInfo);
   }
 
-  const login = () => {
+  const login = async () => {
     console.log(userInfo)
     const validations = ['email', 'password']
-    validations.some(item => {
-      console.log(item)
+    const isInvalid = validations.some(item => {
       if (!userInfo[item]) {
         dispatch(alertActions.openAlert({
           open: true,
@@ -46,6 +45,17 @@ export default function SignIn() {
       }
       return false;
     })
+
+    console.log(userInfo)
+
+    if (isInvalid) return
+
+    const { email, password } = userInfo
+    const response = api.post('login/access-token', {
+      username: email,
+      password: password
+    })
+    // console.log(response.data)
   }
 
   return (
@@ -60,8 +70,8 @@ export default function SignIn() {
         </InfoContainer>
         <StyledBox>
           <h2>Sign In</h2>
-          <Input label="Email" onChange={(text) => onChange(text, 'email')} />
-          <Input label="Password" onChange={(text) => onChange(text, 'password')} />
+          <Input label="Email" onChange={(event) => onChange(event.target.value, 'email')} />
+          <Input label="Password" onChange={(event) => onChange(event.target.value, 'password')} />
           <Question >Forgot your password?</Question>
           <SignButton onClick={login}>SIGN IN</SignButton>
           <Divider />
