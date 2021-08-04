@@ -12,6 +12,7 @@ import {
   Switch,
   InputAdornment,
   Box,
+  Button,
 } from "@material-ui/core";
 import MuiDivider from "@material-ui/core/Divider";
 
@@ -470,6 +471,20 @@ export default function ModelInformation(props) {
                 onChange={handleTextChange}
               />
             </Grid>
+            {props.modelIndex >= 1 && (
+              <Grid item xs={12}>
+                <Box display="flex" justifyContent="flex-end">
+                  <Button
+                    variant="outlined"
+                    color="primary"
+                    style={{ borderRadius: "100px" }}
+                    onClick={() => props.handleRemoveModel(props.modelIndex)}
+                  >
+                    Remove model
+                  </Button>
+                </Box>
+              </Grid>
+            )}
           </Grid>
         </Grid>
       </StyledBoxContainer>
