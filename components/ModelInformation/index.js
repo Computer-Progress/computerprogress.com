@@ -125,6 +125,20 @@ export default function ModelInformation(props) {
     setModel(newModel);
   }
 
+  function handleNumberChange({ target: { name, value } }, type) {
+    console.log(name, value, type);
+    switch (type) {
+      case "int":
+        const onlyInt = value.replace(/[^0-9]/g, "");
+        console.log(onlyInt);
+
+        setModel({ ...model, [name]: onlyInt });
+        break;
+      case "float":
+        break;
+    }
+  }
+
   function handleAutocompleteChange(selected, name) {
     setModel({ ...model, [name]: selected });
   }
@@ -295,7 +309,7 @@ export default function ModelInformation(props) {
                 name="training_time"
                 type="number"
                 value={model.training_time}
-                onChange={(event) => handleTextChange(event, "float")}
+                onChange={(event) => handleNumberChange(event, "int")}
               />
             </Grid>
 
@@ -305,7 +319,7 @@ export default function ModelInformation(props) {
                 name="epochs"
                 type="number"
                 value={model.epochs}
-                onChange={(event) => handleTextChange(event, "int")}
+                onChange={(event) => handleNumberChange(event, "int")}
               />
             </Grid>
 

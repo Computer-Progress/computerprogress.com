@@ -1,4 +1,6 @@
 import { useEffect, useState } from "react";
+import { useForm } from "react-hook-form";
+
 import { ThemeProvider } from "@material-ui/core/styles";
 import { MuiTheme } from "../../styles/theme";
 
@@ -25,24 +27,37 @@ const emptyModel = {
   accuracies: [],
 };
 
+const emptyPaper = {
+  title: "",
+  link: "",
+  code_link: "",
+  publication_date: null,
+  authors: [],
+  models: [],
+};
+
 export default function SubmitPaper() {
   const [paper, setPaper] = useState({});
+  const {
+    control,
+    register,
+    handleSubmit,
+    watch,
+    formState: { errors },
+  } = useForm();
+
+  const [paperErrors, setPaperErros] = useState({});
+  const [shouldValidate, setShouldValidade] = useState(false);
 
   useEffect(() => {
     setPaper({
-      title: "",
-      link: "",
-      code_link: "",
-      publication_date: null,
-      authors: [],
+      ...emptyPaper,
       models: [emptyModel],
     });
   }, []);
 
-  console.log(paper);
-
   function handlePaperInformationChange(newPaper) {
-    setPaper({ ...paper, newPaper });
+    setPaper({ ...paper, ...newPaper });
   }
 
   function handleModelChange(newModel, modelIndex) {
@@ -56,9 +71,24 @@ export default function SubmitPaper() {
     setPaper({ ...paper, models: [...paper.models, emptyModel] });
   }
 
-  function submitPaper() {
-    console.log("submit paper");
+  function validatePaperInformation() {
+    const { models, ...newPaperInformation } = paper;
+
+    Object.keys(newPaperInformation).forEach((key) => {});
   }
+
+  function validateModelInformation() {}
+
+  function validateData() {
+    validatePaperInformation();
+    // validateModelInformation();
+  }
+
+  function submitPaper() {
+    validateData();
+  }
+
+  const onSubmit = () => console.log(paper);
 
   return (
     <ThemeProvider theme={MuiTheme}>
@@ -73,6 +103,9 @@ export default function SubmitPaper() {
               <PaperInformation
                 paper={paper}
                 handlePaperInformationChange={handlePaperInformationChange}
+                control={control}
+                register={register}
+                errors={errors}
               />
             </Grid>
             {paper.models?.map((model, index) => (
@@ -93,7 +126,7 @@ export default function SubmitPaper() {
                   </OutlinedButton>
                 </Box>
                 <Box pl={1}>
-                  <ContainedButton onClick={submitPaper}>
+                  <ContainedButton onClick={handleSubmit(onSubmit)}>
                     Submit paper
                   </ContainedButton>
                 </Box>

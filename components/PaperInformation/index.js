@@ -25,6 +25,7 @@ import CloseIcon from "@material-ui/icons/Close";
 import Divider from "../Divider";
 
 import { StyledCard, StyledBoxContainer, StyledTextField } from "./styles";
+import { Controller } from "react-hook-form";
 
 export default function PaperInformation(props) {
   const theme = useTheme();
@@ -91,6 +92,9 @@ export default function PaperInformation(props) {
 
               <Grid item xs={12}>
                 <StyledTextField
+                  {...props.register("title", { required: true })}
+                  error={!!props.errors["title"]}
+                  helperText={!!props.errors["title"] && "Title is required"}
                   name="title"
                   label="Title"
                   value={paper.title}
@@ -101,6 +105,9 @@ export default function PaperInformation(props) {
 
               <Grid item xs={6}>
                 <StyledTextField
+                  {...props.register("link", { required: true })}
+                  error={!!props.errors["link"]}
+                  helperText={!!props.errors["link"] && "Link is required"}
                   name="link"
                   label="Link"
                   value={paper.link}
@@ -111,6 +118,11 @@ export default function PaperInformation(props) {
 
               <Grid item xs={6}>
                 <StyledTextField
+                  {...props.register("code_link", { required: false })}
+                  error={!!props.errors["code_link"]}
+                  helperText={
+                    !!props.errors["code_link"] && "Code link is required"
+                  }
                   name="code_link"
                   label="Code link"
                   value={paper.code_link}
