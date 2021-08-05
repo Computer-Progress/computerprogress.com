@@ -20,6 +20,15 @@ export default {
 };
 
 export const MuiTheme = createTheme({
+  overrides: {
+    MuiTimelineItem: {
+      missingOppositeContent: {
+        "&:before": {
+          display: "none",
+        },
+      },
+    },
+  },
   typography: {
     fontFamily: ['"Montserrat"', "sans-serif"].join(","),
     h1: {
@@ -28,7 +37,7 @@ export const MuiTheme = createTheme({
     },
     h2: {
       fontSize: "1.8rem",
-      fontWeight: 500
+      fontWeight: 500,
     },
     h3: {
       fontSize: "1.3rem",
@@ -36,7 +45,11 @@ export const MuiTheme = createTheme({
     },
     h4: {
       fontSize: "1rem",
-      fontWeight: 500,
+      fontWeight: 300,
+    },
+    h5: {
+      fontSize: "0.8rem",
+      fontWeight: 300,
     },
     h6: {
       fontSize: "1.1rem",
