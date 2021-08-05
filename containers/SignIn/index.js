@@ -1,7 +1,8 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import PageTemplate from "../../components/PageTemplate";
 import Alert from "../../components/Alert";
-
+import { useRouter } from 'next/router'
+import { CircularProgress } from '@material-ui/core';
 import {
   Container,
   StyledBox,
@@ -13,16 +14,22 @@ import {
 } from './styles';
 
 import useApi from '../../services/useApi';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { Creators as alertActions } from '../../store/ducks/alert';
+import { Creators as userActions } from '../../store/ducks/user';
 
 export default function SignIn() {
+  const router = useRouter()
   const dispatch = useDispatch();
+  const userState = useSelector(state => state.UserReducer);
+
   const api = useApi()
   const [userInfo, setUserInfo] = useState({
     email: '',
     password: ''
   });
+
+  const [loading, setLoading] = useState(false);
 
   const onChange = (value, fieldName) => {
     let myInfo = userInfo;
@@ -30,6 +37,34 @@ export default function SignIn() {
     myInfo[fieldName] = value;
     setUserInfo(myInfo);
   }
+
+  const getUserInfo = async () => {
+    setLoading(true)
+    try {
+      const response = await api.get('/users/me')
+      console.log(response)
+      const user = response.data
+      if (user?.email) {
+        dispatch(userActions.login({...user, ...userState}))
+        router.push('/')
+      }
+    
+    } catch (error) {
+      setLoading(false)
+      dispatch(alertActions.openAlert({
+        open: true,
+        message: error.message,
+        type: 'error'
+      }));
+    }
+
+  }
+
+  useEffect(() => {
+    if (userState?.token) {
+      getUserInfo()
+    }
+  }, [userState])
 
   const login = async () => {
     console.log(userInfo)
@@ -49,13 +84,36 @@ export default function SignIn() {
     console.log(userInfo)
 
     if (isInvalid) return
-
+    setLoading(true)
     const { email, password } = userInfo
-    const response = api.post('login/access-token', {
-      username: email,
-      password: password
-    })
-    // console.log(response.data)
+    const params = new URLSearchParams();
+    params.append('username', email);
+    params.append('password', password);
+
+    try {
+      const response = await api.post('login/access-token', params, {
+        headers: {
+          'Content-Type': 'application/x-www-form-urlencoded'
+        }
+      })
+    
+      console.log(response.data)
+      const { data } = response 
+      let user = {
+        token: `${data.token_type} ${data.access_token}`
+      }
+      dispatch(userActions.login(user))
+    } catch (error) {
+      setLoading(false)
+      dispatch(alertActions.openAlert({
+        open: true,
+        message: error.message,
+        type: 'error'
+      }));
+    }
+  
+
+
   }
 
   return (
@@ -73,11 +131,12 @@ export default function SignIn() {
           <Input label="Email" onChange={(event) => onChange(event.target.value, 'email')} />
           <Input label="Password" onChange={(event) => onChange(event.target.value, 'password')} />
           <Question >Forgot your password?</Question>
-          <SignButton onClick={login}>SIGN IN</SignButton>
+          <SignButton onClick={login}>{loading ? (
+            <CircularProgress color='inherit' size={25} />
+          ) : 'SIGN IN'}</SignButton>
           <Divider />
           <Question>Don't have an account?</Question>
           <SignButton variant="outlined">SIGN UP</SignButton>
-          <Alert open={alert.open} message={alert.message} close={() => setAlert({ open: false })} severity="warning" />
         </StyledBox>
       </Container>
     </PageTemplate>
