@@ -129,7 +129,7 @@ export default function SignIn() {
         <StyledBox>
           <h2>Sign In</h2>
           <Input label="Email" onChange={(event) => onChange(event.target.value, 'email')} />
-          <Input label="Password" onChange={(event) => onChange(event.target.value, 'password')} />
+          <Input label="Password" type="password" autoComplete="current-password" onChange={(event) => onChange(event.target.value, 'password')} />
           <Question >Forgot your password?</Question>
           <SignButton onClick={login}>{loading ? (
             <CircularProgress color='inherit' size={25} />
