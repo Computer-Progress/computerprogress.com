@@ -11,15 +11,15 @@ const filter = createFilterOptions();
 export default function AutocompleteCreatable({
   name,
   optionKey,
+  options,
+  label,
+  variant,
   handleAutocompleteChange,
+  disabled,
+  task,
   ...props
 }) {
   const [value, setValue] = useState(null);
-  const [options, setOptions] = useState([]);
-
-  useEffect(() => {
-    setOptions(props.options);
-  }, [props.options]);
 
   useEffect(() => {
     if (name === "accuracy_type") {
@@ -30,15 +30,12 @@ export default function AutocompleteCreatable({
     }
   }, [value]);
 
-  // useEffect(() => {
-  //   // props.handleAutocompleteChange(value);
-
-  //   console.log(props);
-  // }, [props]);
+  useEffect(() => {
+    setValue(null)
+  }, [task]);
 
   return (
     <Autocomplete
-      {...props}
       value={value}
       onChange={(event, newValue) => {
         if (typeof newValue === "string") {
@@ -81,11 +78,14 @@ export default function AutocompleteCreatable({
       renderOption={(option) => option[optionKey]}
       fullWidth
       freeSolo
+      disabled={disabled}
       renderInput={(params) => (
         <TextField
           {...params}
-          label={props.label}
-          variant={props.variant ?? "outlined"}
+          {...props}
+          label={label}
+          value={value?.name || value}
+          variant={variant ?? "outlined"}
         />
       )}
     />

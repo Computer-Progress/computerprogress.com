@@ -13,6 +13,7 @@ import {
   InputAdornment,
   Box,
   Button,
+  Modal,
 } from "@material-ui/core";
 import MuiDivider from "@material-ui/core/Divider";
 
@@ -66,6 +67,7 @@ export default function ModelInformation(props) {
     if (props.modelIndex >= 0) {
       props.handleModelChange(model, props.modelIndex);
     }
+    console.log(model)
   }, [model]);
 
   useEffect(() => {
@@ -79,9 +81,9 @@ export default function ModelInformation(props) {
 
     const URL = `https://computerprogress.xyz/api/v1/datasets${taskIdQueryParam}`;
 
-    // fetch(URL)
-    //   .then((response) => response.json())
-    //   .then((data) => setDatasetOptions(data));
+    fetch(URL)
+      .then((response) => response.json())
+      .then((data) => setDatasetOptions(data));
   }, [model.task]);
 
   function fetchData() {
@@ -196,6 +198,9 @@ export default function ModelInformation(props) {
 
             <Grid item xs={12}>
               <StyledTextField
+                {...props.register(`ModelName${props.index}`, { required: !model.name })}
+                error={!!props.errors[`ModelName${props.index}`]}
+                helperText={!!props.errors[`ModelName${props.index}`] && "Model is required"}
                 name="name"
                 label="Model name"
                 value={model.name}
@@ -205,6 +210,9 @@ export default function ModelInformation(props) {
 
             <Grid item xs={12}>
               <AutocompleteCreatable
+                {...props.register(`Task${props.index}`, { required: !model.task })}
+                error={!!props.errors[`Task${props.index}`]}
+                helperText={!!props.errors[`Task${props.index}`] && "Task is required"}
                 name="task"
                 label={"Tasks"}
                 options={taskOptions}
@@ -215,11 +223,15 @@ export default function ModelInformation(props) {
 
             <Grid item xs={12}>
               <AutocompleteCreatable
+                {...props.register(`Dataset${props.index}`, { required: !model.dataset })}
+                error={!!props.errors[`Dataset${props.index}`]}
+                helperText={!!props.errors[`Dataset${props.index}`] && "Dataset is required"}
                 name="dataset"
                 optionKey={"name"}
                 options={datasetOptions}
                 label={"Datasets"}
                 disabled={!model.task}
+                task={model.task}
                 handleAutocompleteChange={handleAutocompleteChange}
               />
             </Grid>
@@ -227,6 +239,9 @@ export default function ModelInformation(props) {
             <Grid item xs={12} container spacing={1}>
               <Grid item xs={8}>
                 <AutocompleteCreatable
+                  {...props.register(`accuracy_type${props.index}`, { required: !model.accuracies.length })}
+                  error={!!props.errors[`accuracy_type${props.index}`]}
+                  helperText={!!props.errors[`accuracy_type${props.index}`] && "Accuracy type is required"}
                   name="accuracy_type"
                   label={"Accuracy type"}
                   options={accuracyOptions}
@@ -245,6 +260,9 @@ export default function ModelInformation(props) {
 
               <Grid item xs={4}>
                 <TextField
+                  {...props.register(`accuracy_value${props.index}`, { required: !model.accuracies.length })}
+                  error={!!props.errors[`accuracy_value${props.index}`]}
+                  helperText={!!props.errors[`accuracy_value${props.index}`] && "Accuracy value is required"}
                   label="Value"
                   value={newAccuracyValue}
                   fullWidth
@@ -306,6 +324,9 @@ export default function ModelInformation(props) {
 
             <Grid item xs={6} md={5} lg={4} xl={3}>
               <StyledTextField
+                {...props.register(`TrainingTime${props.index}`, { required: !model.training_time})}
+                error={!!props.errors[`TrainingTime${props.index}`]}
+                helperText={!!props.errors[`TrainingTime${props.index}`] && "Training time is required"}
                 label="Training time"
                 name="training_time"
                 type="number"
@@ -316,6 +337,9 @@ export default function ModelInformation(props) {
 
             <Grid item xs={6} md={5} lg={4} xl={3}>
               <StyledTextField
+                {...props.register(`Ephocs${props.index}`, { required: !model.epochs })}
+                error={!!props.errors[`Ephocs${props.index}`]}
+                helperText={!!props.errors[`Ephocs${props.index}`] && "# of Epochs is required"}
                 label="# of Epochs"
                 name="epochs"
                 type="number"
@@ -386,16 +410,21 @@ export default function ModelInformation(props) {
 
             <Grid item xs={6} sm={4}>
               <StyledTextField
+                {...props.register(`ofCPU${props.index}`, { required: !!model.cpu && !model.number_of_cpu  })}
+                error={!!props.errors[`ofCPU${props.index}`]}
+                helperText={!!props.errors[`ofCPU${props.index}`] && "# of CPU required"}
                 label="# of CPUs"
                 name="number_of_cpu"
                 type="number"
-                value={model.cpu_qty}
                 onChange={(event) => handleTextChange(event, "int")}
               />
             </Grid>
 
             <Grid item xs={12} md={8}>
               <AutocompleteCreatable
+                {...props.register(`GPU${props.index}`, { required: !model.tpu && !model.gpu })}
+                error={!!props.errors[`GPU${props.index}`]}
+                helperText={!!props.errors[`GPU${props.index}`] && "GPU or TPU required"}
                 name="gpu"
                 label={"GPUs"}
                 options={gpuOptions}
@@ -406,30 +435,40 @@ export default function ModelInformation(props) {
 
             <Grid item xs={6} sm={4}>
               <StyledTextField
+                {...props.register(`ofGPU${props.index}`, { required: !!model.gpu && !model.number_of_gpu })}
+                error={!!props.errors[`ofGPU${props.index}`]}
+                helperText={!!props.errors[`ofGPU${props.index}`] && "# of GPU required"}
                 label="# of GPUs"
                 name="number_of_gpu"
                 type="number"
-                value={model.gpu_qty}
+                value={model.number_of_gpu}
                 onChange={(event) => handleTextChange(event, "int")}
               />
             </Grid>
 
             <Grid item xs={12} md={8}>
               <AutocompleteCreatable
+                {...props.register(`TPU${props.index}`, { required: !model.tpu && !model.gpu })}
+                error={!!props.errors[`TPU${props.index}`]}
+                helperText={!!props.errors[`TPU${props.index}`] && "TPU or GPU required"}
                 name="tpu"
                 label={"TPUs"}
                 options={tpuOptions}
                 optionKey={"name"}
+                value={model.tpu ? model.tpu.name : null}
                 handleAutocompleteChange={handleAutocompleteChange}
               />
             </Grid>
 
             <Grid item xs={6} sm={4}>
               <StyledTextField
+                {...props.register(`ofTPU${props.index}`, { required: !!model.tpu && !model.number_of_tpu })}
+                error={!!props.errors[`ofTPU${props.index}`]}
+                helperText={!!props.errors[`ofTPU${props.index}`] && "# of TPU required"}
                 label="# of TPUs"
-                name="tpu_qty"
+                name="number_of_tpu"
+                value={model.number_of_tpu}
                 type="number"
-                value={model.tpu_qty}
                 onChange={(event) => handleTextChange(event, "int")}
               />
             </Grid>

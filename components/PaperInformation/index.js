@@ -176,6 +176,9 @@ export default function PaperInformation(props) {
               <Grid item xs={12}>
                 <form onSubmit={addAuthor}>
                   <TextField
+                    {...props.register(`Authors${props.index}`, { required: !paper.authors.length })}
+                    error={!!props.errors[`Authors${props.index}`]}
+                    helperText={!!props.errors[`Authors${props.index}`] && "At least one author is required"}
                     placeholder="Author name"
                     margin="normal"
                     fullWidth
@@ -187,7 +190,7 @@ export default function PaperInformation(props) {
                       ),
                       endAdornment: (
                         <InputAdornment position="end">
-                          <IconButton size="small">
+                          <IconButton onClick={addAuthor} size="small">
                             <AddIcon />
                           </IconButton>
                         </InputAdornment>

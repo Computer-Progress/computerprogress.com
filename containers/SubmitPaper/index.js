@@ -76,11 +76,9 @@ export default function SubmitPaper() {
 
     const newPaper = { ...paper };
     newPaper.models.splice(modelIndex, 1);
-
-    setPaper(newPaper);
+    newPaper.models = [...newPaper.models]
+    setPaper({...newPaper});
   }
-
-  console.log(paper);
 
   function validatePaperInformation() {
     const { models, ...newPaperInformation } = paper;
@@ -126,6 +124,10 @@ export default function SubmitPaper() {
                   modelIndex={index}
                   handleModelChange={handleModelChange}
                   handleRemoveModel={removeModel}
+                  index={index}
+                  control={control}
+                  register={register}
+                  errors={errors}
                 />
               </Grid>
             ))}
