@@ -3,11 +3,20 @@ import { MuiTheme } from "../../styles/theme";
 import { Title } from "./styles";
 import { useSelector } from "react-redux";
 import { useState, useEffect } from "react";
-import { Box, Button, Divider, Grid, TextField } from "@material-ui/core";
+import {
+  Box,
+  Button,
+  Divider,
+  Grid,
+  TextField,
+  Typography,
+} from "@material-ui/core";
 
-export default function Review() {
+export default function Profile() {
   // const isMobile = useMediaQuery(MuiTheme.breakpoints.down("md"));
   const userState = useSelector((state) => state.UserReducer);
+
+  console.log(userState);
 
   useEffect(() => {
     console.log(userState);
@@ -15,22 +24,42 @@ export default function Review() {
 
   return (
     <UserPageTemplate selectedPage={0}>
-      <Title>Profile</Title>
+      <Grid container display="flex">
+        <Grid item xs={12}>
+          <Box py={3}>
+            <Typography variant="h2">Profile</Typography>
+          </Box>
+        </Grid>
 
-      <Grid container>
         <Grid item xs={6} container spacing={3}>
           <Grid item xs={6}>
-            <TextField label="First name" variant="outlined" fullWidth />
+            <TextField
+              label="First name"
+              value={userState.first_name}
+              variant="outlined"
+              fullWidth
+            />
           </Grid>
           <Grid item xs={6}>
-            <TextField label="Last name" variant="outlined" fullWidth />
+            <TextField
+              label="Last name"
+              value={userState.last_name}
+              variant="outlined"
+              fullWidth
+            />
           </Grid>
-          <Grid item xs={6}>
-            <TextField label="Email" variant="outlined" fullWidth />
+          <Grid item xs={7}>
+            <TextField
+              label="Email"
+              value={userState.email}
+              variant="outlined"
+              fullWidth
+            />
           </Grid>
 
           <Grid item xs={12}>
             <Button
+              disabled
               style={{ borderRadius: "100px" }}
               color="primary"
               variant="contained"
@@ -42,7 +71,7 @@ export default function Review() {
 
           <Divider />
 
-          <Grid item xs={6}>
+          <Grid item xs={7}>
             <TextField
               label="Current password"
               variant="outlined"
@@ -51,7 +80,7 @@ export default function Review() {
             />
           </Grid>
 
-          <Grid item xs={6}>
+          <Grid item xs={7}>
             <TextField
               label="New password"
               variant="outlined"
@@ -60,7 +89,7 @@ export default function Review() {
             />
           </Grid>
 
-          <Grid item xs={6}>
+          <Grid item xs={7}>
             <TextField
               label="Confirm new password"
               variant="outlined"
@@ -71,6 +100,7 @@ export default function Review() {
 
           <Grid item xs={12}>
             <Button
+              disabled
               style={{ borderRadius: "100px" }}
               color="primary"
               variant="contained"
