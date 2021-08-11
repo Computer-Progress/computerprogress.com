@@ -26,7 +26,7 @@ export default function AutocompleteCreatable({
       handleAutocompleteChange;
     }
     if (handleAutocompleteChange) {
-      handleAutocompleteChange(value, name);
+      handleAutocompleteChange(value?.name || value, name);
     }
   }, [value]);
 

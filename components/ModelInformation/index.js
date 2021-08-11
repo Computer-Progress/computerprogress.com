@@ -25,27 +25,16 @@ import { Target as TargetIcon } from "react-feather";
 import AddIcon from "@material-ui/icons/Add";
 import CloseIcon from "@material-ui/icons/Close";
 
+import useApi from '../../services/useApi'
+
 import { StyledCard, StyledBoxContainer, StyledTextField } from "./styles";
 
 export default function ModelInformation(props) {
+  const api = useApi();
   const theme = useTheme();
   const isLargeScreen = useMediaQuery(theme.breakpoints.up("md"));
 
-  const [model, setModel] = useState({
-    name: "",
-    task: null,
-    dataset: null,
-    cpu: null,
-    gpu: null,
-    tpu: null,
-    gflops: "",
-    multiply_adds: "",
-    number_of_parameters: "",
-    training_time: "",
-    epochs: "",
-    extra_training_data: false,
-    accuracies: [],
-  });
+  const [model, setModel] = useState(props.model);
 
   const [taskOptions, setTaskOptions] = useState([]);
   const [datasetOptions, setDatasetOptions] = useState([]);
@@ -79,33 +68,57 @@ export default function ModelInformation(props) {
       ? "?task_id=" + model.task.id
       : "";
 
-    const URL = `https://computerprogress.xyz/api/v1/datasets${taskIdQueryParam}`;
+    const URL = `/datasets${taskIdQueryParam}`;
 
-    fetch(URL)
-      .then((response) => response.json())
-      .then((data) => setDatasetOptions(data));
+    api.get(URL)
+    .then((response) => {
+      const data = response.data;
+      setDatasetOptions(data);
+      const newModel = model
+      newModel.accuracies = [];
+      setModel({...newModel})
+      setNewAccuracyType(null)
+      setNewAccuracyValue('')
+    })
   }, [model.task]);
 
+  useEffect(() => {
+    if (!model.dataset || !model.task) {
+      return;
+    }
+
+    api.get(`/accuracy_types?skip=0&limit=100&task_dataset_identifier=${model.task.replace(' ', '-').toLowerCase()}-on-${model.dataset.replace(' ', '-').toLowerCase()}`)
+      .then((response) => {
+        const data = response.data;
+        setAccuracyOptions(data);
+      })
+
+  }, [model.dataset]);
+
   function fetchData() {
-    fetch(`https://computerprogress.xyz/api/v1/tasks`)
-      .then((response) => response.json())
-      .then((data) => setTaskOptions(data));
+    api.get(`/tasks`)
+      .then((response) => {
+        const data = response.data;
+        setTaskOptions(data);
+      })
 
-    fetch(`https://computerprogress.xyz/api/v1/cpus`)
-      .then((response) => response.json())
-      .then((data) => setCpuOptions(data));
+    api.get(`/cpus`)
+      .then((response) => {
+        const data = response.data;
+        setCpuOptions(data);
+      })
 
-    fetch(`https://computerprogress.xyz/api/v1/gpus`)
-      .then((response) => response.json())
-      .then((data) => setGpuOptions(data));
+    api.get(`/gpus`)
+      .then((response) => {
+        const data = response.data;
+        setGpuOptions(data);
+      })
 
-    fetch(`https://computerprogress.xyz/api/v1/tpus`)
-      .then((response) => response.json())
-      .then((data) => setTpuOptions(data));
-
-    fetch(`https://computerprogress.xyz/api/v1/accuracy_types`)
-      .then((response) => response.json())
-      .then((data) => setAccuracyOptions(data));
+    api.get(`/tpus`)
+      .then((response) => {
+        const data = response.data;
+        setTpuOptions(data);
+      })
   }
 
   function handleTextChange({ target: { name, value } }, type) {
@@ -172,7 +185,6 @@ export default function ModelInformation(props) {
   function removeAccuracy(accuracyIndex) {
     const newModel = { ...model };
     newModel.accuracies.splice(accuracyIndex, 1);
-
     setModel(newModel);
   }
 
@@ -247,6 +259,7 @@ export default function ModelInformation(props) {
                   options={accuracyOptions}
                   optionKey="name"
                   variant="standard"
+                  task={model.task}
                   // InputProps={{
                   //   startAdornment: (
                   //     <InputAdornment position="start">
@@ -410,11 +423,11 @@ export default function ModelInformation(props) {
 
             <Grid item xs={6} sm={4}>
               <StyledTextField
-                {...props.register(`ofCPU${props.index}`, { required: !!model.cpu && !model.number_of_cpu  })}
+                {...props.register(`ofCPU${props.index}`, { required: !!model.cpu && !model.number_of_cpus  })}
                 error={!!props.errors[`ofCPU${props.index}`]}
                 helperText={!!props.errors[`ofCPU${props.index}`] && "# of CPU required"}
                 label="# of CPUs"
-                name="number_of_cpu"
+                name="number_of_cpus"
                 type="number"
                 onChange={(event) => handleTextChange(event, "int")}
               />
@@ -435,13 +448,13 @@ export default function ModelInformation(props) {
 
             <Grid item xs={6} sm={4}>
               <StyledTextField
-                {...props.register(`ofGPU${props.index}`, { required: !!model.gpu && !model.number_of_gpu })}
+                {...props.register(`ofGPU${props.index}`, { required: !!model.gpu && !model.number_of_gpus })}
                 error={!!props.errors[`ofGPU${props.index}`]}
                 helperText={!!props.errors[`ofGPU${props.index}`] && "# of GPU required"}
                 label="# of GPUs"
-                name="number_of_gpu"
+                name="number_of_gpus"
                 type="number"
-                value={model.number_of_gpu}
+                value={model.number_of_gpus}
                 onChange={(event) => handleTextChange(event, "int")}
               />
             </Grid>
@@ -462,12 +475,12 @@ export default function ModelInformation(props) {
 
             <Grid item xs={6} sm={4}>
               <StyledTextField
-                {...props.register(`ofTPU${props.index}`, { required: !!model.tpu && !model.number_of_tpu })}
+                {...props.register(`ofTPU${props.index}`, { required: !!model.tpu && !model.number_of_tpus })}
                 error={!!props.errors[`ofTPU${props.index}`]}
                 helperText={!!props.errors[`ofTPU${props.index}`] && "# of TPU required"}
                 label="# of TPUs"
-                name="number_of_tpu"
-                value={model.number_of_tpu}
+                name="number_of_tpus"
+                value={model.number_of_tpus}
                 type="number"
                 onChange={(event) => handleTextChange(event, "int")}
               />

@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useMemo } from "react";
 import { useForm } from "react-hook-form";
 
 import { ThemeProvider } from "@material-ui/core/styles";
@@ -10,22 +10,7 @@ import ModelInformation from "../../components/ModelInformation";
 
 import { Box, Grid, Typography } from "@material-ui/core/";
 import { OutlinedButton, ContainedButton } from "./styles";
-
-const emptyModel = {
-  name: "",
-  task: null,
-  dataset: null,
-  cpu: null,
-  gpu: null,
-  tpu: null,
-  gflops: "",
-  multiply_adds: "",
-  number_of_parameters: "",
-  training_time: "",
-  epochs: "",
-  extra_training_data: false,
-  accuracies: [],
-};
+import useApi from '../../services/useApi';
 
 const emptyPaper = {
   title: "",
@@ -37,7 +22,9 @@ const emptyPaper = {
 };
 
 export default function SubmitPaper() {
+  const api = useApi();
   const [paper, setPaper] = useState({});
+  const [nextId, setNextId] = useState(2);
   const {
     control,
     register,
@@ -49,10 +36,30 @@ export default function SubmitPaper() {
   const [paperErrors, setPaperErros] = useState({});
   const [shouldValidate, setShouldValidade] = useState(false);
 
+  const emptyModel = (newId) => {
+    console.log('onAdd', newId)
+    return {
+      id: newId,
+      name: '',
+      task: null,
+      dataset: null,
+      cpu: null,
+      gpu: null,
+      tpu: null,
+      gflops: "",
+      multiply_adds: "",
+      number_of_parameters: "",
+      training_time: "",
+      epochs: "",
+      extra_training_data: false,
+      accuracies: [],
+    }
+  };
+
   useEffect(() => {
     setPaper({
       ...emptyPaper,
-      models: [emptyModel],
+      models: [emptyModel(1)],
     });
   }, []);
 
@@ -68,15 +75,17 @@ export default function SubmitPaper() {
   }
 
   function addNewModel() {
-    setPaper({ ...paper, models: [...paper.models, emptyModel] });
+    setPaper({ ...paper, models: [...paper.models, emptyModel(nextId)] });
+    setNextId(nextId + 1)
   }
 
   function removeModel(modelIndex) {
     console.log(modelIndex);
 
-    const newPaper = { ...paper };
-    newPaper.models.splice(modelIndex, 1);
-    newPaper.models = [...newPaper.models]
+    const newPaper = paper;
+    const newList = paper.models.filter((item, index) => index !== modelIndex);;
+    newPaper.models = [...newList];
+  
     setPaper({...newPaper});
   }
 
@@ -97,7 +106,11 @@ export default function SubmitPaper() {
     validateData();
   }
 
-  const onSubmit = () => console.log(paper);
+  const onSubmit = async () => {
+    console.log(paper);
+    const response = await api.post('/submissions', paper);
+    console.log('response', response)
+  };
 
   return (
     <ThemeProvider theme={MuiTheme}>
@@ -117,10 +130,14 @@ export default function SubmitPaper() {
                 errors={errors}
               />
             </Grid>
+            {console.log('Aquuiii', paper.models)}
             {paper.models?.map((model, index) => (
-              <Grid item xs={12} key={index}>
+              <Grid item xs={12} key={model.id}>
+                {console.log('model.id', model.id)}
                 <ModelInformation
                   model={model}
+                  key={model.id}
+                  id={model.id}
                   modelIndex={index}
                   handleModelChange={handleModelChange}
                   handleRemoveModel={removeModel}

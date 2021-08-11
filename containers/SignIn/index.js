@@ -61,6 +61,7 @@ export default function SignIn() {
   }
 
   useEffect(() => {
+    console.log('userState', userState)
     if (userState?.token && !userState?.id) {
       getUserInfo()
     }

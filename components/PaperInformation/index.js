@@ -144,7 +144,7 @@ export default function PaperInformation(props) {
                   onChange={(date) =>
                     setPaper({
                       ...paper,
-                      publication_date: date,
+                      publication_date: date.toISOString().split('T')[0],
                     })
                   }
                   invalidDateMessage="Invalid date"
