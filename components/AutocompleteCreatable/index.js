@@ -17,9 +17,11 @@ export default function AutocompleteCreatable({
   handleAutocompleteChange,
   disabled,
   task,
+  outsideValue,
   ...props
 }) {
   const [value, setValue] = useState(null);
+  const [usedValue, setUsedValue] = useState(false);
 
   useEffect(() => {
     if (name === "accuracy_type") {
@@ -33,6 +35,13 @@ export default function AutocompleteCreatable({
   useEffect(() => {
     setValue(null)
   }, [task]);
+
+  useEffect(() => {
+    if (!usedValue) {
+      setValue(outsideValue)
+      setUsedValue(true)
+    }
+  }, [outsideValue]);
 
   return (
     <Autocomplete

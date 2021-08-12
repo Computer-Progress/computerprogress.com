@@ -86,7 +86,7 @@ export default function ReviewPaper({ submission }) {
       <PageTemplate>
         <Box py={8}>
           <Grid container spacing={5}>
-            <PaperSubmission submittedPaper={paper} />
+            <PaperSubmission submittedPaper={paper?.data} />
 
             {/*<Grid item xs={12}>
               <PaperInformation />

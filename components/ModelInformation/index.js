@@ -229,6 +229,7 @@ export default function ModelInformation(props) {
                 label={"Tasks"}
                 options={taskOptions}
                 optionKey="name"
+                outsideValue={model.task}
                 handleAutocompleteChange={handleAutocompleteChange}
               />
             </Grid>
@@ -243,6 +244,7 @@ export default function ModelInformation(props) {
                 options={datasetOptions}
                 label={"Datasets"}
                 disabled={!model.task}
+                outsideValue={model.dataset}
                 task={model.task}
                 handleAutocompleteChange={handleAutocompleteChange}
               />
@@ -417,6 +419,7 @@ export default function ModelInformation(props) {
                 label={"CPUs"}
                 options={cpuOptions}
                 optionKey={"name"}
+                outsideValue={model.cpu}
                 handleAutocompleteChange={handleAutocompleteChange}
               />
             </Grid>
@@ -429,6 +432,7 @@ export default function ModelInformation(props) {
                 label="# of CPUs"
                 name="number_of_cpus"
                 type="number"
+                value={model.number_of_cpus}
                 onChange={(event) => handleTextChange(event, "int")}
               />
             </Grid>
@@ -441,6 +445,7 @@ export default function ModelInformation(props) {
                 name="gpu"
                 label={"GPUs"}
                 options={gpuOptions}
+                outsideValue={model.gpu}
                 optionKey={"name"}
                 handleAutocompleteChange={handleAutocompleteChange}
               />
@@ -468,6 +473,7 @@ export default function ModelInformation(props) {
                 label={"TPUs"}
                 options={tpuOptions}
                 optionKey={"name"}
+                outsideValue={model.tpu}
                 value={model.tpu ? model.tpu.name : null}
                 handleAutocompleteChange={handleAutocompleteChange}
               />

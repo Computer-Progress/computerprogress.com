@@ -39,10 +39,19 @@ export default function PaperInformation(props) {
     authors: [],
   });
   const [newAuthor, setNewAuthor] = useState("");
+  const [onReview, setOnReview] = useState(false);
+
 
   useEffect(() => {
     props.handlePaperInformationChange(paper);
   }, [paper]);
+
+  useEffect(() => {
+    if (props.submittedPaper && !onReview) {
+      setPaper(props.submittedPaper)
+      setOnReview(true)
+    }
+  }, [props.submittedPaper]);
 
   function handleChange({ target: { name, value } }) {
     setPaper({ ...paper, [name]: value });

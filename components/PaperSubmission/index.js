@@ -56,6 +56,7 @@ export default function PaperSubmission({ submittedPaper }) {
   };
 
   useEffect(() => {
+    console.log('submittedPaper', submittedPaper)
     if (submittedPaper) {
       setPaper(submittedPaper)
     } else {
@@ -64,7 +65,7 @@ export default function PaperSubmission({ submittedPaper }) {
         models: [emptyModel(1)],
       });
     }
-  }, [paper]);
+  }, []);
 
   function handlePaperInformationChange(newPaper) {
     setPaper({ ...paper, ...newPaper });
@@ -126,6 +127,7 @@ export default function PaperSubmission({ submittedPaper }) {
           <Grid item xs={12}>
             <PaperInformation
               paper={paper}
+              submittedPaper={submittedPaper}
               handlePaperInformationChange={handlePaperInformationChange}
               control={control}
               register={register}
