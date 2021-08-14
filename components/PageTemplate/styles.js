@@ -13,7 +13,7 @@ export const StyledContainer = styled(Container).attrs({
   h1 {
     font-weight: normal;
   }
-
+  
   @media only screen and (max-width: 1450px) {
     margin: 0px 0px !important;
   }

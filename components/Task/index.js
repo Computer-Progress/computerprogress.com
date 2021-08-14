@@ -11,7 +11,7 @@ export default function ({ item }) {
           <h3>{item.name}</h3>
         </ImageWrapper>
         <Separator />
-        <p>{item.number_of_benchmarks} benchmark(s)</p>
+        <p>Number of benchmarks: {item.number_of_benchmarks}</p>
       </Wrapper>
     </Link>
   );
