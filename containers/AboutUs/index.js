@@ -10,7 +10,7 @@ export default function AboutUs() {
   return (
     <PageTemplate>
       <Container>
-        <StyledTitle>About us</StyledTitle>
+        {/* <StyledTitle>About us</StyledTitle> */}
 
         <DescriptionCard
           icon={textBlocks[0].icon}
@@ -21,7 +21,7 @@ export default function AboutUs() {
         <ButtonContainer>
           <StyledButton>See our paper</StyledButton>
         </ButtonContainer>
-
+        
         <DescriptionCard
           icon={textBlocks[1].icon}
           title={textBlocks[1].title}

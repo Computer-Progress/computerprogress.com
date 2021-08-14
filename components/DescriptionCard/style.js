@@ -29,7 +29,8 @@ export const ContainerGrid = styled.div`
     align-self: top;
     margin-top: 20;
     text-align: justify;
-    font-size: 14px;
+    line-height: 2;
+    font-size: 1rem;
   }
 `;
 
@@ -37,8 +38,8 @@ export const StyledTitle = styled.div`
 
 
   h2 {
-    font-size: 1.4rem;
-    font-weight: 400;
+    font-size: 2rem;
+    font-weight: 500;
     align-self: bottom;
   }
 `;

@@ -3,9 +3,10 @@ import styled from "styled-components";
 import { Box } from "@material-ui/core";
 
 export const StyledH2 = styled.h2`
-  font-size: 1.5rem;
-  margin: 50px 0;
-  font-weight: 400;
+  font-size: 1.8rem;
+  margin-top: 100px;
+  margin-bottom: 0px;
+  font-weight: 450;
   text-align: center;
 `;
 
