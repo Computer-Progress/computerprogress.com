@@ -18,6 +18,7 @@ export default function AutocompleteCreatable({
   disabled,
   task,
   outsideValue,
+  updateObject,
   ...props
 }) {
   const [value, setValue] = useState(null);
@@ -29,6 +30,9 @@ export default function AutocompleteCreatable({
     }
     if (handleAutocompleteChange) {
       handleAutocompleteChange(value?.name || value, name);
+      if (typeof value === 'object') {
+        updateObject?.(value)
+      }
     }
   }, [value]);
 

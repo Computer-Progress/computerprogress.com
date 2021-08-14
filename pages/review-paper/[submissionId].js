@@ -6,16 +6,17 @@ export const getServerSideProps = async ({ query }) => {
   try {
     const res = await api.get(`/submissions/${query.submissionId}`);
     const submission = res.data;
-
     return {
       props: {
         submission,
+        submissionId: query.submissionId,
       },
     };
   } catch (error) {
     return {
       props: {
-        submission: error.message
+        submission: error.message,
+        submissionId: query.submissionId,
       },
     };
   }

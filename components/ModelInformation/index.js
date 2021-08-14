@@ -35,6 +35,8 @@ export default function ModelInformation(props) {
   const isLargeScreen = useMediaQuery(theme.breakpoints.up("md"));
 
   const [model, setModel] = useState(props.model);
+  const [task, setTask] = useState(null);
+  const [dataset, setDataset] = useState(null);
 
   const [taskOptions, setTaskOptions] = useState([]);
   const [datasetOptions, setDatasetOptions] = useState([]);
@@ -60,12 +62,12 @@ export default function ModelInformation(props) {
   }, [model]);
 
   useEffect(() => {
-    if (!model.task) {
+    if (!task) {
       return;
     }
 
-    let taskIdQueryParam = model.task.hasOwnProperty("id")
-      ? "?task_id=" + model.task.id
+    let taskIdQueryParam = task.hasOwnProperty("id")
+      ? "?task_id=" + task.id
       : "";
 
     const URL = `/datasets${taskIdQueryParam}`;
@@ -83,11 +85,11 @@ export default function ModelInformation(props) {
   }, [model.task]);
 
   useEffect(() => {
-    if (!model.dataset || !model.task) {
+    if (!dataset || !task) {
       return;
     }
 
-    api.get(`/accuracy_types?skip=0&limit=100&task_dataset_identifier=${model.task.replace(' ', '-').toLowerCase()}-on-${model.dataset.replace(' ', '-').toLowerCase()}`)
+    api.get(`/accuracy_types?skip=0&limit=100&task_dataset_identifier=${task.identifier}-on-${dataset.identifier}`)
       .then((response) => {
         const data = response.data;
         setAccuracyOptions(data);
@@ -230,6 +232,7 @@ export default function ModelInformation(props) {
                 options={taskOptions}
                 optionKey="name"
                 outsideValue={model.task}
+                updateObject={setTask}
                 handleAutocompleteChange={handleAutocompleteChange}
               />
             </Grid>
@@ -246,6 +249,7 @@ export default function ModelInformation(props) {
                 disabled={!model.task}
                 outsideValue={model.dataset}
                 task={model.task}
+                updateObject={setDataset}
                 handleAutocompleteChange={handleAutocompleteChange}
               />
             </Grid>
