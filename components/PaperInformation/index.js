@@ -101,7 +101,7 @@ export default function PaperInformation(props) {
 
               <Grid item xs={12}>
                 <StyledTextField
-                  {...props.register("title", { required: true })}
+                  {...props.register("title", { required: !paper.title })}
                   error={!!props.errors["title"]}
                   helperText={!!props.errors["title"] && "Title is required"}
                   name="title"
@@ -114,7 +114,7 @@ export default function PaperInformation(props) {
 
               <Grid item xs={6}>
                 <StyledTextField
-                  {...props.register("link", { required: true })}
+                  {...props.register("link", { required: !paper.link })}
                   error={!!props.errors["link"]}
                   helperText={!!props.errors["link"] && "Link is required"}
                   name="link"

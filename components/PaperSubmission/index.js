@@ -58,7 +58,7 @@ export default function PaperSubmission({ submittedPaper }) {
   useEffect(() => {
     console.log('submittedPaper', submittedPaper)
     if (submittedPaper) {
-      setPaper(submittedPaper)
+      setPaper(submittedPaper.data)
     } else {
       setPaper({
         ...emptyPaper,
@@ -112,8 +112,17 @@ export default function PaperSubmission({ submittedPaper }) {
 
   const onSubmit = async () => {
     console.log(paper);
-    const response = await api.post('/submissions', paper);
-    console.log('response', response)
+    try {
+      if (submittedPaper) {
+        const response = await api.put(`/submissions/${submittedPaper.id}`, paper);
+        console.log('response', response)
+      } else {
+        const response = await api.post('/submissions', paper);
+        console.log('response', response)
+      }
+    } catch (err) {
+      console.log(err)
+    }
   };
 
   return (
@@ -121,23 +130,17 @@ export default function PaperSubmission({ submittedPaper }) {
       <Box py={8}>
         <Grid container spacing={5}>
           <Grid item xs={12}>
-            <Typography variant="h1">Submit paper</Typography>
-          </Grid>
-
-          <Grid item xs={12}>
             <PaperInformation
               paper={paper}
-              submittedPaper={submittedPaper}
+              submittedPaper={submittedPaper?.data}
               handlePaperInformationChange={handlePaperInformationChange}
               control={control}
               register={register}
               errors={errors}
             />
           </Grid>
-          {console.log('Aquuiii', paper.models)}
           {paper.models?.map((model, index) => (
             <Grid item xs={12} key={model.id}>
-              {console.log('model.id', model.id)}
               <ModelInformation
                 model={model}
                 key={model.id}
