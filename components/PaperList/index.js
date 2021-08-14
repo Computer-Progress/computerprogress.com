@@ -126,7 +126,7 @@ export default function PaperList() {
           {/* Search */}
           <Grid item xs={12}>
             <Grid container>
-              <Grid item xs={9}>
+              <Grid item xs={12} md={9}>
                 <TextField
                   name="query"
                   value={filters.query}
@@ -144,7 +144,7 @@ export default function PaperList() {
                 />
               </Grid>
 
-              <Grid item xs={3}>
+              <Grid item xs={12} md={3}>
                 <FormControl fullWidth>
                   <Select
                     name="status"
@@ -152,7 +152,10 @@ export default function PaperList() {
                     onChange={handleFiltersChange}
                     input={
                       <Input
-                        style={{ textAlign: "right", paddingRight: "5px" }}
+                        style={{
+                          textAlign: "right",
+                          paddingRight: "5px",
+                        }}
                       />
                     }
                     disableUnderline={true}
@@ -234,56 +237,7 @@ export default function PaperList() {
                     {status[submission.status].icon}
                   </Box>
                 </Grid>
-
-                {/* <Grid item style={{ order: isMobile ? 1 : 0 }}>
-                  
-                </Grid>
-
-                <Grid item style={{ order: isMobile ? 0 : 1 }}>
-                </Grid> */}
               </Grid>
-
-              {/* <Grid item xs={12}>
-                <Box display="flex" flexWrap="wrap">
-                  <Box flexGrow={1}>
-                    <Grid container alignItems="center" spacing={1}>
-                      <Grid item>
-                        <Box display="flex">
-                          <UserIcon size={16} />
-                        </Box>
-                      </Grid>
-
-                      <Grid item>
-                        <Typography variant="subtitle1">
-                          Submitted by {submission.submitted_by}
-                        </Typography>
-                      </Grid>
-                    </Grid>
-                  </Box>
-
-                  <Box mx={isMobile ? 0 : 1}>
-                    <Typography variant="subtitle1">
-                      Last updated on {submission.last_update}.{" "}
-                    </Typography>
-                  </Box>
-
-                  <Box>
-                    <Grid container alignItems="center" spacing={1}>
-                      <Grid item style={{ order: isMobile ? 1 : 0 }}>
-                        <Typography variant="subtitle1">
-                          {status[submission.status].title}
-                        </Typography>
-                      </Grid>
-
-                      <Grid item style={{ order: isMobile ? 0 : 1 }}>
-                        <Box display="flex">
-                          {status[submission.status].icon}
-                        </Box>
-                      </Grid>
-                    </Grid>
-                  </Box>
-                </Box>
-              </Grid> */}
 
               <Grid item xs={12}>
                 <Box pt={1} pb={2}>
