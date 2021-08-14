@@ -24,7 +24,7 @@ const pages = [
     component: <PaperList />,
   },
   {
-    name: "Review",
+    name: "Reviews",
     pathname: "/papers/reviews",
     icon: <Icon.Clipboard />,
     component: <PaperList />,
@@ -62,7 +62,7 @@ export default function UserPageTemplate({ pathname }) {
           <Grid item xs={12} md={3} container>
             <Grid item xs={12}>
               <Box py={3}>
-                <Typography variant="h2">Account</Typography>
+                <Typography variant="h3">Account</Typography>
               </Box>
             </Grid>
 
@@ -121,7 +121,23 @@ export default function UserPageTemplate({ pathname }) {
           </Grid>
 
           <Grid item xs={12} md={9}>
-            {pages[selectedPage].component}
+            <Box pt={3} pb={4}>
+              <Grid container>
+                {!isMobile && (
+                  <Grid item xs={12}>
+                    <Box pb={3}>
+                      <Typography variant="h2">
+                        {pages[selectedPage].name}
+                      </Typography>
+                    </Box>
+                  </Grid>
+                )}
+
+                <Grid item xs={12}>
+                  {pages[selectedPage].component}
+                </Grid>
+              </Grid>
+            </Box>
           </Grid>
         </Grid>
       )}

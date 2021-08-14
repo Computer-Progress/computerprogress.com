@@ -80,19 +80,19 @@ const statusFilters = [
 
 const status = {
   "review-pending": {
-    icon: <ClockIcon size={16} />,
+    icon: <ClockIcon size={14} />,
     title: "Review pending",
   },
   "need-information": {
-    icon: <InfoIcon size={16} />,
+    icon: <InfoIcon size={14} />,
     title: "Need information",
   },
   approved: {
-    icon: <CheckCircleIcon size={16} />,
+    icon: <CheckCircleIcon size={14} />,
     title: "Approved",
   },
   declined: {
-    icon: <XCircleIcon size={16} />,
+    icon: <XCircleIcon size={14} />,
     title: "Declined",
   },
 };
@@ -179,7 +179,7 @@ export default function PaperList() {
 
           {/* Submissions list */}
           {submissions.map((submission) => (
-            <Grid item xs={12} container>
+            <Grid item xs={12} container key={submission.id}>
               <Grid item xs={12}>
                 <Typography variant="h6">{submission.title}</Typography>
               </Grid>
@@ -187,38 +187,33 @@ export default function PaperList() {
               <Grid item xs={12}>
                 <Box display="flex" flexWrap="wrap" py={3}>
                   {submission.tasks.map((task) => (
-                    <Box mr={1} mb={1}>
+                    <Box mr={1} mb={1} key={task}>
                       <Chip label={task} />
                     </Box>
                   ))}
                 </Box>
               </Grid>
 
-              <Grid
-                item
-                xs={12}
-                md={6}
-                container
-                alignItems="center"
-                spacing={1}
-              >
-                <Grid item>
-                  <Box display="flex">
-                    <UserIcon size={16} />
-                  </Box>
-                </Grid>
+              <Grid item xs={12} md={5} container>
+                <Grid item container alignItems="center" spacing={1}>
+                  <Grid item>
+                    <Box display="flex">
+                      <UserIcon size={14} />
+                    </Box>
+                  </Grid>
 
-                <Grid item>
-                  <Typography variant="subtitle1">
-                    Submitted by {submission.submitted_by}
-                  </Typography>
+                  <Grid item>
+                    <Typography variant="subtitle1">
+                      Submitted by {submission.submitted_by}
+                    </Typography>
+                  </Grid>
                 </Grid>
               </Grid>
 
               <Grid
                 item
                 xs={12}
-                md={6}
+                md={7}
                 container
                 alignItems="center"
                 justifyContent={isMobile ? "flex-start" : "flex-end"}
@@ -228,14 +223,15 @@ export default function PaperList() {
                   <Typography component="span" variant="subtitle1">
                     Last updated on {submission.last_update}.{" "}
                   </Typography>
+                </Grid>
 
+                <Grid item>
                   <Typography component="span" variant="subtitle1">
                     {status[submission.status].title}
                   </Typography>
-
-                  <Box display="inline-block" pl={1}>
-                    {status[submission.status].icon}
-                  </Box>
+                </Grid>
+                <Grid item>
+                  <Box display="flex">{status[submission.status].icon}</Box>
                 </Grid>
               </Grid>
 

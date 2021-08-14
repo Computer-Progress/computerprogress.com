@@ -46,9 +46,9 @@ export default function Collaborate() {
 
           <StyledBox>
             <StyledTypographyBody1>
-              The number of floating-point operations required for a single
-              pass (i.e. weight adjustment), also measurable using
-              multiply-adds, in a given deep learning model.
+              The number of floating-point operations required for a single pass
+              (i.e. weight adjustment), also measurable using multiply-adds, in
+              a given deep learning model.
             </StyledTypographyBody1>
           </StyledBox>
 

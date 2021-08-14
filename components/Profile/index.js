@@ -75,12 +75,6 @@ export default function Profile() {
   }
   return (
     <Grid container spacing={3}>
-      <Grid item xs={12}>
-        <Box pt={3}>
-          <Typography variant="h2">Profile</Typography>
-        </Box>
-      </Grid>
-
       <Grid item xs={12} sm={6} md={4}>
         <TextField
           value={profile.firstName}

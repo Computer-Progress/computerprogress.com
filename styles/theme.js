@@ -54,6 +54,9 @@ export const MuiTheme = createTheme({
     h6: {
       fontSize: "1.1rem",
     },
+    subtitle1: {
+      fontSize: "0.8rem",
+    },
   },
   palette: {
     primary: {
