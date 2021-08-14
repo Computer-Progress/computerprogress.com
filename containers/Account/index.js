@@ -8,8 +8,7 @@ import { useMediaQuery } from "@material-ui/core";
 
 import PageTemplate from "../../components/PageTemplate";
 import Profile from "../../components/Profile";
-import SubmissionsList from "../../components/SubmissionList";
-import ReviewsList from "../../components/ReviewsList";
+import PaperList from "../../components/PaperList";
 
 const pages = [
   {
@@ -22,13 +21,13 @@ const pages = [
     name: "Submissions",
     pathname: "/papers/submissions",
     icon: <Icon.File />,
-    component: <SubmissionsList />,
+    component: <PaperList />,
   },
   {
     name: "Review",
     pathname: "/papers/reviews",
     icon: <Icon.Clipboard />,
-    component: <ReviewsList />,
+    component: <PaperList />,
   },
 ];
 
