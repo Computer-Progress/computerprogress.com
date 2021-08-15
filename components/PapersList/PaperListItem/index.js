@@ -27,7 +27,7 @@ export default function PaperListItem({
                     ) : null}
                     <Text title right>Hardware Burden</Text>
                     
-                    <Text title right>Publication Date</Text>
+                    <Text title right>Year</Text>
                 </Wrapper>
                 <Separator />
             </>

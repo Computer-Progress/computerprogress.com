@@ -50,8 +50,8 @@ export const researchers = [
   },
   {
     name: "Gabriel F. Manso",
-    workPlace: "UnB",
-    position: "Undergraduate Student",
+    workPlace: "MIT",
+    position: "Research Assistant",
     imageName: "gabriel-manso.png",
   },
 ];
