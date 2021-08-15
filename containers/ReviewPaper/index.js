@@ -46,15 +46,24 @@ const timeline = [
   },
 ];
 
-export default function ReviewPaper({ submissionId }) {
+export default function ReviewPaper({ submission }) {
   const api = useApi();
   const [paper, setPaper] = useState(null);
   const [messages, setMessages] = useState([]);
 
   const getSubmission = async () => {
     try {
-      const res = await api.get(`/submissions/${submissionId}`);
+      const res = await api.get(`/submissions/1`);
       setPaper(res.data);
+    } catch (error) {
+      console.log('cant load this submission')
+    }
+  }
+
+  const getMessages = async () => {
+    try {
+      const res = await api.get(`/submissions/1/messages`);
+      setMessages(res.data);
     } catch (error) {
       console.log('cant load this submission')
     }
@@ -62,17 +71,22 @@ export default function ReviewPaper({ submissionId }) {
 
   useEffect(() => {
     getSubmission();
+    getMessages();
   }, []);
 
+  useEffect(() => {
+    console.log(paper, messages)
+  }, [paper, messages]);
 
-  console.log('submission', submissionId)
+
+  console.log('submission', submission)
 
   return (
     <ThemeProvider theme={MuiTheme}>
       <PageTemplate>
         <Box py={8}>
           <Grid container spacing={5}>
-            <PaperSubmission submittedPaper={paper} />
+            <PaperSubmission submittedPaper={paper?.data} />
 
             {/*<Grid item xs={12}>
               <PaperInformation />
@@ -87,7 +101,7 @@ export default function ReviewPaper({ submissionId }) {
             </Grid>
 
             <Grid item xs={12}>
-              <Conversation timeline={messages} paperId={submissionId} />
+              <Conversation timeline={timeline} />
             </Grid>
           </Grid>
         </Box>

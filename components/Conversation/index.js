@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import Timeline from "@material-ui/lab/Timeline";
 import TimelineItem from "@material-ui/lab/TimelineItem";
@@ -9,7 +9,6 @@ import TimelineOppositeContent from "@material-ui/lab/TimelineOppositeContent";
 import TimelineDot from "@material-ui/lab/TimelineDot";
 import Typography from "@material-ui/core/Typography";
 import OutlinedInput from "@material-ui/core/OutlinedInput";
-import { CircularProgress } from '@material-ui/core';
 
 import {
   Send as SendIcon,
@@ -20,53 +19,11 @@ import {
   Edit3 as Edit3Icon,
 } from "react-feather";
 import { Box, Grid, Paper } from "@material-ui/core";
-import { ContainedButton } from "./styles";
-import useApi from '../../services/useApi'
 
-export default function Conversation({ paperId }) {
-  const api = useApi();
-  const [message, setMessage] = useState('');
-  const [loading, setLoading] = useState(false);
-  const [timeline, setTimeline] = useState([]);
-
-  function handleTextChange(event) {
-    setMessage(event.target.value);
-  }
-
-  const getMessages = async () => {
-    try {
-      const res = await api.get(`/submissions/${paperId}/messages`);
-      setTimeline(res.data);
-      setLoading(false);
-      setMessage('');
-    } catch (error) {
-      console.log('cant load this submission')
-      setLoading(false)
-    }
-  }
-
-  useEffect(() => {
-    getMessages();
-  }, []);
-
-
-  const onAddComment = async () => {
-    setLoading(true)
-    try {
-      const response = await api.post(`/submissions/${paperId}/messages`, {
-        message
-      })
-      if (response.data?.id) {
-        getMessages()
-      }
-    } catch (error) {
-      console.log('error', error)
-    }
-  }
-
+export default function Conversation({ timeline }) {
   return (
     <Timeline>
-        <TimelineItem>
+      <TimelineItem>
         <TimelineSeparator>
           <TimelineDot
             elevation={0}
@@ -85,46 +42,30 @@ export default function Conversation({ paperId }) {
           <Grid container xs={12}>
             
           </Grid>
-          <OutlinedInput
-            multiline
-            fullWidth
-            style={{ boxShadow: "10px" }}
-            value={message}
-            onChange={handleTextChange}
-          />
-          {message ? (
-          <Box display="flex" justifyContent="flex-end">
-            <ContainedButton disabled={loading} onClick={onAddComment}>
-              {loading ?
-                (<CircularProgress color='inherit' size={25} />)
-                : 'Add comment'}
-            </ContainedButton>
-          </Box>
-          ) : null}
+          <OutlinedInput fullWidth style={{ boxShadow: "10px" }} />
         </TimelineContent>
       </TimelineItem>
+
       {timeline.map((item, index) => (
         <TimelineItem>
-          {item.author_id ? (
+          {item.type === "comment" ? (
             <>
               <TimelineSeparator>
                 <Paper elevation={2}>
                   <Box p={2}>
                     <Typography variant="h4" noWrap>
-                      <pre style={{ fontFamily: 'inherit', margin: 0, padding: 0 }}>
-                        {item.body}
-                      </pre>
+                      {item.content}
                     </Typography>
 
-                    {/* <Box mt={1}>
+                    <Box mt={1}>
                       <Typography variant="h5" noWrap>
                         {item.date}.
                       </Typography>
-                    </Box> */}
+                    </Box>
                   </Box>
                 </Paper>
 
-                {index < timeline.length - 1 ? <TimelineConnector /> : null}
+                {index < timeline.length - 1 && <TimelineConnector />}
               </TimelineSeparator>
             </>
           ) : (
@@ -141,15 +82,15 @@ export default function Conversation({ paperId }) {
                   <TimelineSeparatorIcon type={item.type} />
                 </TimelineDot>
 
-                {index < timeline.length - 1 ? <TimelineConnector /> : null}
+                {index < timeline.length - 1 && <TimelineConnector />}
               </TimelineSeparator>
 
               <TimelineContent>
-                <Typography variant="h4">{item.body}</Typography>
+                <Typography variant="h4">{item.content}</Typography>
 
-                {/* <Box mt={1}>
-                  <Typography variant="h5">{item.date}</Typography>
-                </Box> */}
+                <Box mt={1}>
+                  <Typography variant="h5">{item.date}.</Typography>
+                </Box>
               </TimelineContent>
             </>
           )}
@@ -161,10 +102,22 @@ export default function Conversation({ paperId }) {
 
 function TimelineSeparatorIcon({ type }) {
   switch (type) {
+    case "add":
+      return <PlusCircleIcon size={20} color="#8f00ff" />;
+
+    case "remove":
+      return <MinusCircleIcon size={20} color="red" />;
+
     case "edit":
       return <Edit3Icon size={20} color="#8f00ff" />;
 
+    case "add-author":
+      return <UserPlusIcon size={20} color="#8f00ff" />;
+
+    case "remove-author":
+      return <UserMinusIcon size={20} color="red" />;
+
     default:
-      return <PlusCircleIcon size={20} color="#8f00ff" />;
+      return <PlusCircleIcon color="#8f00ff" />;
   }
 }
