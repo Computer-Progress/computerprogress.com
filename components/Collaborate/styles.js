@@ -26,7 +26,7 @@ export const Container = styled.div`
 
 export const Text = styled.p`
   display: flex;
-  font-weight: bold;
+  font-weight: 200px !important;
   margin-bottom: 3rem;
   font-size: 2.25rem;
   color: "#2000E5";
