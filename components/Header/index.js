@@ -1,7 +1,22 @@
-import { Container, Toolbar, Box, Typography } from "@material-ui/core";
-import useMediaQuery from "@material-ui/core/useMediaQuery";
+import { useState } from "react";
+import { useRouter } from "next/router";
+
 import { MuiTheme } from "../../styles/theme";
 
+import {
+  Container,
+  Toolbar,
+  Box,
+  Typography,
+  useMediaQuery,
+  Badge,
+  Avatar,
+  Menu,
+  MenuItem,
+  Button,
+  IconButton,
+  Divider,
+} from "@material-ui/core";
 import {
   StyledAppBar,
   StyledContainer,
@@ -11,10 +26,19 @@ import {
 } from "./styles";
 
 import Logo from "../../public/logo_icon.svg";
+import { ChevronDown as ChevronDownIcon } from "react-feather";
+import * as Icon from "react-feather";
+import { useSelector } from "react-redux";
 
 export default function Header({ isHome }) {
+  const router = useRouter();
+  const userState = useSelector((state) => state.UserReducer);
+
   const isMobileSM = useMediaQuery(MuiTheme.breakpoints.down("sm"));
   const isMobileXS = useMediaQuery(MuiTheme.breakpoints.down("xs"));
+
+  const [isUserLogged, setIsUserLogged] = useState(true);
+  const [menuAnchorEl, setMenuAnchorEl] = useState(null);
 
   const links = [
     {
@@ -30,6 +54,45 @@ export default function Header({ isHome }) {
       href: "/about_us",
     },
   ];
+
+  const menuItems = [
+    {
+      title: "Profile",
+      pathname: "/profile",
+      icon: <Icon.User />,
+    },
+    {
+      title: "Submissions",
+      pathname: "/papers/submissions",
+      icon: <Icon.File />,
+    },
+    {
+      title: "Reviews",
+      pathname: "/papers/reviews",
+      icon: <Icon.Clipboard />,
+    },
+  ];
+
+  function getUserInitials() {
+    if (!userState.first_name) {
+      return <Icon.User />;
+    }
+
+    return `${userState.first_name[0]}${userState.last_name[0]}`;
+  }
+
+  function handleOpenMenu(event) {
+    setMenuAnchorEl(event.currentTarget);
+  }
+
+  function handleCloseMenu() {
+    setMenuAnchorEl(null);
+  }
+
+  function goTo(index) {
+    setMenuAnchorEl(null);
+    router.push(menuItems[index]);
+  }
 
   return (
     <StyledAppBar isHome={isHome && !isMobileSM}>
@@ -63,25 +126,98 @@ export default function Header({ isHome }) {
               </>
             )}
 
-            <Box>
-              <StyledButton
-                size={isMobileSM ? "small" : "medium"}
-                color="secondary"
-                href="/sign_up"
-              >
-                Sign up
-              </StyledButton>
-            </Box>
+            {isUserLogged ? (
+              <>
+                <Box>
+                  <IconButton onClick={handleOpenMenu}>
+                    <Badge
+                      overlap="circular"
+                      anchorOrigin={{
+                        vertical: "bottom",
+                        horizontal: "right",
+                      }}
+                      badgeContent={
+                        <Avatar
+                          style={{
+                            width: 18,
+                            height: 18,
+                            backgroundColor: "#4e33ff",
+                          }}
+                        >
+                          <Icon.ChevronDown />
+                        </Avatar>
+                      }
+                    >
+                      <Avatar
+                        style={{ color: "#4e33ff", backgroundColor: "white" }}
+                      >
+                        {getUserInitials()}
+                      </Avatar>
+                    </Badge>
+                  </IconButton>
 
-            <Box>
-              <StyledButton
-                size={"medium"}
-                color="primary"
-                href="/sign_in"
-              >
-                Sign in
-              </StyledButton>
-            </Box>
+                  <Menu
+                    getContentAnchorEl={null}
+                    anchorEl={menuAnchorEl}
+                    anchorOrigin={{
+                      vertical: "bottom",
+                      horizontal: "left",
+                    }}
+                    open={Boolean(menuAnchorEl)}
+                    onClose={handleCloseMenu}
+                  >
+                    {menuItems.map((menuItem, index) => (
+                      <MenuItem
+                        onClick={() => goTo(index)}
+                        key={menuItem.title}
+                      >
+                        <Box display="flex">
+                          <Box
+                            display="inline-flex"
+                            alignContent="center"
+                            pr={2}
+                          >
+                            {menuItem.icon}
+                          </Box>
+
+                          <Box display="inline">{menuItem.title}</Box>
+                        </Box>
+                      </MenuItem>
+                    ))}
+
+                    <Divider />
+
+                    <MenuItem>
+                      <Box display="flex">
+                        <Box display="inline-flex" alignContent="center" pr={2}>
+                          <Icon.LogOut />
+                        </Box>
+
+                        <Box display="inline">Log out</Box>
+                      </Box>
+                    </MenuItem>
+                  </Menu>
+                </Box>
+              </>
+            ) : (
+              <>
+                <Box>
+                  <StyledButton
+                    size={isMobileSM ? "small" : "medium"}
+                    color="secondary"
+                    href="/sign_up"
+                  >
+                    Sign up
+                  </StyledButton>
+                </Box>
+
+                <Box>
+                  <StyledButton size={"medium"} color="primary" href="/sign_in">
+                    Sign in
+                  </StyledButton>
+                </Box>
+              </>
+            )}
           </StyledToolbarBox>
         </Toolbar>
 
