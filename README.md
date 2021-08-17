@@ -2,10 +2,32 @@ This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next
 
 ## Getting Started
 
-First, run the development server:
+To run the application is recomended to install and use [docker](https://docs.docker.com/engine/install/) and [docker-compose](https://docs.docker.com/compose/install/)
 
-```bash
-yarn dev
+To start the development server run:
+
+```
+docker-compose up
+```
+
+To install new dependencies run:
+```
+docker-compose exec web yarn add [dependence]
+```
+
+To use the container terminal run:
+```
+docker-compose exec web bash
+```
+
+to stop services run:
+```
+docker-compose stop
+```
+
+To stop services and remove resources:
+```
+docker-compose down
 ```
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
