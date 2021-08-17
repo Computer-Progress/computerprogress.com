@@ -1,0 +1,14 @@
+version: '3.8'
+
+services:
+  web:
+    build:
+      context: .
+    restart: unless-stopped
+    ports:
+      - 3000:3000
+    tty: true
+    volumes: 
+      - .:/app
+      - /app/node_modules
+    command: yarn dev
