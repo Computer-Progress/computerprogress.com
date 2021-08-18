@@ -21,10 +21,17 @@ export default function Profile() {
     lastName: "",
     email: "",
   });
-  const [profileChanged, setProfileChanged] = useState(false);
-  const [updateProfileLoading, setUpdateProfileLoading] = useState(false);
+  const [password, setPassword] = useState({
+    currentPassword: "",
+    newPassword: "",
+    newPasswordConfirmation: "",
+  });
 
-  const [passwordChanged, setPasswordChanged] = useState(false);
+  const [isProfileValid, setIsProfileValid] = useState(false);
+  const [isPasswordValid, setIsPasswordValid] = useState(false);
+
+  const [isProfileLoading, setIsProfileLoading] = useState(false);
+  const [isPasswordLoading, setIsPasswordLoading] = useState(false);
 
   const userState = useSelector((state) => state.UserReducer);
 
@@ -35,37 +42,53 @@ export default function Profile() {
       email: userState.email ?? "",
     });
 
-    setProfileChanged(false);
+    setIsProfileValid(false);
   }, [userState]);
 
   useEffect(() => {
-    if (profile.firstName && profile.firstName !== userState.first_name) {
-      setProfileChanged(true);
-    } else if (profile.lastName && profile.lastName !== userState.lastName) {
-      setProfileChanged(true);
-    } else if (profile.email && profile.email !== userState.email) {
-      setProfileChanged(true);
-    } else {
-      setProfileChanged(false);
-    }
+    validateProfile();
   }, [profile]);
 
-  function handleProfileChange(event) {
+  useEffect(() => {
+    validatePassword();
+  }, [password]);
+
+  function handleInputChange(event, group) {
     const key = event.target.name;
     const value = event.target.value;
 
-    setProfile({ ...profile, [key]: value });
+    if (group === "profile") {
+      setProfile({ ...profile, [key]: value });
+    } else if (group === "password") {
+      setPassword({ ...password, [key]: value });
+    }
   }
 
-  async function updateProfile() {
-    setUpdateProfileLoading(true);
+  function validateProfile() {
+    if (profile.firstName && profile.firstName !== userState.first_name) {
+      setIsProfileValid(true);
+    } else if (profile.lastName && profile.lastName !== userState.lastName) {
+      setIsProfileValid(true);
+    } else if (profile.email && profile.email !== userState.email) {
+      setIsProfileValid(true);
+    } else {
+      setIsProfileValid(false);
+    }
+  }
 
-    const body = {
-      first_name: profile.firstName,
-      last_name: profile.lastName,
-      email: profile.email,
-    };
+  function validatePassword() {
+    const isPasswordEmpty = Object.values(password).some(
+      (password) => password.length === 0
+    );
 
+    if (isPasswordEmpty) {
+      setIsPasswordValid(false);
+    } else {
+      setIsPasswordValid(true);
+    }
+  }
+
+  async function update(body) {
     const response = await api
       .put("/users/me", body)
       .then((response) => {
@@ -77,9 +100,34 @@ export default function Profile() {
       .catch((error) => {
         console.log(error);
       });
-
-    setUpdateProfileLoading(false);
   }
+
+  async function updateProfile() {
+    const body = {
+      first_name: profile.firstName,
+      last_name: profile.lastName,
+      email: profile.email,
+    };
+
+    setIsProfileLoading(true);
+
+    await update(body);
+
+    setIsProfileLoading(false);
+  }
+
+  async function updatePassword() {
+    const body = {
+      password: password.newPassword,
+    };
+
+    setIsPasswordLoading(true);
+
+    await update(body);
+
+    setIsPasswordLoading(false);
+  }
+
   return (
     <Grid container spacing={3}>
       <Grid item xs={12} sm={6} md={4}>
@@ -89,7 +137,7 @@ export default function Profile() {
           label="First name"
           variant="outlined"
           fullWidth
-          onChange={handleProfileChange}
+          onChange={(event) => handleInputChange(event, "profile")}
         />
       </Grid>
       <Grid item xs={12} sm={6} md={4}>
@@ -99,7 +147,7 @@ export default function Profile() {
           label="Last name"
           variant="outlined"
           fullWidth
-          onChange={handleProfileChange}
+          onChange={(event) => handleInputChange(event, "profile")}
         />
       </Grid>
       <Grid item xs={12} container>
@@ -110,29 +158,16 @@ export default function Profile() {
             label="Email"
             variant="outlined"
             fullWidth
-            onChange={handleProfileChange}
+            onChange={(event) => handleInputChange(event, "profile")}
           />
         </Grid>
       </Grid>
 
-      {/* <Grid item xs={12}>
-        <Button
-          disabled={!profileChanged}
-          style={{ borderRadius: "100px" }}
-          color="primary"
-          variant="contained"
-          disableElevation
-          onClick={updateProfile}
-        >
-          <Box px={3}>Update profile</Box>
-        </Button>
-      </Grid> */}
-
       <Grid item xs={12} container>
         <Grid item xs={12} sm={6} md={4} lg={3}>
           <NewButton
-            disabled={!profileChanged}
-            loading={updateProfileLoading}
+            disabled={!setIsProfileValid}
+            loading={isProfileLoading}
             onClick={updateProfile}
           >
             Update profile
@@ -150,30 +185,36 @@ export default function Profile() {
       <Grid item xs={12} container>
         <Grid item xs={12} sm={6} md={4}>
           <TextField
+            name="currentPassword"
             label="Current password"
             variant="outlined"
             fullWidth
             type="password"
+            onChange={(event) => handleInputChange(event, "password")}
           />
         </Grid>
       </Grid>
       <Grid item xs={12} container>
         <Grid item xs={12} sm={6} md={4}>
           <TextField
+            name="newPassword"
             label="New password"
             variant="outlined"
             fullWidth
             type="password"
+            onChange={(event) => handleInputChange(event, "password")}
           />
         </Grid>
       </Grid>
       <Grid item xs={12} container>
         <Grid item xs={12} sm={6} md={4}>
           <TextField
+            name="newPasswordConfirmation"
             label="Confirm new password"
             variant="outlined"
             fullWidth
             type="password"
+            onChange={(event) => handleInputChange(event, "password")}
           />
         </Grid>
       </Grid>
@@ -181,11 +222,11 @@ export default function Profile() {
       <Grid item xs={12} container>
         <Grid item xs={12} sm={6} md={4} lg={3}>
           <NewButton
-            disabled={!profileChanged}
-            loading={updateProfileLoading}
-            onClick={updateProfile}
+            disabled={!isPasswordValid}
+            loading={isPasswordLoading}
+            onClick={updatePassword}
           >
-            Update profile
+            Update password
           </NewButton>
         </Grid>
       </Grid>
