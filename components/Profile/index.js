@@ -8,6 +8,8 @@ import {
   TextField,
   Typography,
 } from "@material-ui/core";
+import NewButton from "../Button/NewButton";
+
 import { useEffect, useState } from "react";
 
 export default function Profile() {
@@ -19,8 +21,9 @@ export default function Profile() {
     lastName: "",
     email: "",
   });
-
   const [profileChanged, setProfileChanged] = useState(false);
+  const [updateProfileLoading, setUpdateProfileLoading] = useState(false);
+
   const [passwordChanged, setPasswordChanged] = useState(false);
 
   const userState = useSelector((state) => state.UserReducer);
@@ -55,6 +58,8 @@ export default function Profile() {
   }
 
   async function updateProfile() {
+    setUpdateProfileLoading(true);
+
     const body = {
       first_name: profile.firstName,
       last_name: profile.lastName,
@@ -72,6 +77,8 @@ export default function Profile() {
       .catch((error) => {
         console.log(error);
       });
+
+    setUpdateProfileLoading(false);
   }
   return (
     <Grid container spacing={3}>
@@ -108,7 +115,7 @@ export default function Profile() {
         </Grid>
       </Grid>
 
-      <Grid item xs={12}>
+      {/* <Grid item xs={12}>
         <Button
           disabled={!profileChanged}
           style={{ borderRadius: "100px" }}
@@ -119,6 +126,18 @@ export default function Profile() {
         >
           <Box px={3}>Update profile</Box>
         </Button>
+      </Grid> */}
+
+      <Grid item xs={12} container>
+        <Grid item xs={12} sm={6} md={4} lg={3}>
+          <NewButton
+            disabled={!profileChanged}
+            loading={updateProfileLoading}
+            onClick={updateProfile}
+          >
+            Update profile
+          </NewButton>
+        </Grid>
       </Grid>
 
       <Grid item xs={12}>
@@ -159,16 +178,16 @@ export default function Profile() {
         </Grid>
       </Grid>
 
-      <Grid item xs={12}>
-        <Button
-          disabled
-          style={{ borderRadius: "100px" }}
-          color="primary"
-          variant="contained"
-          disableElevation
-        >
-          <Box px={3}>Update password</Box>
-        </Button>
+      <Grid item xs={12} container>
+        <Grid item xs={12} sm={6} md={4} lg={3}>
+          <NewButton
+            disabled={!profileChanged}
+            loading={updateProfileLoading}
+            onClick={updateProfile}
+          >
+            Update profile
+          </NewButton>
+        </Grid>
       </Grid>
     </Grid>
   );

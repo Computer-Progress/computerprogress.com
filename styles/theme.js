@@ -61,7 +61,11 @@ export const MuiTheme = createTheme({
   palette: {
     primary: {
       main: "#7100C9",
-      contrastText: "#FFFFFF",
+      contrastText: "#efeff4",
+    },
+    secondary: {
+      main: "#efeff4",
+      contrastText: "#7100C9",
     },
   },
 });
