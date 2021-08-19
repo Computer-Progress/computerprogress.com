@@ -12,7 +12,7 @@ export default function userReducer(state = initialState, action) {
     switch (action.type) {
     case Types.LOGIN:
         return {...state, ...action.payload.user};
-    case Types.LOGIN:
+    case Types.LOGOUT:
         return initialState;
     default:
         return state;

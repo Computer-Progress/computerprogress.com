@@ -64,9 +64,6 @@ export default function ReviewPaper({ submissionId }) {
     getSubmission();
   }, []);
 
-
-  console.log('submission', submissionId)
-
   return (
     <ThemeProvider theme={MuiTheme}>
       <PageTemplate>

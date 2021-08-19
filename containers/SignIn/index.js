@@ -42,7 +42,6 @@ export default function SignIn() {
     setLoading(true)
     try {
       const response = await api.get('/users/me')
-      console.log(response)
       const user = response.data
       if (user?.email) {
         dispatch(userActions.login({...user, ...userState}))
@@ -61,14 +60,12 @@ export default function SignIn() {
   }
 
   useEffect(() => {
-    console.log('userState', userState)
     if (userState?.token && !userState?.id) {
       getUserInfo()
     }
   }, [userState])
 
   const login = async () => {
-    console.log(userInfo)
     const validations = ['email', 'password']
     const isInvalid = validations.some(item => {
       if (!userInfo[item]) {
@@ -82,7 +79,6 @@ export default function SignIn() {
       return false;
     })
 
-    console.log(userInfo)
 
     if (isInvalid) return
     setLoading(true)
@@ -98,7 +94,6 @@ export default function SignIn() {
         }
       })
     
-      console.log(response.data)
       const { data } = response 
       let user = {
         token: `${data.token_type} ${data.access_token}`

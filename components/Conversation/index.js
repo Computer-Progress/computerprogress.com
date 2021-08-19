@@ -23,6 +23,8 @@ import { Box, Grid, Paper } from "@material-ui/core";
 import { ContainedButton } from "./styles";
 import useApi from '../../services/useApi'
 
+import { getRelativeTime } from '../../utils';
+
 export default function Conversation({ paperId }) {
   const api = useApi();
   const [message, setMessage] = useState('');
@@ -103,31 +105,9 @@ export default function Conversation({ paperId }) {
           ) : null}
         </TimelineContent>
       </TimelineItem>
+      {console.log('timeline', timeline)}
       {timeline.map((item, index) => (
         <TimelineItem>
-          {item.author_id ? (
-            <>
-              <TimelineSeparator>
-                <Paper elevation={2}>
-                  <Box p={2}>
-                    <Typography variant="h4" noWrap>
-                      <pre style={{ fontFamily: 'inherit', margin: 0, padding: 0 }}>
-                        {item.body}
-                      </pre>
-                    </Typography>
-
-                    {/* <Box mt={1}>
-                      <Typography variant="h5" noWrap>
-                        {item.date}.
-                      </Typography>
-                    </Box> */}
-                  </Box>
-                </Paper>
-
-                {index < timeline.length - 1 ? <TimelineConnector /> : null}
-              </TimelineSeparator>
-            </>
-          ) : (
             <>
               <TimelineSeparator>
                 <TimelineDot
@@ -145,14 +125,33 @@ export default function Conversation({ paperId }) {
               </TimelineSeparator>
 
               <TimelineContent>
-                <Typography variant="h4">{item.body}</Typography>
+              {item.author_id ? (
+                <Paper elevation={2}>
+                  <Box p={2}>
+                    <Typography variant="h4" noWrap>
+                      <pre style={{ fontFamily: 'inherit', margin: 0, padding: 0 }}>
+                        {item.body}
+                      </pre>
+                    </Typography>
 
-                {/* <Box mt={1}>
-                  <Typography variant="h5">{item.date}</Typography>
-                </Box> */}
-              </TimelineContent>
+                    <Box mt={1} display="flex" alignItems="flex-end" justifyContent="flex-end">
+                      <Typography variant="h5" noWrap>
+                        Commented by "{item.author.first_name} {item.author.last_name}" {getRelativeTime(new Date(item.created_at))} 
+                      </Typography>
+                    </Box>
+                  </Box>
+                </Paper>
+          ) : (
+            <>
+              <Typography variant="h4">{item.body}</Typography>
+
+              <Box mt={1}>
+                <Typography variant="h5">{getRelativeTime(new Date(item.created_at))}</Typography>
+              </Box>
             </>
           )}
+              </TimelineContent>
+            </>
         </TimelineItem>
       ))}
     </Timeline>

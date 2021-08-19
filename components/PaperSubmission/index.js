@@ -36,7 +36,6 @@ export default function PaperSubmission({ submittedPaper }) {
   const [shouldValidate, setShouldValidade] = useState(false);
 
   const emptyModel = (newId) => {
-    console.log('onAdd', newId)
     return {
       id: newId,
       name: '',
@@ -56,7 +55,6 @@ export default function PaperSubmission({ submittedPaper }) {
   };
 
   useEffect(() => {
-    console.log('submittedPaper', submittedPaper)
     if (submittedPaper) {
       setPaper(submittedPaper.data)
     } else {
@@ -84,8 +82,6 @@ export default function PaperSubmission({ submittedPaper }) {
   }
 
   function removeModel(modelIndex) {
-    console.log(modelIndex);
-
     const newPaper = paper;
     const newList = paper.models.filter((item, index) => index !== modelIndex);;
     newPaper.models = [...newList];

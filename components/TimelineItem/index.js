@@ -15,7 +15,6 @@ import {
 } from "react-feather";
 
 export default function TimelineItem({ item, disableConnector }) {
-  console.log(item, disableConnector);
   return (
     <TimelineItem>
       <TimelineSeparator>

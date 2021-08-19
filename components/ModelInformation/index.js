@@ -58,7 +58,6 @@ export default function ModelInformation(props) {
     if (props.modelIndex >= 0) {
       props.handleModelChange(model, props.modelIndex);
     }
-    console.log(model)
   }, [model]);
 
   useEffect(() => {
@@ -144,11 +143,9 @@ export default function ModelInformation(props) {
   }
 
   function handleNumberChange({ target: { name, value } }, type) {
-    console.log(name, value, type);
     switch (type) {
       case "int":
         const onlyInt = value.replace(/[^0-9]/g, "");
-        console.log(onlyInt);
 
         setModel({ ...model, [name]: onlyInt });
         break;

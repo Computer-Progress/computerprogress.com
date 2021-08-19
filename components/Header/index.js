@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useRouter } from "next/router";
 
 import { MuiTheme } from "../../styles/theme";
@@ -28,16 +28,17 @@ import {
 import Logo from "../../public/logo_icon.svg";
 import { ChevronDown as ChevronDownIcon } from "react-feather";
 import * as Icon from "react-feather";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+import { Creators as userActions } from '../../store/ducks/user';
 
 export default function Header({ isHome }) {
+  const dispatch = useDispatch()
   const router = useRouter();
   const userState = useSelector((state) => state.UserReducer);
 
   const isMobileSM = useMediaQuery(MuiTheme.breakpoints.down("sm"));
   const isMobileXS = useMediaQuery(MuiTheme.breakpoints.down("xs"));
 
-  const [isUserLogged, setIsUserLogged] = useState(true);
   const [menuAnchorEl, setMenuAnchorEl] = useState(null);
 
   const links = [
@@ -51,7 +52,7 @@ export default function Header({ isHome }) {
     },
     {
       text: "About us",
-      href: "/about_us",
+      href: "/aboutus",
     },
   ];
 
@@ -94,6 +95,10 @@ export default function Header({ isHome }) {
     router.push(menuItems[index]);
   }
 
+  function logout() {
+    dispatch(userActions.logout());
+  }
+
   return (
     <StyledAppBar isHome={isHome && !isMobileSM}>
       <StyledContainer>
@@ -126,7 +131,7 @@ export default function Header({ isHome }) {
               </>
             )}
 
-            {isUserLogged ? (
+            {userState?.token ? (
               <>
                 <Box>
                   <IconButton onClick={handleOpenMenu}>
@@ -187,7 +192,7 @@ export default function Header({ isHome }) {
 
                     <Divider />
 
-                    <MenuItem>
+                    <MenuItem onClick={logout}>
                       <Box display="flex">
                         <Box display="inline-flex" alignContent="center" pr={2}>
                           <Icon.LogOut />
@@ -205,14 +210,14 @@ export default function Header({ isHome }) {
                   <StyledButton
                     size={isMobileSM ? "small" : "medium"}
                     color="secondary"
-                    href="/sign_up"
+                    href="/signup"
                   >
                     Sign up
                   </StyledButton>
                 </Box>
 
                 <Box>
-                  <StyledButton size={"medium"} color="primary" href="/sign_in">
+                  <StyledButton size={"medium"} color="primary" href="/signin">
                     Sign in
                   </StyledButton>
                 </Box>

@@ -42,7 +42,6 @@ function Benchmark({ benchmark, taskId, benchmarkId }) {
   ];
 
   useEffect(() => {
-    console.log('benchmark', benchmark)
     const has_operation_per_network_pass = data.some(item => !!item.operation_per_network_pass);
     if (!has_operation_per_network_pass) {
       setSecondButtons([
@@ -57,7 +56,6 @@ function Benchmark({ benchmark, taskId, benchmarkId }) {
   }, []);
 
   const onSelectAccuracy = ({option, index}) => {
-    console.log('index', index)
     setLabel(option.name);
     setSelectedButton(index);
   }
