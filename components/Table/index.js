@@ -56,7 +56,7 @@ export default function TaskTable({
           </StyledGridItem>
         )}
 
-        <StyledGridItem $order={3} xs={12} sm={showViewAllTasks ? 6 : 12} lg={3}>
+        <StyledGridItem $order={3} xs={12} sm={showViewAllTasks ? 6 : 12} lg={sota ? 2 : 3}>
           <TableOptions
             options={options}
             selectedOption={selectedOption}
@@ -70,7 +70,7 @@ export default function TaskTable({
           />
         </StyledGridItem>
 
-        <StyledGridItem $order={isMobile ? 4 : 4} xs={12} lg={showViewAllTasks ? 7 : 9}>
+        <StyledGridItem $order={isMobile ? 4 : 4} xs={12} lg={showViewAllTasks ? 7 : sota ? 8 : 9}>
           <TaskTableChart
             isLoading={loading}
             data={data}
