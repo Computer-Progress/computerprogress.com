@@ -1,5 +1,7 @@
 // import { useState } from 'react';
+import Link from "next/link";
 import PageTemplate from "../../components/PageTemplate";
+import NewButton from "../../components/Button/NewButton";
 
 import {
   Container,
@@ -8,8 +10,8 @@ import {
   Input,
   Question,
   SignButton,
-  Divider
-} from './styles';
+  Divider,
+} from "./styles";
 
 export default function SignUp() {
   return (
@@ -18,8 +20,8 @@ export default function SignUp() {
         <InfoContainer>
           <h2>Your help can change everything</h2>
           <p>
-            Collaborate for the understanding of hardware burden
-            influence in machine learning.
+            Collaborate for the understanding of hardware burden influence in
+            machine learning.
           </p>
         </InfoContainer>
         <StyledBox>
@@ -29,16 +31,23 @@ export default function SignUp() {
           <Input label="Last Name" />
           <Input label="Password" />
           <Input label="Confirm Password" />
-          <Question>Use 8 or more characters with a mix of letters, numbers & simbols</Question>
+          <Question>
+            Use 8 or more characters with a mix of letters, numbers & simbols
+          </Question>
           <SignButton>SIGN UP</SignButton>
 
-          <Question margin>By signing up, you agree to our Data Policy</Question>
+          <Question margin>
+            By signing up, you agree to our Data Policy
+          </Question>
           <Divider />
           <Question>Have an account?</Question>
-          <SignButton variant="outlined">SIGN IN</SignButton>
+          <Link href="/signin">
+            <a>
+              <NewButton color="secondary">Sign in</NewButton>
+            </a>
+          </Link>
         </StyledBox>
       </Container>
     </PageTemplate>
-  )
+  );
 }
-
