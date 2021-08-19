@@ -16,10 +16,9 @@ export default function SignIn() {
     <PageTemplate>
       <Container>
         <InfoContainer>
-          <h2>Your help can change everything</h2>
+          <h2>You can change everything!</h2>
           <p>
-            Collaborate for the understanding of hardware burden
-            influence in machine learning.
+            Collaborate on the understanding of the computational progress!
           </p>
         </InfoContainer>
         <StyledBox>
