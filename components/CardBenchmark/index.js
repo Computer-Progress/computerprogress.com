@@ -50,7 +50,7 @@ export default function CardBenchmark({ taskId, benchmark }) {
                 <FlexItem pl={2} textAlign="right">
                   <p>Year</p>
 
-                  <h4>{benchmark.sota_paper_publication_date}</h4>
+                  <h4>{benchmark.sota_paper_publication_date.substring(0, 4)}</h4>
                 </FlexItem>
               </FlexBox>
             </>
