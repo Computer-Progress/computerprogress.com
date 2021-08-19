@@ -9,7 +9,7 @@ export const StyledButton = styled(MuiButton).attrs((props) => ({
   disabled: props.disabled || props.loading,
   disableElevation: true,
   fullWidth: true,
-  variant: "contained",
+  variant: props.color === "secondary" ? "outlined" : "contained",
 }))`
   border-radius: 100px !important;
   min-height: 2.3rem;
