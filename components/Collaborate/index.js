@@ -4,7 +4,7 @@ export default function Collaborate() {
   return (
     <Wrapper>
       <Container>
-        <Text> Your help can change everything! </Text>
+        <Text> You can change everything! </Text>
         <Call> Collaborate on the understanding of the computational progress!</Call>
         <CollaborateButton link='/collaborate'>SEE HOW TO COLLABORATE</CollaborateButton>
       </Container>

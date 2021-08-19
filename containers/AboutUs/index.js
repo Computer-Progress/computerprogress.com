@@ -4,14 +4,12 @@ import DescriptionCard from "../../components/DescriptionCard";
 import ContributorsContainer from "../../components/ContributorsContainer";
 import { textBlocks, researchers, otherContributors } from "./aboutUsData";
 
-import { StyledTitle, StyledButton, ButtonContainer } from "./styles.js";
+import {StyledButton, ButtonContainer} from "./styles.js";
 
 export default function AboutUs() {
   return (
     <PageTemplate>
       <Container>
-        {/* <StyledTitle>About us</StyledTitle> */}
-
         <DescriptionCard
           icon={textBlocks[0].icon}
           title={textBlocks[0].title}
