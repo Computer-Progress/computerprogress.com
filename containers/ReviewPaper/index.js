@@ -2,10 +2,9 @@ import { useEffect, useState } from 'react';
 
 import { ThemeProvider } from "@material-ui/core/styles";
 import { MuiTheme } from "../../styles/theme";
+import PrivatePage from "../../components/PrivatePage";
 
 import PageTemplate from "../../components/PageTemplate";
-import PaperInformation from "../../components/PaperInformation";
-import ModelInformation from "../../components/ModelInformation";
 import Conversation from "../../components/Conversation";
 import useApi from '../../services/useApi';
 import PaperSubmission from '../../components/PaperSubmission';
@@ -46,7 +45,7 @@ const timeline = [
   },
 ];
 
-export default function ReviewPaper({ submissionId }) {
+function ReviewPaper({ submissionId }) {
   const api = useApi();
   const [paper, setPaper] = useState(null);
   const [messages, setMessages] = useState([]);
@@ -92,3 +91,5 @@ export default function ReviewPaper({ submissionId }) {
     </ThemeProvider>
   );
 }
+
+export default PrivatePage(ReviewPaper)
