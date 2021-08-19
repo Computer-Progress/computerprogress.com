@@ -97,6 +97,7 @@ export default function Header({ isHome }) {
 
   function logout() {
     dispatch(userActions.logout());
+    router.push('/');
   }
 
   return (
