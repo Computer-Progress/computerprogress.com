@@ -6,13 +6,14 @@ export async function getServerSideProps({ query }) {
   if (query.confirmation) {
     const api = useApi(true);
 
-    const params = new URLSearchParams();
-    params.append("confirmation_token", query.confirmation);
+    const body = {
+      token: query.confirmation,
+    };
 
     let hasEmailConfirmationSucceed = null;
 
     try {
-      // await api.put(`...`, params);
+      await api.post(`/confirm-email`, body);
 
       hasEmailConfirmationSucceed = true;
     } catch (error) {
