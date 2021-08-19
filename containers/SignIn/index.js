@@ -1,4 +1,10 @@
 import { useState, useEffect } from "react";
+import Link from "next/link";
+import { useDispatch, useSelector } from "react-redux";
+import { Creators as alertActions } from "../../store/ducks/alert";
+import { Creators as userActions } from "../../store/ducks/user";
+import useApi from "../../services/useApi";
+
 import PageTemplate from "../../components/PageTemplate";
 import Alert from "../../components/Alert";
 import { useRouter } from "next/router";
@@ -13,11 +19,9 @@ import {
   Divider,
   StyledAlert,
 } from "./styles";
+import NewButton from "../../components/Button/NewButton";
 
-import useApi from "../../services/useApi";
-import { useDispatch, useSelector } from "react-redux";
-import { Creators as alertActions } from "../../store/ducks/alert";
-import { Creators as userActions } from "../../store/ducks/user";
+import { GridOffTwoTone } from "@material-ui/icons";
 
 export default function SignIn({ hasEmailConfirmationSucceed }) {
   console.log(hasEmailConfirmationSucceed);
@@ -153,7 +157,11 @@ export default function SignIn({ hasEmailConfirmationSucceed }) {
           </SignButton>
           <Divider />
           <Question>Don't have an account?</Question>
-          <SignButton variant="outlined">SIGN UP</SignButton>
+          <Link href="/signup">
+            <a>
+              <NewButton color="secondary">Sign up</NewButton>
+            </a>
+          </Link>
         </StyledBox>
       </Container>
     </PageTemplate>
