@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import { MuiTheme } from "../../styles/theme";
 import { Grid, Box, Typography, Tabs, Tab, Divider } from "@material-ui/core";
 import * as Icon from "react-feather";
-
+import PrivatePage from "../../components/PrivatePage";
 import { useMediaQuery } from "@material-ui/core";
 
 import PageTemplate from "../../components/PageTemplate";
@@ -31,7 +31,7 @@ const pages = [
   },
 ];
 
-export default function UserPageTemplate({ pathname }) {
+function UserPageTemplate({ pathname }) {
   const router = useRouter();
 
   const isMobile = useMediaQuery(MuiTheme.breakpoints.down("sm"));
@@ -144,3 +144,5 @@ export default function UserPageTemplate({ pathname }) {
     </PageTemplate>
   );
 }
+
+export default PrivatePage(UserPageTemplate)

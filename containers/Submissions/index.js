@@ -1,15 +1,8 @@
-import Link from "next/link";
-import { useEffect, useState } from "react";
-import { useMediaQuery } from "@material-ui/core";
-
-import { Grid, Box, Button } from "@material-ui/core";
-
+import PrivatePage from "../../components/PrivatePage";
 import UserPageTemplate from "../../components/UserPageTemplate";
 import Submissions from '../../components/Submissions';
-import { MuiTheme } from "../../styles/theme";
-import { StyledGridItem, StyledFlexbox, Title } from "./styles";
 
-export default function Review() {
+function Review() {
   // const isMobile = useMediaQuery(MuiTheme.breakpoints.down("md"));
   const papers = [
     {
@@ -48,3 +41,5 @@ export default function Review() {
     </UserPageTemplate>
   );
 }
+
+export default PrivatePage(Review)
