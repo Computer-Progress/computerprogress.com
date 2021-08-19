@@ -1,8 +1,8 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect } from "react";
 import PageTemplate from "../../components/PageTemplate";
 import Alert from "../../components/Alert";
-import { useRouter } from 'next/router'
-import { CircularProgress } from '@material-ui/core';
+import { useRouter } from "next/router";
+import { Box, CircularProgress } from "@material-ui/core";
 import {
   Container,
   StyledBox,
@@ -10,23 +10,25 @@ import {
   Input,
   Question,
   SignButton,
-  Divider
-} from './styles';
+  Divider,
+  StyledAlert,
+} from "./styles";
 
-import useApi from '../../services/useApi';
-import { useDispatch, useSelector } from 'react-redux';
-import { Creators as alertActions } from '../../store/ducks/alert';
-import { Creators as userActions } from '../../store/ducks/user';
+import useApi from "../../services/useApi";
+import { useDispatch, useSelector } from "react-redux";
+import { Creators as alertActions } from "../../store/ducks/alert";
+import { Creators as userActions } from "../../store/ducks/user";
 
-export default function SignIn() {
-  const router = useRouter()
+export default function SignIn({ hasEmailConfirmationSucceed }) {
+  console.log(hasEmailConfirmationSucceed);
+  const router = useRouter();
   const dispatch = useDispatch();
-  const userState = useSelector(state => state.UserReducer);
+  const userState = useSelector((state) => state.UserReducer);
 
-  const api = useApi()
+  const api = useApi();
   const [userInfo, setUserInfo] = useState({
-    email: '',
-    password: ''
+    email: "",
+    password: "",
   });
 
   const [loading, setLoading] = useState(false);
@@ -36,81 +38,81 @@ export default function SignIn() {
 
     myInfo[fieldName] = value;
     setUserInfo(myInfo);
-  }
+  };
 
   const getUserInfo = async () => {
-    setLoading(true)
+    setLoading(true);
     try {
-      const response = await api.get('/users/me')
-      const user = response.data
+      const response = await api.get("/users/me");
+      const user = response.data;
       if (user?.email) {
-        dispatch(userActions.login({...user, ...userState}))
-        router.push('/')
+        dispatch(userActions.login({ ...user, ...userState }));
+        router.push("/");
       }
-    
     } catch (error) {
-      setLoading(false)
-      dispatch(alertActions.openAlert({
-        open: true,
-        message: error.message,
-        type: 'error'
-      }));
+      setLoading(false);
+      dispatch(
+        alertActions.openAlert({
+          open: true,
+          message: error.message,
+          type: "error",
+        })
+      );
     }
-
-  }
+  };
 
   useEffect(() => {
     if (userState?.token && !userState?.id) {
-      getUserInfo()
+      getUserInfo();
     }
-  }, [userState])
+  }, [userState]);
 
   const login = async () => {
-    const validations = ['email', 'password']
-    const isInvalid = validations.some(item => {
+    const validations = ["email", "password"];
+    const isInvalid = validations.some((item) => {
       if (!userInfo[item]) {
-        dispatch(alertActions.openAlert({
-          open: true,
-          message: `Please, insert the ${item}`,
-          type: 'warning'
-        }));
+        dispatch(
+          alertActions.openAlert({
+            open: true,
+            message: `Please, insert the ${item}`,
+            type: "warning",
+          })
+        );
         return true;
       }
       return false;
-    })
+    });
 
-
-    if (isInvalid) return
-    setLoading(true)
-    const { email, password } = userInfo
+    if (isInvalid) return;
+    setLoading(true);
+    const { email, password } = userInfo;
     const params = new URLSearchParams();
-    params.append('username', email);
-    params.append('password', password);
+    params.append("username", email);
+    params.append("password", password);
 
     try {
-      const response = await api.post('login/access-token', params, {
+      const response = await api.post("login/access-token", params, {
         headers: {
-          'Content-Type': 'application/x-www-form-urlencoded'
-        }
-      })
-    
-      const { data } = response 
+          "Content-Type": "application/x-www-form-urlencoded",
+        },
+      });
+
+      const { data } = response;
       let user = {
-        token: `${data.token_type} ${data.access_token}`
-      }
-      dispatch(userActions.login(user))
+        token: `${data.token_type} ${data.access_token}`,
+      };
+      dispatch(userActions.login(user));
     } catch (error) {
-      setLoading(false)
-      dispatch(alertActions.openAlert({
-        open: true,
-        message: error.message,
-        type: 'error'
-      }));
+      setLoading(false);
+      dispatch(
+        alertActions.openAlert({
+          open: true,
+          message: error.message,
+          type: "error",
+        })
+      );
     }
-  
-
-
-  }
+  };
 
   return (
     <PageTemplate>
@@ -118,24 +120,42 @@ export default function SignIn() {
         <InfoContainer>
           <h2>Your help can change everything</h2>
           <p>
-            Collaborate for the understanding of hardware burden
-            influence in machine learning.
+            Collaborate for the understanding of hardware burden influence in
+            machine learning.
           </p>
         </InfoContainer>
         <StyledBox>
           <h2>Sign In</h2>
-          <Input label="Email" onChange={(event) => onChange(event.target.value, 'email')} />
-          <Input label="Password" type="password" autoComplete="current-password" onChange={(event) => onChange(event.target.value, 'password')} />
-          <Question >Forgot your password?</Question>
-          <SignButton onClick={login}>{loading ? (
-            <CircularProgress color='inherit' size={25} />
-          ) : 'SIGN IN'}</SignButton>
+
+          {hasEmailConfirmationSucceed && (
+            <Box pb={2}>
+              <StyledAlert>Your email has been confirmed!</StyledAlert>
+            </Box>
+          )}
+
+          <Input
+            label="Email"
+            onChange={(event) => onChange(event.target.value, "email")}
+          />
+          <Input
+            label="Password"
+            type="password"
+            autoComplete="current-password"
+            onChange={(event) => onChange(event.target.value, "password")}
+          />
+          <Question>Forgot your password?</Question>
+          <SignButton onClick={login}>
+            {loading ? (
+              <CircularProgress color="inherit" size={25} />
+            ) : (
+              "SIGN IN"
+            )}
+          </SignButton>
           <Divider />
           <Question>Don't have an account?</Question>
           <SignButton variant="outlined">SIGN UP</SignButton>
         </StyledBox>
       </Container>
     </PageTemplate>
-  )
+  );
 }
-
