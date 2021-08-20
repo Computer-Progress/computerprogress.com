@@ -128,7 +128,7 @@ export default function PaperList({ isReviewer }) {
         !isReviewer ? `owner_id=${userState?.id}&`
         : ''}limit=20&skip=${page - 1}&q=${search}`)
 
-      console.log(response.data)
+      // console.log(response.data)
       setSubmissions(response.data?.items);
       setTotal(Math.ceil(response.data.total / 20));
     } catch (error) {

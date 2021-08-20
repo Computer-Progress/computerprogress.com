@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useMemo } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import Timeline from "@material-ui/lab/Timeline";
 import TimelineItem from "@material-ui/lab/TimelineItem";
@@ -22,6 +22,7 @@ import {
 import { Box, Grid, Paper } from "@material-ui/core";
 import { ContainedButton } from "./styles";
 import useApi from '../../services/useApi'
+import NewButton from "../../components/Button/NewButton";
 
 import { getRelativeTime } from '../../utils';
 
@@ -42,7 +43,7 @@ export default function Conversation({ paperId }) {
       setLoading(false);
       setMessage('');
     } catch (error) {
-      console.log('cant load this submission')
+      // console.log('cant load this submission')
       setLoading(false)
     }
   }
@@ -50,6 +51,22 @@ export default function Conversation({ paperId }) {
   useEffect(() => {
     getMessages();
   }, []);
+
+  const submitOptions = useMemo(() => {
+    if (message) {
+      return [
+        "Approve and comment",
+        "Decline and comment",
+        "Save changes and comment",
+      ]
+    }
+
+    return [
+      "Approve",
+      "Decline",
+      "Save changes",
+    ]
+  }, [message])
 
 
   const onAddComment = async () => {
@@ -62,7 +79,7 @@ export default function Conversation({ paperId }) {
         getMessages()
       }
     } catch (error) {
-      console.log('error', error)
+      // console.log('error', error)
     }
   }
 
@@ -94,18 +111,29 @@ export default function Conversation({ paperId }) {
             value={message}
             onChange={handleTextChange}
           />
-          {message ? (
-          <Box display="flex" justifyContent="flex-end">
-            <ContainedButton disabled={loading} onClick={onAddComment}>
-              {loading ?
-                (<CircularProgress color='inherit' size={25} />)
-                : 'Add comment'}
-            </ContainedButton>
+          <Box display="flex" justifyContent="flex-end" flexDirection="row" alignItems="center" p={1}>
+            {message ? (
+              <Box marginRight={1}>
+                <NewButton
+                  loading={loading}
+                  onClick={onAddComment}
+                  color="secondary"
+                >
+                  Add comment
+                </NewButton>
+              </Box>
+            ) : null}
+            <Box>
+              <NewButton
+                loading={loading}
+                options={submitOptions}
+              >
+                Save changes
+              </NewButton>
+            </Box>
           </Box>
-          ) : null}
         </TimelineContent>
       </TimelineItem>
-      {console.log('timeline', timeline)}
       {timeline.map((item, index) => (
         <TimelineItem>
             <>

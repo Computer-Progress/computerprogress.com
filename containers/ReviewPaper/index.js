@@ -55,7 +55,7 @@ function ReviewPaper({ submissionId }) {
       const res = await api.get(`/submissions/${submissionId}`);
       setPaper(res.data);
     } catch (error) {
-      console.log('cant load this submission')
+      // console.log('cant load this submission')
     }
   }
 

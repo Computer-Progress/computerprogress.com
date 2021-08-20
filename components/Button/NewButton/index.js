@@ -14,6 +14,7 @@ export default function Button({ children, ...props }) {
   }
 
   return (
+    <>
     <StyledButton {...props} onClick={openMenu}>
       <StyledBox {...props}>
         {props.loading ? <StyledCircularProgress /> : children}
@@ -24,28 +25,27 @@ export default function Button({ children, ...props }) {
           </Box>
         )}
       </StyledBox>
-
-      {props.options?.length >= 0 && (
-        <Menu
-          anchorEl={anchorEl}
-          keepMounted
-          open={Boolean(anchorEl)}
-          onClose={closeMenu}
-          getContentAnchorEl={null}
-          anchorOrigin={{
-            vertical: "bottom",
-            horizontal: "center",
-          }}
-          transformOrigin={{
-            vertical: "top",
-            horizontal: "center",
-          }}
-        >
-          {props.options.map((option) => (
-            <MenuItem>{option}</MenuItem>
-          ))}
-        </Menu>
-      )}
     </StyledButton>
+    {props.options?.length >= 0 && (
+      <Menu
+        anchorEl={anchorEl}
+        open={Boolean(anchorEl)}
+        onClose={closeMenu}
+        getContentAnchorEl={null}
+        anchorOrigin={{
+          vertical: "bottom",
+          horizontal: "center",
+        }}
+        transformOrigin={{
+          vertical: "top",
+          horizontal: "center",
+        }}
+      >
+        {props.options.map((option) => (
+          <MenuItem>{option}</MenuItem>
+        ))}
+      </Menu>
+    )}
+    </>
   );
 }

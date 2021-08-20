@@ -52,7 +52,7 @@ function Benchmark({ benchmark, taskId, benchmarkId }) {
       ])
       setShowOperations(false);
     }
-    // console.log(domain);
+    // // console.log(domain);
   }, []);
 
   const onSelectAccuracy = ({option, index}) => {

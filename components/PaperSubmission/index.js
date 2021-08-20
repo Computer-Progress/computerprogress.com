@@ -11,6 +11,9 @@ import NewButton from "../../components/Button/NewButton";
 import { Box, Grid, Typography } from "@material-ui/core/";
 import { OutlinedButton, ContainedButton } from "./styles";
 import useApi from "../../services/useApi";
+import { TrainRounded } from "@material-ui/icons";
+import { useDispatch } from "react-redux";
+import { Creators as alertActions } from "../../store/ducks/alert";
 
 const emptyPaper = {
   title: "",
@@ -21,16 +24,12 @@ const emptyPaper = {
   models: [],
 };
 
-const submitOptions = [
-  "Approve and comment",
-  "Decline and comment",
-  "Save changes and comment",
-];
-
 export default function PaperSubmission({ submittedPaper }) {
+  const dispatch = useDispatch();
   const api = useApi();
   const [paper, setPaper] = useState({});
   const [nextId, setNextId] = useState(2);
+  const [loading, setLoading] = useState(false);
   const {
     control,
     register,
@@ -114,21 +113,37 @@ export default function PaperSubmission({ submittedPaper }) {
   }
 
   const onSubmit = async () => {
-    console.log(paper);
+    // console.log(paper);
+    setLoading(true);
     try {
       if (submittedPaper) {
         const response = await api.put(
           `/submissions/${submittedPaper.id}`,
           paper
         );
-        console.log("response", response);
+        // console.log("response", response);
       } else {
         const response = await api.post("/submissions", paper);
-        console.log("response", response);
+        // console.log("response", response);
       }
+      dispatch(
+        alertActions.openAlert({
+          open: true,
+          message: `Submission updated with success.`,
+          type: "success",
+        })
+      );
     } catch (err) {
-      console.log(err);
+      // console.log(err);
+      dispatch(
+        alertActions.openAlert({
+          open: true,
+          message: `Un error occurred updating this submission`,
+          type: "error",
+        })
+      );
     }
+    setLoading(false);
   };
 
   return (
@@ -169,10 +184,10 @@ export default function PaperSubmission({ submittedPaper }) {
               </Box>
               <Box pl={1}>
                 <NewButton
-                  options={submitOptions}
+                  loading={loading}
                   onClick={handleSubmit(onSubmit)}
                 >
-                  Submit paper
+                  {submittedPaper ? 'Update paper' : 'Submit paper'}
                 </NewButton>
               </Box>
             </Box>

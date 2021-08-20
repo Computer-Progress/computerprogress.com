@@ -138,7 +138,7 @@ export default function Profile() {
     const response = await update(body, "profile");
 
     // Save new user data
-    console.log(response.data);
+    // console.log(response.data);
 
     setIsProfileLoading(false);
   }

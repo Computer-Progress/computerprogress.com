@@ -24,7 +24,7 @@ import NewButton from "../../components/Button/NewButton";
 import { GridOffTwoTone } from "@material-ui/icons";
 
 export default function SignIn({ hasEmailConfirmationSucceed }) {
-  console.log(hasEmailConfirmationSucceed);
+  // console.log(hasEmailConfirmationSucceed);
   const router = useRouter();
   const dispatch = useDispatch();
   const userState = useSelector((state) => state.UserReducer);

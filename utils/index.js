@@ -1,7 +1,7 @@
 export const getRelativeTime = (d1, d2 = new Date()) => {
     const rtf = new Intl.RelativeTimeFormat('en', { numeric: 'always' })
     const formatDate = d1
-    console.log('TEMPO', formatDate, d2)
+    // console.log('TEMPO', formatDate, d2)
     var elapsed = formatDate.getTime() - d2.getTime()
 
     const units = {

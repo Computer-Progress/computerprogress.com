@@ -17,7 +17,7 @@ export async function getServerSideProps({ query }) {
 
       hasEmailConfirmationSucceed = true;
     } catch (error) {
-      console.log(error);
+      // console.log(error);
 
       hasEmailConfirmationSucceed = false;
     }
