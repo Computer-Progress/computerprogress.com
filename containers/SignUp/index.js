@@ -81,13 +81,6 @@ export default function SignUp() {
   return (
     <PageTemplate>
       <Container>
-        <InfoContainer>
-          <h2>Your help can change everything</h2>
-          <p>
-            Collaborate for the understanding of hardware burden influence in
-            machine learning.
-          </p>
-        </InfoContainer>
         <StyledBox>
           <h2>Sign Up</h2>
           <Input

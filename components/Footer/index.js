@@ -10,20 +10,20 @@ export default function Footer({ isHome }) {
             <Text big>Idealized by:</Text>
             <Logos>
                 <div>
-                  <h3>Gabriel F. Manso</h3>
-                  <p>University of Brasilia</p>
-                </div>
-                <div>
-                  <h3>Keeheon Lee</h3>
-                  <p>Yonsey University</p>
+                  <h3>Neil C. Thompson</h3>
+                  <p>MIT CSAIL</p>
                 </div>
                 <div>
                   <h3>Kristjan Greenewald</h3>
                   <p>MIT-IBM Watson AI Lab</p>
                 </div>
                 <div>
-                  <h3>Neil C. Thompson</h3>
-                  <p>MIT's Computer Science and Artificial Inteligence Lab</p>
+                  <h3>Keeheon Lee</h3>
+                  <p>Yonsey University</p>
+                </div>
+                <div>
+                  <h3>Gabriel F. Manso</h3>
+                  <p>MIT CSAIL</p>
                 </div>
             </Logos>
             <Copyright>© 2021 Computer Progress</Copyright>

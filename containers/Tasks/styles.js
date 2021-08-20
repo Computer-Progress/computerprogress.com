@@ -2,18 +2,15 @@ import styled from "styled-components";
 import theme from "../../styles/theme";
 
 export const Container = styled.div`
-  width: 90%;
-  margin: 0 auto;
-  h1 {
-    font-family: 'Montserrat';
-    font-weight: 500;
-    font-size: 24px;
-    display: flex;
-    margin: 50px 0px;
-    }
+  h2 {
+    font-size: 1.6rem !important;
+    font-weight: 500 !important;
+    align-self: bottom;
+    margin-top: 75px;
+    margin-bottom: 50px;
+
+  }
 `;
-
-
 
 export const ItemsWrapper = styled.div`
   display: grid;

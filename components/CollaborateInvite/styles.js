@@ -8,6 +8,7 @@ export const StyledFlexbox = styled(Box).attrs({
 })`
   height: 100%;
 `;
+
 export const StyledButton = styled(Button).attrs({
   variant: "contained",
   disableElevation: true,

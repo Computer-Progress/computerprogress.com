@@ -9,11 +9,12 @@ export const Container = styled.div`
   display: flex;
   flex-direction: row;
   align-self: center;
-  justify-content: space-between;
+  justify-content: center;
   margin: 50px 0px 20px 0px;
-  div p {
-    font-size: 15px;
-  }
+  width: 100%;
+   div p {
+     font-size: 15px;
+   }
 
   @media only screen and (max-width: 800px) {
     flex-direction: column;
@@ -50,6 +51,7 @@ export const Question = styled.p`
     button ? theme.colors.primary : theme.colors.greyText};
   margin-top: 0px;
   padding-top: 0px;
+  font-size: 14px !important;
 `;
 
 export const SignButton = styled(Button)`

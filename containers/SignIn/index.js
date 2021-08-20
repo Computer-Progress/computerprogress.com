@@ -121,13 +121,6 @@ export default function SignIn({ hasEmailConfirmationSucceed }) {
   return (
     <PageTemplate>
       <Container>
-        <InfoContainer>
-          <h2>Your help can change everything</h2>
-          <p>
-            Collaborate for the understanding of hardware burden influence in
-            machine learning.
-          </p>
-        </InfoContainer>
         <StyledBox>
           <h2>Sign In</h2>
 

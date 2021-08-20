@@ -28,7 +28,7 @@ function Benchmark({ benchmark, taskId, benchmarkId }) {
   const [selectedSecondButton, setSelectedSecondButton] = useState(0);
   const [name, setName] = useState();
   const [type, setType] = useState(0);
-  const [buttons] = useState(benchmark.accuracy_types);
+  const [buttons] = useState(benchmark.accuracy_types.filter(x => data.some(d => d[x.name])));
 
   const tabs = [
     {

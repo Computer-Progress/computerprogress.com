@@ -1,4 +1,5 @@
-import { Wrapper, Text, Separator } from './styles';
+import { Wrapper, Text, Separator, OrderTitle} from './styles';
+import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 
 export default function PaperListItem({
     item,
@@ -12,51 +13,51 @@ export default function PaperListItem({
     <>
         {index === 0 && (
             <>
-                <Wrapper accuracy_list={accuracy_list} showOperations={showOperations}>
-                    <Text title>Rank</Text>
-                    <Text title>Model</Text>
-                    <Text title>Paper</Text>
-                    {accuracy_list?.map((accuracy, index) => (
+                <Text title center>Rank</Text>
+                <Text title>Model</Text>
+                <Text title>Paper</Text>
+                {accuracy_list?.map((accuracy, index) => (
+                    <Text title center hover>
                         <a onClick={() => onSelectAccuracy({option: accuracy, index})}>
-                            <Text title right hover>{accuracy.name}</Text>
+                            {accuracy.name}
+                            <ExpandMoreIcon></ExpandMoreIcon>
                         </a>
-                    ))}
+                    </Text>
+                ))}
 
-                    {showOperations ? (
-                        <Text title right>Operations Per Network Pass</Text>
-                    ) : null}
-                    <Text title right>Hardware Burden</Text>
-                    
-                    <Text title right>Publication Date</Text>
-                </Wrapper>
+                <Text title center>Hardware Burden</Text>
+                {showOperations ? (
+                    <Text title center>Operations Per Network Pass</Text>
+                ) : null}
+                
+                <Text title center>Year</Text>
                 <Separator />
             </>
         )}
-        <a href={item.paper_link} target="_blank">
-            <Wrapper accuracy_list={accuracy_list} showOperations={showOperations}>
-                <Text>{index + 1}</Text>
-                <Text>{item.name}</Text>
-                <Text link>{item.paper_title || '-'}</Text>
-                {accuracy_list?.map(accuracy => (
-                    <Text right>{item[accuracy.name] || '-'}</Text>
-                ))}
-                {showOperations ? (
-                    <Text right>{item.operation_per_network_pass || '-'}</Text>
-                ) : null}
+            <Text center>{index + 1}</Text>
+            <Text>{item.name}</Text>
+            <a href={item.paper_link} target="_blank">
+                <Text hover link>{item.paper_title || '-'}</Text>
+            </a>
+            {accuracy_list?.map(accuracy => (
+                <Text center>{item[accuracy.name] || '-'}</Text>
+            ))}
+            <Text center>
+                {item.hardware_burden ? (
+                    <>
+                    10
+                    <sup>
+                        {Math.log10(item.hardware_burden).toFixed(1)}
+                    </sup>
+                    </>
+                ) : "-"}
+            </Text>
+            {showOperations ? (
+                <Text center>{item.operation_per_network_pass || '-'}</Text>
+            ) : null}
 
-                <Text right>
-                    {item.hardware_burden ? (
-                        <>
-                        10
-                        <sup>
-                            {Math.log10(item.hardware_burden).toFixed(1)}
-                        </sup>
-                        </>
-                    ) : "-"}
-                </Text>
-                <Text right>{new Date(item.paper_publication_date).getFullYear()}</Text>
-            </Wrapper>
-        </a>
+
+            <Text center>{new Date(item.paper_publication_date).getFullYear()}</Text>
         {index < length - 1 ? <Separator /> : null}
     </>
   )

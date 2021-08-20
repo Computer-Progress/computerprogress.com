@@ -4,6 +4,8 @@ import PaperListItem from "./PaperListItem";
 
 import { ItemsWrapper } from './styles';
 
+import { Wrapper } from './PaperListItem/styles'
+
 // import { DataGrid } from '@material-ui/data-grid';
 
 export default function PapersList({
@@ -81,7 +83,9 @@ export default function PapersList({
 
   return (
     <ItemsWrapper>
+      <Wrapper accuracy_list={accuracy_list} showOperations={showOperations}>
         {list.map((item, index) => renderItem(item, index))}
+      </Wrapper>
     </ItemsWrapper>
   )
 
