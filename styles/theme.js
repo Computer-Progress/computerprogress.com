@@ -1,4 +1,4 @@
-import { createMuiTheme } from "@material-ui/core/styles";
+import { createTheme } from "@material-ui/core/styles";
 
 export default {
   colors: {
@@ -19,7 +19,16 @@ export default {
   },
 };
 
-export const MuiTheme = createMuiTheme({
+export const MuiTheme = createTheme({
+  overrides: {
+    MuiTimelineItem: {
+      missingOppositeContent: {
+        "&:before": {
+          display: "none",
+        },
+      },
+    },
+  },
   typography: {
     fontFamily: ['"Montserrat"', "sans-serif"].join(","),
     h1: {
@@ -28,20 +37,35 @@ export const MuiTheme = createMuiTheme({
     },
     h2: {
       fontSize: "1.8rem",
-      fontWeight: 500
+      fontWeight: 500,
     },
     h3: {
       fontSize: "1.3rem",
       fontWeight: 500,
     },
+    h4: {
+      fontSize: "1rem",
+      fontWeight: 300,
+    },
+    h5: {
+      fontSize: "0.8rem",
+      fontWeight: 300,
+    },
     h6: {
       fontSize: "1.1rem",
+    },
+    subtitle1: {
+      fontSize: "0.8rem",
     },
   },
   palette: {
     primary: {
       main: "#7100C9",
-      contrastText: "#FFFFFF",
+      contrastText: "#efeff4",
+    },
+    secondary: {
+      main: "#efeff4",
+      contrastText: "#7100C9",
     },
   },
 });
