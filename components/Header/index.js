@@ -56,6 +56,13 @@ export default function Header({ isHome }) {
     },
   ];
 
+  if (userState?.role) {
+    links.unshift({
+      text: "Submit paper",
+      href: "/submit-paper",
+    },)
+  }
+
   const menuItems = [
     {
       title: "Profile",

@@ -39,8 +39,6 @@ export default function SignIn({ hasEmailConfirmationSucceed }) {
 
   const [loading, setLoading] = useState(false);
 
-  console.log('navigationState', navigationState)
-
   const onChange = (value, fieldName) => {
     let myInfo = userInfo;
 
