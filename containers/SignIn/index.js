@@ -15,12 +15,6 @@ export default function SignIn() {
   return (
     <PageTemplate>
       <Container>
-        <InfoContainer>
-          <h2>You can change everything!</h2>
-          <p>
-            Collaborate on the understanding of the computational progress!
-          </p>
-        </InfoContainer>
         <StyledBox>
           <h2>Sign In</h2>
           <Input label="Email" />

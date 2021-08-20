@@ -25,7 +25,7 @@ export const textBlocks = [
                 We encourage people to pay attention to this issue and contribute to the understanding \
                 of metrics that can guide the post Moore’s Law world. \
                 
-                Do you want to contribute to Computer Progress? Check our “COLLABORATE” page.`,
+                Do you want to contribute to Computer Progress? Check our <a href='/collaborate'> “COLLABORATE” </a> page.`,
   },
 ];
 
