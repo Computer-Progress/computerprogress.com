@@ -10,6 +10,7 @@ import {
 } from "@material-ui/core";
 import NewButton from "../Button/NewButton";
 import { Creators as alertActions } from "../../store/ducks/alert";
+import { Creators as userActions } from "../../store/ducks/user";
 import { useEffect, useState } from "react";
 
 export default function Profile() {
@@ -134,8 +135,18 @@ export default function Profile() {
     };
 
     setIsProfileLoading(true);
-
-    const response = await update(body, "profile");
+    try {
+      const response = await update(body, "profile");
+      dispatch(userActions.login(body))
+    } catch (error) {
+      dispatch(
+        alertActions.openAlert({
+          open: true,
+          message: error.message,
+          type: "error",
+        })
+      );
+    }
 
     // Save new user data
     // console.log(response.data);
