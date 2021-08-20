@@ -14,6 +14,7 @@ import useApi from "../../services/useApi";
 import { TrainRounded } from "@material-ui/icons";
 import { useDispatch } from "react-redux";
 import { Creators as alertActions } from "../../store/ducks/alert";
+import Conversation from "../../components/Conversation";
 
 const emptyPaper = {
   title: "",
@@ -30,6 +31,7 @@ export default function PaperSubmission({ submittedPaper }) {
   const [paper, setPaper] = useState({});
   const [nextId, setNextId] = useState(2);
   const [loading, setLoading] = useState(false);
+  const [onUpdate, setOnUpdate] = useState(false);
   const {
     control,
     register,
@@ -37,9 +39,6 @@ export default function PaperSubmission({ submittedPaper }) {
     watch,
     formState: { errors },
   } = useForm();
-
-  const [paperErrors, setPaperErros] = useState({});
-  const [shouldValidate, setShouldValidade] = useState(false);
 
   const emptyModel = (newId) => {
     return {
@@ -112,7 +111,7 @@ export default function PaperSubmission({ submittedPaper }) {
     validateData();
   }
 
-  const onSubmit = async () => {
+  const onSubmitAction = async (status) => {
     // console.log(paper);
     setLoading(true);
     try {
@@ -121,18 +120,27 @@ export default function PaperSubmission({ submittedPaper }) {
           `/submissions/${submittedPaper.id}`,
           paper
         );
-        // console.log("response", response);
+        if (status) {
+          const response = await api.put(
+            `/submissions/${submittedPaper.id}/status`,
+            {
+              status: status
+            }
+          );
+        }
+        dispatch(
+          alertActions.openAlert({
+            open: true,
+            message: `Submission updated with success.`,
+            type: "success",
+          })
+        );
+        setOnUpdate(!onUpdate)
       } else {
         const response = await api.post("/submissions", paper);
         // console.log("response", response);
       }
-      dispatch(
-        alertActions.openAlert({
-          open: true,
-          message: `Submission updated with success.`,
-          type: "success",
-        })
-      );
+
     } catch (err) {
       // console.log(err);
       dispatch(
@@ -145,6 +153,11 @@ export default function PaperSubmission({ submittedPaper }) {
     }
     setLoading(false);
   };
+
+  const onPressSaveChanges = async (item) => {
+    console.log(item)
+    handleSubmit(onSubmitAction(item))
+  }
 
   return (
     <ThemeProvider theme={MuiTheme}>
@@ -182,17 +195,30 @@ export default function PaperSubmission({ submittedPaper }) {
               <Box pl={1} borderRadius={10}>
                 <OutlinedButton onClick={addNewModel}>New model</OutlinedButton>
               </Box>
-              <Box pl={1}>
-                <NewButton
-                  loading={loading}
-                  onClick={handleSubmit(onSubmit)}
-                >
-                  {submittedPaper ? 'Update paper' : 'Submit paper'}
-                </NewButton>
-              </Box>
+              {!submittedPaper ? (
+                <Box pl={1}>
+                  <NewButton
+                    loading={loading}
+                    onClick={handleSubmit(onSubmitAction)}
+                  >
+                    Submit paper
+                  </NewButton>
+                </Box>
+              ) : null}
             </Box>
           </Grid>
         </Grid>
+        {submittedPaper ? (
+          <Box>
+            <Grid item xs={12}>
+              <Typography variant="h1">Conversation</Typography>
+            </Grid>
+
+            <Grid item xs={12}>
+              <Conversation paperId={submittedPaper?.id} onPressSaveChanges={onPressSaveChanges} onUpdate={onUpdate} />
+            </Grid>
+          </Box>
+        ) : null}
       </Box>
     </ThemeProvider>
   );

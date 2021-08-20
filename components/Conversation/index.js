@@ -23,14 +23,15 @@ import { Box, Grid, Paper } from "@material-ui/core";
 import { ContainedButton } from "./styles";
 import useApi from '../../services/useApi'
 import NewButton from "../../components/Button/NewButton";
-
+import { useSelector } from "react-redux";
 import { getRelativeTime } from '../../utils';
 
-export default function Conversation({ paperId }) {
+export default function Conversation({ paperId, onPressSaveChanges, onUpdate }) {
   const api = useApi();
   const [message, setMessage] = useState('');
   const [loading, setLoading] = useState(false);
   const [timeline, setTimeline] = useState([]);
+  const userState = useSelector((state) => state.UserReducer);
 
   function handleTextChange(event) {
     setMessage(event.target.value);
@@ -50,21 +51,21 @@ export default function Conversation({ paperId }) {
 
   useEffect(() => {
     getMessages();
-  }, []);
+  }, [onUpdate]);
 
   const submitOptions = useMemo(() => {
     if (message) {
       return [
-        "Approve and comment",
-        "Decline and comment",
-        "Save changes and comment",
+        { name: "Approve and comment", value: 'approved' },
+        { name: "Decline and comment", value: 'declined' },
+        { name: "Save changes and comment", value: '' },
       ]
     }
 
     return [
-      "Approve",
-      "Decline",
-      "Save changes",
+      { name: "Approve", value: 'approved' },
+        { name: "Decline", value: 'declined' },
+        { name: "Save changes", value: '' },
     ]
   }, [message])
 
@@ -81,6 +82,14 @@ export default function Conversation({ paperId }) {
     } catch (error) {
       // console.log('error', error)
     }
+  }
+
+  const onPressOption = async (value) => {
+    setLoading(true)
+    if (message) {
+      await onAddComment()
+    }
+    await onPressSaveChanges(value)
   }
 
   return (
@@ -124,9 +133,11 @@ export default function Conversation({ paperId }) {
               </Box>
             ) : null}
             <Box>
+              
               <NewButton
                 loading={loading}
-                options={submitOptions}
+                options={userState.role !== 'default' ? submitOptions : null}
+                onPressOption={userState.role !== 'default' ? onPressOption : onAddComment}
               >
                 Save changes
               </NewButton>

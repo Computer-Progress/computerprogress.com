@@ -144,7 +144,7 @@ export default function Header({ isHome }) {
               </>
             )}
 
-            {userState?.token ? (
+            {userState?.role ? (
               <>
                 <Box>
                   <IconButton onClick={handleOpenMenu}>
