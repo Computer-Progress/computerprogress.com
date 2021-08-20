@@ -19,8 +19,6 @@ export default function Task({ benchmarks }) {
   const [task, setTask] = useState({});
 
   useEffect(() => {
-    console.log('benchmarks', benchmarks);
-    
     if (!router.isReady) return;
 
     const { taskId } = router.query;

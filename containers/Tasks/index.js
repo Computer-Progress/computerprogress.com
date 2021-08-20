@@ -1,10 +1,8 @@
 import { ThemeProvider } from "@material-ui/core/styles";
 import { MuiTheme } from "../../styles/theme";
 import { Container } from "./styles";
-
 import PageTemplate from "../../components/PageTemplate";
 import Task from "../../components/Task";
-
 import { Box, Grid } from "@material-ui/core";
 
 export default function Tasks({ tasks }) {
