@@ -5,7 +5,7 @@ import { MuiTheme } from "../../styles/theme";
 import PrivatePage from "../../components/PrivatePage";
 
 import PageTemplate from "../../components/PageTemplate";
-import Conversation from "../../components/Conversation";
+
 import useApi from '../../services/useApi';
 import PaperSubmission from '../../components/PaperSubmission';
 import { Box, Grid, Typography } from "@material-ui/core/";
@@ -48,7 +48,6 @@ const timeline = [
 function ReviewPaper({ submissionId }) {
   const api = useApi();
   const [paper, setPaper] = useState(null);
-  const [messages, setMessages] = useState([]);
 
   const getSubmission = async () => {
     try {
@@ -69,22 +68,6 @@ function ReviewPaper({ submissionId }) {
         <Box py={8}>
           <Grid container spacing={5}>
             <PaperSubmission submittedPaper={paper} />
-
-            {/*<Grid item xs={12}>
-              <PaperInformation />
-            </Grid>
-
-            <Grid item xs={12}>
-              <ModelInformation />
-            </Grid> */}
-
-            <Grid item xs={12}>
-              <Typography variant="h1">Conversation</Typography>
-            </Grid>
-
-            <Grid item xs={12}>
-              <Conversation timeline={messages} paperId={submissionId} />
-            </Grid>
           </Grid>
         </Box>
       </PageTemplate>

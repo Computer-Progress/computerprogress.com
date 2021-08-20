@@ -42,7 +42,7 @@ export default function Button({ children, ...props }) {
         }}
       >
         {props.options.map((option) => (
-          <MenuItem>{option}</MenuItem>
+          <MenuItem onClick={() => {props.onPressOption(option.value); closeMenu()}}>{option.name}</MenuItem>
         ))}
       </Menu>
     )}
