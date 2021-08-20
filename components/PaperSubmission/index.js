@@ -6,10 +6,11 @@ import { MuiTheme } from "../../styles/theme";
 
 import PaperInformation from "../../components/PaperInformation";
 import ModelInformation from "../../components/ModelInformation";
+import NewButton from "../../components/Button/NewButton";
 
 import { Box, Grid, Typography } from "@material-ui/core/";
 import { OutlinedButton, ContainedButton } from "./styles";
-import useApi from '../../services/useApi';
+import useApi from "../../services/useApi";
 
 const emptyPaper = {
   title: "",
@@ -19,6 +20,12 @@ const emptyPaper = {
   authors: [],
   models: [],
 };
+
+const submitOptions = [
+  "Approve and comment",
+  "Decline and comment",
+  "Save changes and comment",
+];
 
 export default function PaperSubmission({ submittedPaper }) {
   const api = useApi();
@@ -38,7 +45,7 @@ export default function PaperSubmission({ submittedPaper }) {
   const emptyModel = (newId) => {
     return {
       id: newId,
-      name: '',
+      name: "",
       task: null,
       dataset: null,
       cpu: null,
@@ -51,12 +58,12 @@ export default function PaperSubmission({ submittedPaper }) {
       epochs: "",
       extra_training_data: false,
       accuracies: [],
-    }
+    };
   };
 
   useEffect(() => {
     if (submittedPaper) {
-      setPaper(submittedPaper.data)
+      setPaper(submittedPaper.data);
     } else {
       setPaper({
         ...emptyPaper,
@@ -78,15 +85,15 @@ export default function PaperSubmission({ submittedPaper }) {
 
   function addNewModel() {
     setPaper({ ...paper, models: [...paper.models, emptyModel(nextId)] });
-    setNextId(nextId + 1)
+    setNextId(nextId + 1);
   }
 
   function removeModel(modelIndex) {
     const newPaper = paper;
-    const newList = paper.models.filter((item, index) => index !== modelIndex);;
+    const newList = paper.models.filter((item, index) => index !== modelIndex);
     newPaper.models = [...newList];
-  
-    setPaper({...newPaper});
+
+    setPaper({ ...newPaper });
   }
 
   function validatePaperInformation() {
@@ -110,14 +117,17 @@ export default function PaperSubmission({ submittedPaper }) {
     console.log(paper);
     try {
       if (submittedPaper) {
-        const response = await api.put(`/submissions/${submittedPaper.id}`, paper);
-        console.log('response', response)
+        const response = await api.put(
+          `/submissions/${submittedPaper.id}`,
+          paper
+        );
+        console.log("response", response);
       } else {
-        const response = await api.post('/submissions', paper);
-        console.log('response', response)
+        const response = await api.post("/submissions", paper);
+        console.log("response", response);
       }
     } catch (err) {
-      console.log(err)
+      console.log(err);
     }
   };
 
@@ -155,14 +165,15 @@ export default function PaperSubmission({ submittedPaper }) {
           <Grid item xs={12}>
             <Box display="flex" justifyContent="flex-end">
               <Box pl={1} borderRadius={10}>
-                <OutlinedButton onClick={addNewModel}>
-                  New model
-                </OutlinedButton>
+                <OutlinedButton onClick={addNewModel}>New model</OutlinedButton>
               </Box>
               <Box pl={1}>
-                <ContainedButton onClick={handleSubmit(onSubmit)}>
+                <NewButton
+                  options={submitOptions}
+                  onClick={handleSubmit(onSubmit)}
+                >
                   Submit paper
-                </ContainedButton>
+                </NewButton>
               </Box>
             </Box>
           </Grid>

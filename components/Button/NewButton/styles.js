@@ -17,7 +17,7 @@ export const StyledButton = styled(MuiButton).attrs((props) => ({
 
 export const StyledBox = styled(MuiBox).attrs((props) => ({
   display: "flex",
-  px: 3,
+  px: props.options ? 2 : 3,
 }))``;
 
 export const StyledCircularProgress = styled(MuiCircularProgress).attrs(
