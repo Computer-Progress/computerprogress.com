@@ -9,23 +9,25 @@ import {
   Typography,
 } from "@material-ui/core";
 import NewButton from "../Button/NewButton";
-
+import { Creators as alertActions } from "../../store/ducks/alert";
 import { useEffect, useState } from "react";
 
 export default function Profile() {
   const api = useApi();
   const dispatch = useDispatch();
 
+  const emptyPassword = {
+    currentPassword: "",
+    newPassword: "",
+    newPasswordConfirmation: "",
+  };
+
   const [profile, setProfile] = useState({
     firstName: "",
     lastName: "",
     email: "",
   });
-  const [password, setPassword] = useState({
-    currentPassword: "",
-    newPassword: "",
-    newPasswordConfirmation: "",
-  });
+  const [password, setPassword] = useState(emptyPassword);
 
   const [isProfileValid, setIsProfileValid] = useState(false);
   const [isPasswordValid, setIsPasswordValid] = useState(false);
@@ -65,15 +67,22 @@ export default function Profile() {
   }
 
   function validateProfile() {
+    const profileChanges = [];
     if (profile.firstName && profile.firstName !== userState.first_name) {
-      setIsProfileValid(true);
-    } else if (profile.lastName && profile.lastName !== userState.lastName) {
-      setIsProfileValid(true);
-    } else if (profile.email && profile.email !== userState.email) {
-      setIsProfileValid(true);
-    } else {
-      setIsProfileValid(false);
+      profileChanges.push(true);
     }
+
+    if (profile.lastName && profile.lastName !== userState.last_name) {
+      profileChanges.push(true);
+    }
+
+    if (profile.email && profile.email !== userState.email) {
+      profileChanges.push(true);
+    }
+
+    const hasProfileChanged = profileChanges.some((change) => change);
+
+    setIsProfileValid(hasProfileChanged);
   }
 
   function validatePassword() {
@@ -88,18 +97,33 @@ export default function Profile() {
     }
   }
 
-  async function update(body) {
-    const response = await api
-      .put("/users/me", body)
-      .then((response) => {
-        if (response.status >= 200 && response.status < 300) {
-          // Save new data
-          // dispatch(...)
-        }
-      })
-      .catch((error) => {
-        console.log(error);
-      });
+  async function update(body, type) {
+    const successMessage = {
+      profile: "Profile",
+      password: "Password",
+    };
+
+    try {
+      const response = await api.put("/users/me", body);
+
+      dispatch(
+        alertActions.openAlert({
+          open: true,
+          message: `${successMessage[type]} updated with success.`,
+          type: "success",
+        })
+      );
+
+      return response;
+    } catch (error) {
+      dispatch(
+        alertActions.openAlert({
+          open: true,
+          message: error.message,
+          type: "error",
+        })
+      );
+    }
   }
 
   async function updateProfile() {
@@ -111,20 +135,29 @@ export default function Profile() {
 
     setIsProfileLoading(true);
 
-    await update(body);
+    const response = await update(body, "profile");
+
+    // Save new user data
+    console.log(response.data);
 
     setIsProfileLoading(false);
   }
 
   async function updatePassword() {
     const body = {
+      current_password: password.currentPassword,
       password: password.newPassword,
     };
 
     setIsPasswordLoading(true);
 
-    await update(body);
+    await update(body, "password");
 
+    setPassword({
+      currentPassword: "",
+      newPassword: "",
+      newPasswordConfirmation: "",
+    });
     setIsPasswordLoading(false);
   }
 
@@ -166,7 +199,7 @@ export default function Profile() {
       <Grid item xs={12} container>
         <Grid item xs={12} sm={6} md={4} lg={3}>
           <NewButton
-            disabled={!setIsProfileValid}
+            disabled={!isProfileValid}
             loading={isProfileLoading}
             onClick={updateProfile}
           >
@@ -190,6 +223,7 @@ export default function Profile() {
             variant="outlined"
             fullWidth
             type="password"
+            value={password.currentPassword}
             onChange={(event) => handleInputChange(event, "password")}
           />
         </Grid>
@@ -202,6 +236,7 @@ export default function Profile() {
             variant="outlined"
             fullWidth
             type="password"
+            value={password.newPassword}
             onChange={(event) => handleInputChange(event, "password")}
           />
         </Grid>
@@ -214,6 +249,7 @@ export default function Profile() {
             variant="outlined"
             fullWidth
             type="password"
+            value={password.newPasswordConfirmation}
             onChange={(event) => handleInputChange(event, "password")}
           />
         </Grid>
