@@ -116,7 +116,7 @@ export default function SignUp() {
             onChange={handleChange}
           />
           <Question>
-            Use 8 or more characters with a mix of letters, numbers & simbols
+            Use 8 or more characters.
           </Question>
           <NewButton
             color="primary"
@@ -124,7 +124,7 @@ export default function SignUp() {
             loading={isSubmissionLoading}
             onClick={submitSignIn}
           >
-            Sign in
+            Sign Up
           </NewButton>
 
           <Question margin>
