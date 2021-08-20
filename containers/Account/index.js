@@ -27,7 +27,7 @@ const pages = [
     name: "Reviews",
     pathname: "/papers/reviews",
     icon: <Icon.Clipboard />,
-    component: <PaperList />,
+    component: <PaperList isReviewer />,
   },
 ];
 

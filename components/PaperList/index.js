@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import {
   Box,
   Card,
@@ -27,6 +27,8 @@ import useApi from '../../services/useApi'
 import { MuiTheme } from "../../styles/theme";
 import { getRelativeTime } from '../../utils';
 import { useSelector } from 'react-redux'
+import Pagination from '@material-ui/lab/Pagination';
+import {PaginationBox} from './styles';
 
 const mockedSubmissions = [
   {
@@ -110,17 +112,25 @@ export default function PaperList({ isReviewer }) {
     status: "",
   });
   const [submissions, setSubmissions] = useState([]);
+  const [total, setTotal] = useState(0);
+  const [page, setPage] = useState(1);
+  const [search, setSearch] = useState('')
+  const timeout = useRef(null)
 
   useEffect(() => {
     getSubmissions();
-  }, []);
+  }, [filters, page]);
 
   async function getSubmissions() {
     // fetch
     try {
-      const response = await api.get(`submissions/${!isReviewer ? `?owner_id=${userState?.id}` : ''}`)
+      const response = await api.get(`submissions?${
+        !isReviewer ? `owner_id=${userState?.id}&`
+        : ''}limit=20&skip=${page - 1}&q=${search}`)
+
       console.log(response.data)
-      setSubmissions(response.data);
+      setSubmissions(response.data?.items);
+      setTotal(Math.ceil(response.data.total / 20));
     } catch (error) {
       
     }
@@ -130,7 +140,16 @@ export default function PaperList({ isReviewer }) {
     setFilters({ ...filters, [event.target.name]: event.target.value });
   }
 
+  function handleSearchValueChange(event) {
+    setSearch(event.target.value);
+    if (timeout.current) clearTimeout(timeout.current);
+    timeout.current = setTimeout(() => {
+      getSubmissions()
+    }, 500);
+  }
+
   return (
+    <>
     <Card style={{ borderRadius: "16px" }}>
       <Box p={3}>
         <Grid container>
@@ -140,8 +159,8 @@ export default function PaperList({ isReviewer }) {
               <Grid item xs={12} md={9}>
                 <TextField
                   name="query"
-                  value={filters.query}
-                  onChange={handleFiltersChange}
+                  value={search}
+                  onChange={handleSearchValueChange}
                   placeholder="Search"
                   fullWidth
                   InputProps={{
@@ -189,6 +208,11 @@ export default function PaperList({ isReviewer }) {
           </Grid>
 
           {/* Submissions list */}
+          {!submissions.length ? (
+            <PaginationBox>
+              <Typography variant="h6">No submissions found</Typography>
+            </PaginationBox>
+          ) : null}
           {submissions.map((submission) => (
             <a href={`/review-paper/${submission.id}`}>
               <Grid item xs={12} container key={submission.id}>
@@ -258,5 +282,9 @@ export default function PaperList({ isReviewer }) {
         </Grid>
       </Box>
     </Card>
+    <PaginationBox>
+      <Pagination count={total} page={page} onChange={(event, value) => setPage(value)} color="primary" />
+    </PaginationBox>
+    </>
   );
 }
