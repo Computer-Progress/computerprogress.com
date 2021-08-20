@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { Creators as alertActions } from "../../store/ducks/alert";
 import { Creators as userActions } from "../../store/ducks/user";
 import useApi from "../../services/useApi";
+import { Creators as navigationActions } from '../../store/ducks/navigation'
 
 import PageTemplate from "../../components/PageTemplate";
 import Alert from "../../components/Alert";
@@ -28,6 +29,7 @@ export default function SignIn({ hasEmailConfirmationSucceed }) {
   const router = useRouter();
   const dispatch = useDispatch();
   const userState = useSelector((state) => state.UserReducer);
+  const navigationState = useSelector((state) => state.navigation);
 
   const api = useApi();
   const [userInfo, setUserInfo] = useState({
@@ -51,7 +53,12 @@ export default function SignIn({ hasEmailConfirmationSucceed }) {
       const user = response.data;
       if (user?.email) {
         dispatch(userActions.login({ ...user, ...userState }));
-        router.push("/");
+        if (navigationState?.url) {
+          router.push(navigationState.url)
+          dispatch(navigationActions.clearUrl());
+        } else {
+          router.push("/");
+        }
       }
     } catch (error) {
       setLoading(false);

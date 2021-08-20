@@ -16,7 +16,7 @@ export default function Alert({ ...props }) {
       {alertStatus.type && (
         <Snackbar
           open={alertStatus.open}
-          autoHideDuration={3000}
+          autoHideDuration={10000}
           anchorOrigin={{ vertical: "top", horizontal: "right" }}
           onClose={handleClose}
         >

@@ -165,7 +165,9 @@ export default function Collaborate() {
             </StyledBox>
 
             <StyledBox display="flex" justifyContent="center">
-              <StyledButton>Submit paper</StyledButton>
+              <a href="/submit-paper">
+                <StyledButton>Submit paper</StyledButton>
+              </a>
             </StyledBox>
           </StyledFlexboxSection>
         </StyledContainerJoinUs>

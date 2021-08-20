@@ -1,14 +1,17 @@
 import React from 'react';
 import { useRouter } from "next/router";
-import { useSelector } from 'react-redux'
+import { useSelector, useDispatch } from 'react-redux'
+import { Creators as navigationActions } from '../../store/ducks/navigation'
 
 const PrivatePage = Component => {
   const Auth = (props) => {
+    const dispatch = useDispatch()
     const router = useRouter();
     const userState = useSelector((state) => state.UserReducer);
     // If user is not logged in, return login component
     if (!userState.id) {
-      router.replace('/signin')
+      dispatch(navigationActions.saveUrl(router.pathname))
+      router.replace('/signin', {})
       return null
     }
 
