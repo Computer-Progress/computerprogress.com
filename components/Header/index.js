@@ -72,6 +72,11 @@ export default function Header({ isHome }) {
       pathname: "/papers/reviews",
       icon: <Icon.Clipboard />,
     },
+    {
+      title: "Submit Paper",
+      pathname: "/submit-paper",
+      icon: <Icon.PlusCircle />,
+    },
   ];
 
   function getUserInitials() {
