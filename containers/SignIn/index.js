@@ -130,7 +130,7 @@ export default function SignIn({ hasEmailConfirmationSucceed, alert }) {
       dispatch(
         alertActions.openAlert({
           open: true,
-          message: error.message,
+          message: error.response?.data?.detail ?? error.message,
           type: "error",
         })
       );
