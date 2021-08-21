@@ -18,6 +18,15 @@ import { Creators as alertActions } from "../../store/ducks/alert";
 import { useDispatch } from "react-redux";
 import router from "next/router";
 import { useForm } from "react-hook-form";
+import {
+  FormControl,
+  IconButton,
+  InputLabel,
+  OutlinedInput,
+  InputAdornment,
+  FormHelperText,
+} from "@material-ui/core";
+import { Visibility, VisibilityOff } from "@material-ui/icons";
 
 export default function SignUp() {
   const api = useApi();
@@ -27,9 +36,19 @@ export default function SignUp() {
     getValues,
     formState: { errors },
     handleSubmit,
+    reset,
   } = useForm();
 
+  const [showPassword, setShowPassword] = useState(false);
   const [isSubmissionLoading, setIsSubmissionLoading] = useState(false);
+
+  function handleClickShowPassword() {
+    setShowPassword(!showPassword);
+  }
+
+  function handleMouseDownPassword(event) {
+    event.preventDefault();
+  }
 
   function passwordConfirmationMatch(passwordConfirmation) {
     return passwordConfirmation === getValues("password");
@@ -57,10 +76,13 @@ export default function SignUp() {
         dispatch(
           alertActions.openAlert({
             open: true,
-            message: `An email confirmation was sent to ${account.email}.`,
+            message: `An email confirmation was sent to ${getValues("email")}.`,
             type: "info",
           })
         );
+
+        reset();
+        router.push("/signin");
       })
       .catch((error) => {
         dispatch(
@@ -74,13 +96,6 @@ export default function SignUp() {
       .then(() => {
         setIsSubmissionLoading(false);
       });
-
-    return;
-
-    router.push("/signin"); // params pra mostrar a mensagem de confirmacao
-    console.log(response);
-
-    setIsSubmissionLoading(true);
   };
 
   return (
@@ -106,28 +121,72 @@ export default function SignUp() {
             helperText={errors.email && "Email is required"}
             label="Email"
           />
-          <Input
-            {...register("password", { required: true, minLength: 8 })}
-            error={Boolean(errors.password)}
-            helperText={errors.password && "Use 8 or more characters"}
-            label="Password"
-            type="password"
-          />
-          <Input
-            {...register("passwordConfirmation", {
-              required: true,
-              validate: passwordConfirmationMatch,
-            })}
-            error={Boolean(errors.passwordConfirmation)}
-            helperText={
-              errors.passwordConfirmation && "Passwords does not match"
-            }
-            label="Confirm password"
-            type="password"
-          />
-          {/* <Question>
-            Use 8 or more characters with a mix of letters, numbers & simbols.
-          </Question> */}
+
+          <FormControl
+            variant="outlined"
+            style={{ marginBottom: "12px" }}
+            fullWidth
+          >
+            <InputLabel error={Boolean(errors.password)}>Password</InputLabel>
+
+            <OutlinedInput
+              {...register("password", { required: true, minLength: 8 })}
+              error={Boolean(errors.password)}
+              type={showPassword ? "text" : "password"}
+              endAdornment={
+                <InputAdornment position="end">
+                  <IconButton
+                    onClick={handleClickShowPassword}
+                    onMouseDown={handleMouseDownPassword}
+                    edge="end"
+                  >
+                    {showPassword ? <Visibility /> : <VisibilityOff />}
+                  </IconButton>
+                </InputAdornment>
+              }
+              labelWidth={75}
+            />
+
+            {errors.password && (
+              <FormHelperText error>Use 8 or more characters</FormHelperText>
+            )}
+          </FormControl>
+
+          <FormControl
+            variant="outlined"
+            style={{ marginBottom: "12px" }}
+            fullWidth
+          >
+            <InputLabel error={Boolean(errors.passwordConfirmation)}>
+              Confirm password
+            </InputLabel>
+
+            <OutlinedInput
+              {...register("passwordConfirmation", {
+                required: true,
+                validate: passwordConfirmationMatch,
+              })}
+              error={Boolean(errors.passwordConfirmation)}
+              type={showPassword ? "text" : "password"}
+              endAdornment={
+                <InputAdornment position="end">
+                  <IconButton
+                    onClick={handleClickShowPassword}
+                    onMouseDown={handleMouseDownPassword}
+                    edge="end"
+                  >
+                    {showPassword ? <Visibility /> : <VisibilityOff />}
+                  </IconButton>
+                </InputAdornment>
+              }
+              labelWidth={148}
+            />
+
+            {errors.passwordConfirmation && (
+              <FormHelperText error>Passwords does not match</FormHelperText>
+            )}
+          </FormControl>
+
           <NewButton
             color="primary"
             loading={isSubmissionLoading}
