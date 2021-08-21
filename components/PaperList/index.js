@@ -81,6 +81,7 @@ const statusFilters = [
   { value: "all", title: "All status" },
   { value: "pending", title: "Pending" },
   { value: "approved", title: "Approved" },
+  { value: "need_information", title: "Need information" },
   { value: "declined", title: "Declined" },
 ];
 
@@ -89,7 +90,7 @@ const status = {
     icon: <ClockIcon size={14} />,
     title: "Review pending",
   },
-  "need-information": {
+  "need_information": {
     icon: <InfoIcon size={14} />,
     title: "Need information",
   },

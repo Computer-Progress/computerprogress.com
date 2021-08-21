@@ -58,14 +58,16 @@ export default function Conversation({ paperId, onPressSaveChanges, onUpdate }) 
       return [
         { name: "Approve and comment", value: 'approved' },
         { name: "Decline and comment", value: 'declined' },
+        { name: "Request information and comment", value: 'need_information' },
         { name: "Save changes and comment", value: '' },
       ]
     }
 
     return [
       { name: "Approve", value: 'approved' },
-        { name: "Decline", value: 'declined' },
-        { name: "Save changes", value: '' },
+      { name: "Decline", value: 'declined' },
+      { name: "Request information", value: 'need_information' },
+      { name: "Save changes", value: '' },
     ]
   }, [message])
 
@@ -142,7 +144,7 @@ export default function Conversation({ paperId, onPressSaveChanges, onUpdate }) 
               ) : (
                 <NewButton
                   loading={loading}
-                  onClick={onPressOption}
+                  onClick={() => onPressOption(3)}
                 >
                   Save changes
                 </NewButton>
