@@ -1,10 +1,11 @@
 @import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;700&display=swap");
 html,
-body {
+body,
+#__next {
   padding: 0;
   margin: 0;
   font-family: "Montserrat", sans-serif;
-  min-height: 100vh;
+  height: 100%;
 }
 
 a {
@@ -14,10 +15,8 @@ a {
 
 * {
   box-sizing: border-box;
-  font-family: 'Montserrat';
-
+  font-family: "Montserrat";
 }
-
 
 .svg {
   position: absolute;
@@ -25,34 +24,32 @@ a {
   left: 0;
   background-color: transparent;
   z-index: -1;
- }
- .path {
+}
+.path {
   animation: draw 20s infinite;
   animation-timing-function: linear;
- }
- .path-01 {
+}
+.path-01 {
   animation-delay: 2s;
- }
- .path-02 {
+}
+.path-02 {
   animation-delay: 4s;
- }
- .path-03 {
+}
+.path-03 {
   animation-delay: 8s;
- }
- .path-04 {
+}
+.path-04 {
   animation-delay: 16s;
- }
- .path-05 {
+}
+.path-05 {
   animation-delay: 32s;
- }
- 
- 
- 
- @keyframes draw {
+}
+
+@keyframes draw {
   0% {
   }
   100% {
     stroke-dashoffset: 0;
     stroke-opacity: 1;
   }
- }
+}
