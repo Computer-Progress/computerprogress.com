@@ -15,15 +15,7 @@ export default class MyDocument extends Document {
         </Head>
         <body>
           <Main />
-          <style jsx global>{`
-            /* Other global styles such as 'html, body' etc... */
 
-            #__next {
-              min-height: 100vh;
-              display: flex;
-              flex-direction: column;
-            }
-          `}</style>
           <NextScript />
         </body>
       </Html>
@@ -70,9 +62,11 @@ MyDocument.getInitialProps = async (ctx) => {
   return {
     ...initialProps,
     // Styles fragment is rendered after the app and page rendering finish.
-    styles: [
-      ...React.Children.toArray(initialProps.styles),
-      sheets.getStyleElement(),
-    ],
+    styles: (
+      <>
+        {initialProps.styles}
+        {sheets.getStyleElement()}
+      </>
+    ),
   };
 };
