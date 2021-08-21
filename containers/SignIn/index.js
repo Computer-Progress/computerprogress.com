@@ -159,7 +159,12 @@ export default function SignIn({ hasEmailConfirmationSucceed, alert }) {
             autoComplete="current-password"
             onChange={(event) => onChange(event.target.value, "password")}
           />
-          <Question>Forgot your password?</Question>
+
+          <Link href="/recover-password">
+            <a>
+              <Question>Forgot your password?</Question>
+            </a>
+          </Link>
           <SignButton onClick={login}>
             {loading ? (
               <CircularProgress color="inherit" size={25} />

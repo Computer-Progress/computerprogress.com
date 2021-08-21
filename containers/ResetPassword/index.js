@@ -49,7 +49,7 @@ export default function ChangePassword({ token }) {
 
     await api
       .post(`/reset-recovery/`, {
-        token: props.token,
+        token: token,
         new_password: data.password,
       })
       .then((response) => {
@@ -74,6 +74,7 @@ export default function ChangePassword({ token }) {
       })
       .then(() => {
         setIsLoading(false);
+        router.push("/signin");
       });
   }
 
