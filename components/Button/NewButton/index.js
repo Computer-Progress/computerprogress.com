@@ -16,7 +16,7 @@ export default function Button({ children, onClick, ...props }) {
   }
 
   function onPress() {
-    onClick?.(selected)
+    onClick?.(props.options ? selected : null)
   }
 
   return (

@@ -68,21 +68,25 @@ export default function Header({ isHome }) {
       title: "Profile",
       pathname: "/profile",
       icon: <Icon.User />,
+      show: true
     },
     {
       title: "Submissions",
       pathname: "/papers/submissions",
       icon: <Icon.File />,
+      show: true
     },
     {
       title: "Reviews",
       pathname: "/papers/reviews",
       icon: <Icon.Clipboard />,
+      show: userState?.role !== 'default'
     },
     {
       title: "Submit Paper",
       pathname: "/submit-paper",
       icon: <Icon.PlusCircle />,
+      show: true
     },
   ];
 
@@ -184,7 +188,7 @@ export default function Header({ isHome }) {
                     open={Boolean(menuAnchorEl)}
                     onClose={handleCloseMenu}
                   >
-                    {menuItems.map((menuItem, index) => (
+                    {menuItems.map((menuItem, index) => menuItem.show ? (
                       <MenuItem
                         onClick={() => goTo(index)}
                         key={menuItem.title}
@@ -201,7 +205,7 @@ export default function Header({ isHome }) {
                           <Box display="inline">{menuItem.title}</Box>
                         </Box>
                       </MenuItem>
-                    ))}
+                    ): null)}
 
                     <Divider />
 
