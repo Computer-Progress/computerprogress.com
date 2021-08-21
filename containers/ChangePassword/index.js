@@ -2,103 +2,158 @@ import Link from "next/link";
 import PageTemplate from "../../components/PageTemplate";
 import NewButton from "../../components/Button/NewButton";
 
-import {
-  Container,
-  StyledBox,
-  Input,
-  Question,
-} from "./styles";
+import { Container, StyledBox, Input, Question } from "./styles";
 import { useEffect, useState } from "react";
 import useApi from "../../services/useApi";
 import { Creators as alertActions } from "../../store/ducks/alert";
 import { useDispatch } from "react-redux";
 import router from "next/router";
+import { useForm } from "react-hook-form";
+import {
+  FormControl,
+  FormHelperText,
+  IconButton,
+  InputAdornment,
+  InputLabel,
+  OutlinedInput,
+} from "@material-ui/core";
+import { Visibility, VisibilityOff } from "@material-ui/icons";
 
-export default function ChangePassword() {
+export default function ChangePassword({ token }) {
   const api = useApi();
   const dispatch = useDispatch();
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+    getValues,
+  } = useForm();
 
-  const emptyAccount = {
-    first_name: "",
-    last_name: "",
-    email: "",
-    password: "",
-    passwordConfirmation: "",
-  };
+  const [showPassword, setShowPassword] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
 
-  const [account, setAccount] = useState(emptyAccount);
-
-  const [isAccountValid, setIsAccountValid] = useState(false);
-  const [isSubmissionLoading, setIsSubmissionLoading] = useState(false);
-
-  useEffect(() => {
-    const isSomeInputEmpty = Object.values(account).some(
-      (input) => input.length === 0
-    );
-
-    setIsAccountValid(!isSomeInputEmpty);
-  }, [account]);
-
-  function handleChange(event) {
-    const key = event.target.name;
-    const value = event.target.value;
-
-    setAccount({ ...account, [key]: value });
+  function handleClickShowPassword() {
+    setShowPassword(!showPassword);
   }
 
-  async function submitSignIn() {
-    setIsSubmissionLoading(true);
-
-    try {
-      const response = await api.post("/users/open", account);
-
-      dispatch(
-        alertActions.openAlert({
-          open: true,
-          message: `An email confirmation was sent to ${account.email}.`,
-          type: "info",
-        })
-      );
-
-      setIsSubmissionLoading(true);
-      setAccount(emptyAccount);
-      router.push("/signin");
-    } catch (error) {
-      dispatch(
-        alertActions.openAlert({
-          open: true,
-          message: error.message,
-          type: "error",
-        })
-      );
-    }
-    setIsSubmissionLoading(false);
+  function handleMouseDownPassword(event) {
+    event.preventDefault();
   }
+
+  function passwordConfirmationMatch(passwordConfirmation) {
+    return passwordConfirmation === getValues("password");
+  }
+
+  async function onSubmit(data) {
+    setIsLoading(true);
+
+    await api
+      .post(`/reset-recovery/`, {
+        token: props.token,
+        new_password: data.password,
+      })
+      .then((response) => {
+        dispatch(
+          alertActions.openAlert({
+            open: true,
+            message: `Successfully updated your password.`,
+            type: "success",
+          })
+        );
+
+        router.push("/signin");
+      })
+      .catch((error) => {
+        dispatch(
+          alertActions.openAlert({
+            open: true,
+            message: error.response?.data?.detail ?? error.message,
+            type: "error",
+          })
+        );
+      })
+      .then(() => {
+        setIsLoading(false);
+      });
+  }
+
   return (
     <PageTemplate>
       <Container>
         <StyledBox>
-          <h2>Change Your Password</h2>
-          <Input
-            name="new_password"
-            label="New Password"
-            value={account["new_password"]}
-            onChange={handleChange}
-          />
-          <Input
-            name="confirm_new_password"
-            label="Confirm New Password"
-            value={account["confirm_new_password"]}
-            onChange={handleChange}
-          />
-          <Question>
-            Use 8 or more characters.
-          </Question>
+          <h2>Change your password</h2>
+          <form onSubmit={handleSubmit(onSubmit)}>
+            <FormControl
+              variant="outlined"
+              style={{ marginBottom: "12px" }}
+              fullWidth
+            >
+              <InputLabel error={Boolean(errors.password)}>Password</InputLabel>
+
+              <OutlinedInput
+                {...register("password", { required: true, minLength: 8 })}
+                error={Boolean(errors.password)}
+                type={showPassword ? "text" : "password"}
+                endAdornment={
+                  <InputAdornment position="end">
+                    <IconButton
+                      onClick={handleClickShowPassword}
+                      onMouseDown={handleMouseDownPassword}
+                      edge="end"
+                    >
+                      {showPassword ? <Visibility /> : <VisibilityOff />}
+                    </IconButton>
+                  </InputAdornment>
+                }
+                labelWidth={75}
+              />
+
+              {errors.password && (
+                <FormHelperText error>Use 8 or more characters</FormHelperText>
+              )}
+            </FormControl>
+
+            <FormControl
+              variant="outlined"
+              style={{ marginBottom: "12px" }}
+              fullWidth
+            >
+              <InputLabel error={Boolean(errors.passwordConfirmation)}>
+                Confirm password
+              </InputLabel>
+
+              <OutlinedInput
+                {...register("passwordConfirmation", {
+                  required: true,
+                  validate: passwordConfirmationMatch,
+                })}
+                error={Boolean(errors.passwordConfirmation)}
+                type={showPassword ? "text" : "password"}
+                endAdornment={
+                  <InputAdornment position="end">
+                    <IconButton
+                      onClick={handleClickShowPassword}
+                      onMouseDown={handleMouseDownPassword}
+                      edge="end"
+                    >
+                      {showPassword ? <Visibility /> : <VisibilityOff />}
+                    </IconButton>
+                  </InputAdornment>
+                }
+                labelWidth={148}
+              />
+
+              {errors.passwordConfirmation && (
+                <FormHelperText error>Passwords does not match</FormHelperText>
+              )}
+            </FormControl>
+          </form>
+
+          {/* <Question>Use 8 or more characters.</Question> */}
           <NewButton
             color="primary"
-            disabled={!isAccountValid}
-            loading={isSubmissionLoading}
-            onClick={submitSignIn}
+            loading={isLoading}
+            onClick={handleSubmit(onSubmit)}
           >
             Change Password
           </NewButton>
