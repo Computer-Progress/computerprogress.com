@@ -15,6 +15,7 @@ import { TrainRounded } from "@material-ui/icons";
 import { useDispatch } from "react-redux";
 import { Creators as alertActions } from "../../store/ducks/alert";
 import Conversation from "../../components/Conversation";
+import { useRouter } from "next/router";
 
 const emptyPaper = {
   title: "",
@@ -27,6 +28,8 @@ const emptyPaper = {
 
 export default function PaperSubmission({ submittedPaper }) {
   const dispatch = useDispatch();
+  const router = useRouter();
+
   const api = useApi();
   const [paper, setPaper] = useState({});
   const [nextId, setNextId] = useState(2);
@@ -49,9 +52,9 @@ export default function PaperSubmission({ submittedPaper }) {
       cpu: null,
       gpu: null,
       tpu: null,
-      gflops: "",
-      multiply_adds: "",
-      number_of_parameters: "",
+      gflops: null,
+      multiply_adds: null,
+      number_of_parameters: null,
       training_time: "",
       epochs: "",
       extra_training_data: false,
@@ -139,14 +142,22 @@ export default function PaperSubmission({ submittedPaper }) {
       } else {
         const response = await api.post("/submissions", paper);
         // console.log("response", response);
+        router.push('/papers/submissions')
+        dispatch(
+          alertActions.openAlert({
+            open: true,
+            message: 'Submission created',
+            type: "success",
+          })
+        );
       }
 
     } catch (err) {
-      // console.log(err);
+      console.log(err.response.data);
       dispatch(
         alertActions.openAlert({
           open: true,
-          message: `Un error occurred updating this submission`,
+          message: err.response?.data?.detail?.map(value => `${value.msg}, `),
           type: "error",
         })
       );
