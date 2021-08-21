@@ -89,7 +89,7 @@ export default function Conversation({ paperId, onPressSaveChanges, onUpdate }) 
     if (message) {
       await onAddComment()
     }
-    await onPressSaveChanges(value)
+    await onPressSaveChanges(submitOptions[value].value)
   }
 
   return (
@@ -133,14 +133,20 @@ export default function Conversation({ paperId, onPressSaveChanges, onUpdate }) 
               </Box>
             ) : null}
             <Box>
-              
-              <NewButton
-                loading={loading}
-                options={userState.role !== 'default' ? submitOptions : null}
-                onPressOption={userState.role !== 'default' ? onPressOption : onAddComment}
-              >
-                Save changes
-              </NewButton>
+              {userState.role !== 'default' ? (
+                <NewButton
+                  loading={loading}
+                  options={submitOptions}
+                  onClick={onPressOption}
+                ></NewButton>
+              ) : (
+                <NewButton
+                  loading={loading}
+                  onClick={onPressOption}
+                >
+                  Save changes
+                </NewButton>
+              )}
             </Box>
           </Box>
         </TimelineContent>
