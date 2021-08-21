@@ -80,7 +80,8 @@ const mockedSubmissions = [
 const statusFilters = [
   { value: "all", title: "All status" },
   { value: "pending", title: "Pending" },
-  { value: "reviewed", title: "Reviewed" },
+  { value: "approved", title: "Approved" },
+  { value: "declined", title: "Declined" },
 ];
 
 const status = {
@@ -109,7 +110,7 @@ export default function PaperList({ isReviewer }) {
 
   const [filters, setFilters] = useState({
     query: "",
-    status: "",
+    status: "all",
   });
   const [submissions, setSubmissions] = useState([]);
   const [total, setTotal] = useState(0);
@@ -126,7 +127,7 @@ export default function PaperList({ isReviewer }) {
     try {
       const response = await api.get(`submissions?${
         !isReviewer ? `owner_id=${userState?.id}&`
-        : ''}limit=20&skip=${page - 1}&q=${search}`)
+        : ''}limit=20&skip=${page - 1}&q=${search}${filters.status !== 'all' ? `&status=${filters.status}` : ''}`)
 
       // console.log(response.data)
       setSubmissions(response.data?.items);
