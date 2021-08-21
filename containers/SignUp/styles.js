@@ -3,7 +3,7 @@ import theme from "../../styles/theme";
 import { Box, Divider as MaterialDivider, TextField } from "@material-ui/core";
 import Button from "../../components/Button"
 
-export const Container = styled.div`
+export const FormContainer = styled.form`
   background: ${theme.colors.white};
   display: flex;
   flex-direction: row;

@@ -4,7 +4,7 @@ import PageTemplate from "../../components/PageTemplate";
 import NewButton from "../../components/Button/NewButton";
 
 import {
-  Container,
+  FormContainer,
   StyledBox,
   InfoContainer,
   Input,
@@ -17,114 +17,123 @@ import useApi from "../../services/useApi";
 import { Creators as alertActions } from "../../store/ducks/alert";
 import { useDispatch } from "react-redux";
 import router from "next/router";
+import { useForm } from "react-hook-form";
 
 export default function SignUp() {
   const api = useApi();
   const dispatch = useDispatch();
+  const {
+    register,
+    getValues,
+    formState: { errors },
+    handleSubmit,
+  } = useForm();
 
-  const emptyAccount = {
-    first_name: "",
-    last_name: "",
-    email: "",
-    password: "",
-    passwordConfirmation: "",
-  };
-
-  const [account, setAccount] = useState(emptyAccount);
-
-  const [isAccountValid, setIsAccountValid] = useState(false);
   const [isSubmissionLoading, setIsSubmissionLoading] = useState(false);
 
-  useEffect(() => {
-    const isSomeInputEmpty = Object.values(account).some(
-      (input) => input.length === 0
-    );
-
-    setIsAccountValid(!isSomeInputEmpty);
-  }, [account]);
-
-  function handleChange(event) {
-    const key = event.target.name;
-    const value = event.target.value;
-
-    setAccount({ ...account, [key]: value });
+  function passwordConfirmationMatch(passwordConfirmation) {
+    return passwordConfirmation === getValues("password");
   }
 
-  async function submitSignIn() {
+  const onSubmit = async (data) => {
     setIsSubmissionLoading(true);
 
-    try {
-      const response = await api.post("/users/open", account);
+    await api
+      .post(
+        "/users/open",
+        {
+          first_name: data.firstName,
+          last_name: data.lastName,
+          email: data.email,
+          password: data.password,
+        },
+        {
+          headers: {
+            "Content-Type": "application/x-www-form-urlencoded",
+          },
+        }
+      )
+      .then((response) => {
+        dispatch(
+          alertActions.openAlert({
+            open: true,
+            message: `An email confirmation was sent to ${account.email}.`,
+            type: "info",
+          })
+        );
+      })
+      .catch((error) => {
+        dispatch(
+          alertActions.openAlert({
+            open: true,
+            message: error.response?.data?.detail ?? error.message,
+            type: "error",
+          })
+        );
+      })
+      .then(() => {
+        setIsSubmissionLoading(false);
+      });
 
-      dispatch(
-        alertActions.openAlert({
-          open: true,
-          message: `An email confirmation was sent to ${account.email}.`,
-          type: "info",
-        })
-      );
+    return;
 
-      setIsSubmissionLoading(true);
-      setAccount(emptyAccount);
-      router.push("/signin");
-    } catch (error) {
-      dispatch(
-        alertActions.openAlert({
-          open: true,
-          message: error.message,
-          type: "error",
-        })
-      );
-    }
-    setIsSubmissionLoading(false);
-  }
+    router.push("/signin"); // params pra mostrar a mensagem de confirmacao
+    console.log(response);
+
+    setIsSubmissionLoading(true);
+  };
+
   return (
     <PageTemplate>
-      <Container>
+      <FormContainer onSubmit={handleSubmit(onSubmit)}>
         <StyledBox>
           <h2>Sign Up</h2>
           <Input
-            name="first_name"
+            {...register("firstName", { required: true })}
+            error={Boolean(errors.firstName)}
+            helperText={errors.firstName && "First name is required"}
             label="First name"
-            value={account["first_name"]}
-            onChange={handleChange}
           />
           <Input
-            name="last_name"
+            {...register("lastName", { required: true })}
+            error={Boolean(errors.lastName)}
+            helperText={errors.lastName && "Last name is required"}
             label="Last name"
-            value={account["last_name"]}
-            onChange={handleChange}
           />
           <Input
-            name="email"
+            {...register("email", { required: true })}
+            error={Boolean(errors.email)}
+            helperText={errors.email && "Email is required"}
             label="Email"
-            value={account["email"]}
-            onChange={handleChange}
           />
           <Input
-            name="password"
+            {...register("password", { required: true, minLength: 8 })}
+            error={Boolean(errors.password)}
+            helperText={errors.password && "Use 8 or more characters"}
             label="Password"
             type="password"
-            value={account["password"]}
-            onChange={handleChange}
           />
           <Input
-            name="passwordConfirmation"
+            {...register("passwordConfirmation", {
+              required: true,
+              validate: passwordConfirmationMatch,
+            })}
+            error={Boolean(errors.passwordConfirmation)}
+            helperText={
+              errors.passwordConfirmation && "Passwords does not match"
+            }
             label="Confirm password"
             type="password"
-            value={account["passwordConfirmation"]}
-            onChange={handleChange}
           />
-          <Question>
-            Use 8 or more characters.
-          </Question>
+          {/* <Question>
+            Use 8 or more characters with a mix of letters, numbers & simbols.
+          </Question> */}
           <NewButton
             color="primary"
-            disabled={!isAccountValid}
             loading={isSubmissionLoading}
-            onClick={submitSignIn}
+            onClick={handleSubmit(onSubmit)}
           >
-            Sign Up
+            Sign up
           </NewButton>
 
           <Question margin>
@@ -138,7 +147,7 @@ export default function SignUp() {
             </a>
           </Link>
         </StyledBox>
-      </Container>
+      </FormContainer>
     </PageTemplate>
   );
 }
