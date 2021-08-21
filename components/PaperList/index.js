@@ -216,7 +216,7 @@ export default function PaperList({ isReviewer }) {
             </PaginationBox>
           ) : null}
           {submissions.map((submission) => (
-            <a href={`/review-paper/${submission.id}`}>
+            <a href={`/review-paper/${submission.id}`} style={{ width: '100%' }} key={submission.id}>
               <Grid item xs={12} container key={submission.id}>
                 <Grid item xs={12}>
                   <Typography variant="h6">{submission?.data?.title}</Typography>
