@@ -4,7 +4,13 @@ import {
   Box,
   Button,
   Divider,
+  FormControl,
+  FormHelperText,
   Grid,
+  IconButton,
+  InputAdornment,
+  InputLabel,
+  OutlinedInput,
   TextField,
   Typography,
 } from "@material-ui/core";
@@ -12,31 +18,31 @@ import NewButton from "../Button/NewButton";
 import { Creators as alertActions } from "../../store/ducks/alert";
 import { Creators as userActions } from "../../store/ducks/user";
 import { useEffect, useState } from "react";
+import { useForm } from "react-hook-form";
+import { Visibility, VisibilityOff } from "@material-ui/icons";
 
 export default function Profile() {
   const api = useApi();
+  const userState = useSelector((state) => state.UserReducer);
   const dispatch = useDispatch();
-
-  const emptyPassword = {
-    currentPassword: "",
-    newPassword: "",
-    newPasswordConfirmation: "",
-  };
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+    getValues,
+    reset,
+  } = useForm();
+  const [showPassword, setShowPassword] = useState(false);
+  const [isPasswordLoading, setIsPasswordLoading] = useState(false);
 
   const [profile, setProfile] = useState({
     firstName: "",
     lastName: "",
     email: "",
   });
-  const [password, setPassword] = useState(emptyPassword);
-
   const [isProfileValid, setIsProfileValid] = useState(false);
-  const [isPasswordValid, setIsPasswordValid] = useState(false);
 
   const [isProfileLoading, setIsProfileLoading] = useState(false);
-  const [isPasswordLoading, setIsPasswordLoading] = useState(false);
-
-  const userState = useSelector((state) => state.UserReducer);
 
   useEffect(() => {
     setProfile({
@@ -52,10 +58,6 @@ export default function Profile() {
     validateProfile();
   }, [profile]);
 
-  useEffect(() => {
-    validatePassword();
-  }, [password]);
-
   function handleInputChange(event, group) {
     const key = event.target.name;
     const value = event.target.value;
@@ -65,6 +67,18 @@ export default function Profile() {
     } else if (group === "password") {
       setPassword({ ...password, [key]: value });
     }
+  }
+
+  function handleClickShowPassword() {
+    setShowPassword(!showPassword);
+  }
+
+  function handleMouseDownPassword(event) {
+    event.preventDefault();
+  }
+
+  function passwordConfirmationMatch(passwordConfirmation) {
+    return passwordConfirmation === getValues("newPassword");
   }
 
   function validateProfile() {
@@ -84,18 +98,6 @@ export default function Profile() {
     const hasProfileChanged = profileChanges.some((change) => change);
 
     setIsProfileValid(hasProfileChanged);
-  }
-
-  function validatePassword() {
-    const isPasswordEmpty = Object.values(password).some(
-      (password) => password.length === 0
-    );
-
-    if (isPasswordEmpty) {
-      setIsPasswordValid(false);
-    } else {
-      setIsPasswordValid(true);
-    }
   }
 
   async function update(body, type) {
@@ -137,7 +139,7 @@ export default function Profile() {
     setIsProfileLoading(true);
     try {
       const response = await update(body, "profile");
-      dispatch(userActions.login(body))
+      dispatch(userActions.login(body));
     } catch (error) {
       dispatch(
         alertActions.openAlert({
@@ -154,21 +156,18 @@ export default function Profile() {
     setIsProfileLoading(false);
   }
 
-  async function updatePassword() {
+  async function updatePassword(data) {
     const body = {
-      current_password: password.currentPassword,
-      password: password.newPassword,
+      current_password: data.currentPassword,
+      password: data.newPassword,
     };
 
     setIsPasswordLoading(true);
 
     await update(body, "password");
 
-    setPassword({
-      currentPassword: "",
-      newPassword: "",
-      newPasswordConfirmation: "",
-    });
+    reset();
+
     setIsPasswordLoading(false);
   }
 
@@ -228,50 +227,108 @@ export default function Profile() {
 
       <Grid item xs={12} container>
         <Grid item xs={12} sm={6} md={4}>
-          <TextField
-            name="currentPassword"
-            label="Current password"
-            variant="outlined"
-            fullWidth
-            type="password"
-            value={password.currentPassword}
-            onChange={(event) => handleInputChange(event, "password")}
-          />
+          <FormControl variant="outlined" fullWidth>
+            <InputLabel error={Boolean(errors.currentPassword)}>
+              Current password
+            </InputLabel>
+
+            <OutlinedInput
+              {...register("currentPassword", { required: true })}
+              error={Boolean(errors.currentPassword)}
+              type={showPassword ? "text" : "password"}
+              endAdornment={
+                <InputAdornment position="end">
+                  <IconButton
+                    onClick={handleClickShowPassword}
+                    onMouseDown={handleMouseDownPassword}
+                    edge="end"
+                  >
+                    {showPassword ? <Visibility /> : <VisibilityOff />}
+                  </IconButton>
+                </InputAdornment>
+              }
+              labelWidth={145}
+            />
+
+            {errors.currentPassword && (
+              <FormHelperText error>
+                Current password is required
+              </FormHelperText>
+            )}
+          </FormControl>
         </Grid>
       </Grid>
       <Grid item xs={12} container>
         <Grid item xs={12} sm={6} md={4}>
-          <TextField
-            name="newPassword"
-            label="New password"
-            variant="outlined"
-            fullWidth
-            type="password"
-            value={password.newPassword}
-            onChange={(event) => handleInputChange(event, "password")}
-          />
+          <FormControl variant="outlined" fullWidth>
+            <InputLabel error={Boolean(errors.newPassword)}>
+              New password
+            </InputLabel>
+
+            <OutlinedInput
+              {...register("newPassword", { required: true, minLength: 8 })}
+              error={Boolean(errors.newPassword)}
+              type={showPassword ? "text" : "password"}
+              endAdornment={
+                <InputAdornment position="end">
+                  <IconButton
+                    onClick={handleClickShowPassword}
+                    onMouseDown={handleMouseDownPassword}
+                    edge="end"
+                  >
+                    {showPassword ? <Visibility /> : <VisibilityOff />}
+                  </IconButton>
+                </InputAdornment>
+              }
+              labelWidth={120}
+            />
+
+            {errors.newPassword && (
+              <FormHelperText error>Use 8 or more characters</FormHelperText>
+            )}
+          </FormControl>
         </Grid>
       </Grid>
       <Grid item xs={12} container>
         <Grid item xs={12} sm={6} md={4}>
-          <TextField
-            name="newPasswordConfirmation"
-            label="Confirm new password"
-            variant="outlined"
-            fullWidth
-            type="password"
-            value={password.newPasswordConfirmation}
-            onChange={(event) => handleInputChange(event, "password")}
-          />
+          <FormControl variant="outlined" fullWidth>
+            <InputLabel error={Boolean(errors.newPasswordConfirmation)}>
+              Confirm password
+            </InputLabel>
+
+            <OutlinedInput
+              {...register("newPasswordConfirmation", {
+                required: true,
+                validate: passwordConfirmationMatch,
+              })}
+              error={Boolean(errors.newPasswordConfirmation)}
+              type={showPassword ? "text" : "password"}
+              endAdornment={
+                <InputAdornment position="end">
+                  <IconButton
+                    onClick={handleClickShowPassword}
+                    onMouseDown={handleMouseDownPassword}
+                    edge="end"
+                  >
+                    {showPassword ? <Visibility /> : <VisibilityOff />}
+                  </IconButton>
+                </InputAdornment>
+              }
+              labelWidth={148}
+            />
+
+            {errors.newPasswordConfirmation && (
+              <FormHelperText error>Passwords does not match</FormHelperText>
+            )}
+          </FormControl>
         </Grid>
       </Grid>
 
       <Grid item xs={12} container>
         <Grid item xs={12} sm={6} md={4} lg={3}>
           <NewButton
-            disabled={!isPasswordValid}
             loading={isPasswordLoading}
-            onClick={updatePassword}
+            onClick={handleSubmit(updatePassword)}
           >
             Update password
           </NewButton>

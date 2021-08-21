@@ -4,7 +4,7 @@ import PageTemplate from "../../components/PageTemplate";
 import NewButton from "../../components/Button/NewButton";
 
 import {
-  Container,
+  FormContainer,
   StyledBox,
   InfoContainer,
   Input,
@@ -17,114 +17,182 @@ import useApi from "../../services/useApi";
 import { Creators as alertActions } from "../../store/ducks/alert";
 import { useDispatch } from "react-redux";
 import router from "next/router";
+import { useForm } from "react-hook-form";
+import {
+  FormControl,
+  IconButton,
+  InputLabel,
+  OutlinedInput,
+  InputAdornment,
+  FormHelperText,
+} from "@material-ui/core";
+import { Visibility, VisibilityOff } from "@material-ui/icons";
 
 export default function SignUp() {
   const api = useApi();
   const dispatch = useDispatch();
+  const {
+    register,
+    getValues,
+    formState: { errors },
+    handleSubmit,
+    reset,
+  } = useForm();
 
-  const emptyAccount = {
-    first_name: "",
-    last_name: "",
-    email: "",
-    password: "",
-    passwordConfirmation: "",
-  };
-
-  const [account, setAccount] = useState(emptyAccount);
-
-  const [isAccountValid, setIsAccountValid] = useState(false);
+  const [showPassword, setShowPassword] = useState(false);
   const [isSubmissionLoading, setIsSubmissionLoading] = useState(false);
 
-  useEffect(() => {
-    const isSomeInputEmpty = Object.values(account).some(
-      (input) => input.length === 0
-    );
-
-    setIsAccountValid(!isSomeInputEmpty);
-  }, [account]);
-
-  function handleChange(event) {
-    const key = event.target.name;
-    const value = event.target.value;
-
-    setAccount({ ...account, [key]: value });
+  function handleClickShowPassword() {
+    setShowPassword(!showPassword);
   }
 
-  async function submitSignIn() {
+  function handleMouseDownPassword(event) {
+    event.preventDefault();
+  }
+
+  function passwordConfirmationMatch(passwordConfirmation) {
+    return passwordConfirmation === getValues("password");
+  }
+
+  const onSubmit = async (data) => {
     setIsSubmissionLoading(true);
 
-    try {
-      const response = await api.post("/users/open", account);
+    await api
+      .post(
+        "/users/open",
+        {
+          first_name: data.firstName,
+          last_name: data.lastName,
+          email: data.email,
+          password: data.password,
+        },
+        {
+          headers: {
+            "Content-Type": "application/x-www-form-urlencoded",
+          },
+        }
+      )
+      .then((response) => {
+        dispatch(
+          alertActions.openAlert({
+            open: true,
+            message: `An email confirmation was sent to ${getValues("email")}.`,
+            type: "info",
+          })
+        );
 
-      dispatch(
-        alertActions.openAlert({
-          open: true,
-          message: `An email confirmation was sent to ${account.email}.`,
-          type: "info",
-        })
-      );
+        reset();
+        router.push("/signin");
+      })
+      .catch((error) => {
+        dispatch(
+          alertActions.openAlert({
+            open: true,
+            message: error.response?.data?.detail ?? error.message,
+            type: "error",
+          })
+        );
+      })
+      .then(() => {
+        setIsSubmissionLoading(false);
+      });
+  };
 
-      setIsSubmissionLoading(true);
-      setAccount(emptyAccount);
-      router.push("/signin");
-    } catch (error) {
-      dispatch(
-        alertActions.openAlert({
-          open: true,
-          message: error.message,
-          type: "error",
-        })
-      );
-    }
-    setIsSubmissionLoading(false);
-  }
   return (
     <PageTemplate>
-      <Container>
+      <FormContainer onSubmit={handleSubmit(onSubmit)}>
         <StyledBox>
           <h2>Sign Up</h2>
           <Input
-            name="first_name"
+            {...register("firstName", { required: true })}
+            error={Boolean(errors.firstName)}
+            helperText={errors.firstName && "First name is required"}
             label="First name"
-            value={account["first_name"]}
-            onChange={handleChange}
           />
           <Input
-            name="last_name"
+            {...register("lastName", { required: true })}
+            error={Boolean(errors.lastName)}
+            helperText={errors.lastName && "Last name is required"}
             label="Last name"
-            value={account["last_name"]}
-            onChange={handleChange}
           />
           <Input
-            name="email"
+            {...register("email", { required: true })}
+            error={Boolean(errors.email)}
+            helperText={errors.email && "Email is required"}
             label="Email"
-            value={account["email"]}
-            onChange={handleChange}
           />
-          <Input
-            name="password"
-            label="Password"
-            type="password"
-            value={account["password"]}
-            onChange={handleChange}
-          />
-          <Input
-            name="passwordConfirmation"
-            label="Confirm password"
-            type="password"
-            value={account["passwordConfirmation"]}
-            onChange={handleChange}
-          />
-          <Question>
-            Use 8 or more characters.
-          </Question>
+
+          <FormControl
+            variant="outlined"
+            style={{ marginBottom: "12px" }}
+            fullWidth
+          >
+            <InputLabel error={Boolean(errors.password)}>Password</InputLabel>
+
+            <OutlinedInput
+              {...register("password", { required: true, minLength: 8 })}
+              error={Boolean(errors.password)}
+              type={showPassword ? "text" : "password"}
+              endAdornment={
+                <InputAdornment position="end">
+                  <IconButton
+                    onClick={handleClickShowPassword}
+                    onMouseDown={handleMouseDownPassword}
+                    edge="end"
+                  >
+                    {showPassword ? <Visibility /> : <VisibilityOff />}
+                  </IconButton>
+                </InputAdornment>
+              }
+              labelWidth={75}
+            />
+
+            {errors.password && (
+              <FormHelperText error>Use 8 or more characters</FormHelperText>
+            )}
+          </FormControl>
+
+          <FormControl
+            variant="outlined"
+            style={{ marginBottom: "12px" }}
+            fullWidth
+          >
+            <InputLabel error={Boolean(errors.passwordConfirmation)}>
+              Confirm password
+            </InputLabel>
+
+            <OutlinedInput
+              {...register("passwordConfirmation", {
+                required: true,
+                validate: passwordConfirmationMatch,
+              })}
+              error={Boolean(errors.passwordConfirmation)}
+              type={showPassword ? "text" : "password"}
+              endAdornment={
+                <InputAdornment position="end">
+                  <IconButton
+                    onClick={handleClickShowPassword}
+                    onMouseDown={handleMouseDownPassword}
+                    edge="end"
+                  >
+                    {showPassword ? <Visibility /> : <VisibilityOff />}
+                  </IconButton>
+                </InputAdornment>
+              }
+              labelWidth={148}
+            />
+
+            {errors.passwordConfirmation && (
+              <FormHelperText error>Passwords does not match</FormHelperText>
+            )}
+          </FormControl>
+
           <NewButton
             color="primary"
-            disabled={!isAccountValid}
             loading={isSubmissionLoading}
-            onClick={submitSignIn}
+            onClick={handleSubmit(onSubmit)}
           >
-            Sign Up
+            Sign up
           </NewButton>
 
           <Question margin>
@@ -138,7 +206,7 @@ export default function SignUp() {
             </a>
           </Link>
         </StyledBox>
-      </Container>
+      </FormContainer>
     </PageTemplate>
   );
 }

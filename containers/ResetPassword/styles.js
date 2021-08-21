@@ -3,7 +3,7 @@ import theme from "../../styles/theme";
 import { Box, Divider as MaterialDivider, TextField } from "@material-ui/core";
 import Button from "../../components/Button"
 
-export const FormContainer = styled.form`
+export const Container = styled.div`
   background: ${theme.colors.white};
   display: flex;
   flex-direction: row;
@@ -54,16 +54,4 @@ export const Question = styled.p`
     padding-top: 0px;
   `}
   font-size: 14px !important;
-`;
-
-export const SignButton = styled(Button)`
-  align-self: stretch !important;
-  width: 100% !important;
-  background: ${({ variant }) => variant ? 'transparent' : 'linear-gradient(268.88deg, rgba(255, 255, 255, 0.1) -7.38%, #9E1FFF 104.79%), #4e33ff'} !important;
-  color: ${({ variant }) => variant ? theme.colors.secondary : theme.colors.white} !important;
-  border: 1px solid ${theme.colors.secondary} !important;
-`;
-
-export const Divider = styled(MaterialDivider)`
-  margin: 15px 0px !important;
 `;

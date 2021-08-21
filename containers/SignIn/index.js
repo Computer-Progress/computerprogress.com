@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { Creators as alertActions } from "../../store/ducks/alert";
 import { Creators as userActions } from "../../store/ducks/user";
 import useApi from "../../services/useApi";
-import { Creators as navigationActions } from '../../store/ducks/navigation'
+import { Creators as navigationActions } from "../../store/ducks/navigation";
 
 import PageTemplate from "../../components/PageTemplate";
 import Alert from "../../components/Alert";
@@ -24,7 +24,7 @@ import NewButton from "../../components/Button/NewButton";
 
 import { GridOffTwoTone } from "@material-ui/icons";
 
-export default function SignIn({ hasEmailConfirmationSucceed }) {
+export default function SignIn({ hasEmailConfirmationSucceed, alert }) {
   // console.log(hasEmailConfirmationSucceed);
   const router = useRouter();
   const dispatch = useDispatch();
@@ -38,6 +38,18 @@ export default function SignIn({ hasEmailConfirmationSucceed }) {
   });
 
   const [loading, setLoading] = useState(false);
+
+  useEffect(() => {
+    if (alert) {
+      dispatch(
+        alertActions.openAlert({
+          open: true,
+          message: alert.message,
+          type: alert.type,
+        })
+      );
+    }
+  }, []);
 
   const onChange = (value, fieldName) => {
     let myInfo = userInfo;
@@ -54,7 +66,7 @@ export default function SignIn({ hasEmailConfirmationSucceed }) {
       if (user?.email) {
         dispatch(userActions.login({ ...user, ...userState }));
         if (navigationState?.url) {
-          router.push(navigationState.url)
+          router.push(navigationState.url);
           dispatch(navigationActions.clearUrl());
         } else {
           router.push("/");
@@ -118,7 +130,7 @@ export default function SignIn({ hasEmailConfirmationSucceed }) {
       dispatch(
         alertActions.openAlert({
           open: true,
-          message: error.message,
+          message: error.response?.data?.detail ?? error.message,
           type: "error",
         })
       );
@@ -147,7 +159,12 @@ export default function SignIn({ hasEmailConfirmationSucceed }) {
             autoComplete="current-password"
             onChange={(event) => onChange(event.target.value, "password")}
           />
-          <Question>Forgot your password?</Question>
+
+          <Link href="/recover-password">
+            <a>
+              <Question>Forgot your password?</Question>
+            </a>
+          </Link>
           <SignButton onClick={login}>
             {loading ? (
               <CircularProgress color="inherit" size={25} />
