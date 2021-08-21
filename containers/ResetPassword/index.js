@@ -48,7 +48,7 @@ export default function ChangePassword({ token }) {
     setIsLoading(true);
 
     await api
-      .post(`/reset-recovery/`, {
+      .post(`/reset-password/`, {
         token: token,
         new_password: data.password,
       })
