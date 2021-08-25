@@ -54,6 +54,17 @@ const chart = ({ data, label, isByYear, computingPower }) => {
     result.points.sort((a, b) => a[1] - b[1]);
 
     const chart = {
+      chart: {
+        spacingLeft: -5,
+        marginRight: 20,
+      },
+      exporting: {
+        buttons: {
+          contextButton: {
+            x: 12
+          },
+        },
+      },
       plotOptions: {
         scatter: {
           dataLabels: {
