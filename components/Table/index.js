@@ -34,6 +34,7 @@ export default function TaskTable({
   isByYear
 }) {
   const isTablet = useMediaQuery(MuiTheme.breakpoints.down("md"));
+  const isMobile = useMediaQuery(MuiTheme.breakpoints.down("xs"));
 
   return (
     <>
@@ -81,7 +82,7 @@ export default function TaskTable({
         </StyledGridItem>
         {sota ? (
           <StyledGridItem $order={isTablet ? 3 : 4} xs={12} sm={6} lg={3}>
-            <Box style={{ height: "100%" }} ml={2}>
+            <Box style={{ height: "100%" }} ml={isMobile ? 0 : 2}>
               <TaskTableSOTA
                 sota={sota}
               />
