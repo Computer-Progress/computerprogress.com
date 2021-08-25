@@ -88,7 +88,7 @@ export default function TaskTableSOTA({ sota }) {
         </Box>
 
         <Box mt={1}>
-          <Typography variant="subtitle1" component="span" noWrap>
+          <Typography variant="subtitle1" component="span" style={{ textAlign: "center" }}>
             <Box fontWeight="500">{sota.sota_name ?? "-"}</Box>
           </Typography>
         </Box>
