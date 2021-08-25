@@ -5,12 +5,22 @@ export const Wrapper = styled.div`
   flex: 1;
   padding: 15px;
   flex-direction: column;
+  width: 100%;
   border-radius: 16px;
   box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.25);
   transition: all 0.3s ease-in !important;
   &:hover {
     opacity: 0.55;
     cursor: pointer;
+  }
+  p {
+    font-size: 15px;
+    font-weight: 500;
+    align-items: center;
+    display: flex;
+    margin-left: 50px;
+    justify-content: center;
+    margin-top: 30px;
   }
 `;
 
@@ -29,7 +39,7 @@ export const ImageWrapper = styled.div`
   h3 {
     font-family: 'Montserrat';
     font-weight: 500;
-    margin: 0 0 0 20px;
+    margin: 0 0 0 0;
     padding-top: 0;
     flex: 1;
     text-align: center;
@@ -38,6 +48,7 @@ export const ImageWrapper = styled.div`
 
 export const Image = styled.img`
   width: 50px;
+  margin: 10px 0;
 `;
 
 

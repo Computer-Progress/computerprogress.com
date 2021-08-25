@@ -22,20 +22,26 @@ import {
   StyledTypographyBody1,
   StyledListIcon,
   StyledButton,
+  StyledBoxTitle,
+  StyledTypographyBodyTitle,
+  StyledTypographyBody2,
+  StyledChip,
+  StyledTypographyCard,
+  StyledContainerJoinUs,
+  StyledListItemIcon
 } from "./styles";
 
 export default function Collaborate() {
   return (
     <ThemeProvider theme={MuiTheme}>
       <PageTemplate ignoreContainer>
-        {/* Learn how to report computing power */}
         <StyledContainer>
           <StyledFlexboxSection>
-            <Box mb={8}>
-              <Typography variant="h1" align="center">
+            <StyledBoxTitle mb={8}>
+              <StyledTypographyBodyTitle variant="h1" align="center">
                 Learn how to report computing power
-              </Typography>
-            </Box>
+              </StyledTypographyBodyTitle>
+            </StyledBoxTitle>
 
             <StyledBox>
               <StyledTypographyBody1>
@@ -45,32 +51,32 @@ export default function Collaborate() {
             </StyledBox>
 
             <StyledBox>
-              <Typography variant="h2">Computation per network pass</Typography>
+              <Typography variant="h2">1) Computations per network pass</Typography>
             </StyledBox>
 
             <StyledBox>
               <StyledTypographyBody1>
-                The number of floating-point operations required for a single
-                pass (i.e. weight adjustment), also measurable using
-                multiply-adds, in a given deep learning model.
+                Computations (or operations) per network passs the number of floating-point 
+                operations required for a single pass in the network, also measurable using
+                multiply-adds. 
               </StyledTypographyBody1>
             </StyledBox>
 
             <StyledBox>
-              <StyledTypographyBody1>
-                To report this data, you can use either:
-              </StyledTypographyBody1>
+              <StyledTypographyBody2>
+                To report this data, you can either use:
+              </StyledTypographyBody2>
 
               <List>
                 <ListItem>
-                  <ListItemIcon>
+                  <StyledListItemIcon>
                     <StyledListIcon />
-                  </ListItemIcon>
+                  </StyledListItemIcon>
                   <ListItemText
                     primary={
                       <>
-                        <Chip label="Gigaflops" /> or{" "}
-                        <Chip label="Multiply-adds" />
+                        <StyledChip label="Flops"/>    or   {"  "}
+                        <StyledChip label="Multiply-adds"/>
                       </>
                     }
                   />
@@ -79,47 +85,47 @@ export default function Collaborate() {
             </StyledBox>
 
             <StyledBox>
-              <Typography variant="h2">Hardware burden</Typography>
+              <Typography variant="h2">2) Hardware burden</Typography>
             </StyledBox>
 
             <StyledBox>
               <StyledTypographyBody1>
-                The computational capability of the hardware used to train the
-                model, calculated as the number of processors multiplied by the
-                computation rate and time.
+                Hardware burden is the computational capability of the hardware used to train a
+                model. It depends on the model training time and the computation of the hardware
+                used to train the model.
               </StyledTypographyBody1>
             </StyledBox>
 
             <StyledBox>
-              <StyledTypographyBody1>
+              <StyledTypographyBody2>
                 To report this data, you will need:
-              </StyledTypographyBody1>
+              </StyledTypographyBody2>
 
               <List>
                 <ListItem>
-                  <ListItemIcon>
+                  <StyledListItemIcon>
                     <StyledListIcon />
-                  </ListItemIcon>
+                  </StyledListItemIcon>
                   <ListItemText
-                    primary={<Chip label="TPU, GPU and CPU model" />}
+                    primary={<StyledChip label="Hardware used (e.g TPU, GPU and/or CPU)"/>}
                   />
                 </ListItem>
 
                 <ListItem>
-                  <ListItemIcon>
+                  <StyledListItemIcon>
                     <StyledListIcon />
-                  </ListItemIcon>
+                  </StyledListItemIcon>
                   <ListItemText
-                    primary={<Chip label="Number of TPUs, GPUs and CPUs" />}
+                    primary={<StyledChip label="Number of each hardware component used"/>}
                   />
                 </ListItem>
 
                 <ListItem>
-                  <ListItemIcon>
+                  <StyledListItemIcon>
                     <StyledListIcon />
-                  </ListItemIcon>
+                  </StyledListItemIcon>
                   <ListItemText
-                    primary={<Chip label="Training time in seconds" />}
+                    primary={<StyledChip label="Training time"/>}
                   />
                 </ListItem>
               </List>
@@ -127,14 +133,13 @@ export default function Collaborate() {
           </StyledFlexboxSection>
         </StyledContainer>
 
-        {/* People talking about the importance of computing power */}
         <Box style={{ background: "#f9f9fe" }}>
           <StyledContainer>
             <StyledFlexboxSection>
               <Box mb={8}>
-                <Typography variant="h1" align="center">
-                  People talking about the importance of computing power
-                </Typography>
+                <StyledTypographyCard variant="h1" align="center">
+                  Why to understand the progress of computing?!
+                </StyledTypographyCard>
               </Box>
 
               <StyledBox>
@@ -144,31 +149,30 @@ export default function Collaborate() {
           </StyledContainer>
         </Box>
 
-        <StyledContainer>
-          {/* Join us! */}
+        <StyledContainerJoinUs>
           <StyledFlexboxSection>
-            {/* <CollaborateJoin /> */}
 
             <StyledBox>
               <Typography variant="h2" align="center">
-                Join us!
+                Join our community!
               </Typography>
             </StyledBox>
 
             <StyledBox>
               <Typography variant="h3" align="center">
-                Join our community and start contributing to the future of
-                artificial intelligence right now!
+                Start contributing to the progress of computing right now!
               </Typography>
             </StyledBox>
 
             <StyledBox display="flex" justifyContent="center">
-              <StyledButton>Submit paper</StyledButton>
+              <a href="/submit-paper">
+                <StyledButton>Submit paper</StyledButton>
+              </a>
             </StyledBox>
           </StyledFlexboxSection>
-        </StyledContainer>
+        </StyledContainerJoinUs>
+
         <Box style={{ background: "#f9f9fe" }}>
-          {/* Contact */}
           <StyledContainer>
             <StyledFlexboxSection>
               <StyledBox>
@@ -195,3 +199,4 @@ export default function Collaborate() {
     </ThemeProvider>
   );
 }
+

@@ -93,7 +93,7 @@ export const Logos = styled.div`
 
 export const Text = styled.p`
   display: flex;
-  font-weight: bold;
+  font-weight: 500px;
   font-size: 1.5rem;
   margin-bottom: 2rem;
   color: ${theme.colors.white};

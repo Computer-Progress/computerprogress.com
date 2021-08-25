@@ -1,29 +1,60 @@
 import styled from "styled-components";
 
-import { Box, Button, Typography, Container } from "@material-ui/core";
+import { Box, Button, Typography, Container, Chip, ListItemIcon} from "@material-ui/core";
 
 export const StyledContainer = styled(Container)`
   max-width: 1500px !important;
+`;
+
+export const StyledContainerJoinUs = styled(Container)`
+  max-width: 1500px !important;
+  margin: 50px 0;
 `;
 
 export const StyledFlexboxSection = styled(Box).attrs({
   my: 5,
 })``;
 
+export const StyledBoxTitle = styled(Box).attrs({
+  mt: 5,
+})`
+  margin: 100px 0px !important;
+`;
+
 export const StyledBox = styled(Box).attrs({
   mt: 5,
 })``;
+
+export const StyledTypographyBodyTitle = styled(Typography).attrs({
+  variant: "body1",
+})`
+  font-weight: 500 !important;
+  font-size: 50px !important;
+`;
 
 export const StyledTypographyBody1 = styled(Typography).attrs({
   variant: "body1",
 })``;
 
+export const StyledTypographyBody2 = styled(Typography).attrs({
+  variant: "body1",
+})`
+  margin-bottom: 30px !important;
+`;
+
+export const StyledTypographyCard = styled(Typography).attrs({
+  variant: "h1",
+})`
+  font-weight: 500 !important;
+  font-size: 35px !important;
+`;
+
 export const StyledListIcon = styled.div`
-  width: 16px;
-  height: 16px;
-  border: solid 4px #7100c9;
+  width: 4px;
+  height: 4px;
+  border: solid 4px #4e33ff;
   border-radius: 50%;
-  background-color: #ffffff;
+  background-color: #4e33ff;
 `;
 
 export const StyledButton = styled(Button).attrs({
@@ -43,4 +74,15 @@ export const StyledButton = styled(Button).attrs({
       #7100c9 104.79%
     ),
     #2000e5 !important;
+`;
+
+export const StyledChip = styled(Chip).attrs({
+  variant:"outlined",
+})`
+  font-weight: 500 !important;
+  font-size: 13px !important;
+`;
+
+export const StyledListItemIcon = styled(ListItemIcon)`
+  margin-right: -25px !important;
 `;

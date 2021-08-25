@@ -3,13 +3,14 @@ import theme from "../../styles/theme";
 import { Box, Divider as MaterialDivider, TextField } from "@material-ui/core";
 import Button from "../../components/Button"
 
-export const Container = styled.div`
+export const FormContainer = styled.form`
   background: ${theme.colors.white};
   display: flex;
   flex-direction: row;
   align-self: center;
-  justify-content: space-between;
-  max-width: 1100px;
+  justify-content: center;
+  /* max-width: 1100px; */
+  width: 100%;
   margin: 50px 0px 20px 0px;
    div p {
      font-size: 15px;
@@ -52,6 +53,7 @@ export const Question = styled.p`
     margin-top: 0px;
     padding-top: 0px;
   `}
+  font-size: 14px !important;
 `;
 
 export const SignButton = styled(Button)`

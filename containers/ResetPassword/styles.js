@@ -8,8 +8,9 @@ export const Container = styled.div`
   display: flex;
   flex-direction: row;
   align-self: center;
-  justify-content: space-between;
-  max-width: 1100px;
+  justify-content: center;
+  /* max-width: 1100px; */
+  width: 100%;
   margin: 50px 0px 20px 0px;
    div p {
      font-size: 15px;
@@ -52,16 +53,5 @@ export const Question = styled.p`
     margin-top: 0px;
     padding-top: 0px;
   `}
-`;
-
-export const SignButton = styled(Button)`
-  align-self: stretch !important;
-  width: 100% !important;
-  background: ${({ variant }) => variant ? 'transparent' : 'linear-gradient(268.88deg, rgba(255, 255, 255, 0.1) -7.38%, #9E1FFF 104.79%), #4e33ff'} !important;
-  color: ${({ variant }) => variant ? theme.colors.secondary : theme.colors.white} !important;
-  border: 1px solid ${theme.colors.secondary} !important;
-`;
-
-export const Divider = styled(MaterialDivider)`
-  margin: 15px 0px !important;
+  font-size: 14px !important;
 `;

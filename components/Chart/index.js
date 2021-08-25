@@ -51,7 +51,7 @@ const chart = ({ data, label, isByYear, computingPower }) => {
     }
 
     const result = regression.linear(data_points);
-    result.points.sort((a, b) => a[1] - b[1]);
+    result.points.sort(([a, b], [c, d]) => c - a || b - d);
 
     const chart = {
       chart: {

@@ -28,7 +28,7 @@ function Benchmark({ benchmark, taskId, benchmarkId }) {
   const [selectedSecondButton, setSelectedSecondButton] = useState(0);
   const [name, setName] = useState();
   const [type, setType] = useState(0);
-  const [buttons] = useState(benchmark.accuracy_types);
+  const [buttons] = useState(benchmark.accuracy_types.filter(x => data.some(d => d[x.name])));
 
   const tabs = [
     {
@@ -42,7 +42,6 @@ function Benchmark({ benchmark, taskId, benchmarkId }) {
   ];
 
   useEffect(() => {
-    console.log('benchmark', benchmark)
     const has_operation_per_network_pass = data.some(item => !!item.operation_per_network_pass);
     if (!has_operation_per_network_pass) {
       setSecondButtons([
@@ -53,11 +52,10 @@ function Benchmark({ benchmark, taskId, benchmarkId }) {
       ])
       setShowOperations(false);
     }
-    // console.log(domain);
+    // // console.log(domain);
   }, []);
 
   const onSelectAccuracy = ({option, index}) => {
-    console.log('index', index)
     setLabel(option.name);
     setSelectedButton(index);
   }

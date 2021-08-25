@@ -12,11 +12,11 @@ export default function Navbar({ transparentBackground }) {
         </Logo>
         <Menu>
           <Button link='/tasks'>Tasks</Button>
-          <Button link='/about_us'>About Us</Button>
+          <Button link='/aboutus'>About Us</Button>
         </Menu>
         <Auth>
-          <Button link='/sign_up'>Sign up</Button>
-          <SignInButton link='/sign_in' primary>SIGN IN</SignInButton>
+          <Button link='/signup'>Sign up</Button>
+          <SignInButton link='/signin' primary>SIGN IN</SignInButton>
         </Auth>
       </Wrapper>
     </div>

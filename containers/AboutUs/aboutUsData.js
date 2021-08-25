@@ -19,12 +19,13 @@ export const textBlocks = [
     icon: "icon-background-target.svg",
     title: "Our mission",
     description:
-                "Understanding the role that computing power plays in Deep Learning is extremely important.\
-                Our study shows that over 1000 Deep Learning papers were visited, and only 12.9% of \
-                them reported computer resource data correctly.  Our mission is to make clear the huge role \
-                that computing power has played in this area. We really want to encourage the computer science \
-                community to pay attention to this issue and contribute to understanding the progress of Deep \
-                Learning from this prespective.",
+                `The mission of Computer Progress is to make open and free resources regarding
+                the current worldwide voracious computational advance. \
+
+                We encourage people to pay attention to this issue and contribute to the understanding \
+                of metrics that can guide the post Moore’s Law world. \
+                
+                Do you want to contribute to Computer Progress? Check our <a href='/collaborate' style="color: #9E1FFF"> “COLLABORATE” </a> page.`,
   },
 ];
 
@@ -49,8 +50,8 @@ export const researchers = [
   },
   {
     name: "Gabriel F. Manso",
-    workPlace: "UnB",
-    position: "Undergraduate Student",
+    workPlace: "MIT",
+    position: "Research Assistant",
     imageName: "gabriel-manso.png",
   },
 ];
