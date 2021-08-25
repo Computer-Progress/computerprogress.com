@@ -4,12 +4,12 @@ import HighchartsReact from "highcharts-react-official";
 import Highcharts from "highcharts";
 import HighchartsExporting from "highcharts/modules/exporting";
 import regression from "regression";
-import useMediaQuery from "@material-ui/core/useMediaQuery";
-import { MuiTheme } from "../../styles/theme";
+import { useMediaQuery, useTheme } from "@material-ui/core";
 
 
 const chart = ({ data, label, isByYear, computingPower }) => {
-  const isMobileXS = useMediaQuery(MuiTheme.breakpoints.down("xs"));
+  const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down("xs"));
 
   const [chartOptions, setChartOptions] = useState({
     title: {
@@ -128,6 +128,7 @@ const chart = ({ data, label, isByYear, computingPower }) => {
         },
         tickInterval: 1,
         labels: {
+          rotation: isMobile ? 45 : 0,
           style: {
             fontSize: 15,
             fontFamily: "Montserrat, sans-serif"
@@ -165,7 +166,7 @@ const chart = ({ data, label, isByYear, computingPower }) => {
 
   useEffect(() => {
     generateChart(data, label);
-  }, [data, label, isByYear, computingPower])
+  }, [data, label, isByYear, computingPower, isMobile])
 
 
   if (typeof Highcharts === "object") {
