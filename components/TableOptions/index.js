@@ -1,6 +1,7 @@
 import { Avatar } from "@material-ui/core";
 import { Icon } from "@material-ui/core";
-import { Card, Typography, Box } from "@material-ui/core";
+import { Card, Typography, Box, useMediaQuery } from "@material-ui/core";
+import { useTheme } from "@material-ui/core/styles";
 import DoneIcon from "@material-ui/icons/Done";
 
 import { StyledChip } from "./styles";
@@ -16,8 +17,11 @@ export default function TableOptions({
   secondaryOptionsTitle,
   fieldName,
 }) {
+  const theme = useTheme();
+  const isTablet = useMediaQuery(theme.breakpoints.down("md"));
+
   return (
-    <Card style={{ height: "100%", borderRadius: "16px 0 0 16px" }}>
+    <Card style={{ height: "100%", borderRadius: isTablet ? "16px" : "16px 0 0 16px" }}>
       <Box display="flex" flexDirection="column" p={2}>
         <Typography variant="h5">{optionsTitle}</Typography>
 
