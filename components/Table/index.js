@@ -33,7 +33,7 @@ export default function TaskTable({
   sota,
   isByYear
 }) {
-  const isMobile = useMediaQuery(MuiTheme.breakpoints.down("md"));
+  const isTablet = useMediaQuery(MuiTheme.breakpoints.down("md"));
 
   return (
     <>
@@ -46,7 +46,7 @@ export default function TaskTable({
           />
         </StyledGridItem>
 
-        {!isMobile && showViewAllTasks && (
+        {!isTablet && showViewAllTasks && (
           <StyledGridItem $order={1} xs={3}>
             <Link href="/tasks">
               <StyledFlexbox>
@@ -70,7 +70,7 @@ export default function TaskTable({
           />
         </StyledGridItem>
 
-        <StyledGridItem $order={isMobile ? 4 : 4} xs={12} lg={showViewAllTasks ? 7 : 10}>
+        <StyledGridItem $order={isTablet ? 4 : 4} xs={12} lg={showViewAllTasks ? 7 : 10}>
           <TaskTableChart
             isLoading={loading}
             data={data}
@@ -80,7 +80,7 @@ export default function TaskTable({
           />
         </StyledGridItem>
         {sota ? (
-          <StyledGridItem $order={isMobile ? 3 : 4} xs={12} sm={6} lg={3}>
+          <StyledGridItem $order={isTablet ? 3 : 4} xs={12} sm={6} lg={3}>
             <Box style={{ height: "100%" }} ml={2}>
               <TaskTableSOTA
                 sota={sota}
