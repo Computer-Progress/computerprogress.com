@@ -18,7 +18,10 @@
       "components/**/*.{js,jsx}",
       "containers/**/*.{js,jsx}"
     ],
-    "coverageDirectory": "__tests__/coverage"
+    "coverageDirectory": "__tests__/coverage",
+    "moduleNameMapper": {
+      "\\.svg$": "<rootDir>/jest.svg.js"
+    }
   },
   "dependencies": {
     "@material-ui/core": "^4.11.4",
