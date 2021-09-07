@@ -9,7 +9,7 @@ import { Creators as navigationActions } from "../../store/ducks/navigation";
 import PageTemplate from "../../components/PageTemplate";
 import Alert from "../../components/Alert";
 import { useRouter } from "next/router";
-import { Box, CircularProgress } from "@material-ui/core";
+import { Box, CircularProgress, InputAdornment, IconButton } from "@material-ui/core";
 import {
   Container,
   StyledBox,
@@ -22,7 +22,7 @@ import {
 } from "./styles";
 import NewButton from "../../components/Button/NewButton";
 
-import { GridOffTwoTone } from "@material-ui/icons";
+import { Visibility, VisibilityOff } from "@material-ui/icons";
 
 export default function SignIn({ hasEmailConfirmationSucceed, alert }) {
   // console.log(hasEmailConfirmationSucceed);
@@ -38,6 +38,8 @@ export default function SignIn({ hasEmailConfirmationSucceed, alert }) {
   });
 
   const [loading, setLoading] = useState(false);
+
+  const [showPassword, setShowPassword] = useState(false);
 
   useEffect(() => {
     if (alert) {
@@ -57,6 +59,14 @@ export default function SignIn({ hasEmailConfirmationSucceed, alert }) {
     myInfo[fieldName] = value;
     setUserInfo(myInfo);
   };
+
+  const handleClickShowPassword = () => {
+    setShowPassword(!showPassword);
+  }
+
+  const handleMouseDownPassword = (event) => {
+    event.preventDefault();
+  }
 
   const getUserInfo = async () => {
     setLoading(true);
@@ -155,9 +165,22 @@ export default function SignIn({ hasEmailConfirmationSucceed, alert }) {
           />
           <Input
             label="Password"
-            type="password"
+            type={showPassword ? "text" : "password"}
             autoComplete="current-password"
             onChange={(event) => onChange(event.target.value, "password")}
+            InputProps={{
+              endAdornment: (
+                <InputAdornment position="end">
+                  <IconButton
+                    aria-label="toggle password visibility"
+                    onClick={handleClickShowPassword}
+                    onMouseDown={handleMouseDownPassword}
+                  >
+                    {showPassword ? <Visibility/> : <VisibilityOff/> }
+                  </IconButton>
+                </InputAdornment>
+              )
+            }}
           />
 
           <Link href="/recover-password">
