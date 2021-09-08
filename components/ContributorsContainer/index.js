@@ -16,7 +16,7 @@ export default function ContributorsContainer({
           <ContributorCard contributor={contributor} key={contributor.name} />
         ))}
       </ContributorsFlexBox>
-      
+
       <StyledH2>Web Development Team</StyledH2>
 
       <ContributorsFlexBox>

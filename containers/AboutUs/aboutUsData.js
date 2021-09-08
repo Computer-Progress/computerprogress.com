@@ -3,7 +3,7 @@ export const textBlocks = [
     icon: "icon-background-filetext.svg",
     title: "Our paper (abstract)",
     description:
-                "Deep learning's recent history has been one of achievement:\
+      "Deep learning's recent history has been one of achievement:\
                 from triumphing over humans in the game of Go to world-leading \
                 performance in image recognition, voice recognition, translation, \
                 and other tasks. But this progress has come with a voracious appetite for computing power. \
@@ -18,8 +18,7 @@ export const textBlocks = [
   {
     icon: "icon-background-target.svg",
     title: "Our mission",
-    description:
-                `The mission of Computer Progress is to make open and free resources regarding
+    description: `The mission of Computer Progress is to make open and free resources regarding
                 the current worldwide voracious computational advance. \
 
                 We encourage people to pay attention to this issue and contribute to the understanding \

@@ -13,5 +13,5 @@ export default function Footer({}) {
      
       <Copyright>© 2021 Computer Progress</Copyright>
     </Wrapper>
-  )
+  );
 }

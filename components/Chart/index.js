@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { ChartWrapper } from './styles'
+import { ChartWrapper } from "./styles";
 import HighchartsReact from "highcharts-react-official";
 import Highcharts from "highcharts";
 import HighchartsExporting from "highcharts/modules/exporting";
@@ -7,15 +7,14 @@ import regression from "regression";
 import useMediaQuery from "@material-ui/core/useMediaQuery";
 import { MuiTheme } from "../../styles/theme";
 
-
 const chart = ({ data, label, isByYear, computingPower }) => {
   const isMobileXS = useMediaQuery(MuiTheme.breakpoints.down("xs"));
 
   const [chartOptions, setChartOptions] = useState({
     title: {
       text: "Loading...",
-    }
-  })
+    },
+  });
   const generateChart = (list, label) => {
     let data_points = [];
     let info_points = [];
@@ -24,8 +23,10 @@ const chart = ({ data, label, isByYear, computingPower }) => {
       const element = list[index];
       if (element[label] && element[computingPower.value]) {
         let x, y;
-        x = isByYear ? new Date(element.paper_publication_date).getFullYear() : Math.log10(element[computingPower.value]);
-        y = 1 / (1 - (element[label] / 100));
+        x = isByYear
+          ? new Date(element.paper_publication_date).getFullYear()
+          : Math.log10(element[computingPower.value]);
+        y = 1 / (1 - element[label] / 100);
         const point = [x, y];
 
         data_points.push(point);
@@ -41,10 +42,10 @@ const chart = ({ data, label, isByYear, computingPower }) => {
             radius: 4,
             states: {
               hover: {
-                enabled: true
-              }
-            }
-          }
+                enabled: true,
+              },
+            },
+          },
         };
         info_points.push(info);
       }
@@ -58,7 +59,7 @@ const chart = ({ data, label, isByYear, computingPower }) => {
         scatter: {
           dataLabels: {
             enabled: false,
-            format: "{series.name}"
+            format: "{series.name}",
           },
           enableMouseTracking: true,
           color: "#073b4c",
@@ -68,13 +69,17 @@ const chart = ({ data, label, isByYear, computingPower }) => {
               let y = (1 - 1 / this.y) * 100;
               y = Math.round(y * 100) / 100;
               let x = Math.round(this.x * 100) / 100;
-              return `${label}: ${y}% - ${isByYear ? `Year: ${x}` : `Computation: 10e${x < 0 ? '' : '+'}${x.toFixed(1)}`} `;
-            }
-          }
+              return `${label}: ${y}% - ${
+                isByYear
+                  ? `Year: ${x}`
+                  : `Computation: 10e${x < 0 ? "" : "+"}${x.toFixed(1)}`
+              } `;
+            },
+          },
         },
         line: {
-          color: "#000000"
-        }
+          color: "#000000",
+        },
       },
 
       series: [
@@ -89,53 +94,55 @@ const chart = ({ data, label, isByYear, computingPower }) => {
             .replace("y", label),
           data: [result.points[0], result.points[result.points.length - 1]],
           marker: {
-            enabled: false
+            enabled: false,
           },
           states: {
             hover: {
-              lineWidth: 3
-            }
+              lineWidth: 3,
+            },
           },
-          enableMouseTracking: false
-        }
+          enableMouseTracking: false,
+        },
       ],
 
       legend: {
         layout: "vertical",
         align: "center",
         verticalAlign: "top",
-        symbolHeight: .001,
-        symbolWidth: .001,
-        symbolRadius: .001,
+        symbolHeight: 0.001,
+        symbolWidth: 0.001,
+        symbolRadius: 0.001,
         fontFamily: "Montserrat, sans-serif",
       },
       credits: {
-        enabled: false
+        enabled: false,
       },
       title: {
         text: "",
       },
       xAxis: {
         title: {
-          text: isByYear ? 'Year' : `Computation (${computingPower.name})`,
+          text: isByYear ? "Year" : `Computation (${computingPower.name})`,
           margin: 20,
           style: {
             color: "#333",
             fontWeight: "bold",
             fontSize: "18px",
-            fontFamily: "Montserrat, sans-serif"
-          }
+            fontFamily: "Montserrat, sans-serif",
+          },
         },
         tickInterval: 1,
         labels: {
           style: {
             fontSize: 15,
-            fontFamily: "Montserrat, sans-serif"
+            fontFamily: "Montserrat, sans-serif",
           },
           formatter: function () {
-            return isByYear ? this.value : `10e${parseFloat(this.value) < 0 ? '' : '+'}` + this.value;
-          }
-        }
+            return isByYear
+              ? this.value
+              : `10e${parseFloat(this.value) < 0 ? "" : "+"}` + this.value;
+          },
+        },
       },
       yAxis: {
         title: {
@@ -145,28 +152,27 @@ const chart = ({ data, label, isByYear, computingPower }) => {
             color: "#333",
             fontWeight: "bold",
             fontSize: "18px",
-            fontFamily: "Montserrat, sans-serif"
-          }
+            fontFamily: "Montserrat, sans-serif",
+          },
         },
         labels: {
           style: {
             fontSize: 15,
-            fontFamily: "Montserrat, sans-serif"
+            fontFamily: "Montserrat, sans-serif",
           },
           formatter: function () {
-            let label = (1 - (1 / this.value)) * 100;
+            let label = (1 - 1 / this.value) * 100;
             return `${this.value ? label.toFixed(1) : 0}%`;
-          }
-        }
-      }
+          },
+        },
+      },
     };
     setChartOptions(chart);
   };
 
   useEffect(() => {
     generateChart(data, label);
-  }, [data, label, isByYear, computingPower])
-
+  }, [data, label, isByYear, computingPower]);
 
   if (typeof Highcharts === "object") {
     HighchartsExporting(Highcharts);
@@ -174,13 +180,8 @@ const chart = ({ data, label, isByYear, computingPower }) => {
 
   return (
     <ChartWrapper>
-
-      <HighchartsReact
-        highcharts={Highcharts}
-        options={chartOptions}
-      />
+      <HighchartsReact highcharts={Highcharts} options={chartOptions} />
     </ChartWrapper>
   );
-}
+};
 export default chart;
-

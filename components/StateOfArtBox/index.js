@@ -8,13 +8,12 @@ import {
   ButtonWrapper,
   ViewPaperButton,
   HardwareBurdenTooltip,
-  PurpleInfoIcon
+  PurpleInfoIcon,
 } from "./styles";
 
-import { Tooltip, IconButton } from '@material-ui/core';
+import { Tooltip, IconButton } from "@material-ui/core";
 
 const StateOfArtBox = ({ data }) => {
-
   const [stateOfArt, setStateOfArt] = useState({});
 
   useEffect(() => {
@@ -34,9 +33,9 @@ const StateOfArtBox = ({ data }) => {
       <div className="blockWrapper">
         <Block>
           <p>Acurracy:</p>
-          <h4>{stateOfArt.accuracy * 100}<span>
-            %
-          </span>
+          <h4>
+            {stateOfArt.accuracy * 100}
+            <span>%</span>
           </h4>
         </Block>
         <Line />
@@ -48,9 +47,11 @@ const StateOfArtBox = ({ data }) => {
                 <PurpleInfoIcon />
               </IconButton>
             </Tooltip>
-            <p>  :</p>
+            <p> :</p>
           </HardwareBurdenTooltip>
-          <h4>10<sup>{Math.log10(stateOfArt.hardware_burden).toFixed(1)}</sup></h4>
+          <h4>
+            10<sup>{Math.log10(stateOfArt.hardware_burden).toFixed(1)}</sup>
+          </h4>
         </Block>
         <Line />
         <ModelBlock>
@@ -59,7 +60,9 @@ const StateOfArtBox = ({ data }) => {
         </ModelBlock>
       </div>
       <ButtonWrapper>
-        <ViewPaperButton primary link='/tasks'>VIEW PAPER</ViewPaperButton>
+        <ViewPaperButton primary link="/tasks">
+          VIEW PAPER
+        </ViewPaperButton>
       </ButtonWrapper>
     </Wrapper>
   );

@@ -9,7 +9,7 @@ import TimelineOppositeContent from "@material-ui/lab/TimelineOppositeContent";
 import TimelineDot from "@material-ui/lab/TimelineDot";
 import Typography from "@material-ui/core/Typography";
 import OutlinedInput from "@material-ui/core/OutlinedInput";
-import { CircularProgress } from '@material-ui/core';
+import { CircularProgress } from "@material-ui/core";
 
 import {
   Send as SendIcon,
@@ -21,14 +21,18 @@ import {
 } from "react-feather";
 import { Box, Grid, Paper } from "@material-ui/core";
 import { ContainedButton } from "./styles";
-import useApi from '../../services/useApi'
+import useApi from "../../services/useApi";
 import NewButton from "../../components/Button/NewButton";
 import { useSelector } from "react-redux";
-import { getRelativeTime } from '../../utils';
+import { getRelativeTime } from "../../utils";
 
-export default function Conversation({ paperId, onPressSaveChanges, onUpdate }) {
+export default function Conversation({
+  paperId,
+  onPressSaveChanges,
+  onUpdate,
+}) {
   const api = useApi();
-  const [message, setMessage] = useState('');
+  const [message, setMessage] = useState("");
   const [loading, setLoading] = useState(false);
   const [timeline, setTimeline] = useState([]);
   const userState = useSelector((state) => state.UserReducer);
@@ -42,12 +46,12 @@ export default function Conversation({ paperId, onPressSaveChanges, onUpdate }) 
       const res = await api.get(`/submissions/${paperId}/messages`);
       setTimeline(res.data);
       setLoading(false);
-      setMessage('');
+      setMessage("");
     } catch (error) {
       // console.log('cant load this submission')
-      setLoading(false)
+      setLoading(false);
     }
-  }
+  };
 
   useEffect(() => {
     getMessages();
@@ -71,30 +75,30 @@ export default function Conversation({ paperId, onPressSaveChanges, onUpdate }) 
 
 
   const onAddComment = async () => {
-    setLoading(true)
+    setLoading(true);
     try {
       const response = await api.post(`/submissions/${paperId}/messages`, {
-        message
-      })
+        message,
+      });
       if (response.data?.id) {
-        getMessages()
+        getMessages();
       }
     } catch (error) {
       // console.log('error', error)
     }
-  }
+  };
 
   const onPressOption = async (value) => {
-    setLoading(true)
+    setLoading(true);
     if (message) {
-      await onAddComment()
+      await onAddComment();
     }
-    await onPressSaveChanges(submitOptions[value].value)
-  }
+    await onPressSaveChanges(submitOptions[value].value);
+  };
 
   return (
     <Timeline>
-        <TimelineItem>
+      <TimelineItem>
         <TimelineSeparator>
           <TimelineDot
             elevation={0}
@@ -110,9 +114,7 @@ export default function Conversation({ paperId, onPressSaveChanges, onUpdate }) 
           <TimelineConnector />
         </TimelineSeparator>
         <TimelineContent>
-          <Grid container xs={12}>
-            
-          </Grid>
+          <Grid container xs={12}></Grid>
           <OutlinedInput
             multiline
             fullWidth
@@ -121,7 +123,13 @@ export default function Conversation({ paperId, onPressSaveChanges, onUpdate }) 
             value={message}
             onChange={handleTextChange}
           />
-          <Box display="flex" justifyContent="flex-end" flexDirection="row" alignItems="center" p={1}>
+          <Box
+            display="flex"
+            justifyContent="flex-end"
+            flexDirection="row"
+            alignItems="center"
+            p={1}
+          >
             {message ? (
               <Box marginRight={1}>
                 <NewButton
@@ -134,7 +142,7 @@ export default function Conversation({ paperId, onPressSaveChanges, onUpdate }) 
               </Box>
             ) : null}
             <Box>
-              {userState.role !== 'default' ? (
+              {userState.role !== "default" ? (
                 <NewButton
                   loading={loading}
                   options={submitOptions}
@@ -147,50 +155,61 @@ export default function Conversation({ paperId, onPressSaveChanges, onUpdate }) 
       </TimelineItem>
       {timeline.map((item, index) => (
         <TimelineItem>
-            <>
-              <TimelineSeparator>
-                <TimelineDot
-                  elevation={0}
-                  style={{
-                    background: "#f9f9f9",
-                    boxShadow: "none",
-                    padding: "8px",
-                  }}
-                >
-                  <TimelineSeparatorIcon type={item.type} />
-                </TimelineDot>
+          <>
+            <TimelineSeparator>
+              <TimelineDot
+                elevation={0}
+                style={{
+                  background: "#f9f9f9",
+                  boxShadow: "none",
+                  padding: "8px",
+                }}
+              >
+                <TimelineSeparatorIcon type={item.type} />
+              </TimelineDot>
 
-                {index < timeline.length - 1 ? <TimelineConnector /> : null}
-              </TimelineSeparator>
+              {index < timeline.length - 1 ? <TimelineConnector /> : null}
+            </TimelineSeparator>
 
-              <TimelineContent>
+            <TimelineContent>
               {item.author_id ? (
                 <Paper elevation={2}>
                   <Box p={2}>
                     <Typography variant="h4" noWrap>
-                      <pre style={{ fontFamily: 'inherit', margin: 0, padding: 0 }}>
+                      <pre
+                        style={{ fontFamily: "inherit", margin: 0, padding: 0 }}
+                      >
                         {item.body}
                       </pre>
                     </Typography>
 
-                    <Box mt={1} display="flex" alignItems="flex-end" justifyContent="flex-end">
+                    <Box
+                      mt={1}
+                      display="flex"
+                      alignItems="flex-end"
+                      justifyContent="flex-end"
+                    >
                       <Typography variant="h5" noWrap>
-                        Commented by "{item.author.first_name} {item.author.last_name}" {getRelativeTime(new Date(item.created_at))} 
+                        Commented by "{item.author.first_name}{" "}
+                        {item.author.last_name}"{" "}
+                        {getRelativeTime(new Date(item.created_at))}
                       </Typography>
                     </Box>
                   </Box>
                 </Paper>
-          ) : (
-            <>
-              <Typography variant="h4">{item.body}</Typography>
+              ) : (
+                <>
+                  <Typography variant="h4">{item.body}</Typography>
 
-              <Box mt={1}>
-                <Typography variant="h5">{getRelativeTime(new Date(item.created_at))}</Typography>
-              </Box>
-            </>
-          )}
-              </TimelineContent>
-            </>
+                  <Box mt={1}>
+                    <Typography variant="h5">
+                      {getRelativeTime(new Date(item.created_at))}
+                    </Typography>
+                  </Box>
+                </>
+              )}
+            </TimelineContent>
+          </>
         </TimelineItem>
       ))}
     </Timeline>

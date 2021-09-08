@@ -28,7 +28,7 @@ import {
   StyledChip,
   StyledTypographyCard,
   StyledContainerJoinUs,
-  StyledListItemIcon
+  StyledListItemIcon,
 } from "./styles";
 
 export default function Collaborate() {
@@ -51,14 +51,16 @@ export default function Collaborate() {
             </StyledBox>
 
             <StyledBox>
-              <Typography variant="h2">1) Computations per network pass</Typography>
+              <Typography variant="h2">
+                1) Computations per network pass
+              </Typography>
             </StyledBox>
 
             <StyledBox>
               <StyledTypographyBody1>
-                Computations (or operations) per network passs the number of floating-point 
-                operations required for a single pass in the network, also measurable using
-                multiply-adds. 
+                Computations (or operations) per network passs the number of
+                floating-point operations required for a single pass in the
+                network, also measurable using multiply-adds.
               </StyledTypographyBody1>
             </StyledBox>
 
@@ -75,8 +77,8 @@ export default function Collaborate() {
                   <ListItemText
                     primary={
                       <>
-                        <StyledChip label="Flops"/>    or   {"  "}
-                        <StyledChip label="Multiply-adds"/>
+                        <StyledChip label="Flops" /> or {"  "}
+                        <StyledChip label="Multiply-adds" />
                       </>
                     }
                   />
@@ -90,9 +92,9 @@ export default function Collaborate() {
 
             <StyledBox>
               <StyledTypographyBody1>
-                Hardware burden is the computational capability of the hardware used to train a
-                model. It depends on the model training time and the computation of the hardware
-                used to train the model.
+                Hardware burden is the computational capability of the hardware
+                used to train a model. It depends on the model training time and
+                the computation of the hardware used to train the model.
               </StyledTypographyBody1>
             </StyledBox>
 
@@ -107,7 +109,9 @@ export default function Collaborate() {
                     <StyledListIcon />
                   </StyledListItemIcon>
                   <ListItemText
-                    primary={<StyledChip label="Hardware used (e.g TPU, GPU and/or CPU)"/>}
+                    primary={
+                      <StyledChip label="Hardware used (e.g TPU, GPU and/or CPU)" />
+                    }
                   />
                 </ListItem>
 
@@ -116,7 +120,9 @@ export default function Collaborate() {
                     <StyledListIcon />
                   </StyledListItemIcon>
                   <ListItemText
-                    primary={<StyledChip label="Number of each hardware component used"/>}
+                    primary={
+                      <StyledChip label="Number of each hardware component used" />
+                    }
                   />
                 </ListItem>
 
@@ -125,7 +131,7 @@ export default function Collaborate() {
                     <StyledListIcon />
                   </StyledListItemIcon>
                   <ListItemText
-                    primary={<StyledChip label="Training time"/>}
+                    primary={<StyledChip label="Training time" />}
                   />
                 </ListItem>
               </List>
@@ -151,7 +157,6 @@ export default function Collaborate() {
 
         <StyledContainerJoinUs>
           <StyledFlexboxSection>
-
             <StyledBox>
               <Typography variant="h2" align="center">
                 Join our community!
@@ -199,4 +204,3 @@ export default function Collaborate() {
     </ThemeProvider>
   );
 }
-

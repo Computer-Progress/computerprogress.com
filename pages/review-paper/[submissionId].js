@@ -1,8 +1,8 @@
 export { default } from "../../containers/ReviewPaper";
-import useApi from '../../services/useApi'
+import useApi from "../../services/useApi";
 
 export const getServerSideProps = async ({ query }) => {
-  const api = useApi(true)
+  const api = useApi(true);
   try {
     const res = await api.get(`/submissions/${query.submissionId}`);
     const submission = res.data;

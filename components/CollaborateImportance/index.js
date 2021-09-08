@@ -35,7 +35,8 @@ const quotes = [
     source: "Song Han, MIT",
   },
   {
-    quote: "The actual computational burden of deep learning models is scaling more rapidly than (known) lower bounds from theory.",
+    quote:
+      "The actual computational burden of deep learning models is scaling more rapidly than (known) lower bounds from theory.",
     source: "Thompson et al, 2021",
   },
 ];

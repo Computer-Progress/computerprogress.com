@@ -30,20 +30,20 @@ export default function AutocompleteCreatable({
     }
     if (handleAutocompleteChange) {
       handleAutocompleteChange(value?.name || value, name);
-      if (typeof value === 'object') {
-        updateObject?.(value)
+      if (typeof value === "object") {
+        updateObject?.(value);
       }
     }
   }, [value]);
 
   useEffect(() => {
-    setValue(null)
+    setValue(null);
   }, [task]);
 
   useEffect(() => {
     if (!usedValue) {
-      setValue(outsideValue)
-      setUsedValue(true)
+      setValue(outsideValue);
+      setUsedValue(true);
     }
   }, [outsideValue]);
 

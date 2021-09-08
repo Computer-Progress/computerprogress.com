@@ -1,10 +1,10 @@
-import '../styles/globals.css'
+import "../styles/globals.css";
 import { ThemeProvider } from "@material-ui/core/styles";
 import { MuiTheme } from "../styles/theme";
-import { store, persistor } from '../store';
-import { Provider } from 'react-redux';
-import { PersistGate } from 'redux-persist/integration/react'
-import Alert from '../components/Alert';
+import { store, persistor } from "../store";
+import { Provider } from "react-redux";
+import { PersistGate } from "redux-persist/integration/react";
+import Alert from "../components/Alert";
 
 function MyApp({ Component, pageProps }) {
   return (
@@ -16,7 +16,7 @@ function MyApp({ Component, pageProps }) {
         </PersistGate>
       </Provider>
     </ThemeProvider>
-  )
+  );
 }
 
-export default MyApp
+export default MyApp;

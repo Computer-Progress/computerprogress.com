@@ -1,8 +1,7 @@
 import styled from "styled-components";
 import theme from "../../styles/theme";
-import DefaultButton from "../../components/Button"
-import InfoIcon from '@material-ui/icons/Info';
-
+import DefaultButton from "../../components/Button";
+import InfoIcon from "@material-ui/icons/Info";
 
 export const Wrapper = styled.div`
   display: flex;
@@ -26,7 +25,7 @@ export const Wrapper = styled.div`
 `;
 
 export const StateOfArt = styled.div`
-  font-family: 'Montserrat';
+  font-family: "Montserrat";
   font-size: 22px;
   font-weight: bold;
   font-stretch: normal;
@@ -39,7 +38,7 @@ export const StateOfArt = styled.div`
 
 export const Acurracy = styled.div`
   margin: 16px 64px 8px 16px;
-  font-family: 'Montserrat';
+  font-family: "Montserrat";
   font-size: 18px;
   font-weight: 600;
   font-stretch: normal;
@@ -52,7 +51,7 @@ export const Acurracy = styled.div`
 
 export const Percentage = styled.div`
   margin: 8px 106px 17px 105px;
-  font-family: 'Montserrat';
+  font-family: "Montserrat";
   font-size: 36px;
   font-weight: bold;
   font-stretch: normal;
@@ -64,7 +63,12 @@ export const Percentage = styled.div`
 `;
 
 export const PurpleInfoIcon = styled(InfoIcon)`
-  color: linear-gradient(268.88deg, rgba(255, 255, 255, 0.1) -7.38%, #9E1FFF 104.79%), #4e33ff !important;
+  color: linear-gradient(
+      268.88deg,
+      rgba(255, 255, 255, 0.1) -7.38%,
+      #9e1fff 104.79%
+    ),
+    #4e33ff !important;
 `;
 
 export const HardwareBurdenTooltip = styled.div`
@@ -80,12 +84,12 @@ export const Line = styled.div`
 `;
 
 export const ViewPaperButton = styled(DefaultButton)`
-  color: #9E1FFF !important;
+  color: #9e1fff !important;
 `;
 
 export const Block = styled.div`
   h4 {
-    font-family: 'Montserrat';
+    font-family: "Montserrat";
     font-size: 36px;
     font-weight: 200;
     font-stretch: normal;
@@ -94,18 +98,17 @@ export const Block = styled.div`
     letter-spacing: normal;
     justify-content: center;
     color: #1a1515;
-    span{
-    font-size: 18px;
-    bottom: 0;
-
+    span {
+      font-size: 18px;
+      bottom: 0;
     }
-    sup{
-    font-size: 28px;
+    sup {
+      font-size: 28px;
       margin-bottom: 15px;
     }
   }
   p {
-    font-family: 'Montserrat';
+    font-family: "Montserrat";
     font-size: 18px;
     font-weight: 600;
     font-stretch: normal;
@@ -119,7 +122,7 @@ export const Block = styled.div`
 
 export const ModelBlock = styled.div`
   p {
-    font-family: 'Montserrat';
+    font-family: "Montserrat";
     font-size: 18px;
     font-weight: 600;
     font-stretch: normal;
@@ -146,7 +149,8 @@ export const ModelBlock = styled.div`
 `;
 
 export const Button = styled(DefaultButton)`
-  font-size: 16px;`;
+  font-size: 16px;
+`;
 
 export const ButtonWrapper = styled.div`
   display: flex;

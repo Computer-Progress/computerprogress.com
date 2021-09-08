@@ -19,7 +19,7 @@ export default function DescriptionCard({
 
       <StyledTitle>{isH1 ? <h1>{title}</h1> : <h2>{title}</h2>}</StyledTitle>
 
-      <p dangerouslySetInnerHTML={{__html: description}}/>
+      <p dangerouslySetInnerHTML={{ __html: description }} />
     </ContainerGrid>
   );
 }

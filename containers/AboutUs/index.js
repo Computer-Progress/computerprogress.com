@@ -4,7 +4,7 @@ import DescriptionCard from "../../components/DescriptionCard";
 import ContributorsContainer from "../../components/ContributorsContainer";
 import { textBlocks, researchers, otherContributors } from "./aboutUsData";
 
-import {StyledButton, ButtonContainer} from "./styles.js";
+import { StyledButton, ButtonContainer } from "./styles.js";
 
 export default function AboutUs() {
   return (
@@ -19,7 +19,7 @@ export default function AboutUs() {
         <ButtonContainer>
           <StyledButton>See our paper</StyledButton>
         </ButtonContainer>
-        
+
         <DescriptionCard
           icon={textBlocks[1].icon}
           title={textBlocks[1].title}

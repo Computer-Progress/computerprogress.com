@@ -1,9 +1,19 @@
 import Link from "next/link";
 import React from "react";
-import { Wrapper, SearchWrapper, Separator, Image, Input, Header, SearchIcon, Selector, PaginationBox } from "./styles";
-import { MenuItem } from '@material-ui/core'
+import {
+  Wrapper,
+  SearchWrapper,
+  Separator,
+  Image,
+  Input,
+  Header,
+  SearchIcon,
+  Selector,
+  PaginationBox,
+} from "./styles";
+import { MenuItem } from "@material-ui/core";
 import Submission from "./Submission";
-import Pagination from '@material-ui/lab/Pagination';
+import Pagination from "@material-ui/lab/Pagination";
 
 export default function ({ papers }) {
   const [age, setAge] = React.useState(10);
@@ -16,7 +26,7 @@ export default function ({ papers }) {
     <>
       <Wrapper>
         <Header>
-            {/* <Image src={item.image} /> */}
+          {/* <Image src={item.image} /> */}
           <SearchIcon />
           <Input label="Search" />
           <Selector
@@ -33,9 +43,7 @@ export default function ({ papers }) {
         {papers.map((paper, index) => (
           <>
             <Submission paper={paper} />
-            {index !== papers.length - 1 ? (
-              <Separator />
-            ) : null}
+            {index !== papers.length - 1 ? <Separator /> : null}
           </>
         ))}
       </Wrapper>

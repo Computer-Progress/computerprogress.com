@@ -51,5 +51,10 @@ export const StyledButton = styled(Button).attrs({
   text-align: center;
   border-radius: 30px !important;
   color: white;
-  background: linear-gradient(268.88deg, rgba(255, 255, 255, 0.1) -7.38%, #9E1FFF 104.79%), #4e33ff;;
+  background: linear-gradient(
+      268.88deg,
+      rgba(255, 255, 255, 0.1) -7.38%,
+      #9e1fff 104.79%
+    ),
+    #4e33ff; ;
 `;

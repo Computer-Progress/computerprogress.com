@@ -28,7 +28,7 @@ export const Separator = styled.div`
   height: 1px;
   width: 100%;
   margin-top: 5px;
-  background-color: #9E1FFF;
+  background-color: #9e1fff;
 `;
 
 export const ImageWrapper = styled.div`
@@ -37,7 +37,7 @@ export const ImageWrapper = styled.div`
   align-items: center;
   padding-bottom: 5px;
   h3 {
-    font-family: 'Montserrat';
+    font-family: "Montserrat";
     font-weight: 500;
     margin: 0 0 0 0;
     padding-top: 0;
@@ -50,5 +50,3 @@ export const Image = styled.img`
   width: 50px;
   margin: 10px 0;
 `;
-
-

@@ -1,30 +1,28 @@
-export {default} from '../containers/Benchmark';
+export { default } from "../containers/Benchmark";
 
 export const getServerSideProps = async ({ query }) => {
-    try {
-      const res = await fetch(
-        `/api/benchmark/${query.benchmarkId}`
-      );
-      const benchmark = await res.json();
-  
+  try {
+    const res = await fetch(`/api/benchmark/${query.benchmarkId}`);
+    const benchmark = await res.json();
+
+    return {
+      props: {
+        benchmark,
+      },
+    };
+  } catch {
+    if (query.hasOwnProperty("taskId")) {
       return {
-        props: {
-          benchmark,
+        redirect: {
+          permanent: false,
+          destination: `/tasks/${query.taskId}`,
         },
+        props: {},
       };
-    } catch {
-      if (query.hasOwnProperty("taskId")) {
-        return {
-          redirect: {
-            permanent: false,
-            destination: `/tasks/${query.taskId}`,
-          },
-          props: {},
-        };
-      } else {
-        return {
-          notFound: true,
-        };
-      }
+    } else {
+      return {
+        notFound: true,
+      };
     }
-  };
+  }
+};

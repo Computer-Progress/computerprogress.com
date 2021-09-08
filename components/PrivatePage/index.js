@@ -1,12 +1,12 @@
-import React from 'react';
+import React from "react";
 import { useRouter } from "next/router";
-import { useSelector, useDispatch } from 'react-redux'
-import { Creators as navigationActions } from '../../store/ducks/navigation'
-import { Creators as alertActions } from '../../store/ducks/alert'
+import { useSelector, useDispatch } from "react-redux";
+import { Creators as navigationActions } from "../../store/ducks/navigation";
+import { Creators as alertActions } from "../../store/ducks/alert";
 
 const PrivatePage = (Component, role) => {
   const Auth = (props) => {
-    const dispatch = useDispatch()
+    const dispatch = useDispatch();
     const router = useRouter();
     const userState = useSelector((state) => state.UserReducer);
     // If user is not logged in, return login component
@@ -21,15 +21,13 @@ const PrivatePage = (Component, role) => {
     }
 
     if (!userState.id) {
-      dispatch(navigationActions.saveUrl(router.pathname))
-      router.replace('/signin')
-      return null
+      dispatch(navigationActions.saveUrl(router.pathname));
+      router.replace("/signin");
+      return null;
     }
 
     // If user is logged in, return original component
-    return (
-      <Component {...props} />
-    );
+    return <Component {...props} />;
   };
 
   // Copy getInitial props so it will run as well

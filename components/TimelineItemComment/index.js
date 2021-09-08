@@ -7,7 +7,6 @@ import Typography from "@material-ui/core/Typography";
 import { Box, Paper } from "@material-ui/core";
 
 export default function TimelineItemComment({ item, disableConnector }) {
-
   return (
     <TimelineItem>
       <TimelineSeparator>

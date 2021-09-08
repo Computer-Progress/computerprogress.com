@@ -1,10 +1,10 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState } from "react";
 
 import PaperListItem from "./PaperListItem";
 
-import { ItemsWrapper } from './styles';
+import { ItemsWrapper } from "./styles";
 
-import { Wrapper } from './PaperListItem/styles'
+import { Wrapper } from "./PaperListItem/styles";
 
 // import { DataGrid } from '@material-ui/data-grid';
 
@@ -14,7 +14,7 @@ export default function PapersList({
   accuracy_list,
   selectedAccuracy,
   onSelectAccuracy,
-  showOperations
+  showOperations,
 }) {
   const renderItem = (item, index) => (
     <PaperListItem
@@ -27,7 +27,7 @@ export default function PapersList({
       accuracy_list={accuracy_list}
       showOperations={showOperations}
     />
-  )
+  );
 
   // const [columns] = useState([
   //   {
@@ -79,7 +79,7 @@ export default function PapersList({
   useEffect(() => {
     papers.sort((a, b) => b[selectedAccuracy] - a[selectedAccuracy]);
     setList(papers.filter((item) => item[selectedAccuracy]));
-  }, [selectedAccuracy, papers])
+  }, [selectedAccuracy, papers]);
 
   return (
     <ItemsWrapper>
@@ -87,7 +87,7 @@ export default function PapersList({
         {list.map((item, index) => renderItem(item, index))}
       </Wrapper>
     </ItemsWrapper>
-  )
+  );
 
   // return (
   //   <ItemsWrapper>

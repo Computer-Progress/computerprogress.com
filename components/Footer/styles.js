@@ -13,8 +13,13 @@ export const Wrapper = styled.div`
   justify-content: space-between;
   align-items: center;
   flex-wrap: wrap;
-  background: linear-gradient(268.88deg, rgba(255, 255, 255, 0.1) -7.38%, #9E1FFF 104.79%), #4e33ff;
-  font-size: .8rem;
+  background: linear-gradient(
+      268.88deg,
+      rgba(255, 255, 255, 0.1) -7.38%,
+      #9e1fff 104.79%
+    ),
+    #4e33ff;
+  font-size: 0.8rem;
   width: 100%;
   padding: 0 3.75%;
   margin-top: auto;
@@ -24,7 +29,7 @@ export const Container = styled.div`
   display: flex;
   flex-direction: column;
   width: 100%;
-  padding:0 3.75%;
+  padding: 0 3.75%;
   padding-top: 100px;
   max-width: 1920px;
   margin: 0 auto;
@@ -53,7 +58,6 @@ export const Logos = styled.div`
     color: ${theme.colors.white};
     text-align: center;
   }
-
 
   div h3 {
     font-weight: bold;
@@ -88,8 +92,6 @@ export const Logos = styled.div`
   @media only screen and (max-width: 380px) {
     grid-template-columns: 1fr;
   }
-
-
 `;
 
 export const Text = styled.p`
@@ -98,7 +100,7 @@ export const Text = styled.p`
   font-weight: 500px;
   font-size: 17px;
   color: ${theme.colors.white};
-`
+`;
 
 export const Copyright = styled.p`
   display: flex;

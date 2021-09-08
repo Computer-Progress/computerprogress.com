@@ -1,1 +1,1 @@
-export {default} from '../containers/RecoverPassword';
+export { default } from "../containers/RecoverPassword";

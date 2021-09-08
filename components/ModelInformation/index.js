@@ -25,7 +25,7 @@ import { Target as TargetIcon } from "react-feather";
 import AddIcon from "@material-ui/icons/Add";
 import CloseIcon from "@material-ui/icons/Close";
 
-import useApi from '../../services/useApi'
+import useApi from "../../services/useApi";
 
 import { StyledCard, StyledBoxContainer, StyledTextField } from "./styles";
 
@@ -71,16 +71,15 @@ export default function ModelInformation(props) {
 
     const URL = `/datasets${taskIdQueryParam}`;
 
-    api.get(URL)
-    .then((response) => {
+    api.get(URL).then((response) => {
       const data = response.data;
       setDatasetOptions(data);
-      const newModel = model
+      const newModel = model;
       newModel.accuracies = [];
-      setModel({...newModel})
-      setNewAccuracyType(null)
-      setNewAccuracyValue('')
-    })
+      setModel({ ...newModel });
+      setNewAccuracyType(null);
+      setNewAccuracyValue("");
+    });
   }, [model.task]);
 
   useEffect(() => {
@@ -88,38 +87,36 @@ export default function ModelInformation(props) {
       return;
     }
 
-    api.get(`/accuracy_types?skip=0&limit=100&task_dataset_identifier=${task.identifier}-on-${dataset.identifier}`)
+    api
+      .get(
+        `/accuracy_types?skip=0&limit=100&task_dataset_identifier=${task.identifier}-on-${dataset.identifier}`
+      )
       .then((response) => {
         const data = response.data;
         setAccuracyOptions(data);
-      })
-
+      });
   }, [model.dataset]);
 
   function fetchData() {
-    api.get(`/tasks`)
-      .then((response) => {
-        const data = response.data;
-        setTaskOptions(data);
-      })
+    api.get(`/tasks`).then((response) => {
+      const data = response.data;
+      setTaskOptions(data);
+    });
 
-    api.get(`/cpus`)
-      .then((response) => {
-        const data = response.data;
-        setCpuOptions(data);
-      })
+    api.get(`/cpus`).then((response) => {
+      const data = response.data;
+      setCpuOptions(data);
+    });
 
-    api.get(`/gpus`)
-      .then((response) => {
-        const data = response.data;
-        setGpuOptions(data);
-      })
+    api.get(`/gpus`).then((response) => {
+      const data = response.data;
+      setGpuOptions(data);
+    });
 
-    api.get(`/tpus`)
-      .then((response) => {
-        const data = response.data;
-        setTpuOptions(data);
-      })
+    api.get(`/tpus`).then((response) => {
+      const data = response.data;
+      setTpuOptions(data);
+    });
   }
 
   function handleTextChange({ target: { name, value } }, type) {
@@ -209,9 +206,14 @@ export default function ModelInformation(props) {
 
             <Grid item xs={12}>
               <StyledTextField
-                {...props.register(`ModelName${props.index}`, { required: !model.name })}
+                {...props.register(`ModelName${props.index}`, {
+                  required: !model.name,
+                })}
                 error={!!props.errors[`ModelName${props.index}`]}
-                helperText={!!props.errors[`ModelName${props.index}`] && "Model is required"}
+                helperText={
+                  !!props.errors[`ModelName${props.index}`] &&
+                  "Model is required"
+                }
                 name="name"
                 label="Model name"
                 value={model.name}
@@ -221,9 +223,13 @@ export default function ModelInformation(props) {
 
             <Grid item xs={12}>
               <AutocompleteCreatable
-                {...props.register(`Task${props.index}`, { required: !model.task })}
+                {...props.register(`Task${props.index}`, {
+                  required: !model.task,
+                })}
                 error={!!props.errors[`Task${props.index}`]}
-                helperText={!!props.errors[`Task${props.index}`] && "Task is required"}
+                helperText={
+                  !!props.errors[`Task${props.index}`] && "Task is required"
+                }
                 name="task"
                 label={"Tasks"}
                 options={taskOptions}
@@ -236,9 +242,14 @@ export default function ModelInformation(props) {
 
             <Grid item xs={12}>
               <AutocompleteCreatable
-                {...props.register(`Dataset${props.index}`, { required: !model.dataset })}
+                {...props.register(`Dataset${props.index}`, {
+                  required: !model.dataset,
+                })}
                 error={!!props.errors[`Dataset${props.index}`]}
-                helperText={!!props.errors[`Dataset${props.index}`] && "Dataset is required"}
+                helperText={
+                  !!props.errors[`Dataset${props.index}`] &&
+                  "Dataset is required"
+                }
                 name="dataset"
                 optionKey={"name"}
                 options={datasetOptions}
@@ -254,7 +265,9 @@ export default function ModelInformation(props) {
             <Grid item xs={12} container spacing={1}>
               <Grid item xs={8}>
                 <AutocompleteCreatable
-                  {...props.register(`accuracy_type${props.index}`, { required: !model.accuracies.length })}
+                  {...props.register(`accuracy_type${props.index}`, {
+                    required: !model.accuracies.length,
+                  })}
                   error={!!props.errors[`accuracy_type${props.index}`]}
                   helperText={!!props.errors[`accuracy_type${props.index}`] && "To add the accuracy type, click on the plus icon"}
                   name="accuracy_type"
@@ -342,7 +355,9 @@ export default function ModelInformation(props) {
 
             <Grid item xs={6} md={5} lg={4} xl={3}>
               <StyledTextField
-                {...props.register(`TrainingTime${props.index}`, { required: !model.training_time})}
+                {...props.register(`TrainingTime${props.index}`, {
+                  required: !model.training_time,
+                })}
                 error={!!props.errors[`TrainingTime${props.index}`]}
                 helperText={!!props.errors[`TrainingTime${props.index}`] && "Training time is required"}
                 label="Training time (seg)"
@@ -355,9 +370,14 @@ export default function ModelInformation(props) {
 
             <Grid item xs={6} md={5} lg={4} xl={3}>
               <StyledTextField
-                {...props.register(`Ephocs${props.index}`, { required: !model.epochs })}
+                {...props.register(`Ephocs${props.index}`, {
+                  required: !model.epochs,
+                })}
                 error={!!props.errors[`Ephocs${props.index}`]}
-                helperText={!!props.errors[`Ephocs${props.index}`] && "# of Epochs is required"}
+                helperText={
+                  !!props.errors[`Ephocs${props.index}`] &&
+                  "# of Epochs is required"
+                }
                 label="# of Epochs"
                 name="epochs"
                 type="number"
@@ -429,9 +449,13 @@ export default function ModelInformation(props) {
 
             <Grid item xs={6} sm={4}>
               <StyledTextField
-                {...props.register(`ofCPU${props.index}`, { required: !!model.cpu && !model.number_of_cpus  })}
+                {...props.register(`ofCPU${props.index}`, {
+                  required: !!model.cpu && !model.number_of_cpus,
+                })}
                 error={!!props.errors[`ofCPU${props.index}`]}
-                helperText={!!props.errors[`ofCPU${props.index}`] && "# of CPU required"}
+                helperText={
+                  !!props.errors[`ofCPU${props.index}`] && "# of CPU required"
+                }
                 label="# of CPUs"
                 name="number_of_cpus"
                 type="number"
@@ -442,9 +466,13 @@ export default function ModelInformation(props) {
 
             <Grid item xs={12} md={8}>
               <AutocompleteCreatable
-                {...props.register(`GPU${props.index}`, { required: !model.tpu && !model.gpu })}
+                {...props.register(`GPU${props.index}`, {
+                  required: !model.tpu && !model.gpu,
+                })}
                 error={!!props.errors[`GPU${props.index}`]}
-                helperText={!!props.errors[`GPU${props.index}`] && "GPU or TPU required"}
+                helperText={
+                  !!props.errors[`GPU${props.index}`] && "GPU or TPU required"
+                }
                 name="gpu"
                 label={"GPUs"}
                 options={gpuOptions}
@@ -456,9 +484,13 @@ export default function ModelInformation(props) {
 
             <Grid item xs={6} sm={4}>
               <StyledTextField
-                {...props.register(`ofGPU${props.index}`, { required: !!model.gpu && !model.number_of_gpus })}
+                {...props.register(`ofGPU${props.index}`, {
+                  required: !!model.gpu && !model.number_of_gpus,
+                })}
                 error={!!props.errors[`ofGPU${props.index}`]}
-                helperText={!!props.errors[`ofGPU${props.index}`] && "# of GPU required"}
+                helperText={
+                  !!props.errors[`ofGPU${props.index}`] && "# of GPU required"
+                }
                 label="# of GPUs"
                 name="number_of_gpus"
                 type="number"
@@ -469,9 +501,13 @@ export default function ModelInformation(props) {
 
             <Grid item xs={12} md={8}>
               <AutocompleteCreatable
-                {...props.register(`TPU${props.index}`, { required: !model.tpu && !model.gpu })}
+                {...props.register(`TPU${props.index}`, {
+                  required: !model.tpu && !model.gpu,
+                })}
                 error={!!props.errors[`TPU${props.index}`]}
-                helperText={!!props.errors[`TPU${props.index}`] && "TPU or GPU required"}
+                helperText={
+                  !!props.errors[`TPU${props.index}`] && "TPU or GPU required"
+                }
                 name="tpu"
                 label={"TPUs"}
                 options={tpuOptions}
@@ -484,9 +520,13 @@ export default function ModelInformation(props) {
 
             <Grid item xs={6} sm={4}>
               <StyledTextField
-                {...props.register(`ofTPU${props.index}`, { required: !!model.tpu && !model.number_of_tpus })}
+                {...props.register(`ofTPU${props.index}`, {
+                  required: !!model.tpu && !model.number_of_tpus,
+                })}
                 error={!!props.errors[`ofTPU${props.index}`]}
-                helperText={!!props.errors[`ofTPU${props.index}`] && "# of TPU required"}
+                helperText={
+                  !!props.errors[`ofTPU${props.index}`] && "# of TPU required"
+                }
                 label="# of TPUs"
                 name="number_of_tpus"
                 value={model.number_of_tpus}

@@ -12,9 +12,9 @@ export const Container = styled.div`
   justify-content: center;
   margin: 50px 0px 20px 0px;
   width: 100%;
-   div p {
-     font-size: 15px;
-   }
+  div p {
+    font-size: 15px;
+  }
 
   @media only screen and (max-width: 800px) {
     flex-direction: column;

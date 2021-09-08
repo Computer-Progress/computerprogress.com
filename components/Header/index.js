@@ -30,10 +30,10 @@ import Logo from "../../public/logo_icon.svg";
 import { ChevronDown as ChevronDownIcon } from "react-feather";
 import * as Icon from "react-feather";
 import { useSelector, useDispatch } from "react-redux";
-import { Creators as userActions } from '../../store/ducks/user';
+import { Creators as userActions } from "../../store/ducks/user";
 
 export default function Header({ isHome }) {
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
   const router = useRouter();
   const userState = useSelector((state) => state.UserReducer);
 
@@ -61,7 +61,7 @@ export default function Header({ isHome }) {
     links.unshift({
       text: "Submit paper",
       href: "/submit-paper",
-    },)
+    });
   }
 
   const menuItems = [
@@ -69,25 +69,25 @@ export default function Header({ isHome }) {
       title: "Profile",
       pathname: "/profile",
       icon: <Icon.User />,
-      show: true
+      show: true,
     },
     {
       title: "Submissions",
       pathname: "/papers/submissions",
       icon: <Icon.File />,
-      show: true
+      show: true,
     },
     {
       title: "Reviews",
       pathname: "/papers/reviews",
       icon: <Icon.Clipboard />,
-      show: userState?.role !== 'default'
+      show: userState?.role !== "default",
     },
     {
       title: "Submit Paper",
       pathname: "/submit-paper",
       icon: <Icon.PlusCircle />,
-      show: true
+      show: true,
     },
   ];
 
@@ -114,7 +114,7 @@ export default function Header({ isHome }) {
 
   function logout() {
     dispatch(userActions.logout());
-    router.push('/');
+    router.push("/");
   }
 
   return (
@@ -189,24 +189,26 @@ export default function Header({ isHome }) {
                     open={Boolean(menuAnchorEl)}
                     onClose={handleCloseMenu}
                   >
-                    {menuItems.map((menuItem, index) => menuItem.show ? (
-                      <MenuItem
-                        onClick={() => goTo(index)}
-                        key={menuItem.title}
-                      >
-                        <Box display="flex">
-                          <Box
-                            display="inline-flex"
-                            alignContent="center"
-                            pr={2}
-                          >
-                            {menuItem.icon}
-                          </Box>
+                    {menuItems.map((menuItem, index) =>
+                      menuItem.show ? (
+                        <MenuItem
+                          onClick={() => goTo(index)}
+                          key={menuItem.title}
+                        >
+                          <Box display="flex">
+                            <Box
+                              display="inline-flex"
+                              alignContent="center"
+                              pr={2}
+                            >
+                              {menuItem.icon}
+                            </Box>
 
-                          <Box display="inline">{menuItem.title}</Box>
-                        </Box>
-                      </MenuItem>
-                    ): null)}
+                            <Box display="inline">{menuItem.title}</Box>
+                          </Box>
+                        </MenuItem>
+                      ) : null
+                    )}
 
                     <Divider />
 

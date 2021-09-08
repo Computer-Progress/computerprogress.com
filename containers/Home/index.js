@@ -10,16 +10,16 @@ export default function Home({ tasks }) {
   const isMobile = useMediaQuery(MuiTheme.breakpoints.down("md"));
 
   return (
-      <PageTemplate isHome>
-        <Box display="flex" flexDirection="column">
-          <Box my={3}>
-            <TaskTable tasks={tasks} />
-          </Box>
+    <PageTemplate isHome>
+      <Box display="flex" flexDirection="column">
+        <Box my={3}>
+          <TaskTable tasks={tasks} />
+        </Box>
 
           <Box my={3} height="30vh" width={isMobile ? "100%" : "80%"}>
             <CollaborateInvite />
           </Box>
-        </Box>
-      </PageTemplate>
+      </Box>
+    </PageTemplate>
   );
 }

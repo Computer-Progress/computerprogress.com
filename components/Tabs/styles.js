@@ -58,5 +58,6 @@ export const StyledButton = styled(Button)`
   font-size: 14px;
   color: ${theme.colors.black};
   font-weight: 500;
-  ${({selected}) => selected && `color: ${theme.colors.secondary}; font-weight: 450;`}
+  ${({ selected }) =>
+    selected && `color: ${theme.colors.secondary}; font-weight: 450;`}
 `;

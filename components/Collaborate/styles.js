@@ -1,6 +1,6 @@
 import styled, { keyframes } from "styled-components";
 import theme from "../../styles/theme";
-import Button from '../Button'
+import Button from "../Button";
 
 export const Wrapper = styled.div`
   display: flex;
@@ -30,10 +30,15 @@ export const Text = styled.p`
   margin-bottom: 3rem;
   font-size: 2.25rem;
   color: "#2000E5";
-`
+`;
 
 export const CollaborateButton = styled(Button)`
-  background: linear-gradient(268.88deg, rgba(255, 255, 255, 0.1) -7.38%, #9E1FFF 104.79%), #4e33ff !important;
+  background: linear-gradient(
+      268.88deg,
+      rgba(255, 255, 255, 0.1) -7.38%,
+      #9e1fff 104.79%
+    ),
+    #4e33ff !important;
 `;
 
 export const Call = styled.p`
@@ -43,5 +48,4 @@ export const Call = styled.p`
   font-weight: 500;
   font-size: 1.5rem;
   color: "#2000E5";
-`
-
+`;

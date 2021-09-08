@@ -3,11 +3,7 @@ import { StyledCard } from "./styles";
 import { useMediaQuery } from "@material-ui/core";
 import { MuiTheme } from "../../styles/theme";
 
-export default function TableTabs({
-  tabs,
-  selectedTab,
-  onSelectTab
-}) {
+export default function TableTabs({ tabs, selectedTab, onSelectTab }) {
   function handleChange(event, newValue) {
     onSelectTab(newValue);
   }
@@ -32,7 +28,7 @@ export default function TableTabs({
             }
             wrapped
             key={tab.task_id}
-            style={{ flexGrow: 1, maxWidth: isMobile ? '300px' : '50%' }}
+            style={{ flexGrow: 1, maxWidth: isMobile ? "300px" : "50%" }}
           />
         ))}
       </Tabs>

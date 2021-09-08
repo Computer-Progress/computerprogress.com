@@ -5,11 +5,4 @@ import conll2003 from "./conll2003_data";
 import wmt2014_enfr from "./wmt2014_en-fr_data";
 import wmt2014_enge from "./wmt2014_en-ge_data";
 
-export {
-  imagenet,
-  mscoco,
-  squad1_1,
-  conll2003,
-  wmt2014_enfr,
-  wmt2014_enge
-}
+export { imagenet, mscoco, squad1_1, conll2003, wmt2014_enfr, wmt2014_enge };

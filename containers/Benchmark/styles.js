@@ -1,7 +1,6 @@
 import styled from "styled-components";
 import theme from "../../styles/theme";
-import Button from '../../components/Button';
-
+import Button from "../../components/Button";
 
 export const Container = styled.div`
   display: flex;
@@ -14,7 +13,7 @@ export const Container = styled.div`
   margin: 0 auto;
   h4 {
     grid-column: span 2;
-    font-family: 'Montserrat';
+    font-family: "Montserrat";
     font-style: normal;
     font-weight: 500;
     font-size: 24px;
@@ -23,16 +22,16 @@ export const Container = styled.div`
     margin: 0;
     align-items: center;
   }
-  > .viewAll{
+  > .viewAll {
     display: flex;
     justify-content: center;
     align-items: center;
-    button{
+    button {
       font-weight: 500;
       font-size: 16px;
     }
   }
-  > .chart{
+  > .chart {
     width: 100%;
     display: flex;
   }
@@ -41,7 +40,7 @@ export const Container = styled.div`
 export const Title = styled.h3`
   color: ${theme.colors.secondary};
   font-weight: normal;
-`
+`;
 
 export const Download = styled(Button)`
   align-self: flex-end;

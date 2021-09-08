@@ -157,7 +157,7 @@ export default function PaperSubmission({ submittedPaper }) {
           const response = await api.put(
             `/submissions/${submittedPaper.id}/status`,
             {
-              status: status
+              status: status,
             }
           );
         } else {
@@ -178,21 +178,20 @@ export default function PaperSubmission({ submittedPaper }) {
       } else {
         const response = await api.post("/submissions", paper);
         // console.log("response", response);
-        router.push('/papers/submissions')
+        router.push("/papers/submissions");
         dispatch(
           alertActions.openAlert({
             open: true,
-            message: 'Submission created',
+            message: "Submission created",
             type: "success",
           })
         );
       }
-
     } catch (err) {
       dispatch(
         alertActions.openAlert({
           open: true,
-          message: err.response?.data?.detail?.map(value => `${value.msg}, `),
+          message: err.response?.data?.detail?.map((value) => `${value.msg}, `),
           type: "error",
         })
       );
@@ -277,7 +276,11 @@ export default function PaperSubmission({ submittedPaper }) {
             </Grid>
 
             <Grid item xs={12}>
-              <Conversation paperId={submittedPaper?.id} onPressSaveChanges={onPressSaveChanges} onUpdate={onUpdate} />
+              <Conversation
+                paperId={submittedPaper?.id}
+                onPressSaveChanges={onPressSaveChanges}
+                onUpdate={onUpdate}
+              />
             </Grid>
           </Box>
         ) : null}

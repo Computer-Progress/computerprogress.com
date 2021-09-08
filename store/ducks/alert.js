@@ -1,34 +1,33 @@
-
 const Types = {
-    OPEN_ALERT: "OPEN_ALERT",
-    CLOSE_ALERT: "CLOSE_ALERT",
+  OPEN_ALERT: "OPEN_ALERT",
+  CLOSE_ALERT: "CLOSE_ALERT",
 };
 
 const initialState = {
-    open: false,
-    message: '',
-    type: '' // error - warning - info - success
+  open: false,
+  message: "",
+  type: "", // error - warning - info - success
 };
 
 export default function alertReducer(state = initialState, action) {
-    switch (action.type) {
+  switch (action.type) {
     case Types.OPEN_ALERT:
-        return {...state, ...action.payload.alert};
+      return { ...state, ...action.payload.alert };
     case Types.CLOSE_ALERT:
-        return initialState;
+      return initialState;
     default:
-        return state;
-    }
+      return state;
+  }
 }
 
 export const Creators = {
-    openAlert: (alert) => ({
-        type: Types.OPEN_ALERT,
-        payload: {
-            alert,
+  openAlert: (alert) => ({
+    type: Types.OPEN_ALERT,
+    payload: {
+      alert,
     },
-    }),
-    closeAlert: () => ({
-        type: Types.CLOSE_ALERT
-    })
+  }),
+  closeAlert: () => ({
+    type: Types.CLOSE_ALERT,
+  }),
 };

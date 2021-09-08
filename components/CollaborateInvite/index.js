@@ -1,7 +1,7 @@
 import Link from "next/link";
 
 import { Box, Typography } from "@material-ui/core";
-import { StyledFlexbox, StyledButton} from "./styles";
+import { StyledFlexbox, StyledButton } from "./styles";
 
 export default function CollaborateInvite() {
   return (

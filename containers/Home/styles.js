@@ -1,7 +1,6 @@
 import styled from "styled-components";
 import theme from "../../styles/theme";
-import Button from "../../components/Button"
-
+import Button from "../../components/Button";
 
 export const Container = styled.div`
   display: grid;
@@ -15,7 +14,7 @@ export const Container = styled.div`
   margin: 0 auto;
   h4 {
     grid-column: span 2;
-    font-family: 'Montserrat';
+    font-family: "Montserrat";
     font-style: normal;
     font-weight: 500;
     font-size: 24px;
@@ -24,17 +23,16 @@ export const Container = styled.div`
     margin: 0;
     align-items: center;
   }
-  > .viewAll{
+  > .viewAll {
     display: flex;
     justify-content: center;
     align-items: center;
-    button{
-
+    button {
       font-weight: 500;
-  font-size: 16px;
+      font-size: 16px;
     }
   }
-  > .chart{
+  > .chart {
     width: 100%;
     display: flex;
   }
@@ -45,16 +43,16 @@ export const Container = styled.div`
   }
 
   @media only screen and (max-width: 1015px) {
-    > .chart{
+    > .chart {
       flex-direction: column;
     }
   }
 `;
 
 export const AllTasksButton = styled(Button)`
-  color: #9E1FFF !important;
+  color: #9e1fff !important;
 `;
 
 export const Header = styled.header`
-position: relative;
-`
+  position: relative;
+`;

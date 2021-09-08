@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState } from "react";
 
 import { ThemeProvider } from "@material-ui/core/styles";
 import { MuiTheme } from "../../styles/theme";
@@ -6,8 +6,8 @@ import PrivatePage from "../../components/PrivatePage";
 
 import PageTemplate from "../../components/PageTemplate";
 
-import useApi from '../../services/useApi';
-import PaperSubmission from '../../components/PaperSubmission';
+import useApi from "../../services/useApi";
+import PaperSubmission from "../../components/PaperSubmission";
 import { Box, Grid, Typography } from "@material-ui/core/";
 
 const timeline = [
@@ -56,7 +56,7 @@ function ReviewPaper({ submissionId }) {
     } catch (error) {
       // console.log('cant load this submission')
     }
-  }
+  };
 
   useEffect(() => {
     getSubmission();
@@ -75,4 +75,4 @@ function ReviewPaper({ submissionId }) {
   );
 }
 
-export default PrivatePage(ReviewPaper)
+export default PrivatePage(ReviewPaper);

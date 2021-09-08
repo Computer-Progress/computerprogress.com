@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import ReactWave from 'react-wavify';
+import ReactWave from "react-wavify";
 import theme from "../../styles/theme";
 
 export const Wave = styled(ReactWave)`
@@ -15,13 +15,12 @@ export const Text = styled.p`
   padding-bottom: 50px;
   color: ${theme.colors.white};
   width: 45%;
-`
+`;
 
 export const TextWrapper = styled.div`
-width: 100%;
-padding: 60px 3.75%;
-margin: 0 auto;
-max-width: 1920px;
-position: relative;
-
-`
+  width: 100%;
+  padding: 60px 3.75%;
+  margin: 0 auto;
+  max-width: 1920px;
+  position: relative;
+`;

@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import theme from "../../styles/theme";
-import Button from "../../components/Button"
-import UpIcon from '@material-ui/icons/ExpandLess';
+import Button from "../../components/Button";
+import UpIcon from "@material-ui/icons/ExpandLess";
 
 export const BackToTop = styled(Button)`
   border-radius: 50px;
@@ -17,5 +17,5 @@ export const BackToTop = styled(Button)`
 `;
 
 export const BackToTopIcon = styled(UpIcon).attrs({
-  style: { width: 40, height: 40},
+  style: { width: 40, height: 40 },
 })``;

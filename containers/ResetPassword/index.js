@@ -89,7 +89,9 @@ export default function ChangePassword({ token }) {
               style={{ marginBottom: "12px" }}
               fullWidth
             >
-              <InputLabel error={Boolean(errors.password)}>New password</InputLabel>
+              <InputLabel error={Boolean(errors.password)}>
+                New password
+              </InputLabel>
 
               <OutlinedInput
                 {...register("password", { required: true, minLength: 8 })}

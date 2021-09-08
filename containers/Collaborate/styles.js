@@ -1,6 +1,13 @@
 import styled from "styled-components";
 
-import { Box, Button, Typography, Container, Chip, ListItemIcon} from "@material-ui/core";
+import {
+  Box,
+  Button,
+  Typography,
+  Container,
+  Chip,
+  ListItemIcon,
+} from "@material-ui/core";
 
 export const StyledContainer = styled(Container)`
   max-width: 1500px !important;
@@ -77,7 +84,7 @@ export const StyledButton = styled(Button).attrs({
 `;
 
 export const StyledChip = styled(Chip).attrs({
-  variant:"outlined",
+  variant: "outlined",
 })`
   font-weight: 500 !important;
   font-size: 13px !important;

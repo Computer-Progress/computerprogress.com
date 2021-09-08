@@ -1,10 +1,6 @@
 import ContributorImage from "../ContributorImage";
 
-import {
-  ContributorBox,
-  StyledName,
-  StyledPosition,
-} from "./style";
+import { ContributorBox, StyledName, StyledPosition } from "./style";
 
 export default function ContributorCard({ contributor }) {
   return (

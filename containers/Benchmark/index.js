@@ -18,12 +18,12 @@ function Benchmark({ benchmark, taskId, benchmarkId }) {
   const [data, setData] = useState(benchmark.models);
   const [secondButtons, setSecondButtons] = useState([
     {
-      name: 'Hardware Burden',
-      value: 'hardware_burden',
+      name: "Hardware Burden",
+      value: "hardware_burden",
     },
     {
       name: `Operations Per\nNetwork Pass`,
-      value: 'operation_per_network_pass',
+      value: "operation_per_network_pass",
     },
   ]);
   const [showOperations, setShowOperations] = useState(true);
@@ -34,7 +34,9 @@ function Benchmark({ benchmark, taskId, benchmarkId }) {
   const [selectedSecondButton, setSelectedSecondButton] = useState(0);
   const [name, setName] = useState();
   const [type, setType] = useState(0);
-  const [buttons] = useState(benchmark.accuracy_types.filter(x => data.some(d => d[x.name])));
+  const [buttons] = useState(
+    benchmark.accuracy_types.filter((x) => data.some((d) => d[x.name]))
+  );
 
   const tabs = [
     {
@@ -48,28 +50,30 @@ function Benchmark({ benchmark, taskId, benchmarkId }) {
   ];
 
   useEffect(() => {
-    const has_operation_per_network_pass = data.some(item => !!item.operation_per_network_pass);
+    const has_operation_per_network_pass = data.some(
+      (item) => !!item.operation_per_network_pass
+    );
     if (!has_operation_per_network_pass) {
       setSecondButtons([
         {
-          name: 'Hardware Burden',
-          value: 'hardware_burden',
-        }
-      ])
+          name: "Hardware Burden",
+          value: "hardware_burden",
+        },
+      ]);
       setShowOperations(false);
     }
     // // console.log(domain);
   }, []);
 
-  const onSelectAccuracy = ({option, index}) => {
+  const onSelectAccuracy = ({ option, index }) => {
     setLabel(option.name);
     setSelectedButton(index);
-  }
+  };
 
-  const onSelectComputingPower = ({option, index}) => {
+  const onSelectComputingPower = ({ option, index }) => {
     setComputingPower(option);
     setSelectedSecondButton(index);
-  }
+  };
 
   const onClickDownload = (e) => {
     if (!userState.id) {
@@ -82,7 +86,10 @@ function Benchmark({ benchmark, taskId, benchmarkId }) {
   return (
     <PageTemplate>
       <Container>
-        <Title><a href={`/tasks/${taskId}`}>{benchmark.task_name}</a> / {benchmark.dataset_name}</Title>
+        <Title>
+          <a href={`/tasks/${taskId}`}>{benchmark.task_name}</a> /{" "}
+          {benchmark.dataset_name}
+        </Title>
         <Table
           tabs={tabs}
           selectedTab={type}

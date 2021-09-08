@@ -1,32 +1,31 @@
-
 const Types = {
-    LOGIN: "LOGIN",
-    LOGOUT: "LOGOUT",
+  LOGIN: "LOGIN",
+  LOGOUT: "LOGOUT",
 };
 
 const initialState = {
-    token: '',
+  token: "",
 };
 
 export default function userReducer(state = initialState, action) {
-    switch (action.type) {
+  switch (action.type) {
     case Types.LOGIN:
-        return {...state, ...action.payload.user};
+      return { ...state, ...action.payload.user };
     case Types.LOGOUT:
-        return initialState;
+      return initialState;
     default:
-        return state;
-    }
+      return state;
+  }
 }
 
 export const Creators = {
-    login: (user) => ({
-        type: Types.LOGIN,
-        payload: {
-            user,
+  login: (user) => ({
+    type: Types.LOGIN,
+    payload: {
+      user,
     },
-    }),
-    logout: () => ({
-        type: Types.LOGOUT
-    })
+  }),
+  logout: () => ({
+    type: Types.LOGOUT,
+  }),
 };

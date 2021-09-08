@@ -1,16 +1,16 @@
 import styled from "styled-components";
 import { Button } from "../Button/styles";
 import theme from "../../styles/theme";
-import { Chip } from '@material-ui/core';
+import { Chip } from "@material-ui/core";
 
 export const Wrapper = styled.div`
   flex: 1 1 20%;
   max-width: 20%;
   padding: 32px 24px;
-  border-radius: 16px  0 0 16px;
+  border-radius: 16px 0 0 16px;
   box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.25);
-  h4{
-    font-family: 'Montserrat';
+  h4 {
+    font-family: "Montserrat";
     font-style: normal;
     font-weight: 500;
     font-size: 18px;
@@ -30,12 +30,11 @@ export const Wrapper = styled.div`
     border-radius: 16px 16px 16px 16px;
     margin-bottom: 10px;
   }
-
 `;
 
 export const Item = styled(Chip)`
   margin: 0px 10px 10px 0 !important;
-  font-family: 'Montserrat';
+  font-family: "Montserrat";
   font-style: normal;
   font-weight: 500;
   font-size: 16px;

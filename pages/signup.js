@@ -1,1 +1,1 @@
-export {default} from '../containers/SignUp';
+export { default } from "../containers/SignUp";

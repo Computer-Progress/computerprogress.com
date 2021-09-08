@@ -41,7 +41,6 @@ export default function PaperInformation(props) {
   const [newAuthor, setNewAuthor] = useState("");
   const [onReview, setOnReview] = useState(false);
 
-
   useEffect(() => {
     props.handlePaperInformationChange(paper);
 
@@ -154,7 +153,7 @@ export default function PaperInformation(props) {
                   onChange={(date) =>
                     setPaper({
                       ...paper,
-                      publication_date: date.toISOString().split('T')[0],
+                      publication_date: date.toISOString().split("T")[0],
                     })
                   }
                   invalidDateMessage="Invalid date"
@@ -186,9 +185,14 @@ export default function PaperInformation(props) {
               <Grid item xs={12}>
                 <form onSubmit={addAuthor}>
                   <TextField
-                    {...props.register(`Authors${props.index}`, { required: !paper.authors.length })}
+                    {...props.register(`Authors${props.index}`, {
+                      required: !paper.authors.length,
+                    })}
                     error={!!props.errors[`Authors${props.index}`]}
-                    helperText={!!props.errors[`Authors${props.index}`] && "At least one author is required"}
+                    helperText={
+                      !!props.errors[`Authors${props.index}`] &&
+                      "At least one author is required"
+                    }
                     placeholder="Author name"
                     margin="normal"
                     fullWidth

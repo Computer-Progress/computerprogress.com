@@ -21,13 +21,18 @@ export default function TableOptions({
       <Box display="flex" flexDirection="column" p={2}>
         <Typography variant="h5">{optionsTitle}</Typography>
 
-        <Box display="flex" flexDirection="row" paddingBottom={3} flexWrap="wrap">
+        <Box
+          display="flex"
+          flexDirection="row"
+          paddingBottom={3}
+          flexWrap="wrap"
+        >
           {options.map((option, index) => (
             <Box mt={2} key={`${option[fieldName]}${index}`}>
               <StyledChip
                 label={option[fieldName]}
                 avatar={selectedOption === index ? <DoneIcon /> : null}
-                onClick={() => setSelectedOption({option, index})}
+                onClick={() => setSelectedOption({ option, index })}
               />
             </Box>
           ))}
@@ -35,13 +40,22 @@ export default function TableOptions({
         {secondaryOptions ? (
           <>
             <Typography variant="h5">{secondaryOptionsTitle}</Typography>
-            <Box display="flex" flexDirection="row" paddingBottom={3} flexWrap="wrap">
+            <Box
+              display="flex"
+              flexDirection="row"
+              paddingBottom={3}
+              flexWrap="wrap"
+            >
               {secondaryOptions.map((option, index) => (
                 <Box mt={2} key={`${option[fieldName]}${index}`}>
                   <StyledChip
                     label={option[fieldName]}
-                    avatar={selectedSecondaryOption === index ? <DoneIcon /> : null}
-                    onClick={() => setSelectedSecondaryOption({option, index})}
+                    avatar={
+                      selectedSecondaryOption === index ? <DoneIcon /> : null
+                    }
+                    onClick={() =>
+                      setSelectedSecondaryOption({ option, index })
+                    }
                   />
                 </Box>
               ))}

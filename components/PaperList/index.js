@@ -23,12 +23,12 @@ import {
   XCircle as XCircleIcon,
   CheckCircle as CheckCircleIcon,
 } from "react-feather";
-import useApi from '../../services/useApi'
+import useApi from "../../services/useApi";
 import { MuiTheme } from "../../styles/theme";
-import { getRelativeTime } from '../../utils';
-import { useSelector } from 'react-redux'
-import Pagination from '@material-ui/lab/Pagination';
-import {PaginationBox} from './styles';
+import { getRelativeTime } from "../../utils";
+import { useSelector } from "react-redux";
+import Pagination from "@material-ui/lab/Pagination";
+import { PaginationBox } from "./styles";
 
 const mockedSubmissions = [
   {
@@ -86,11 +86,11 @@ const statusFilters = [
 ];
 
 const status = {
-  "pending": {
+  pending: {
     icon: <ClockIcon size={14} />,
     title: "Review pending",
   },
-  "need_information": {
+  need_information: {
     icon: <InfoIcon size={14} />,
     title: "Need information",
   },
@@ -105,7 +105,7 @@ const status = {
 };
 
 export default function PaperList({ isReviewer }) {
-  const api = useApi()
+  const api = useApi();
   const userState = useSelector((state) => state.UserReducer);
   const isMobile = useMediaQuery(MuiTheme.breakpoints.down("sm"));
 
@@ -116,8 +116,8 @@ export default function PaperList({ isReviewer }) {
   const [submissions, setSubmissions] = useState([]);
   const [total, setTotal] = useState(0);
   const [page, setPage] = useState(1);
-  const [search, setSearch] = useState('')
-  const timeout = useRef(null)
+  const [search, setSearch] = useState("");
+  const timeout = useRef(null);
 
   useEffect(() => {
     getSubmissions();
@@ -126,16 +126,18 @@ export default function PaperList({ isReviewer }) {
   async function getSubmissions() {
     // fetch
     try {
-      const response = await api.get(`submissions?${
-        !isReviewer ? `owner_id=${userState?.id}&`
-        : ''}limit=20&skip=${page - 1}&q=${search}${filters.status !== 'all' ? `&status=${filters.status}` : ''}`)
+      const response = await api.get(
+        `submissions?${
+          !isReviewer ? `owner_id=${userState?.id}&` : ""
+        }limit=20&skip=${page - 1}&q=${search}${
+          filters.status !== "all" ? `&status=${filters.status}` : ""
+        }`
+      );
 
       // console.log(response.data)
       setSubmissions(response.data?.items);
       setTotal(Math.ceil(response.data.total / 20));
-    } catch (error) {
-      
-    }
+    } catch (error) {}
   }
 
   function handleFiltersChange(event) {
@@ -146,131 +148,59 @@ export default function PaperList({ isReviewer }) {
     setSearch(event.target.value);
     if (timeout.current) clearTimeout(timeout.current);
     timeout.current = setTimeout(() => {
-      getSubmissions()
+      getSubmissions();
     }, 500);
   }
 
   return (
     <>
-    <Card style={{ borderRadius: "16px" }}>
-      <Box p={3}>
-        <Grid container>
-          {/* Search */}
-          <Grid item xs={12}>
-            <Grid container>
-              <Grid item xs={12} md={9}>
-                <TextField
-                  name="query"
-                  value={search}
-                  onChange={handleSearchValueChange}
-                  placeholder="Search"
-                  fullWidth
-                  InputProps={{
-                    disableUnderline: true,
-                    startAdornment: (
-                      <InputAdornment position="start">
-                        <SearchIcon size={20} />
-                      </InputAdornment>
-                    ),
-                  }}
-                />
-              </Grid>
-
-              <Grid item xs={12} md={3}>
-                <FormControl fullWidth>
-                  <Select
-                    name="status"
-                    value={filters.status}
-                    onChange={handleFiltersChange}
-                    input={
-                      <Input
-                        style={{
-                          textAlign: "right",
-                          paddingRight: "5px",
-                        }}
-                      />
-                    }
-                    disableUnderline={true}
-                  >
-                    {statusFilters.map(({ value, title }) => (
-                      <MenuItem value={value} key={value}>
-                        {title}
-                      </MenuItem>
-                    ))}
-                  </Select>
-                </FormControl>
-              </Grid>
-
-              <Grid item xs={12}>
-                <Box pt={1} pb={2}>
-                  <Divider />
-                </Box>
-              </Grid>
-            </Grid>
-          </Grid>
-
-          {/* Submissions list */}
-          {!submissions.length ? (
-            <PaginationBox>
-              <Typography variant="h6">No submissions found</Typography>
-            </PaginationBox>
-          ) : null}
-          {submissions.map((submission) => (
-            <a href={`/review-paper/${submission.id}`} style={{ width: '100%' }} key={submission.id}>
-              <Grid item xs={12} container key={submission.id}>
-                <Grid item xs={12}>
-                  <Typography variant="h6">{submission?.data?.title}</Typography>
+      <Card style={{ borderRadius: "16px" }}>
+        <Box p={3}>
+          <Grid container>
+            {/* Search */}
+            <Grid item xs={12}>
+              <Grid container>
+                <Grid item xs={12} md={9}>
+                  <TextField
+                    name="query"
+                    value={search}
+                    onChange={handleSearchValueChange}
+                    placeholder="Search"
+                    fullWidth
+                    InputProps={{
+                      disableUnderline: true,
+                      startAdornment: (
+                        <InputAdornment position="start">
+                          <SearchIcon size={20} />
+                        </InputAdornment>
+                      ),
+                    }}
+                  />
                 </Grid>
 
-                <Grid item xs={12}>
-                  <Box display="flex" flexWrap="wrap" py={3}>
-                    {submission?.data?.models?.map((model) => (
-                      <Box mr={1} mb={1} key={model.task}>
-                        <Chip label={model.task} />
-                      </Box>
-                    ))}
-                  </Box>
-                </Grid>
-
-                <Grid item xs={12} md={5} container>
-                  <Grid item container alignItems="center" spacing={1}>
-                    <Grid item>
-                      <Box display="flex">
-                        <UserIcon size={14} />
-                      </Box>
-                    </Grid>
-
-                    <Grid item>
-                      <Typography variant="subtitle1">
-                        Submitted by {submission.owner?.first_name} {submission.owner?.last_name}
-                      </Typography>
-                    </Grid>
-                  </Grid>
-                </Grid>
-
-                <Grid
-                  item
-                  xs={12}
-                  md={7}
-                  container
-                  alignItems="center"
-                  justifyContent={isMobile ? "flex-start" : "flex-end"}
-                  spacing={1}
-                >
-                  <Grid item>
-                    <Typography component="span" variant="subtitle1">
-                      Last updated on {getRelativeTime(new Date(submission.updated_at))}.{" "}
-                    </Typography>
-                  </Grid>
-
-                  <Grid item>
-                    <Typography component="span" variant="subtitle1">
-                      {status[submission.status].title}
-                    </Typography>
-                  </Grid>
-                  <Grid item>
-                    <Box display="flex">{status[submission.status].icon}</Box>
-                  </Grid>
+                <Grid item xs={12} md={3}>
+                  <FormControl fullWidth>
+                    <Select
+                      name="status"
+                      value={filters.status}
+                      onChange={handleFiltersChange}
+                      input={
+                        <Input
+                          style={{
+                            textAlign: "right",
+                            paddingRight: "5px",
+                          }}
+                        />
+                      }
+                      disableUnderline={true}
+                    >
+                      {statusFilters.map(({ value, title }) => (
+                        <MenuItem value={value} key={value}>
+                          {title}
+                        </MenuItem>
+                      ))}
+                    </Select>
+                  </FormControl>
                 </Grid>
 
                 <Grid item xs={12}>
@@ -279,14 +209,99 @@ export default function PaperList({ isReviewer }) {
                   </Box>
                 </Grid>
               </Grid>
-            </a>
-          ))}
-        </Grid>
-      </Box>
-    </Card>
-    <PaginationBox>
-      <Pagination count={total} page={page} onChange={(event, value) => setPage(value)} color="primary" />
-    </PaginationBox>
+            </Grid>
+
+            {/* Submissions list */}
+            {!submissions.length ? (
+              <PaginationBox>
+                <Typography variant="h6">No submissions found</Typography>
+              </PaginationBox>
+            ) : null}
+            {submissions.map((submission) => (
+              <a
+                href={`/review-paper/${submission.id}`}
+                style={{ width: "100%" }}
+                key={submission.id}
+              >
+                <Grid item xs={12} container key={submission.id}>
+                  <Grid item xs={12}>
+                    <Typography variant="h6">
+                      {submission?.data?.title}
+                    </Typography>
+                  </Grid>
+
+                  <Grid item xs={12}>
+                    <Box display="flex" flexWrap="wrap" py={3}>
+                      {submission?.data?.models?.map((model) => (
+                        <Box mr={1} mb={1} key={model.task}>
+                          <Chip label={model.task} />
+                        </Box>
+                      ))}
+                    </Box>
+                  </Grid>
+
+                  <Grid item xs={12} md={5} container>
+                    <Grid item container alignItems="center" spacing={1}>
+                      <Grid item>
+                        <Box display="flex">
+                          <UserIcon size={14} />
+                        </Box>
+                      </Grid>
+
+                      <Grid item>
+                        <Typography variant="subtitle1">
+                          Submitted by {submission.owner?.first_name}{" "}
+                          {submission.owner?.last_name}
+                        </Typography>
+                      </Grid>
+                    </Grid>
+                  </Grid>
+
+                  <Grid
+                    item
+                    xs={12}
+                    md={7}
+                    container
+                    alignItems="center"
+                    justifyContent={isMobile ? "flex-start" : "flex-end"}
+                    spacing={1}
+                  >
+                    <Grid item>
+                      <Typography component="span" variant="subtitle1">
+                        Last updated on{" "}
+                        {getRelativeTime(new Date(submission.updated_at))}.{" "}
+                      </Typography>
+                    </Grid>
+
+                    <Grid item>
+                      <Typography component="span" variant="subtitle1">
+                        {status[submission.status].title}
+                      </Typography>
+                    </Grid>
+                    <Grid item>
+                      <Box display="flex">{status[submission.status].icon}</Box>
+                    </Grid>
+                  </Grid>
+
+                  <Grid item xs={12}>
+                    <Box pt={1} pb={2}>
+                      <Divider />
+                    </Box>
+                  </Grid>
+                </Grid>
+              </a>
+            ))}
+          </Grid>
+        </Box>
+      </Card>
+      <PaginationBox>
+        <Pagination
+          count={total}
+          page={page}
+          onChange={(event, value) => setPage(value)}
+          color="primary"
+        />
+      </PaginationBox>
     </>
   );
 }

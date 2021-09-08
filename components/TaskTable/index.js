@@ -1,7 +1,6 @@
 import Link from "next/link";
 import { useEffect, useState } from "react";
 
-
 import { Typography, Grid, Card, Box, Button } from "@material-ui/core";
 
 import TaskTableTabs from "../TaskTableTabs";
@@ -12,7 +11,7 @@ import TaskTableChart from "../TaskTableChart";
 import { MuiTheme } from "../../styles/theme";
 import { StyledGridItem, StyledFlexbox } from "./styles";
 
-import Table from '../Table';
+import Table from "../Table";
 
 export default function TaskTable({ tasks }) {
   const [selectedTask, setSelectedTask] = useState(0);
@@ -29,7 +28,7 @@ export default function TaskTable({ tasks }) {
 
     try {
       if (loadedTasks[taskId]?.[datasetId]) {
-        setDatasetModels(loadedTasks[taskId][datasetId])
+        setDatasetModels(loadedTasks[taskId][datasetId]);
         return;
       }
 
@@ -52,14 +51,14 @@ export default function TaskTable({ tasks }) {
   }, [selectedTask, selectedDataset]);
 
   const onSelectTab = (value) => {
-    setSelectedTask(value)
-    setSelectedDataset(0)
-  }
+    setSelectedTask(value);
+    setSelectedDataset(0);
+  };
 
   const computingPower = {
-    name: 'Hardware Burden',
-    value: 'hardware_burden',
-  }
+    name: "Hardware Burden",
+    value: "hardware_burden",
+  };
 
   return (
     <Table
@@ -71,12 +70,12 @@ export default function TaskTable({ tasks }) {
       optionsTitle="Datasets"
       fieldName="dataset_name"
       selectedOption={selectedDataset}
-      setSelectedOption={({index}) => setSelectedDataset(index)}
+      setSelectedOption={({ index }) => setSelectedDataset(index)}
       loading={isDatasetModelsLoading}
       data={datasetModels.models}
       label={datasetModels.accuracy_types?.[0].name}
       computingPower={computingPower}
       sota={tasks[selectedTask].datasets[selectedDataset]}
     />
-  )
+  );
 }

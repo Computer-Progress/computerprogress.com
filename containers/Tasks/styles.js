@@ -8,7 +8,6 @@ export const Container = styled.div`
     align-self: bottom;
     margin-top: 75px;
     margin-bottom: 50px;
-
   }
 `;
 
