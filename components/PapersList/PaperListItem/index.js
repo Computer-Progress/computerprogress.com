@@ -36,7 +36,7 @@ export default function PaperListItem({
         )}
             <Text center>{index + 1}</Text>
             <Text>{item.name}</Text>
-            <a href={item.paper_link} target="_blank">
+            <a href={item.paper_link} target="_blank" rel="noreferrer">
                 <Text hover link>{item.paper_title || '-'}</Text>
             </a>
             {accuracy_list?.map(accuracy => (
