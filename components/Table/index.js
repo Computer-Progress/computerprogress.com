@@ -71,7 +71,7 @@ export default function TaskTable({
           />
         </StyledGridItem>
 
-        <StyledGridItem $order={isTablet ? 4 : 4} xs={12} lg={showViewAllTasks ? 7 : 10}>
+        <StyledGridItem $order={isTablet ? 4 : 4} xs={12} lg={showViewAllTasks ? 6 : 9}>
 
           <TaskTableChart
             isLoading={loading}
