@@ -185,8 +185,8 @@ export default function Collaborate() {
                 <Typography align="center">
                   Don’t hesitate to contact our team:{" "}
                   <strong>
-                    <a href="mailto:contact@computerprogress.com">
-                      contact@computerprogress.com
+                    <a href="mailto:hello@computerprogress.org">
+                      hello@computerprogress.org
                     </a>
                   </strong>
                   .

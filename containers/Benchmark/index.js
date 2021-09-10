@@ -87,7 +87,7 @@ function Benchmark({ benchmark, taskId, benchmarkId }) {
           isByYear={type}
           computingPower={computingPower}
         />
-        <Download contained href={`https://computerprogress.xyz/api/v1/models/${taskId}/${benchmarkId}/csv`}>Download</Download>
+        <Download contained href={process.env.BASE_API_URL + `/models/${taskId}/${benchmarkId}/csv`}>Download</Download>
         <PapersList 
           onSelectAccuracy={onSelectAccuracy}
           selectedAccuracy={label}

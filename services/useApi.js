@@ -16,7 +16,7 @@ export default (serverSide) => {
     }
 
     const api = axios.create({
-      baseURL: 'https://computerprogress.xyz/api/v1'
+      baseURL: process.env.BASE_API_URL
     });
 
     api.interceptors.request.use(async config => ({
