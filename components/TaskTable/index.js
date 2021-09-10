@@ -22,8 +22,7 @@ export default function TaskTable({ tasks }) {
   const [isDatasetModelsLoading, setIsDatasetModelsLoading] = useState(true);
 
   useEffect(async () => {
-    const URL =
-      process.env.BASE_API_URL;
+    const URL = process.env.NEXT_PUBLIC_BASE_API_URL;
 
     const taskId = tasks[selectedTask].task_id;
     const datasetId = tasks[selectedTask].datasets[selectedDataset].dataset_id;
