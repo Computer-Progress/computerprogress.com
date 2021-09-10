@@ -23,7 +23,7 @@ export default function Footer({ isHome }) {
                 </div>
                 <div>
                   <h3>Gabriel F. Manso</h3>
-                  <p>MIT CSAIL</p>
+                  <p>Univ. of Brasilia</p>
                 </div>
             </Logos>
             <Copyright>© 2021 Computer Progress</Copyright>
