@@ -177,7 +177,7 @@ export default function Collaborate() {
             <StyledFlexboxSection>
               <StyledBox>
                 <Typography variant="h2" align="center">
-                  Any question?
+                  Any questions?
                 </Typography>
               </StyledBox>
 

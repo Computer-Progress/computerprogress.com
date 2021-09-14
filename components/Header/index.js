@@ -23,6 +23,7 @@ import {
   StyledToolbarBox,
   StyledSpacer,
   StyledButton,
+  StyledBox,
 } from "./styles";
 
 import Logo from "../../public/logo_icon.svg";
@@ -128,7 +129,7 @@ export default function Header({ isHome }) {
 
               {!isMobileXS && (
                 <Typography variant="h6">
-                  <Box fontWeight="fontWeightBold">Computer Progress</Box>
+                  <StyledBox fontWeight="fontWeightBold">Computer Progress</StyledBox>
                 </Typography>
               )}
             </StyledButton>

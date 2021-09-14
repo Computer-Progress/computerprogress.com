@@ -9,7 +9,7 @@ export default function CollaborateInvite() {
       <Box>
         <Typography variant="h2">
           <Box fontWeight="bold">
-            Your help can change everything!
+            You can change everything!
           </Box>
         </Typography>
       </Box>
