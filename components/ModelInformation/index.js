@@ -52,7 +52,7 @@ export default function ModelInformation(props) {
     setModel(props.model);
 
     fetchData();
-  }, []);
+  }, [props.undoChangesPressed]);
 
   useEffect(() => {
     if (props.modelIndex >= 0) {
