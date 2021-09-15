@@ -11,7 +11,7 @@ const PrivatePage = (Component, role) => {
     const userState = useSelector((state) => state.UserReducer);
     // If user is not logged in, return login component
     if (role && userState?.role && userState.role === 'default') {
-      router.back()
+      router.replace('/')
       dispatch(alertActions.openAlert({
         message: 'You are not allowed to access this page',
         open: true,

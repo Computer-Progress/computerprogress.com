@@ -10,6 +10,7 @@ import PageTemplate from "../../components/PageTemplate";
 import Alert from "../../components/Alert";
 import { useRouter } from "next/router";
 import { Box, CircularProgress, InputAdornment, IconButton } from "@material-ui/core";
+import PublicPageOnly from '../../components/PublicPageOnly'
 import {
   Container,
   StyledBox,
@@ -24,7 +25,7 @@ import NewButton from "../../components/Button/NewButton";
 
 import { Visibility, VisibilityOff } from "@material-ui/icons";
 
-export default function SignIn({ hasEmailConfirmationSucceed, alert }) {
+function SignIn({ hasEmailConfirmationSucceed, alert }) {
   // console.log(hasEmailConfirmationSucceed);
   const router = useRouter();
   const dispatch = useDispatch();
@@ -207,3 +208,5 @@ export default function SignIn({ hasEmailConfirmationSucceed, alert }) {
     </PageTemplate>
   );
 }
+
+export default PublicPageOnly(SignIn);

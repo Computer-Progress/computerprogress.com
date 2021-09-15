@@ -2,7 +2,7 @@
 import Link from "next/link";
 import PageTemplate from "../../components/PageTemplate";
 import NewButton from "../../components/Button/NewButton";
-
+import PublicPageOnly from '../../components/PublicPageOnly'
 import {
   FormContainer,
   StyledBox,
@@ -28,7 +28,7 @@ import {
 } from "@material-ui/core";
 import { Visibility, VisibilityOff } from "@material-ui/icons";
 
-export default function SignUp() {
+function SignUp() {
   const api = useApi();
   const dispatch = useDispatch();
   const {
@@ -210,3 +210,5 @@ export default function SignUp() {
     </PageTemplate>
   );
 }
+
+export default PublicPageOnly(SignUp);
