@@ -39,7 +39,7 @@ export default (serverSide) => {
             type: 'error'
           }));
         } else if (response.status === 403) {
-          router.back()
+          router.replace('/')
           dispatch(alertActions.openAlert({
             open: true,
             message: 'Forbidden',

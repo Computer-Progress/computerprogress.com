@@ -13,7 +13,7 @@ import {
   InputAdornment,
   Box,
   Button,
-  Modal,
+  Tooltip,
 } from "@material-ui/core";
 import MuiDivider from "@material-ui/core/Divider";
 
@@ -275,24 +275,26 @@ export default function ModelInformation(props) {
               </Grid>
 
               <Grid item xs={4}>
-                <TextField
-                  {...props.register(`accuracy_value${props.index}`, { required: !model.accuracies.length })}
-                  error={!!props.errors[`accuracy_value${props.index}`]}
-                  helperText={!!props.errors[`accuracy_value${props.index}`] && "Fill accuracy value and click the plus icon"}
-                  label="Value"
-                  value={newAccuracyValue}
-                  fullWidth
-                  InputProps={{
-                    endAdornment: (
-                      <InputAdornment position="end">
-                        <IconButton size="small" onClick={addAccuracy}>
-                          <AddIcon />
-                        </IconButton>
-                      </InputAdornment>
-                    ),
-                  }}
-                  onChange={handleAccuracyValueChange}
-                />
+                <Tooltip title="To add the accuracy type, click the plus icon" placement="top-end">
+                  <TextField
+                    {...props.register(`accuracy_value${props.index}`, { required: !model.accuracies.length })}
+                    error={!!props.errors[`accuracy_value${props.index}`]}
+                    helperText={!!props.errors[`accuracy_value${props.index}`] && "Fill accuracy value and click the plus icon"}
+                    label="Value"
+                    value={newAccuracyValue}
+                    fullWidth
+                    InputProps={{
+                      endAdornment: (
+                        <InputAdornment position="end">
+                          <IconButton size="small" onClick={addAccuracy}>
+                            <AddIcon />
+                          </IconButton>
+                        </InputAdornment>
+                      ),
+                    }}
+                    onChange={handleAccuracyValueChange}
+                  />
+                </Tooltip>
               </Grid>
 
               {model.accuracies.map((accuracy, index) => (
