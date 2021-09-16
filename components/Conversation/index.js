@@ -116,6 +116,7 @@ export default function Conversation({ paperId, onPressSaveChanges, onUpdate }) 
           <OutlinedInput
             multiline
             fullWidth
+            placeholder="Leave a comment..."
             style={{ boxShadow: "10px" }}
             value={message}
             onChange={handleTextChange}

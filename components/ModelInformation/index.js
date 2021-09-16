@@ -256,7 +256,7 @@ export default function ModelInformation(props) {
                 <AutocompleteCreatable
                   {...props.register(`accuracy_type${props.index}`, { required: !model.accuracies.length })}
                   error={!!props.errors[`accuracy_type${props.index}`]}
-                  helperText={!!props.errors[`accuracy_type${props.index}`] && "Accuracy type is required"}
+                  helperText={!!props.errors[`accuracy_type${props.index}`] && "To add the accuracy type, click on the plus icon"}
                   name="accuracy_type"
                   label={"Accuracy type"}
                   options={accuracyOptions}
@@ -278,7 +278,7 @@ export default function ModelInformation(props) {
                 <TextField
                   {...props.register(`accuracy_value${props.index}`, { required: !model.accuracies.length })}
                   error={!!props.errors[`accuracy_value${props.index}`]}
-                  helperText={!!props.errors[`accuracy_value${props.index}`] && "Accuracy value is required"}
+                  helperText={!!props.errors[`accuracy_value${props.index}`] && "Fill accuracy value and click the plus icon"}
                   label="Value"
                   value={newAccuracyValue}
                   fullWidth
@@ -343,7 +343,7 @@ export default function ModelInformation(props) {
                 {...props.register(`TrainingTime${props.index}`, { required: !model.training_time})}
                 error={!!props.errors[`TrainingTime${props.index}`]}
                 helperText={!!props.errors[`TrainingTime${props.index}`] && "Training time is required"}
-                label="Training time"
+                label="Training time (seg)"
                 name="training_time"
                 type="number"
                 value={model.training_time}
