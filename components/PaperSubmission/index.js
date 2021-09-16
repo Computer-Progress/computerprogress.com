@@ -153,7 +153,7 @@ export default function PaperSubmission({ submittedPaper }) {
     setLoading(true);
     try {
       if (submittedPaper) {
-        if (status) {
+        if (typeof status === 'string') {
           const response = await api.put(
             `/submissions/${submittedPaper.id}/status`,
             {
@@ -174,6 +174,7 @@ export default function PaperSubmission({ submittedPaper }) {
           })
         );
         setOnUpdate(!onUpdate)
+        setPaperDidChange(false);
       } else {
         const response = await api.post("/submissions", paper);
         // console.log("response", response);
