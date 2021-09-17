@@ -105,12 +105,12 @@ export const Copyright = styled.p`
   justify-content: flex-end;
   color: ${theme.colors.white};
   text-align: right;
-  font-size: 17px;
+  font-size: 15px;
 `
 
 export const SupportEmail = styled.p`
   display: flex;
   justify-content: center !important;
   color: ${theme.colors.white};
-  font-size: 17px;
+  font-size: 15px;
 `
