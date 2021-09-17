@@ -50,7 +50,7 @@ export const researchers = [
   },
   {
     name: "Gabriel F. Manso",
-    workPlace: "Univ. of Brasilia",
+    workPlace: "University of Brasilia",
     position: "Undergraduate Student",
     imageName: "gabriel-manso.png",
   },
@@ -58,26 +58,32 @@ export const researchers = [
 
 export const otherContributors = [
   {
+    name: "Gabriel F. Manso",
+    workPlace: "University of Brasilia",
+    position: "Project Manager",
+    imageName: "gabriel-manso.png",
+  },
+  {
     name: "Andrew Lucas",
-    workPlace: "UnB",
+    workPlace: "University of Brasilia",
     position: "Software Engineer",
     imageName: "andrew-lucas.png",
   },
   {
     name: "Guilherme Banci",
-    workPlace: "UnB",
+    workPlace: "University of Brasilia",
     position: "Front-end Developer",
     imageName: "guilherme-banci.jpg",
   },
   {
     name: "Irwin Schmitt",
-    workPlace: "UnB",
+    workPlace: "University of Brasilia",
     position: "Front-end Developer",
     imageName: "irwin-schmitt.png",
   },
   {
     name: "João Egewarth",
-    workPlace: "UnB",
+    workPlace: "University of Brasilia",
     position: "UI/UX Designer",
     imageName: "joao-egewarth.png",
   },
