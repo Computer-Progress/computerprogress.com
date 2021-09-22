@@ -117,7 +117,7 @@ export default function Header({ isHome }) {
   }
 
   return (
-    <StyledAppBar isHome={isHome && !isMobileSM}>
+    <StyledAppBar $isHome={isHome && !isMobileSM}>
       <StyledContainer>
         <Toolbar disableGutters>
           <StyledToolbarBox>

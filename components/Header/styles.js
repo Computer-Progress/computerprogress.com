@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 import {
   AppBar as MuiAppBar,
   Container as MuiContainer,
@@ -22,12 +22,12 @@ export const StyledAppBar = styled(MuiAppBar).attrs({
   position: "static",
   elevation: 0,
 })`
-  ${({ isHome }) =>
-    isHome
-      ? "background-color: transparent !important;"
-      : `
-  background-color: #4e33ff !important;
-  background: linear-gradient(268.88deg, rgba(255, 255, 255, 0.1) -7.38%, #9E1FFF 104.79%), #4e33ff;
+  ${({ $isHome }) =>
+    $isHome
+      ? css`background-color: transparent !important;`
+      : css`
+    background-color: #4e33ff !important;
+    background: linear-gradient(268.88deg, rgba(255, 255, 255, 0.1) -7.38%, #9E1FFF 104.79%), #4e33ff;
   `}
 `;
 
