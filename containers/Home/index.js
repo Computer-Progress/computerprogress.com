@@ -16,9 +16,9 @@ export default function Home({ tasks }) {
           <TaskTable tasks={tasks} />
         </Box>
 
-          <Box my={3} height="30vh" width={isMobile ? "100%" : "80%"}>
-            <CollaborateInvite />
-          </Box>
+        <Box my={3} height="30vh" width={isMobile ? "100%" : "80%"}>
+          <CollaborateInvite />
+        </Box>
       </Box>
     </PageTemplate>
   );

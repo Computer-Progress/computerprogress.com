@@ -6,8 +6,8 @@ import Tabs from "../../components/Tabs";
 import PageTemplate from "../../components/PageTemplate";
 import PapersList from "../../components/PapersList";
 import ButtonToTop from "../../components/ButtonToTop";
-import Table from '../../components/Table';
-import { Creators as navigationActions } from '../../store/ducks/navigation'
+import Table from "../../components/Table";
+import { Creators as navigationActions } from "../../store/ducks/navigation";
 import { useSelector, useDispatch } from "react-redux";
 import { useRouter } from "next/router";
 
@@ -78,10 +78,10 @@ function Benchmark({ benchmark, taskId, benchmarkId }) {
   const onClickDownload = (e) => {
     if (!userState.id) {
       e.preventDefault();
-      dispatch(navigationActions.saveUrl(router.pathname))
-      router.replace('/signin')
+      dispatch(navigationActions.saveUrl(router.pathname));
+      router.replace("/signin");
     }
-  }
+  };
 
   return (
     <PageTemplate>
@@ -108,8 +108,17 @@ function Benchmark({ benchmark, taskId, benchmarkId }) {
           isByYear={type}
           computingPower={computingPower}
         />
-        <Download onClick={onClickDownload} contained href={process.env.NEXT_PUBLIC_BASE_API_URL + `/models/${taskId}/${benchmarkId}/csv`}>Download</Download>
-        <PapersList 
+        <Download
+          onClick={onClickDownload}
+          contained
+          href={
+            process.env.NEXT_PUBLIC_BASE_API_URL +
+            `/models/${taskId}/${benchmarkId}/csv`
+          }
+        >
+          Download
+        </Download>
+        <PapersList
           onSelectAccuracy={onSelectAccuracy}
           selectedAccuracy={label}
           papers={data}

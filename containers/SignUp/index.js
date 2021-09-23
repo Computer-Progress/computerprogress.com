@@ -2,7 +2,7 @@
 import Link from "next/link";
 import PageTemplate from "../../components/PageTemplate";
 import NewButton from "../../components/Button/NewButton";
-import PublicPageOnly from '../../components/PublicPageOnly'
+import PublicPageOnly from "../../components/PublicPageOnly";
 import {
   FormContainer,
   StyledBox,

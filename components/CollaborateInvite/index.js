@@ -8,9 +8,7 @@ export default function CollaborateInvite() {
     <StyledFlexbox>
       <Box>
         <Typography variant="h2">
-          <Box fontWeight="bold">
-            You can change everything!
-          </Box>
+          <Box fontWeight="bold">You can change everything!</Box>
         </Typography>
       </Box>
       <Box mt={5}>

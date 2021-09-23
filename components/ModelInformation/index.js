@@ -269,7 +269,10 @@ export default function ModelInformation(props) {
                     required: !model.accuracies.length,
                   })}
                   error={!!props.errors[`accuracy_type${props.index}`]}
-                  helperText={!!props.errors[`accuracy_type${props.index}`] && "To add the accuracy type, click on the plus icon"}
+                  helperText={
+                    !!props.errors[`accuracy_type${props.index}`] &&
+                    "To add the accuracy type, click on the plus icon"
+                  }
                   name="accuracy_type"
                   label={"Accuracy type"}
                   options={accuracyOptions}
@@ -288,11 +291,19 @@ export default function ModelInformation(props) {
               </Grid>
 
               <Grid item xs={4}>
-                <Tooltip title="To add the accuracy type, click the plus icon" placement="top-end">
+                <Tooltip
+                  title="To add the accuracy type, click the plus icon"
+                  placement="top-end"
+                >
                   <TextField
-                    {...props.register(`accuracy_value${props.index}`, { required: !model.accuracies.length })}
+                    {...props.register(`accuracy_value${props.index}`, {
+                      required: !model.accuracies.length,
+                    })}
                     error={!!props.errors[`accuracy_value${props.index}`]}
-                    helperText={!!props.errors[`accuracy_value${props.index}`] && "Fill accuracy value and click the plus icon"}
+                    helperText={
+                      !!props.errors[`accuracy_value${props.index}`] &&
+                      "Fill accuracy value and click the plus icon"
+                    }
                     label="Value"
                     value={newAccuracyValue}
                     fullWidth
@@ -359,7 +370,10 @@ export default function ModelInformation(props) {
                   required: !model.training_time,
                 })}
                 error={!!props.errors[`TrainingTime${props.index}`]}
-                helperText={!!props.errors[`TrainingTime${props.index}`] && "Training time is required"}
+                helperText={
+                  !!props.errors[`TrainingTime${props.index}`] &&
+                  "Training time is required"
+                }
                 label="Training time (seg)"
                 name="training_time"
                 type="number"

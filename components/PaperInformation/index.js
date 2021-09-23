@@ -43,13 +43,12 @@ export default function PaperInformation(props) {
 
   useEffect(() => {
     props.handlePaperInformationChange(paper);
-
   }, [paper]);
 
   useEffect(() => {
     if (props.submittedPaper) {
-      setPaper(props.submittedPaper)
-      setOnReview(true)
+      setPaper(props.submittedPaper);
+      setOnReview(true);
     }
   }, [props.undoChangesPressed]);
 

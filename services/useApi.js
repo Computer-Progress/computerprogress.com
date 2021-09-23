@@ -15,9 +15,9 @@ export default (serverSide) => {
     dispatch = useDispatch();
   }
 
-    const api = axios.create({
-      baseURL: process.env.NEXT_PUBLIC_BASE_API_URL
-    });
+  const api = axios.create({
+    baseURL: process.env.NEXT_PUBLIC_BASE_API_URL,
+  });
 
   api.interceptors.request.use(async (config) => ({
     ...config,
@@ -36,12 +36,14 @@ export default (serverSide) => {
         dispatch(
           alertActions.openAlert({
             open: true,
-            message: 'Please, login',
-            type: 'error'
-          }));
-        } else if (response.status === 403) {
-          router.replace('/')
-          dispatch(alertActions.openAlert({
+            message: "Please, login",
+            type: "error",
+          })
+        );
+      } else if (response.status === 403) {
+        router.replace("/");
+        dispatch(
+          alertActions.openAlert({
             open: true,
             message: "Forbidden",
             type: "error",

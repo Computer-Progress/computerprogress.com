@@ -129,7 +129,9 @@ export default function Header({ isHome }) {
 
               {!isMobileXS && (
                 <Typography variant="h6">
-                  <StyledBox fontWeight="fontWeightBold">Computer Progress</StyledBox>
+                  <StyledBox fontWeight="fontWeightBold">
+                    Computer Progress
+                  </StyledBox>
                 </Typography>
               )}
             </StyledButton>

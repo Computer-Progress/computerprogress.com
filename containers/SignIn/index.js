@@ -9,8 +9,13 @@ import { Creators as navigationActions } from "../../store/ducks/navigation";
 import PageTemplate from "../../components/PageTemplate";
 import Alert from "../../components/Alert";
 import { useRouter } from "next/router";
-import { Box, CircularProgress, InputAdornment, IconButton } from "@material-ui/core";
-import PublicPageOnly from '../../components/PublicPageOnly'
+import {
+  Box,
+  CircularProgress,
+  InputAdornment,
+  IconButton,
+} from "@material-ui/core";
+import PublicPageOnly from "../../components/PublicPageOnly";
 import {
   Container,
   StyledBox,
@@ -63,11 +68,11 @@ function SignIn({ hasEmailConfirmationSucceed, alert }) {
 
   const handleClickShowPassword = () => {
     setShowPassword(!showPassword);
-  }
+  };
 
   const handleMouseDownPassword = (event) => {
     event.preventDefault();
-  }
+  };
 
   const getUserInfo = async () => {
     setLoading(true);
@@ -177,10 +182,10 @@ function SignIn({ hasEmailConfirmationSucceed, alert }) {
                     onClick={handleClickShowPassword}
                     onMouseDown={handleMouseDownPassword}
                   >
-                    {showPassword ? <Visibility/> : <VisibilityOff/> }
+                    {showPassword ? <Visibility /> : <VisibilityOff />}
                   </IconButton>
                 </InputAdornment>
-              )
+              ),
             }}
           />
 

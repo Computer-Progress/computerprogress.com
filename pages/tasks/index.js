@@ -1,8 +1,7 @@
 export { default } from "../../containers/Tasks";
 
 export async function getServerSideProps() {
-  const URL =
-    process.env.NEXT_PUBLIC_BASE_API_URL + "/tasks";
+  const URL = process.env.NEXT_PUBLIC_BASE_API_URL + "/tasks";
 
   try {
     const response = await fetch(URL);

@@ -86,10 +86,10 @@ export default function PaperSubmission({ submittedPaper }) {
   }, [submittedPaper]);
 
   useEffect(() => {
-    undoRef.current = false
+    undoRef.current = false;
 
     setTimeout(() => {
-      undoRef.current = true
+      undoRef.current = true;
     }, 600);
   }, [submittedPaper, undoChangesPressed]);
 
@@ -146,14 +146,14 @@ export default function PaperSubmission({ submittedPaper }) {
     setTimeout(() => {
       setPageLoading(false);
     }, 5);
-  }
+  };
 
   const onSubmitAction = async (status) => {
     // console.log(paper);
     setLoading(true);
     try {
       if (submittedPaper) {
-        if (typeof status === 'string') {
+        if (typeof status === "string") {
           const response = await api.put(
             `/submissions/${submittedPaper.id}/status`,
             {
@@ -173,7 +173,7 @@ export default function PaperSubmission({ submittedPaper }) {
             type: "success",
           })
         );
-        setOnUpdate(!onUpdate)
+        setOnUpdate(!onUpdate);
         setPaperDidChange(false);
       } else {
         const response = await api.post("/submissions", paper);
@@ -200,8 +200,8 @@ export default function PaperSubmission({ submittedPaper }) {
   };
 
   const onPressSaveChanges = async (item) => {
-    handleSubmit(onSubmitAction(item))
-  }
+    handleSubmit(onSubmitAction(item));
+  };
 
   return (
     <ThemeProvider theme={MuiTheme}>
@@ -218,7 +218,9 @@ export default function PaperSubmission({ submittedPaper }) {
               errors={errors}
             />
           </Grid>
-          {pageLoading ? <MuiCircularProgress /> : (
+          {pageLoading ? (
+            <MuiCircularProgress />
+          ) : (
             <>
               {paper.models?.map((model, index) => (
                 <Grid item xs={12} key={model.id}>
@@ -257,15 +259,15 @@ export default function PaperSubmission({ submittedPaper }) {
                 </Box>
               ) : null}
 
-                <Box pl={1}>
-                  <NewButton
-                    loading={loading}
-                    onClick={handleSubmit(onSubmitAction)}
-                    disabled={!paperDidChange}
-                  >
-                    {submittedPaper ? 'Save changes' : 'Submit paper'}
-                  </NewButton>
-                </Box>
+              <Box pl={1}>
+                <NewButton
+                  loading={loading}
+                  onClick={handleSubmit(onSubmitAction)}
+                  disabled={!paperDidChange}
+                >
+                  {submittedPaper ? "Save changes" : "Submit paper"}
+                </NewButton>
+              </Box>
             </Box>
           </Grid>
         </Grid>

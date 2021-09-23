@@ -3,7 +3,8 @@ export { default } from "../../../../containers/Benchmark";
 export const getServerSideProps = async ({ query }) => {
   try {
     const res = await fetch(
-      process.env.NEXT_PUBLIC_BASE_API_URL + `/models/${query.taskId}/${query.benchmarkId}`
+      process.env.NEXT_PUBLIC_BASE_API_URL +
+        `/models/${query.taskId}/${query.benchmarkId}`
     );
     const benchmark = await res.json();
 

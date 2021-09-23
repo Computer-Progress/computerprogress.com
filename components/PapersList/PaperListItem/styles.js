@@ -3,16 +3,12 @@ import theme from "../../../styles/theme";
 
 export const Wrapper = styled.div`
   display: grid;
-  grid-template-columns: minmax(50px, 0.2fr) minmax(150px, 2fr) minmax(
-      150px,
-      2fr
-    ) ${({ accuracy_list }) =>
+  grid-template-columns:
+    minmax(50px, 0.2fr) minmax(150px, 2fr) minmax(150px, 2fr)
+    ${({ accuracy_list }) =>
       accuracy_list.map((item) => "minmax(100px, 1fr)")} ${({
       showOperations,
-    }) => (showOperations ? "minmax(100px, 1fr)" : "")} minmax(100px, 1fr) minmax(
-      50px,
-      0.2fr
-    );
+    }) => (showOperations ? "minmax(100px, 1fr)" : "")} minmax(100px, 1fr) minmax(50px, 0.2fr);
   row-gap: 10px;
   width: 100%;
   padding: 15px 20px;

@@ -60,19 +60,18 @@ export default function Conversation({
   const submitOptions = useMemo(() => {
     if (message) {
       return [
-        { name: "Approve and comment", value: 'approved' },
-        { name: "Decline and comment", value: 'declined' },
-        { name: "Request information and comment", value: 'need_information' },
-      ]
+        { name: "Approve and comment", value: "approved" },
+        { name: "Decline and comment", value: "declined" },
+        { name: "Request information and comment", value: "need_information" },
+      ];
     }
 
     return [
-      { name: "Approve", value: 'approved' },
-      { name: "Decline", value: 'declined' },
-      { name: "Request information", value: 'need_information' },
-    ]
-  }, [message])
-
+      { name: "Approve", value: "approved" },
+      { name: "Decline", value: "declined" },
+      { name: "Request information", value: "need_information" },
+    ];
+  }, [message]);
 
   const onAddComment = async () => {
     setLoading(true);

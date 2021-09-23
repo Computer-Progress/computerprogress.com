@@ -48,8 +48,7 @@ export const StyledSpacer = styled(MuiBox).attrs({
   flexGrow: 1,
 })``;
 
-export const StyledBox= styled(MuiBox).attrs({
-})`
+export const StyledBox = styled(MuiBox).attrs({})`
   padding-left: 10px;
   font-size: 20px;
 `;
