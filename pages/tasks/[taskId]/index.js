@@ -1,7 +1,7 @@
 export { default } from "../../../containers/Task";
 import useApi from "../../../services/useApi";
 
-export const getServerSideProps = async ({ query }) => {
+export const GetServerSideProps = async ({ query }) => {
   const api = useApi(true);
   try {
     const res = await api.get(`/sota/${query.taskId}`);

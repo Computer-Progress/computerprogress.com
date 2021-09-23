@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { FooterWave } from "./styles";
 import theme from "../../styles/theme";
 
-export default () => {
+const FooterWaveComponent = () => {
   const [animated, setAnimated] = useState(false);
 
   useEffect(() => {
@@ -30,3 +30,5 @@ export default () => {
     </FooterWave>
   );
 };
+
+export default FooterWaveComponent;

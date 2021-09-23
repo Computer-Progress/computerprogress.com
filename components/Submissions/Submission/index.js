@@ -6,9 +6,11 @@ import {
   SmallDetails,
   UpdateDetails,
 } from "./styles";
+
 import * as Icon from "react-feather";
 
-export default ({ paper }) => {
+
+const Submission = ({ paper }) => {
   const status = {
     0: {
       text: "Review pending",
@@ -57,3 +59,5 @@ export default ({ paper }) => {
     </Wrapper>
   );
 };
+
+export default Submission;

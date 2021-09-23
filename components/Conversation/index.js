@@ -189,8 +189,8 @@ export default function Conversation({
                       justifyContent="flex-end"
                     >
                       <Typography variant="h5" noWrap>
-                        Commented by "{item.author.first_name}{" "}
-                        {item.author.last_name}"{" "}
+                        Commented by &quot;{item.author.first_name}{" "}
+                        {item.author.last_name}&quot;{" "}
                         {getRelativeTime(new Date(item.created_at))}
                       </Typography>
                     </Box>

@@ -2,7 +2,7 @@ import useApi from "../services/useApi";
 
 export { default } from "../containers/SignIn";
 
-export async function getServerSideProps({ query }) {
+export async function GetServerSideProps({ query }) {
   if (query.confirmation) {
     const api = useApi(true);
 

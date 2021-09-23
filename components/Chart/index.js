@@ -7,7 +7,7 @@ import regression from "regression";
 import useMediaQuery from "@material-ui/core/useMediaQuery";
 import { MuiTheme } from "../../styles/theme";
 
-const chart = ({ data, label, isByYear, computingPower }) => {
+const Chart = ({ data, label, isByYear, computingPower }) => {
   const isMobileXS = useMediaQuery(MuiTheme.breakpoints.down("xs"));
 
   const [chartOptions, setChartOptions] = useState({
@@ -184,4 +184,5 @@ const chart = ({ data, label, isByYear, computingPower }) => {
     </ChartWrapper>
   );
 };
-export default chart;
+
+export default Chart;

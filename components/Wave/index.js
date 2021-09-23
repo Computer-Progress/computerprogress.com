@@ -1,8 +1,10 @@
 import { useState, useEffect } from "react";
 import { Wave, Text, TextWrapper } from "./styles";
-import theme from "../../styles/theme";
 
-export default () => {
+// import theme from "../../styles/theme";
+
+
+const WaveComponent = () => {
   const [animated, setAnimated] = useState(false);
 
   useEffect(() => {
@@ -39,3 +41,5 @@ export default () => {
     </>
   );
 };
+
+export default WaveComponent;

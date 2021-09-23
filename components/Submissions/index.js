@@ -1,21 +1,25 @@
 import Link from "next/link";
 import React from "react";
+
+import { MenuItem } from "@material-ui/core";
+import Pagination from "@material-ui/lab/Pagination";
+
 import {
   Wrapper,
-  SearchWrapper,
+  // SearchWrapper,
   Separator,
-  Image,
+  // Image,
   Input,
   Header,
   SearchIcon,
   Selector,
   PaginationBox,
 } from "./styles";
-import { MenuItem } from "@material-ui/core";
-import Submission from "./Submission";
-import Pagination from "@material-ui/lab/Pagination";
 
-export default function ({ papers }) {
+import Submission from "./Submission";
+
+
+const Submissions = ({ papers }) => {
   const [age, setAge] = React.useState(10);
 
   const handleChange = (event) => {
@@ -53,3 +57,5 @@ export default function ({ papers }) {
     </>
   );
 }
+
+export default Submissions;

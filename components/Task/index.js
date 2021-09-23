@@ -1,8 +1,10 @@
-import Link from "next/link";
 import React from "react";
+import Link from "next/link";
+
 import { Wrapper, ImageWrapper, Separator, Image } from "./styles";
 
-export default function ({ item }) {
+
+const Task = ({ item }) => {
   return (
     <Link href={`/tasks/${item.identifier}`}>
       <Wrapper>
@@ -16,3 +18,5 @@ export default function ({ item }) {
     </Link>
   );
 }
+
+export default Task;
