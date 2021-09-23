@@ -7,7 +7,8 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "format": "prettier --write \"**/*.{js, jsx, json, md}\""
+    "format": "prettier --write \"**/*.{js, jsx, json, md}\"",
+    "prepare": "husky install"
   },
   "dependencies": {
     "@date-io/date-fns": "1.x",
@@ -40,6 +41,7 @@
     "eslint": "7.32.0",
     "eslint-config-next": "11.1.2",
     "eslint-config-prettier": "^8.3.0",
+    "husky": "^7.0.2",
     "prettier": "^2.3.2"
   }
 }
