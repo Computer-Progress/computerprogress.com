@@ -9,7 +9,6 @@ import {
 
 import * as Icon from "react-feather";
 
-
 const Submission = ({ paper }) => {
   const status = {
     0: {

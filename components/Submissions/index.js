@@ -18,7 +18,6 @@ import {
 
 import Submission from "./Submission";
 
-
 const Submissions = ({ papers }) => {
   const [age, setAge] = React.useState(10);
 
@@ -56,6 +55,6 @@ const Submissions = ({ papers }) => {
       </PaginationBox>
     </>
   );
-}
+};
 
 export default Submissions;

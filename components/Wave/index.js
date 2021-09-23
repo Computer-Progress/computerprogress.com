@@ -3,7 +3,6 @@ import { Wave, Text, TextWrapper } from "./styles";
 
 // import theme from "../../styles/theme";
 
-
 const WaveComponent = () => {
   const [animated, setAnimated] = useState(false);
 

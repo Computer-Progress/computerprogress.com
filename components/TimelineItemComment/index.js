@@ -10,7 +10,6 @@ import TimelineItem from "../TimelineItem";
 // import TimelineDot from "@material-ui/lab/TimelineDot";
 // import Typography from "@material-ui/core/Typography";
 
-
 export default function TimelineItemComment({ item, disableConnector }) {
   return (
     <TimelineItem>

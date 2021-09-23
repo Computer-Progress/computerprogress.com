@@ -3,7 +3,6 @@ import Link from "next/link";
 
 import { Wrapper, ImageWrapper, Separator, Image } from "./styles";
 
-
 const Task = ({ item }) => {
   return (
     <Link href={`/tasks/${item.identifier}`}>
@@ -17,6 +16,6 @@ const Task = ({ item }) => {
       </Wrapper>
     </Link>
   );
-}
+};
 
 export default Task;
