@@ -25,9 +25,10 @@ const chart = ({ data, label, isByYear, computingPower }) => {
       if (element[label] && element[computingPower.value]) {
         let x, y;
         x = isByYear ? new Date(element.paper_publication_date).getFullYear() : Math.log10(element[computingPower.value]);
-        y = 1 / (1 - (element[label] / 100));
+        y = Math.log10(1 / (1 - (element[label] / 100)));
         const point = [x, y];
-
+        console.log("Antes - " + element[label]);
+        console.log(y);
         data_points.push(point);
 
         const info = {
@@ -65,7 +66,9 @@ const chart = ({ data, label, isByYear, computingPower }) => {
           tooltip: {
             headerFormat: "<b>{series.name}</b><br>",
             pointFormatter: function () {
-              let y = (1 - 1 / this.y) * 100;
+              console.log(this.y);
+              let y = (1 - 10**(-this.y)) * 100;
+              console.log(y);
               y = Math.round(y * 100) / 100;
               let x = Math.round(this.x * 100) / 100;
               return `${label}: ${y}% - ${isByYear ? `Year: ${x}` : `Computation: 10e${x < 0 ? '' : '+'}${x.toFixed(1)}`} `;
@@ -151,7 +154,7 @@ const chart = ({ data, label, isByYear, computingPower }) => {
             fontFamily: "Montserrat, sans-serif"
           },
           formatter: function () {
-            let label = (1 - (1 / this.value)) * 100;
+            let label = (1 - 10**(-this.value)) * 100;
             return `${this.value ? label.toFixed(1) : 0}%`;
           }
         }
