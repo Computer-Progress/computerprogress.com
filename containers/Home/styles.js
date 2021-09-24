@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import theme from "../../styles/theme";
 import Button from "../../components/Button"
+import {Typography} from "@material-ui/core";
 
 
 export const Container = styled.div`
@@ -58,3 +59,8 @@ export const AllTasksButton = styled(Button)`
 export const Header = styled.header`
 position: relative;
 `
+
+export const Footnote = styled(Typography)`
+  align-self: flex-start;
+  font-size: 13px !important;
+`;

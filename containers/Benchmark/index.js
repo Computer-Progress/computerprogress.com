@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Container, Title, Download } from "./styles.js";
+import { Container, Title, Download, Footnote } from "./styles.js";
 import Chart from "../../components/Chart";
 import ChartOptions from "../../components/ChartOptions";
 import Tabs from "../../components/Tabs";
@@ -10,6 +10,7 @@ import Table from '../../components/Table';
 import { Creators as navigationActions } from '../../store/ducks/navigation'
 import { useSelector, useDispatch } from "react-redux";
 import { useRouter } from "next/router";
+
 
 function Benchmark({ benchmark, taskId, benchmarkId }) {
   const dispatch = useDispatch();
@@ -101,6 +102,9 @@ function Benchmark({ benchmark, taskId, benchmarkId }) {
           isByYear={type}
           computingPower={computingPower}
         />
+        <Footnote>
+          * The regression is performed in log-log space but (for interpretability) the regression formula is shown in exponential form.
+        </Footnote>
         <Download onClick={onClickDownload} contained href={process.env.NEXT_PUBLIC_BASE_API_URL + `/models/${taskId}/${benchmarkId}/csv`}>Download</Download>
         <PapersList 
           onSelectAccuracy={onSelectAccuracy}
