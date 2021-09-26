@@ -9,8 +9,7 @@ import { MuiTheme } from "../../styles/theme";
 
 
 const chart = ({ data, label, isByYear, computingPower }) => {
-  const isMobileXS = useMediaQuery(MuiTheme.breakpoints.down("xs"));
-
+  const isMobile = useMediaQuery(MuiTheme.breakpoints.down("md"));
   const [chartOptions, setChartOptions] = useState({
     title: {
       text: "Loading...",
@@ -99,6 +98,7 @@ const chart = ({ data, label, isByYear, computingPower }) => {
         layout: "vertical",
         align: "center",
         verticalAlign: "top",
+        fontSize: isMobile ? "8px" : "18px",
         symbolHeight: .001,
         symbolWidth: .001,
         symbolRadius: .001,
@@ -117,7 +117,7 @@ const chart = ({ data, label, isByYear, computingPower }) => {
           style: {
             color: "#333",
             fontWeight: "bold",
-            fontSize: "18px",
+            fontSize: isMobile ? "10px" : "18px",
             fontFamily: "Montserrat, sans-serif"
           }
         },
@@ -139,7 +139,7 @@ const chart = ({ data, label, isByYear, computingPower }) => {
           style: {
             color: "#333",
             fontWeight: "bold",
-            fontSize: "18px",
+            fontSize: isMobile ? "10px" : "18px",
             fontFamily: "Montserrat, sans-serif"
           }
         },
