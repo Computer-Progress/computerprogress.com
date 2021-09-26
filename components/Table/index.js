@@ -10,7 +10,7 @@ import TaskTableSOTA from "../TaskTableSOTA";
 import TaskTableChart from "../TaskTableChart";
 
 import { MuiTheme } from "../../styles/theme";
-import { StyledGridItem, StyledFlexbox } from "./styles";
+import { StyledGridItem, StyledFlexbox, Footnote } from "./styles";
 
 export default function TaskTable({
   tabs,
@@ -89,6 +89,11 @@ export default function TaskTable({
           </StyledGridItem>
         ) : null}
       </Grid>
+      {!isByYear ? (
+        <Footnote>
+          * The regression is performed in log-log space but (for interpretability) the regression formula is shown in exponential form.
+        </Footnote>
+      ) : null}
     </>
   );
 }

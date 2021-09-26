@@ -102,9 +102,6 @@ function Benchmark({ benchmark, taskId, benchmarkId }) {
           isByYear={type}
           computingPower={computingPower}
         />
-        <Footnote>
-          * The regression is performed in log-log space but (for interpretability) the regression formula is shown in exponential form.
-        </Footnote>
         <Download onClick={onClickDownload} contained href={process.env.NEXT_PUBLIC_BASE_API_URL + `/models/${taskId}/${benchmarkId}/csv`}>Download</Download>
         <PapersList 
           onSelectAccuracy={onSelectAccuracy}

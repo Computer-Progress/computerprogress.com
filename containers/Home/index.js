@@ -15,9 +15,6 @@ export default function Home({ tasks }) {
           <Box my={3}>
             <TaskTable tasks={tasks} />
           </Box>
-          <Footnote>
-            * The regression is performed in log-log space but (for interpretability) the regression formula is shown in exponential form.
-          </Footnote>
           <Box my={3} height="30vh" width={isMobile ? "100%" : "80%"}>
             <CollaborateInvite />
           </Box>
