@@ -27,8 +27,6 @@ const chart = ({ data, label, isByYear, computingPower }) => {
         x = isByYear ? new Date(element.paper_publication_date).getFullYear() : Math.log10(element[computingPower.value]);
         y = Math.log10(1 / (1 - (element[label] / 100)));
         const point = [x, y];
-        console.log("Antes - " + element[label]);
-        console.log(y);
         data_points.push(point);
 
         const info = {
@@ -66,9 +64,7 @@ const chart = ({ data, label, isByYear, computingPower }) => {
           tooltip: {
             headerFormat: "<b>{series.name}</b><br>",
             pointFormatter: function () {
-              console.log(this.y);
               let y = (1 - 10**(-this.y)) * 100;
-              console.log(y);
               y = Math.round(y * 100) / 100;
               let x = Math.round(this.x * 100) / 100;
               return `${label}: ${y}% - ${isByYear ? `Year: ${x}` : `Computation: 10e${x < 0 ? '' : '+'}${x.toFixed(1)}`} `;
@@ -86,8 +82,8 @@ const chart = ({ data, label, isByYear, computingPower }) => {
           type: "line",
           showInLegend: true,
           color: "#000000",
-          name: `${label} = 10<span dy="-7"  style="font-size: 10px">${-result.equation[1]}</span><span dy="7"> &times; (${computingPower.name})</span><span dy="-7" style="font-size: 10px">${-result.equation[0]}</span>`,
-          data: [result.points[0], result.points[result.points.length - 1]],
+          name: isByYear ? `${label} = ${result.equation[0]} &times Year ${result.equation[1]}` : `${label} = 10<span dy="-7"  style="font-size: 10px">${-result.equation[1]}</span><span dy="7"> &times; (${computingPower.name})</span><span dy="-7" style="font-size: 10px">${-result.equation[0]}</span>`,
+          data: [result.points[0], result.points[result.points.length - 1]], 
           marker: {
             enabled: false
           },
@@ -99,7 +95,6 @@ const chart = ({ data, label, isByYear, computingPower }) => {
           enableMouseTracking: false
         }
       ],
-
       legend: {
         layout: "vertical",
         align: "center",
