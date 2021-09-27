@@ -25,7 +25,7 @@ export const textBlocks = [
                 We encourage people to pay attention to this issue and contribute to the understanding \
                 of metrics that can guide the post Moore’s Law world. \
                 
-                Do you want to contribute to Computer Progress? Check our <a href='/collaborate' style="color: #9E1FFF"> “COLLABORATE” </a> page.`,
+                Do you want to contribute to ComputerProgress.com? Check our <a href='/collaborate' style="color: #9E1FFF"> “COLLABORATE” </a> page.`,
   },
 ];
 
@@ -60,7 +60,7 @@ export const otherContributors = [
   {
     name: "Gabriel F. Manso",
     workPlace: "University of Brasilia",
-    position: "Project Manager",
+    position: "Project Lead & Manager",
     imageName: "gabriel-manso.png",
   },
   {

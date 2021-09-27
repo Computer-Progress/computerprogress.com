@@ -39,7 +39,7 @@ export default function Collaborate() {
           <StyledFlexboxSection>
             <StyledBoxTitle mb={8}>
               <StyledTypographyBodyTitle variant="h1" align="center">
-                Learn how to report computing power
+                Reporting computing power...
               </StyledTypographyBodyTitle>
             </StyledBoxTitle>
 
@@ -56,7 +56,7 @@ export default function Collaborate() {
 
             <StyledBox>
               <StyledTypographyBody1>
-                Computations (or operations) per network passs the number of floating-point 
+                Computations (or operations) per network pass is the number of floating-point 
                 operations required for a single pass in the network, also measurable using
                 multiply-adds. 
               </StyledTypographyBody1>
@@ -160,7 +160,7 @@ export default function Collaborate() {
 
             <StyledBox>
               <Typography variant="h3" align="center">
-                Start contributing to the progress of computing right now!
+                Start contributing to the progress of Deep Learning right now!
               </Typography>
             </StyledBox>
 
