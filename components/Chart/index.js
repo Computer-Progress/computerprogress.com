@@ -81,7 +81,7 @@ const chart = ({ data, label, isByYear, computingPower }) => {
           type: "line",
           showInLegend: true,
           color: "#000000",
-          name: isByYear ? `${label} = 1 - 10<span dy="-7"  style="font-size: 10px">${-result.equation[0]} &times Year ${result.equation[1]}</span><span dy="7">` : `${label} = 10<span dy="-7"  style="font-size: 10px">${-result.equation[1]}</span><span dy="7"> &times; (${computingPower.name})</span><span dy="-7" style="font-size: 10px">${-result.equation[0]}</span>`,
+          name: isByYear ? `${label} = 1 - 10<span dy="-7"  style="font-size: 10px">${-result.equation[0]} &times Year ${result.equation[1]}</span><span dy="7">` : `${label} = 1 - 10<span dy="-7"  style="font-size: 10px">${-result.equation[1]}</span><span dy="7"> &times; (${computingPower.name})</span><span dy="-7" style="font-size: 10px">${-result.equation[0]}</span>`,
           data: [result.points[0], result.points[result.points.length - 1]], 
           marker: {
             enabled: false
