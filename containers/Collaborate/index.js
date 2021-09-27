@@ -138,7 +138,7 @@ export default function Collaborate() {
             <StyledFlexboxSection>
               <Box mb={8}>
                 <StyledTypographyCard variant="h1" align="center">
-                  Why to understand the progress of computing?!
+                  People talking about this issue:
                 </StyledTypographyCard>
               </Box>
 

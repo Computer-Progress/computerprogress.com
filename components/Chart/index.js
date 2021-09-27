@@ -94,6 +94,9 @@ const chart = ({ data, label, isByYear, computingPower }) => {
           enableMouseTracking: false
         }
       ],
+      exporting: {
+        width: 2000,
+      },
       legend: {
         layout: "vertical",
         align: "center",
@@ -105,7 +108,15 @@ const chart = ({ data, label, isByYear, computingPower }) => {
         fontFamily: "Montserrat, sans-serif",
       },
       credits: {
-        enabled: false
+        text: '<a href="https://arxiv.org/abs/2007.05558">' +
+              'Ⓒ The Computational Limits of Deep Learning, N.C. THOMPSON, K. GREENEWALD, K. LEE, G.F. MANSO</a>' + 
+              '<a href="https://dblp.uni-trier.de/rec/journals/corr/abs-2007-05558.html?view=bibtex">' +
+              '  [CITE]</a>',
+        position: {
+          align: 'center',
+          y: -2,
+          x: 50
+      }
       },
       title: {
         text: "",
@@ -117,7 +128,7 @@ const chart = ({ data, label, isByYear, computingPower }) => {
           style: {
             color: "#333",
             fontWeight: "bold",
-            fontSize: isMobile ? "10px" : "18px",
+            fontSize: isMobile ? "10px" : "14px",
             fontFamily: "Montserrat, sans-serif"
           }
         },
@@ -139,7 +150,7 @@ const chart = ({ data, label, isByYear, computingPower }) => {
           style: {
             color: "#333",
             fontWeight: "bold",
-            fontSize: isMobile ? "10px" : "18px",
+            fontSize: isMobile ? "10px" : "14px",
             fontFamily: "Montserrat, sans-serif"
           }
         },
