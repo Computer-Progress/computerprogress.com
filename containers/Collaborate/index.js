@@ -71,7 +71,7 @@ navigator.clipboard.writeText(`@article\{DBLP:journals/corr/abs-2007-05558,
 
             <StyledBox>
               <StyledTypographyBody1>
-                All analyzes performed on our website were inspired and discussed in the paper <a href="https://arxiv.org/abs/2007.05558" target="_blank" style={{color: "#9E1FFF"}}>"The Computational Limits of Deep Learning"</a> (Thompson et al, 2020).
+                All analysis performed on our website were inspired and discussed in the paper <a href="https://arxiv.org/abs/2007.05558" target="_blank" style={{color: "#9E1FFF"}}>"The Computational Limits of Deep Learning"</a> (Thompson et al, 2020).
                 If you use some of our resources, we kindly encourage you to cite us using the following reference:
               </StyledTypographyBody1>
             </StyledBox>
@@ -101,7 +101,7 @@ navigator.clipboard.writeText(`@article\{DBLP:journals/corr/abs-2007-05558,
 
             <StyledBox>
               <StyledTypographyBody1>
-                If you also want to know a little more about the future of Deep Learning, you can also check out the paper <a href="https://spectrum.ieee.org/deep-learning-computational-cost" target="_blank" style={{color: "#9E1FFF"}}>"Deep Learning's Diminishing Returns"</a> (Thompson et al, 2021).
+                For last treatments, you can also read <a href="https://spectrum.ieee.org/deep-learning-computational-cost" target="_blank" style={{color: "#9E1FFF"}}>"Deep Learning's Diminishing Returns"</a> (Thompson et al, 2021).
               </StyledTypographyBody1>
             </StyledBox>
 
