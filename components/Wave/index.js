@@ -30,7 +30,7 @@ export default () => {
         </defs>
       </Wave>
       <TextWrapper>
-        <Text>Understand the growing computational burden in the history of Deep Learning.</Text>
+        <Text>Understand the growing computational burden of Deep Learning.</Text>
       </TextWrapper>
     </>
   );
