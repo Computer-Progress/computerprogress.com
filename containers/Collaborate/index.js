@@ -1,5 +1,6 @@
 import { ThemeProvider } from "@material-ui/core/styles";
 import { MuiTheme } from "../../styles/theme";
+import { Copy as CopyIcon } from "react-feather";
 
 import {
   List,
@@ -9,6 +10,7 @@ import {
   Chip,
   Typography,
   Box,
+  Tooltip
 } from "@material-ui/core";
 
 import PageTemplate from "../../components/PageTemplate";
@@ -30,8 +32,31 @@ import {
   StyledContainerJoinUs,
   StyledListItemIcon
 } from "./styles";
+import { useState } from "react";
 
 export default function Collaborate() {
+  const copyToClipboard = () => {
+navigator.clipboard.writeText(`@article\{DBLP:journals/corr/abs-2007-05558,
+  author    = {Neil C. Thompson and
+              Kristjan H. Greenewald and
+              Keeheon Lee and
+              Gabriel F. Manso},
+  title     = {The Computational Limits of Deep Learning},
+  journal   = {CoRR},
+  volume    = {abs/2007.05558},
+  year      = {2020},
+  url       = {https://arxiv.org/abs/2007.05558},
+  eprinttype = {arXiv},
+  eprint    = {2007.05558},
+  timestamp = {Sat, 23 Jan 2021 01:12:47 +0100},
+  biburl    = {https://dblp.org/rec/journals/corr/abs-2007-05558.bib},
+  bibsource = {dblp computer science bibliography, https://dblp.org}
+}`)
+  .then(() => {
+   setIsCopy(true)
+  })
+  };
+  const [isCopy, setIsCopy] = useState(false)
   return (
     <ThemeProvider theme={MuiTheme}>
       <PageTemplate ignoreContainer>
@@ -39,16 +64,39 @@ export default function Collaborate() {
           <StyledFlexboxSection>
             <StyledBoxTitle mb={8}>
               <StyledTypographyBodyTitle variant="h1" align="center">
-                Reporting computing power...
+                Reporting computing power data in Deep Learning
               </StyledTypographyBodyTitle>
             </StyledBoxTitle>
 
             <StyledBox>
               <StyledTypographyBody1>
-                Two are the most usual ways used to report the computational
-                burden in Deep Learning:
+                All analyzes performed on our website were inspired and discussed in the paper <a href="https://arxiv.org/abs/2007.05558" target="_blank" style={{color: "#9E1FFF"}}>"The Computational Limits of Deep Learning"</a> (Thompson et al, 2020).
+                If you use some of our resources, we kindly encourage you to cite us using the following bibtex reference:
               </StyledTypographyBody1>
             </StyledBox>
+            
+<div className='citation'>
+  <Tooltip arrow title={isCopy? "Copied!" : "Copy"} onClose={()=>setIsCopy(false)}>
+    <button onClick={()=>copyToClipboard()}><CopyIcon/></button>
+  </Tooltip>
+<pre>{
+`@article\{DBLP:journals/corr/abs-2007-05558,
+  author    = {Neil C. Thompson and
+              Kristjan H. Greenewald and
+              Keeheon Lee and
+              Gabriel F. Manso},
+  title     = {The Computational Limits of Deep Learning},
+  journal   = {CoRR},
+  volume    = {abs/2007.05558},
+  year      = {2020},
+  url       = {https://arxiv.org/abs/2007.05558},
+  eprinttype = {arXiv},
+  eprint    = {2007.05558},
+  timestamp = {Sat, 23 Jan 2021 01:12:47 +0100},
+  biburl    = {https://dblp.org/rec/journals/corr/abs-2007-05558.bib},
+  bibsource = {dblp computer science bibliography, https://dblp.org}
+}`}</pre>
+</div>
 
             <StyledBox>
               <Typography variant="h2">1) Computations per network pass</Typography>

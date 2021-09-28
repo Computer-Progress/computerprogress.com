@@ -13,7 +13,35 @@ export const StyledContainerJoinUs = styled(Container)`
 
 export const StyledFlexboxSection = styled(Box).attrs({
   my: 5,
-})``;
+})`
+.citation{
+  position: relative;
+  background: #ebebeb;
+  padding: 1rem;
+  border: 1px dashed #cccccc;
+  margin-top: 2rem;
+  font-size: 15px;
+  border-radius: 5px;
+  button{
+    position: absolute;
+    right: 1rem;
+    top: 1rem;
+    border: none;
+    border-radius: 5px;
+    padding: 3px;
+    cursor: pointer;
+    :hover{
+      transform: scale(1.05)
+    }
+    :active{
+      transform: scale(1)
+    }
+  }
+  pre{
+    font-family: 'Courier New', Courier, monospace
+  }
+}
+`;
 
 export const StyledBoxTitle = styled(Box).attrs({
   mt: 5,
