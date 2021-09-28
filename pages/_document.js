@@ -27,6 +27,12 @@ export default class MyDocument extends Document {
             `,
             }}
           />
+          <meta property="og:url" content="https://www.computerprogress.com/" />
+          <meta property="og:title" content="Computer Progress" />
+          <meta property="og:description" content="Understand the growing computational burden in the history of Deep Learning." />
+          {/* <meta property="og:image" content="../public/logo_icon.svg" /> */}
+          <meta name="description" content="Understand the growing computational burden in the history of Deep Learning." />
+          <meta name="title" content="Computer Progress" />
         </Head>
         <body>
           <Main />
