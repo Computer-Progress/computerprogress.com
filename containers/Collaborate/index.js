@@ -10,7 +10,7 @@ import {
   Chip,
   Typography,
   Box,
-  Tooltip
+  Tooltip,
 } from "@material-ui/core";
 
 import PageTemplate from "../../components/PageTemplate";
@@ -31,13 +31,15 @@ import {
   StyledChip,
   StyledTypographyCard,
   StyledContainerJoinUs,
-  StyledListItemIcon
+  StyledListItemIcon,
 } from "./styles";
 import { useState } from "react";
 
 export default function Collaborate() {
   const copyToClipboard = () => {
-navigator.clipboard.writeText(`@article\{DBLP:journals/corr/abs-2007-05558,
+    navigator.clipboard
+      .writeText(
+        `@article\{DBLP:journals/corr/abs-2007-05558,
   author    = {Neil C. Thompson and
               Kristjan H. Greenewald and
               Keeheon Lee and
@@ -52,12 +54,13 @@ navigator.clipboard.writeText(`@article\{DBLP:journals/corr/abs-2007-05558,
   timestamp = {Sat, 23 Jan 2021 01:12:47 +0100},
   biburl    = {https://dblp.org/rec/journals/corr/abs-2007-05558.bib},
   bibsource = {dblp computer science bibliography, https://dblp.org}
-}`)
-  .then(() => {
-   setIsCopy(true)
-  })
+}`
+      )
+      .then(() => {
+        setIsCopy(true);
+      });
   };
-  const [isCopy, setIsCopy] = useState(false)
+  const [isCopy, setIsCopy] = useState(false);
   return (
     <ThemeProvider theme={MuiTheme}>
       <PageTemplate ignoreContainer>
@@ -71,17 +74,32 @@ navigator.clipboard.writeText(`@article\{DBLP:journals/corr/abs-2007-05558,
 
             <StyledBox>
               <StyledTypographyBody1>
-                All analysis performed on our website were inspired and discussed in the paper <a href="https://arxiv.org/abs/2007.05558" target="_blank" style={{color: "#9E1FFF"}}>"The Computational Limits of Deep Learning"</a> (Thompson et al, 2020).
-                If you use some of our resources, we kindly encourage you to cite us using the following reference:
+                All analysis performed on our website were inspired and
+                discussed in the paper{" "}
+                <a
+                  href="https://arxiv.org/abs/2007.05558"
+                  target="_blank"
+                  style={{ color: "#9E1FFF" }}
+                >
+                  "The Computational Limits of Deep Learning"
+                </a>{" "}
+                (Thompson et al, 2020). If you use some of our resources, we
+                kindly encourage you to cite us using the following reference:
               </StyledTypographyBody1>
             </StyledBox>
-            
-<div className='citation'>
-  <Tooltip arrow title={isCopy? "Copied!" : "Copy"} onClose={()=>setIsCopy(false)}>
-    <button onClick={()=>copyToClipboard()}><CopyIcon/></button>
-  </Tooltip>
-<pre>{
-`@article\{DBLP:journals/corr/abs-2007-05558,
+
+            <div className="citation">
+              <Tooltip
+                arrow
+                title={isCopy ? "Copied!" : "Copy"}
+                onClose={() => setIsCopy(false)}
+              >
+                <button onClick={() => copyToClipboard()}>
+                  <CopyIcon />
+                </button>
+              </Tooltip>
+              <pre style={{ "overflow-x": "auto" }}>
+                {`@article\{DBLP:journals/corr/abs-2007-05558,
   author    = {Neil C. Thompson and
               Kristjan H. Greenewald and
               Keeheon Lee and
@@ -96,12 +114,21 @@ navigator.clipboard.writeText(`@article\{DBLP:journals/corr/abs-2007-05558,
   timestamp = {Sat, 23 Jan 2021 01:12:47 +0100},
   biburl    = {https://dblp.org/rec/journals/corr/abs-2007-05558.bib},
   bibsource = {dblp computer science bibliography, https://dblp.org}
-}`}</pre>
-</div>
+}`}
+              </pre>
+            </div>
 
             <StyledBox>
               <StyledTypographyBody1>
-                For last treatments, you can also read <a href="https://spectrum.ieee.org/deep-learning-computational-cost" target="_blank" style={{color: "#9E1FFF"}}>"Deep Learning's Diminishing Returns"</a> (Thompson et al, 2021).
+                For last treatments, you can also read{" "}
+                <a
+                  href="https://spectrum.ieee.org/deep-learning-computational-cost"
+                  target="_blank"
+                  style={{ color: "#9E1FFF" }}
+                >
+                  "Deep Learning's Diminishing Returns"
+                </a>{" "}
+                (Thompson et al, 2021).
               </StyledTypographyBody1>
             </StyledBox>
 
@@ -110,23 +137,25 @@ navigator.clipboard.writeText(`@article\{DBLP:journals/corr/abs-2007-05558,
                 Estimating Computing Power in Deep Learning
               </StyledTypographyBodyTitle2>
             </StyledBoxTitle>
-            
+
             <StyledBox>
               <StyledTypographyBody1>
-                The ways we use to report computational burden in Deep Learning are:
+                The ways we use to report computational burden in Deep Learning
+                are:
               </StyledTypographyBody1>
             </StyledBox>
-            
 
             <StyledBox>
-              <Typography variant="h3">1) Computations per network pass</Typography>
+              <Typography variant="h3">
+                1) Computations per network pass
+              </Typography>
             </StyledBox>
 
             <StyledBox>
               <StyledTypographyBody1>
-                Computations (or operations) per network pass is the number of floating-point 
-                operations required for a single pass in the network, also measurable using
-                multiply-adds. 
+                Computations (or operations) per network pass is the number of
+                floating-point operations required for a single pass in the
+                network, also measurable using multiply-adds.
               </StyledTypographyBody1>
             </StyledBox>
 
@@ -143,8 +172,8 @@ navigator.clipboard.writeText(`@article\{DBLP:journals/corr/abs-2007-05558,
                   <ListItemText
                     primary={
                       <>
-                        <StyledChip label="Flops"/>    or   {"  "}
-                        <StyledChip label="Multiply-adds"/>
+                        <StyledChip label="Flops" /> or {"  "}
+                        <StyledChip label="Multiply-adds" />
                       </>
                     }
                   />
@@ -158,9 +187,9 @@ navigator.clipboard.writeText(`@article\{DBLP:journals/corr/abs-2007-05558,
 
             <StyledBox>
               <StyledTypographyBody1>
-                Hardware burden is the computational capability of the hardware used to train a
-                model. It depends on the model training time and the computation of the hardware
-                used to train the model.
+                Hardware burden is the computational capability of the hardware
+                used to train a model. It depends on the model training time and
+                the computation of the hardware used to train the model.
               </StyledTypographyBody1>
             </StyledBox>
 
@@ -175,7 +204,9 @@ navigator.clipboard.writeText(`@article\{DBLP:journals/corr/abs-2007-05558,
                     <StyledListIcon />
                   </StyledListItemIcon>
                   <ListItemText
-                    primary={<StyledChip label="Hardware used (e.g TPU, GPU and/or CPU)"/>}
+                    primary={
+                      <StyledChip label="Hardware used (e.g TPU, GPU and/or CPU)" />
+                    }
                   />
                 </ListItem>
 
@@ -184,7 +215,9 @@ navigator.clipboard.writeText(`@article\{DBLP:journals/corr/abs-2007-05558,
                     <StyledListIcon />
                   </StyledListItemIcon>
                   <ListItemText
-                    primary={<StyledChip label="Number of each hardware component used"/>}
+                    primary={
+                      <StyledChip label="Number of each hardware component used" />
+                    }
                   />
                 </ListItem>
 
@@ -193,7 +226,7 @@ navigator.clipboard.writeText(`@article\{DBLP:journals/corr/abs-2007-05558,
                     <StyledListIcon />
                   </StyledListItemIcon>
                   <ListItemText
-                    primary={<StyledChip label="Training time"/>}
+                    primary={<StyledChip label="Training time" />}
                   />
                 </ListItem>
               </List>
@@ -219,7 +252,6 @@ navigator.clipboard.writeText(`@article\{DBLP:journals/corr/abs-2007-05558,
 
         <StyledContainerJoinUs>
           <StyledFlexboxSection>
-
             <StyledBox>
               <Typography variant="h2" align="center">
                 Join our community!
@@ -267,4 +299,3 @@ navigator.clipboard.writeText(`@article\{DBLP:journals/corr/abs-2007-05558,
     </ThemeProvider>
   );
 }
-
