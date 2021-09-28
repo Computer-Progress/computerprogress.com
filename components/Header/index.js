@@ -41,30 +41,7 @@ export default function Header({ isHome }) {
   const isMobileXS = useMediaQuery(MuiTheme.breakpoints.down("xs"));
 
   const [menuAnchorEl, setMenuAnchorEl] = useState(null);
-
-  const links = [
-    {
-      text: "Tasks",
-      href: "/tasks",
-    },
-    {
-      text: "Collaborate",
-      href: "/collaborate",
-    },
-    {
-      text: "About us",
-      href: "/aboutus",
-    },
-  ];
-
-  if (userState?.role) {
-    links.unshift({
-      text: "Submit paper",
-      href: "/submit-paper",
-    });
-  }
-
-  const menuItems = [
+  const [menuItems, setMenuItems] = useState([
     {
       title: "Profile",
       pathname: "/profile",
@@ -88,6 +65,33 @@ export default function Header({ isHome }) {
       pathname: "/submit-paper",
       icon: <Icon.PlusCircle />,
       show: true,
+    },
+  ]);
+
+  useEffect(() => {
+    const newMenuItems = menuItems;
+
+    const submitPaperIndex = menuItems.findIndex(
+      (item) => item.title === "Submit Paper"
+    );
+
+    newMenuItems[submitPaperIndex].show = isMobileXS;
+
+    setMenuItems([...newMenuItems]);
+  }, [isMobileXS]);
+
+  const links = [
+    {
+      text: "Tasks",
+      href: "/tasks",
+    },
+    {
+      text: "Collaborate",
+      href: "/collaborate",
+    },
+    {
+      text: "About us",
+      href: "/aboutus",
     },
   ];
 
@@ -156,6 +160,21 @@ export default function Header({ isHome }) {
             {userState?.role ? (
               <>
                 <Box>
+                  {!isMobileSM && (
+                    <StyledButton
+                      size={isMobileSM ? "small" : "medium"}
+                      color="secondary"
+                      href="/submit-paper"
+                    >
+                      {isMobileSM ? (
+                        <Box px={1}>Submit paper</Box>
+                      ) : (
+                        <Box fontSize="1rem" px={1}>
+                          Submit paper
+                        </Box>
+                      )}
+                    </StyledButton>
+                  )}
                   <IconButton onClick={handleOpenMenu}>
                     <Badge
                       overlap="circular"
@@ -265,6 +284,12 @@ export default function Header({ isHome }) {
         {isMobileSM && (
           <Toolbar disableGutters>
             <StyledToolbarBox justifyContent="space-between">
+              {!isMobileXS && (
+                <StyledButton color="secondary" href="/submit-paper">
+                  Submit paper
+                </StyledButton>
+              )}
+
               {links.map(({ text, href }) => (
                 <Box key={href}>
                   <StyledButton href={href} color="secondary">
