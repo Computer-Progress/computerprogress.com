@@ -161,7 +161,7 @@ export default function Header({ isHome }) {
                 {links.map(({ text, href }) => (
                   <Box key={href}>
                     <StyledButton size="large" href={href} color="secondary">
-                      <Box fontSize="0.95rem" px={1}>
+                      <Box fontSize="0.90rem" px={1}>
                         {text}
                       </Box>
                     </StyledButton>
@@ -257,7 +257,7 @@ export default function Header({ isHome }) {
                     {isMobileSM ? (
                       <Box px={1}>Sign up</Box>
                     ) : (
-                      <Box fontSize="0.95rem" px={1}>
+                      <Box fontSize="0.90rem" px={1}>
                         Sign up
                       </Box>
                     )}
@@ -269,7 +269,7 @@ export default function Header({ isHome }) {
                     {isMobileSM ? (
                       "Sign in"
                     ) : (
-                      <Box fontSize="0.95rem" px={1}>
+                      <Box fontSize="0.90rem" px={1}>
                         Sign in
                       </Box>
                     )}
@@ -288,7 +288,7 @@ export default function Header({ isHome }) {
                 .map(({ text, href }) => (
                   <Box key={href}>
                     <StyledButton href={href} color="secondary">
-                      {text}
+                      <Box fontSize="0.9rem">{text}</Box>
                     </StyledButton>
                   </Box>
                 ))}
