@@ -84,7 +84,7 @@ export const otherContributors = [
   {
     name: "João Egewarth",
     workPlace: "University of Brasilia",
-    position: "UI/UX Designer",
+    position: "Product Designer",
     imageName: "joao-egewarth.png",
   },
 ];
