@@ -29,10 +29,15 @@ export default class MyDocument extends Document {
           />
           <meta property="og:url" content="https://www.computerprogress.com/" />
           <meta property="og:title" content="Computer Progress" />
-          <meta property="og:description" content="Understand the growing computational burden in the history of Deep Learning." />
+          <meta property="og:description" content="Understand the growing computational burden in the history of Deep Learning!" />
           <meta property="og:image" content="https://computerprogress.com/meta_logo.png" />
-          <meta name="description" content="Understand the growing computational burden in the history of Deep Learning." />
+          <meta name="description" content="Understand the growing computational burden in the history of Deep Learning!" />
           <meta name="title" content="Computer Progress" />
+          <meta property="twitter:card" content="summary_large_image" />
+          <meta property="twitter:url" content="https://www.computerprogress.com/" />
+          <meta property="twitter:title" content="Computer Progress" />
+          <meta property="twitter:description" content="Understand the growing computational burden in the history of Deep Learning!" />
+          <meta property="twitter:image" content="https://computerprogress.com/meta_logo.png" />
         </Head>
         <body>
           <Main />
