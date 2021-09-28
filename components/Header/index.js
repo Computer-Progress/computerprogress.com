@@ -61,39 +61,53 @@ export default function Header({ isHome }) {
       show: userState?.role !== "default",
     },
     {
-      title: "Submit Paper",
+      title: "Submit paper",
       pathname: "/submit-paper",
       icon: <Icon.PlusCircle />,
+      show: true,
+    },
+  ]);
+  const [links, setLinks] = useState([
+    {
+      text: "Submit paper",
+      href: "/submit-paper",
+      show: true,
+    },
+    {
+      text: "Tasks",
+      href: "/tasks",
+      show: true,
+    },
+    {
+      text: "Collaborate",
+      href: "/collaborate",
+      show: true,
+    },
+    {
+      text: "About us",
+      href: "/aboutus",
       show: true,
     },
   ]);
 
   useEffect(() => {
     const newMenuItems = menuItems;
+    const newLinks = links;
 
-    const submitPaperIndex = menuItems.findIndex(
-      (item) => item.title === "Submit Paper"
+    const submitPaperMenuIndex = menuItems.findIndex(
+      (item) => item.title === "Submit paper"
     );
 
-    newMenuItems[submitPaperIndex].show = isMobileXS;
+    const submitPaperLinksIndex = links.findIndex(
+      (item) => item.text === "Submit paper"
+    );
+
+    newMenuItems[submitPaperMenuIndex].show = isMobileXS;
+    newLinks[submitPaperLinksIndex].show = !isMobileXS;
 
     setMenuItems([...newMenuItems]);
+    setLinks([...newLinks]);
   }, [isMobileXS]);
-
-  const links = [
-    {
-      text: "Tasks",
-      href: "/tasks",
-    },
-    {
-      text: "Collaborate",
-      href: "/collaborate",
-    },
-    {
-      text: "About us",
-      href: "/aboutus",
-    },
-  ];
 
   function getUserInitials() {
     if (!userState.first_name) {
@@ -147,7 +161,7 @@ export default function Header({ isHome }) {
                 {links.map(({ text, href }) => (
                   <Box key={href}>
                     <StyledButton size="large" href={href} color="secondary">
-                      <Box fontSize="1rem" px={1}>
+                      <Box fontSize="0.95rem" px={1}>
                         {text}
                       </Box>
                     </StyledButton>
@@ -160,21 +174,6 @@ export default function Header({ isHome }) {
             {userState?.role ? (
               <>
                 <Box>
-                  {!isMobileSM && (
-                    <StyledButton
-                      size={isMobileSM ? "small" : "medium"}
-                      color="secondary"
-                      href="/submit-paper"
-                    >
-                      {isMobileSM ? (
-                        <Box px={1}>Submit paper</Box>
-                      ) : (
-                        <Box fontSize="1rem" px={1}>
-                          Submit paper
-                        </Box>
-                      )}
-                    </StyledButton>
-                  )}
                   <IconButton onClick={handleOpenMenu}>
                     <Badge
                       overlap="circular"
@@ -258,7 +257,7 @@ export default function Header({ isHome }) {
                     {isMobileSM ? (
                       <Box px={1}>Sign up</Box>
                     ) : (
-                      <Box fontSize="1rem" px={1}>
+                      <Box fontSize="0.95rem" px={1}>
                         Sign up
                       </Box>
                     )}
@@ -270,7 +269,7 @@ export default function Header({ isHome }) {
                     {isMobileSM ? (
                       "Sign in"
                     ) : (
-                      <Box fontSize="1rem" px={1}>
+                      <Box fontSize="0.95rem" px={1}>
                         Sign in
                       </Box>
                     )}
@@ -284,19 +283,15 @@ export default function Header({ isHome }) {
         {isMobileSM && (
           <Toolbar disableGutters>
             <StyledToolbarBox justifyContent="space-between">
-              {!isMobileXS && (
-                <StyledButton color="secondary" href="/submit-paper">
-                  Submit paper
-                </StyledButton>
-              )}
-
-              {links.map(({ text, href }) => (
-                <Box key={href}>
-                  <StyledButton href={href} color="secondary">
-                    {text}
-                  </StyledButton>
-                </Box>
-              ))}
+              {links
+                .filter(({ show }) => show)
+                .map(({ text, href }) => {
+                  <Box key={href}>
+                    <StyledButton href={href} color="secondary">
+                      {text}
+                    </StyledButton>
+                  </Box>;
+                })}
             </StyledToolbarBox>
           </Toolbar>
         )}
