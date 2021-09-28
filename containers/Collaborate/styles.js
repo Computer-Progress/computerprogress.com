@@ -57,7 +57,14 @@ export const StyledTypographyBodyTitle = styled(Typography).attrs({
   variant: "body1",
 })`
   font-weight: 500 !important;
-  font-size: 50px !important;
+  font-size: 40px !important;
+`;
+
+export const StyledTypographyBodyTitle2 = styled(Typography).attrs({
+  variant: "h2",
+})`
+  font-weight: 500 !important;
+  font-size: 25px !important;
 `;
 
 export const StyledTypographyBody1 = styled(Typography).attrs({
@@ -74,7 +81,7 @@ export const StyledTypographyCard = styled(Typography).attrs({
   variant: "h1",
 })`
   font-weight: 500 !important;
-  font-size: 35px !important;
+  font-size: 30px !important;
 `;
 
 export const StyledListIcon = styled.div`

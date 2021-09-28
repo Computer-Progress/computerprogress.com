@@ -72,7 +72,7 @@ export const otherContributors = [
   {
     name: "Guilherme Banci",
     workPlace: "University of Brasilia",
-    position: "Front-end Developer",
+    position: "Software Engineer",
     imageName: "guilherme-banci.jpg",
   },
   {

@@ -26,6 +26,7 @@ import {
   StyledButton,
   StyledBoxTitle,
   StyledTypographyBodyTitle,
+  StyledTypographyBodyTitle2,
   StyledTypographyBody2,
   StyledChip,
   StyledTypographyCard,
@@ -64,14 +65,14 @@ navigator.clipboard.writeText(`@article\{DBLP:journals/corr/abs-2007-05558,
           <StyledFlexboxSection>
             <StyledBoxTitle mb={8}>
               <StyledTypographyBodyTitle variant="h1" align="center">
-                Reporting computing power data in Deep Learning
+                Reporting Data
               </StyledTypographyBodyTitle>
             </StyledBoxTitle>
 
             <StyledBox>
               <StyledTypographyBody1>
                 All analyzes performed on our website were inspired and discussed in the paper <a href="https://arxiv.org/abs/2007.05558" target="_blank" style={{color: "#9E1FFF"}}>"The Computational Limits of Deep Learning"</a> (Thompson et al, 2020).
-                If you use some of our resources, we kindly encourage you to cite us using the following bibtex reference:
+                If you use some of our resources, we kindly encourage you to cite us using the following reference:
               </StyledTypographyBody1>
             </StyledBox>
             
@@ -99,7 +100,26 @@ navigator.clipboard.writeText(`@article\{DBLP:journals/corr/abs-2007-05558,
 </div>
 
             <StyledBox>
-              <Typography variant="h2">1) Computations per network pass</Typography>
+              <StyledTypographyBody1>
+                If you also want to know a little more about the future of Deep Learning, you can also check out the paper <a href="https://spectrum.ieee.org/deep-learning-computational-cost" target="_blank" style={{color: "#9E1FFF"}}>"Deep Learning's Diminishing Returns"</a> (Thompson et al, 2021).
+              </StyledTypographyBody1>
+            </StyledBox>
+
+            <StyledBoxTitle mb={8}>
+              <StyledTypographyBodyTitle2 variant="h2" align="center">
+                Estimating Computing Power in Deep Learning
+              </StyledTypographyBodyTitle2>
+            </StyledBoxTitle>
+            
+            <StyledBox>
+              <StyledTypographyBody1>
+                The ways we use to report computational burden in Deep Learning are:
+              </StyledTypographyBody1>
+            </StyledBox>
+            
+
+            <StyledBox>
+              <Typography variant="h3">1) Computations per network pass</Typography>
             </StyledBox>
 
             <StyledBox>
@@ -133,7 +153,7 @@ navigator.clipboard.writeText(`@article\{DBLP:journals/corr/abs-2007-05558,
             </StyledBox>
 
             <StyledBox>
-              <Typography variant="h2">2) Hardware burden</Typography>
+              <Typography variant="h3">2) Hardware burden</Typography>
             </StyledBox>
 
             <StyledBox>

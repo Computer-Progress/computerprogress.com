@@ -340,7 +340,7 @@ export default function ModelInformation(props) {
               <Typography variant="h4">Training information</Typography>
             </Grid>
 
-            <Grid item xs={6} md={5} lg={4} xl={3}>
+            <Grid item xs={6}>
               <StyledTextField
                 {...props.register(`TrainingTime${props.index}`, { required: !model.training_time})}
                 error={!!props.errors[`TrainingTime${props.index}`]}
@@ -353,7 +353,7 @@ export default function ModelInformation(props) {
               />
             </Grid>
 
-            <Grid item xs={6} md={5} lg={4} xl={3}>
+            <Grid item xs={6}>
               <StyledTextField
                 {...props.register(`Ephocs${props.index}`, { required: !model.epochs })}
                 error={!!props.errors[`Ephocs${props.index}`]}
@@ -499,7 +499,7 @@ export default function ModelInformation(props) {
               <Typography variant="h4">Computation per network pass</Typography>
             </Grid>
 
-            <Grid item xs={6} md={5} lg={4} xl={3}>
+            <Grid item xs={6}>
               <StyledTextField
                 label="Gigaflops"
                 name="gflops"
@@ -509,7 +509,7 @@ export default function ModelInformation(props) {
               />
             </Grid>
 
-            <Grid item xs={6} md={5} lg={4} xl={3}>
+            <Grid item xs={6}>
               <StyledTextField
                 label="Multiply-adds"
                 name="multiply_adds"
@@ -523,7 +523,7 @@ export default function ModelInformation(props) {
               <Typography variant="h4">Other</Typography>
             </Grid>
 
-            <Grid item xs={6} md={5} lg={4} xl={3}>
+            <Grid item xs={6}>
               <StyledTextField
                 label="# of parameters"
                 name="number_of_parameters"
