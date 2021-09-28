@@ -31,9 +31,10 @@ export default function TaskTable({
   computingPower,
   fieldName,
   sota,
-  isByYear
+  isByYear,
 }) {
   const isMobile = useMediaQuery(MuiTheme.breakpoints.down("md"));
+  const isMobileXS = useMediaQuery(MuiTheme.breakpoints.down("xs"));
 
   return (
     <>
@@ -56,7 +57,12 @@ export default function TaskTable({
           </StyledGridItem>
         )}
 
-        <StyledGridItem $order={3} xs={12} sm={showViewAllTasks ? 6 : 12} lg={showViewAllTasks ? 3 : 3}>
+        <StyledGridItem
+          $order={3}
+          xs={12}
+          sm={showViewAllTasks ? 6 : 12}
+          lg={showViewAllTasks ? 3 : 3}
+        >
           <TableOptions
             options={options}
             selectedOption={selectedOption}
@@ -70,7 +76,7 @@ export default function TaskTable({
           />
         </StyledGridItem>
 
-        <StyledGridItem $order={isMobile ? 4 : 4} xs={12} lg={showViewAllTasks ? 6 : 9}>
+        <StyledGridItem $order={4} xs={12} lg={showViewAllTasks ? 6 : 9}>
           <TaskTableChart
             isLoading={loading}
             data={data}
@@ -81,17 +87,16 @@ export default function TaskTable({
         </StyledGridItem>
         {sota ? (
           <StyledGridItem $order={isMobile ? 3 : 4} xs={12} sm={6} lg={3}>
-            <Box style={{ height: "100%" }} ml={2}>
-              <TaskTableSOTA
-                sota={sota}
-              />
+            <Box style={{ height: "100%" }} ml={isMobileXS ? 0 : 2}>
+              <TaskTableSOTA sota={sota} />
             </Box>
           </StyledGridItem>
         ) : null}
       </Grid>
       {!isByYear ? (
         <Footnote>
-          * The regression is performed in log-log space but (for interpretability) the regression formula is shown in exponential form.
+          * The regression is performed in log-log space but (for
+          interpretability) the regression formula is shown in exponential form.
         </Footnote>
       ) : null}
     </>
