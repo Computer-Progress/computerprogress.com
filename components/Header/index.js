@@ -285,13 +285,13 @@ export default function Header({ isHome }) {
             <StyledToolbarBox justifyContent="space-between">
               {links
                 .filter(({ show }) => show)
-                .map(({ text, href }) => {
+                .map(({ text, href }) => (
                   <Box key={href}>
                     <StyledButton href={href} color="secondary">
                       {text}
                     </StyledButton>
-                  </Box>;
-                })}
+                  </Box>
+                ))}
             </StyledToolbarBox>
           </Toolbar>
         )}
