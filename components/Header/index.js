@@ -24,7 +24,14 @@ import {
   StyledSpacer,
   StyledButton,
   StyledBox,
+  StyledBenchButton
 } from "./styles";
+
+// import KeyboardArrowDown from '@material-ui/icons/ExpandLess';
+import ArrowDropDownIcon from '@material-ui/icons/ArrowDropDown';
+
+
+
 
 import Logo from "../../public/logo_icon.svg";
 import { ChevronDown as ChevronDownIcon } from "react-feather";
@@ -41,6 +48,8 @@ export default function Header({ isHome }) {
   const isMobileXS = useMediaQuery(MuiTheme.breakpoints.down("xs"));
 
   const [menuAnchorEl, setMenuAnchorEl] = useState(null);
+  const [benchMenuAnchorEl, setBenchMenuAnchorEl] = useState(null);
+
   const [menuItems, setMenuItems] = useState([
     {
       title: "Profile",
@@ -67,15 +76,42 @@ export default function Header({ isHome }) {
       show: true,
     },
   ]);
+  const [menuBenchmarks, setMenuBenchmarks] = useState([
+    {
+      title: "ImageNet",
+      pathname: "/tasks/image-classification/imagenet",
+      show: true,
+    },
+    {
+      title: "MS COCO test dev",
+      pathname: "/tasks/object-detection/ms-coco",
+      show: true,
+    },
+    {
+      title: "SQuAD 1.1",
+      pathname: "/tasks/question-answering/squad11",
+      show: true,
+    },
+    {
+      title: "CoNLL-2003",
+      pathname: "/tasks/named-entity-recognition/conll-2003",
+      show: true,
+    },
+    {
+      title: "WMT 2014 En-Fr",
+      pathname: "/tasks/machine-translation/wmt2014-en-fr",
+      show: true,
+    },
+    {
+      title: "WMT 2014 En-Ge",
+      pathname: "/tasks/machine-translation/wmt2014-en-ge",
+      show: true,
+    }
+  ]);
   const [links, setLinks] = useState([
     {
       text: "Submit paper",
       href: "/submit-paper",
-      show: true,
-    },
-    {
-      text: "Tasks",
-      href: "/tasks",
       show: true,
     },
     {
@@ -121,13 +157,26 @@ export default function Header({ isHome }) {
     setMenuAnchorEl(event.currentTarget);
   }
 
+  function handleOpenBenchMenu(event) {
+    setBenchMenuAnchorEl(event.currentTarget);
+  }
+
   function handleCloseMenu() {
     setMenuAnchorEl(null);
+  }
+
+  function handleCloseBenchMenu() {
+    setBenchMenuAnchorEl(null);
   }
 
   function goTo(index) {
     setMenuAnchorEl(null);
     router.push(menuItems[index]);
+  }
+
+  function goToBench(index) {
+    setBenchMenuAnchorEl(null);
+    router.push(menuBenchmarks[index]);
   }
 
   function logout() {
@@ -155,6 +204,55 @@ export default function Header({ isHome }) {
             </StyledButton>
 
             <StyledSpacer />
+
+            <Box>  
+              <IconButton onClick={handleOpenBenchMenu}>
+              <StyledBenchButton
+                id="demo-customized-button"
+                aria-controls="demo-customized-menu"
+                aria-haspopup="true"
+                aria-expanded={open ? 'true' : undefined}
+                variant="contained"
+                disableElevation
+                onClick={handleOpenBenchMenu}
+                endIcon={<ArrowDropDownIcon />}
+                background= "transparent"
+              >
+                Benchmarks
+              </StyledBenchButton>
+              </IconButton>
+
+              <Menu
+                getContentAnchorEl={null}
+                anchorEl={benchMenuAnchorEl}
+                anchorOrigin={{
+                  vertical: "bottom",
+                  horizontal: "left",
+                }}
+                open={Boolean(benchMenuAnchorEl)}
+                onClose={handleCloseBenchMenu}
+              >
+                {menuBenchmarks.map((menuBenchItem, index) =>
+                  menuBenchItem.show ? (
+                    <MenuItem
+                      onClick={() => goToBench(index)}
+                      key={menuBenchItem.title}
+                    >
+                      <Box display="flex">
+                        <Box
+                          display="inline-flex"
+                          alignContent="center"
+                          pr={2}
+                        >
+                        </Box>
+
+                        <Box display="inline">{menuBenchItem.title}</Box>
+                      </Box>
+                    </MenuItem>
+                  ) : null
+                )}
+              </Menu>
+            </Box>
 
             {!isMobileSM && (
               <>

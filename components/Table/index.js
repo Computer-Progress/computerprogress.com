@@ -51,7 +51,7 @@ export default function TaskTable({
           <StyledGridItem $order={1} xs={3}>
             <Link href="/tasks">
               <StyledFlexbox>
-                <Button color="primary">View all tasks</Button>
+                {/* <Button color="primary">View all tasks</Button> */}
               </StyledFlexbox>
             </Link>
           </StyledGridItem>

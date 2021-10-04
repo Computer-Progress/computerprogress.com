@@ -58,3 +58,11 @@ export const StyledButton = styled(MuiButton).attrs({})`
   background: ${({ color }) => theme[color].background} !important;
   border-radius: 100px !important;
 `;
+
+
+export const StyledBenchButton = styled(MuiButton).attrs({})`
+  background: transparent !important;
+  border-radius: 100px !important;
+  font-size: 15px !important;
+  color: white !important;
+`;
