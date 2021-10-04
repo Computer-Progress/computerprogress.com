@@ -1,3 +1,5 @@
+import { StyledCircle, StyledRect } from './styles.js'
+
 export default function Circuit() {
     return (
 
@@ -330,233 +332,256 @@ export default function Circuit() {
           </g>
         </g>
         <g id="static" transform="translate(48.000000, 56.000000)" stroke="#DDE0E2" strokeWidth={2} fill="none" fillRule="evenodd" strokeLinecap="round" strokeLinejoin="round">
-          <rect x={1804} y={384} width={48} height={48} rx={4} />
-          <circle cx={1868} cy={256} r={4} />
-          <circle cx={1856} cy={267} r={4} />
-          <circle cx={2112} cy={464} r={4} />
-          <circle cx={2027} cy={404} r={4} />
-          <circle cx={1688} cy={67} r={4} />
-          <circle cx={1700} cy={55} r={4} />
-          <circle cx={1712} cy={67} r={4} />
-          <circle cx={1724} cy={55} r={4} />
-          <circle cx={1935} cy={388} r={4} />
-          <circle cx={1939} cy={368} r={4} />
-          <circle cx={1940} cy={352} r={4} />
-          <circle cx={1892} cy={384} r={4} />
-          <circle cx={1788} cy={468} r={4} />
-          <circle cx={1796} cy={336} r={4} />
-          <circle cx={1776} cy={372} r={4} />
-          <circle cx={1824} cy={496} r={4} />
-          <circle cx={1811} cy={480} r={4} />
-          <circle cx={1480} cy={63} r={4} />
-          <circle cx={1480} cy={95} r={4} />
-          <circle cx={1480} cy={111} r={4} />
-          <circle cx={4} cy={729} r={4} />
-          <circle cx={17} cy={716} r={4} />
-          <circle cx={56} cy={716} r={4} />
-          <circle cx={84} cy={716} r={4} />
-          <circle cx={28} cy={729} r={4} />
-          <circle cx={31} cy={848} r={4} />
-          <circle cx={1785} cy={635} r={4} />
-          <circle cx={1768} cy={684} r={4} />
-          <rect x={1732} y={800} width={48} height={48} rx={4} />
-          <circle cx={1717} cy={479} r={4} />
-          <circle cx={1733} cy={567} r={4} />
-          <circle cx={1809} cy={676} r={4} />
-          <circle cx={1797} cy={647} r={4} />
-          <circle cx={1828} cy={1028} r={4} />
-          <circle cx={1808} cy={872} r={4} />
-          <circle cx={1864} cy={711} r={4} />
-          <circle cx={1849} cy={711} r={4} />
-          <circle cx={1828} cy={711} r={4} />
-          <circle cx={1816} cy={723} r={4} />
-          <circle cx={1805} cy={731} r={4} />
-          <circle cx={1856} cy={1016} r={4} />
-          <circle cx={1800} cy={1012} r={4} />
-          <circle cx={1772} cy={1000} r={4} />
-          <rect x={2084} y={112} width={48} height={48} rx={4} />
-          <circle cx={2108} cy={308} r={4} />
-          <circle cx={2124} cy={308} r={4} />
-          <circle cx={2140} cy={300} r={4} />
-          <circle cx={2156} cy={308} r={4} />
-          <circle cx={2284} cy={279} r={4} />
-          <circle cx={2284} cy={303} r={4} />
-          <circle cx={2272} cy={292} r={4} />
-          <circle cx={2354} cy={111} r={4} />
-          <circle cx={1856} cy={112} r={4} />
-          <rect x={932} y={0} width={48} height={48} rx={4} />
-          <circle cx={972} cy={200} r={4} />
-          <circle cx={1000} cy={212} r={4} />
-          <circle cx={1028} cy={228} r={4} />
-          <circle cx={1056} cy={216} r={4} />
-          <circle cx={1008} cy={72} r={4} />
-          <rect x={992} y={132} width={40} height={40} rx={4} />
-          <circle cx={1268} cy={296} r={4} />
-          <circle cx={1471} cy={328} r={4} />
-          <circle cx={1444} cy={340} r={4} />
-          <circle cx={1504} cy={352} r={4} />
-          <circle cx={1012} cy={184} r={4} />
-          <circle cx={980} cy={168} r={4} />
-          <circle cx={980} cy={152} r={4} />
-          <circle cx={1072} cy={124} r={4} />
-          <circle cx={1044} cy={184} r={4} />
-          <circle cx={992} cy={104} r={4} />
-          <rect x={616} y={800} width={56} height={56} rx={4} />
-          <circle cx={755} cy={648} r={4} />
-          <circle cx={804} cy={729} r={4} />
-          <circle cx={817} cy={716} r={4} />
-          <circle cx={856} cy={716} r={4} />
-          <circle cx={884} cy={716} r={4} />
-          <circle cx={828} cy={729} r={4} />
-          <circle cx={771} cy={635} r={4} />
-          <circle cx={888} cy={904} r={4} />
-          <circle cx={831} cy={848} r={4} />
-          <circle cx={583} cy={868} r={4} />
-          <circle cx={656} cy={663} r={4} />
-          <circle cx={880} cy={615} r={4} />
-          <circle cx={869} cy={628} r={4} />
-          <circle cx={632} cy={741} r={4} />
-          <circle cx={620} cy={711} r={4} />
-          <circle cx={576} cy={820} r={4} />
-          <circle cx={576} cy={836} r={4} />
-          <circle cx={576} cy={852} r={4} />
-          <circle cx={559} cy={896} r={4} />
-          <circle cx={559} cy={919} r={4} />
-          <circle cx={571} cy={931} r={4} />
-          <circle cx={583} cy={943} r={4} />
-          <circle cx={672} cy={940} r={4} />
-          <circle cx={660} cy={928} r={4} />
-          <circle cx={547} cy={907} r={4} />
-          <rect x={1340} y={400} width={48} height={48} rx={4} />
-          <circle cx={1292} cy={440} r={4} />
-          <circle cx={1280} cy={452} r={4} />
-          <circle cx={1227} cy={360} r={4} />
-          <circle cx={1227} cy={383} r={4} />
-          <circle cx={1209} cy={371} r={4} />
-          <circle cx={1398} cy={371} r={4} />
-          <circle cx={1528} cy={408} r={4} />
-          <circle cx={1528} cy={424} r={4} />
-          <circle cx={1516} cy={436} r={4} />
-          <circle cx={1487} cy={436} r={4} />
-          <circle cx={1444} cy={452} r={4} />
-          <circle cx={1384} cy={519} r={4} />
-          <circle cx={1396} cy={508} r={4} />
-          <circle cx={1368} cy={519} r={4} />
-          <circle cx={1352} cy={519} r={4} />
-          <circle cx={1504} cy={447} r={4} />
-          <rect x={1340} y={1200} width={48} height={48} rx={4} />
-          <circle cx={1292} cy={1240} r={4} />
-          <circle cx={1280} cy={1252} r={4} />
-          <circle cx={1227} cy={1160} r={4} />
-          <circle cx={1227} cy={1183} r={4} />
-          <circle cx={1209} cy={1171} r={4} />
-          <circle cx={1398} cy={1171} r={4} />
-          <circle cx={1528} cy={1208} r={4} />
-          <circle cx={1528} cy={1224} r={4} />
-          <circle cx={1516} cy={1236} r={4} />
-          <circle cx={1487} cy={1236} r={4} />
-          <circle cx={1444} cy={1252} r={4} />
-          <circle cx={1384} cy={1319} r={4} />
-          <circle cx={1396} cy={1308} r={4} />
-          <circle cx={1368} cy={1319} r={4} />
-          <circle cx={1352} cy={1319} r={4} />
-          <circle cx={1504} cy={1247} r={4} />
-          <circle cx={1205} cy={662} r={4} />
-          <rect x={1124} y={820} width={48} height={48} rx={4} />
-          <circle cx={1173} cy={790} r={4} />
-          <circle cx={1175} cy={712} r={4} />
-          <circle cx={1132} cy={805} r={4} />
-          <circle cx={1148} cy={790} r={4} />
-          <circle cx={1120} cy={915} r={4} />
-          <circle cx={1169} cy={915} r={4} />
-          <circle cx={1133} cy={915} r={4} />
-          <circle cx={1185} cy={915} r={4} />
+          <StyledRect x={1804} y={384} width={48} height={48} />
+
+          <StyledCircle cx={1868} cy={256} />
+          <StyledCircle cx={1856} cy={267} />
+          <StyledCircle cx={2112} cy={464} />
+          <StyledCircle cx={2027} cy={404} />
+          <StyledCircle cx={1688} cy={67} />
+          <StyledCircle cx={1700} cy={55} />
+          <StyledCircle cx={1712} cy={67} />
+          <StyledCircle cx={1724} cy={55} />
+          <StyledCircle cx={1935} cy={388} />
+          <StyledCircle cx={1939} cy={368} />
+          <StyledCircle cx={1940} cy={352} />
+          <StyledCircle cx={1892} cy={384} />
+          <StyledCircle cx={1788} cy={468} />
+          <StyledCircle cx={1796} cy={336} />
+          <StyledCircle cx={1776} cy={372} />
+          <StyledCircle cx={1824} cy={496} />
+          <StyledCircle cx={1811} cy={480} />
+          <StyledCircle cx={1480} cy={63} />
+          <StyledCircle cx={1480} cy={95} />
+          <StyledCircle cx={1480} cy={111} />
+          <StyledCircle cx={4} cy={729} />
+          <StyledCircle cx={17} cy={716} />
+          <StyledCircle cx={56} cy={716} />
+          <StyledCircle cx={84} cy={716} />
+          <StyledCircle cx={28} cy={729} />
+          <StyledCircle cx={31} cy={848} />
+          <StyledCircle cx={1785} cy={635} />
+          <StyledCircle cx={1768} cy={684} />
+
+          <StyledRect x={1732} y={800} width={48} height={48} />
+          
+          <StyledCircle cx={1717} cy={479} />
+          <StyledCircle cx={1733} cy={567} />
+          <StyledCircle cx={1809} cy={676} />
+          <StyledCircle cx={1797} cy={647} />
+          <StyledCircle cx={1828} cy={1028} />
+          <StyledCircle cx={1808} cy={872} />
+          <StyledCircle cx={1864} cy={711} />
+          <StyledCircle cx={1849} cy={711} />
+          <StyledCircle cx={1828} cy={711} />
+          <StyledCircle cx={1816} cy={723} />
+          <StyledCircle cx={1805} cy={731} />
+          <StyledCircle cx={1856} cy={1016} />
+          <StyledCircle cx={1800} cy={1012} />
+          <StyledCircle cx={1772} cy={1000} />
+          
+          <StyledRect x={2084} y={112} width={48} height={48} />
+          
+          <StyledCircle cx={2108} cy={308} />
+          <StyledCircle cx={2124} cy={308} />
+          <StyledCircle cx={2140} cy={300} />
+          <StyledCircle cx={2156} cy={308} />
+          <StyledCircle cx={2284} cy={279} />
+          <StyledCircle cx={2284} cy={303} />
+          <StyledCircle cx={2272} cy={292} />
+          <StyledCircle cx={2354} cy={111} />
+          <StyledCircle cx={1856} cy={112} />
+          
+          <StyledRect x={932} y={0} width={48} height={48} />
+          
+          <StyledCircle cx={972} cy={200} />
+          <StyledCircle cx={1000} cy={212} />
+          <StyledCircle cx={1028} cy={228} />
+          <StyledCircle cx={1056} cy={216} />
+          <StyledCircle cx={1008} cy={72} />
+          
+          <StyledRect x={992} y={132} width={40} height={40} />
+          
+          <StyledCircle cx={1268} cy={296} />
+          <StyledCircle cx={1471} cy={328} />
+          <StyledCircle cx={1444} cy={340} />
+          <StyledCircle cx={1504} cy={352} />
+          <StyledCircle cx={1012} cy={184} />
+          <StyledCircle cx={980} cy={168} />
+          <StyledCircle cx={980} cy={152} />
+          <StyledCircle cx={1072} cy={124} />
+          <StyledCircle cx={1044} cy={184} />
+          <StyledCircle cx={992} cy={104} />
+          
+          <StyledRect x={616} y={800} width={56} height={56} />
+          
+          <StyledCircle cx={755} cy={648} />
+          <StyledCircle cx={804} cy={729} />
+          <StyledCircle cx={817} cy={716} />
+          <StyledCircle cx={856} cy={716} />
+          <StyledCircle cx={884} cy={716} />
+          <StyledCircle cx={828} cy={729} />
+          <StyledCircle cx={771} cy={635} />
+          <StyledCircle cx={888} cy={904} />
+          <StyledCircle cx={831} cy={848} />
+          <StyledCircle cx={583} cy={868} />
+          <StyledCircle cx={656} cy={663} />
+          <StyledCircle cx={880} cy={615} />
+          <StyledCircle cx={869} cy={628} />
+          <StyledCircle cx={632} cy={741} />
+          <StyledCircle cx={620} cy={711} />
+          <StyledCircle cx={576} cy={820} />
+          <StyledCircle cx={576} cy={836} />
+          <StyledCircle cx={576} cy={852} />
+          <StyledCircle cx={559} cy={896} />
+          <StyledCircle cx={559} cy={919} />
+          <StyledCircle cx={571} cy={931} />
+          <StyledCircle cx={583} cy={943} />
+          <StyledCircle cx={672} cy={940} />
+          <StyledCircle cx={660} cy={928} />
+          <StyledCircle cx={547} cy={907} />
+          
+          <StyledRect x={1340} y={400} width={48} height={48} />
+          
+          <StyledCircle cx={1292} cy={440} />
+          <StyledCircle cx={1280} cy={452} />
+          <StyledCircle cx={1227} cy={360} />
+          <StyledCircle cx={1227} cy={383} />
+          <StyledCircle cx={1209} cy={371} />
+          <StyledCircle cx={1398} cy={371} />
+          <StyledCircle cx={1528} cy={408} />
+          <StyledCircle cx={1528} cy={424} />
+          <StyledCircle cx={1516} cy={436} />
+          <StyledCircle cx={1487} cy={436} />
+          <StyledCircle cx={1444} cy={452} />
+          <StyledCircle cx={1384} cy={519} />
+          <StyledCircle cx={1396} cy={508} />
+          <StyledCircle cx={1368} cy={519} />
+          <StyledCircle cx={1352} cy={519} />
+          <StyledCircle cx={1504} cy={447} />
+          
+          <StyledRect x={1340} y={1200} width={48} height={48} />
+          
+          <StyledCircle cx={1292} cy={1240} />
+          <StyledCircle cx={1280} cy={1252} />
+          <StyledCircle cx={1227} cy={1160} />
+          <StyledCircle cx={1227} cy={1183} />
+          <StyledCircle cx={1209} cy={1171} />
+          <StyledCircle cx={1398} cy={1171} />
+          <StyledCircle cx={1528} cy={1208} />
+          <StyledCircle cx={1528} cy={1224} />
+          <StyledCircle cx={1516} cy={1236} />
+          <StyledCircle cx={1487} cy={1236} />
+          <StyledCircle cx={1444} cy={1252} />
+          <StyledCircle cx={1384} cy={1319} />
+          <StyledCircle cx={1396} cy={1308} />
+          <StyledCircle cx={1368} cy={1319} />
+          <StyledCircle cx={1352} cy={1319} />
+          <StyledCircle cx={1504} cy={1247} />
+          <StyledCircle cx={1205} cy={662} />
+          
+          <StyledRect x={1124} y={820} width={48} height={48} />
+          
+          <StyledCircle cx={1173} cy={790} />
+          <StyledCircle cx={1175} cy={712} />
+          <StyledCircle cx={1132} cy={805} />
+          <StyledCircle cx={1148} cy={790} />
+          <StyledCircle cx={1120} cy={915} />
+          <StyledCircle cx={1169} cy={915} />
+          <StyledCircle cx={1133} cy={915} />
+          <StyledCircle cx={1185} cy={915} />
           <path d="M1551.92188,500 L1571.99696,500 C1574.20778,500 1576,501.799795 1576,504.004908 L1576,551.995092 C1576,554.206941 1574.21305,556 1571.99388,556 L1552.22559,556 L1522.99753,556 C1520.78976,556 1519,554.200205 1519,551.995092 L1519,504.004908 L1519,504.004908 C1519,501.793059 1520.78859,500 1522.99321,500 L1551.8335,500" />
-          <circle cx={1464} cy={211} r={4} />
-          <circle cx={1493} cy={220} r={4} />
-          <circle cx={1505} cy={231} r={4} />
-          <circle cx={1532} cy={263} r={4} />
-          <circle cx={1564} cy={172} r={4} />
-          <circle cx={1657} cy={411} r={4} />
-          <circle cx={1616} cy={572} r={4} />
-          <circle cx={1628} cy={476} r={4} />
-          <circle cx={1617} cy={487} r={4} />
-          <circle cx={1600} cy={572} r={4} />
-          <circle cx={1604} cy={476} r={4} />
-          <circle cx={1593} cy={487} r={4} />
+          <StyledCircle cx={1464} cy={211} />
+          <StyledCircle cx={1493} cy={220} />
+          <StyledCircle cx={1505} cy={231} />
+          <StyledCircle cx={1532} cy={263} />
+          <StyledCircle cx={1564} cy={172} />
+          <StyledCircle cx={1657} cy={411} />
+          <StyledCircle cx={1616} cy={572} />
+          <StyledCircle cx={1628} cy={476} />
+          <StyledCircle cx={1617} cy={487} />
+          <StyledCircle cx={1600} cy={572} />
+          <StyledCircle cx={1604} cy={476} />
+          <StyledCircle cx={1593} cy={487} />
           <path d="M751.921875,1300 L771.996959,1300 C774.207777,1300 776,1301.7998 776,1304.00491 L776,1351.99509 C776,1354.20694 774.213055,1356 771.993879,1356 L752.225586,1356 L722.997534,1356 C720.789757,1356 719,1354.2002 719,1351.99509 L719,1304.00491 L719,1304.00491 C719,1301.79306 720.788588,1300 722.993206,1300 L751.833496,1300" />
-          <circle cx={664} cy={1011} r={4} />
-          <circle cx={693} cy={1020} r={4} />
-          <circle cx={705} cy={1031} r={4} />
-          <circle cx={732} cy={1063} r={4} />
-          <circle cx={764} cy={972} r={4} />
-          <circle cx={857} cy={1211} r={4} />
-          <circle cx={816} cy={1372} r={4} />
-          <circle cx={828} cy={1276} r={4} />
-          <circle cx={817} cy={1287} r={4} />
-          <circle cx={800} cy={1372} r={4} />
-          <circle cx={804} cy={1276} r={4} />
-          <circle cx={793} cy={1287} r={4} />
+          <StyledCircle cx={664} cy={1011} />
+          <StyledCircle cx={693} cy={1020} />
+          <StyledCircle cx={705} cy={1031} />
+          <StyledCircle cx={732} cy={1063} />
+          <StyledCircle cx={764} cy={972} />
+          <StyledCircle cx={857} cy={1211} />
+          <StyledCircle cx={816} cy={1372} />
+          <StyledCircle cx={828} cy={1276} />
+          <StyledCircle cx={817} cy={1287} />
+          <StyledCircle cx={800} cy={1372} />
+          <StyledCircle cx={804} cy={1276} />
+          <StyledCircle cx={793} cy={1287} />
           <path d="M1492,744.030273 L1492,715.991893 L1492,715.991893 C1492,713.787232 1493.78429,712 1495.99005,712 L1512.00995,712 C1514.21359,712 1516,713.790092 1516,715.990494 L1516,744.019043" />
-          <circle cx={1500} cy={696} r={4} />
-          <circle cx={1593} cy={715} r={4} />
-          <circle cx={1588} cy={691} r={4} />
-          <circle cx={1633} cy={707} r={4} />
-          <circle cx={1728} cy={684} r={4} />
-          <circle cx={1712} cy={719} r={4} />
-          <circle cx={1708} cy={607} r={4} />
-          <circle cx={1692} cy={603} r={4} />
-          <circle cx={1695} cy={656} r={4} />
-          <circle cx={1524} cy={784} r={4} />
-          <circle cx={1504} cy={784} r={4} />
-          <circle cx={1488} cy={784} r={4} />
-          <circle cx={1717} cy={839} r={4} />
-          <circle cx={1677} cy={884} r={4} />
+          <StyledCircle cx={1500} cy={696} />
+          <StyledCircle cx={1593} cy={715} />
+          <StyledCircle cx={1588} cy={691} />
+          <StyledCircle cx={1633} cy={707} />
+          <StyledCircle cx={1728} cy={684} />
+          <StyledCircle cx={1712} cy={719} />
+          <StyledCircle cx={1708} cy={607} />
+          <StyledCircle cx={1692} cy={603} />
+          <StyledCircle cx={1695} cy={656} />
+          <StyledCircle cx={1524} cy={784} />
+          <StyledCircle cx={1504} cy={784} />
+          <StyledCircle cx={1488} cy={784} />
+          <StyledCircle cx={1717} cy={839} />
+          <StyledCircle cx={1677} cy={884} />
           <path d="M1516,744.15625 L1516,756.001953 C1516,758.210013 1514.21571,760 1512.00995,760 L1495.99005,760 C1493.78641,760 1492,758.210373 1492,755.995361 L1492,744.130127" />
-          <rect x={992} y={932} width={40} height={40} rx={4} />
-          <circle cx={980} cy={968} r={4} />
-          <circle cx={1471} cy={1128} r={4} />
-          <circle cx={1444} cy={1140} r={4} />
-          <circle cx={1504} cy={1152} r={4} />
-          <circle cx={980} cy={952} r={4} />
-          <circle cx={1072} cy={924} r={4} />
-          <circle cx={1012} cy={984} r={4} />
-          <circle cx={1044} cy={984} r={4} />
-          <circle cx={992} cy={904} r={4} />
-          <rect x={2216} y={800} width={56} height={56} rx={4} />
-          <circle cx={2220} cy={711} r={4} />
-          <circle cx={2256} cy={663} r={4} />
-          <circle cx={2176} cy={820} r={4} />
-          <circle cx={2176} cy={836} r={4} />
-          <circle cx={2176} cy={852} r={4} />
-          <circle cx={2183} cy={868} r={4} />
-          <circle cx={2159} cy={896} r={4} />
-          <circle cx={2159} cy={919} r={4} />
-          <circle cx={2171} cy={931} r={4} />
-          <circle cx={2183} cy={943} r={4} />
-          <circle cx={2272} cy={940} r={4} />
-          <circle cx={2260} cy={928} r={4} />
-          <circle cx={2147} cy={907} r={4} />
-          <circle cx={2232} cy={741} r={4} />
-          <rect x={1804} y={1184} width={48} height={48} rx={4} />
-          <circle cx={1480} cy={863} r={4} />
-          <circle cx={1480} cy={895} r={4} />
-          <circle cx={1480} cy={911} r={4} />
-          <circle cx={2112} cy={1264} r={4} />
-          <circle cx={2027} cy={1204} r={4} />
-          <circle cx={1688} cy={867} r={4} />
-          <circle cx={1700} cy={855} r={4} />
-          <circle cx={1712} cy={867} r={4} />
-          <circle cx={1724} cy={855} r={4} />
-          <circle cx={1935} cy={1188} r={4} />
-          <circle cx={1939} cy={1168} r={4} />
-          <circle cx={1940} cy={1152} r={4} />
-          <circle cx={1892} cy={1184} r={4} />
-          <circle cx={1788} cy={1268} r={4} />
-          <circle cx={1796} cy={1136} r={4} />
-          <circle cx={1776} cy={1172} r={4} />
-          <circle cx={1824} cy={1296} r={4} />
-          <circle cx={1811} cy={1280} r={4} />
+          
+          <StyledRect x={992} y={932} width={40} height={40} />
+          
+          <StyledCircle cx={980} cy={968} />
+          <StyledCircle cx={1471} cy={1128} />
+          <StyledCircle cx={1444} cy={1140} />
+          <StyledCircle cx={1504} cy={1152} />
+          <StyledCircle cx={980} cy={952} />
+          <StyledCircle cx={1072} cy={924} />
+          <StyledCircle cx={1012} cy={984} />
+          <StyledCircle cx={1044} cy={984} />
+          <StyledCircle cx={992} cy={904} />
+          
+          <StyledRect x={2216} y={800} width={56} height={56} />
+          
+          <StyledCircle cx={2220} cy={711} />
+          <StyledCircle cx={2256} cy={663} />
+          <StyledCircle cx={2176} cy={820} />
+          <StyledCircle cx={2176} cy={836} />
+          <StyledCircle cx={2176} cy={852} />
+          <StyledCircle cx={2183} cy={868} />
+          <StyledCircle cx={2159} cy={896} />
+          <StyledCircle cx={2159} cy={919} />
+          <StyledCircle cx={2171} cy={931} />
+          <StyledCircle cx={2183} cy={943} />
+          <StyledCircle cx={2272} cy={940} />
+          <StyledCircle cx={2260} cy={928} />
+          <StyledCircle cx={2147} cy={907} />
+          <StyledCircle cx={2232} cy={741} />
+          
+          <StyledRect x={1804} y={1184} width={48} height={48} />
+          
+          <StyledCircle cx={1480} cy={863} />
+          <StyledCircle cx={1480} cy={895} />
+          <StyledCircle cx={1480} cy={911} />
+          <StyledCircle cx={2112} cy={1264} />
+          <StyledCircle cx={2027} cy={1204} />
+          <StyledCircle cx={1688} cy={867} />
+          <StyledCircle cx={1700} cy={855} />
+          <StyledCircle cx={1712} cy={867} />
+          <StyledCircle cx={1724} cy={855} />
+          <StyledCircle cx={1935} cy={1188} />
+          <StyledCircle cx={1939} cy={1168} />
+          <StyledCircle cx={1940} cy={1152} />
+          <StyledCircle cx={1892} cy={1184} />
+          <StyledCircle cx={1788} cy={1268} />
+          <StyledCircle cx={1796} cy={1136} />
+          <StyledCircle cx={1776} cy={1172} />
+          <StyledCircle cx={1824} cy={1296} />
+          <StyledCircle cx={1811} cy={1280} />
         </g>
         <g id="paths-bg" transform="translate(0.000000, 0.000000)" stroke="#DDE0E2" strokeWidth={2} fill="none" fillRule="evenodd" strokeLinecap="round" strokeLinejoin="round">
           
