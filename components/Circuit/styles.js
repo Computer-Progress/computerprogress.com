@@ -7,3 +7,8 @@ export const StyledCircle = styled.circle`
 export const StyledRect = styled.rect`
     rx: 4
 `;
+
+export const SmallRect = styled(StyledRect).attrs({
+    width: 48,
+    height: 48,
+})``
