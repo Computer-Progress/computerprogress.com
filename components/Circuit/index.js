@@ -1,4 +1,4 @@
-import { StyledCircle, StyledRect, SmallRect } from './styles.js'
+import { StyledCircle, StyledRect, MediumRect } from './styles.js'
 
 export default function Circuit() {
     return (
@@ -332,7 +332,7 @@ export default function Circuit() {
           </g>
         </g>
         <g id="static" transform="translate(48.000000, 56.000000)" stroke="#DDE0E2" strokeWidth={2} fill="none" fillRule="evenodd" strokeLinecap="round" strokeLinejoin="round">
-          <SmallRect x={1804} y={384} />
+          <MediumRect x={1804} y={384} />
 
           <StyledCircle cx={1868} cy={256} />
           <StyledCircle cx={1856} cy={267} />
@@ -363,7 +363,7 @@ export default function Circuit() {
           <StyledCircle cx={1785} cy={635} />
           <StyledCircle cx={1768} cy={684} />
 
-          <SmallRect x={1732} y={800} />
+          <MediumRect x={1732} y={800} />
 
           <StyledCircle cx={1717} cy={479} />
           <StyledCircle cx={1733} cy={567} />
@@ -380,7 +380,7 @@ export default function Circuit() {
           <StyledCircle cx={1800} cy={1012} />
           <StyledCircle cx={1772} cy={1000} />
           
-          <SmallRect x={2084} y={112} />
+          <MediumRect x={2084} y={112} />
           
           <StyledCircle cx={2108} cy={308} />
           <StyledCircle cx={2124} cy={308} />
@@ -392,7 +392,7 @@ export default function Circuit() {
           <StyledCircle cx={2354} cy={111} />
           <StyledCircle cx={1856} cy={112} />
           
-          <SmallRect x={932} y={0} />
+          <MediumRect x={932} y={0} />
           
           <StyledCircle cx={972} cy={200} />
           <StyledCircle cx={1000} cy={212} />
@@ -441,7 +441,7 @@ export default function Circuit() {
           <StyledCircle cx={660} cy={928} />
           <StyledCircle cx={547} cy={907} />
           
-          <SmallRect x={1340} y={400} />
+          <MediumRect x={1340} y={400} />
           
           <StyledCircle cx={1292} cy={440} />
           <StyledCircle cx={1280} cy={452} />
@@ -460,7 +460,7 @@ export default function Circuit() {
           <StyledCircle cx={1352} cy={519} />
           <StyledCircle cx={1504} cy={447} />
           
-          <SmallRect x={1340} y={1200} />
+          <MediumRect x={1340} y={1200} />
           
           <StyledCircle cx={1292} cy={1240} />
           <StyledCircle cx={1280} cy={1252} />
@@ -480,7 +480,7 @@ export default function Circuit() {
           <StyledCircle cx={1504} cy={1247} />
           <StyledCircle cx={1205} cy={662} />
           
-          <SmallRect x={1124} y={820} />
+          <MediumRect x={1124} y={820} />
           
           <StyledCircle cx={1173} cy={790} />
           <StyledCircle cx={1175} cy={712} />
@@ -562,7 +562,7 @@ export default function Circuit() {
           <StyledCircle cx={2147} cy={907} />
           <StyledCircle cx={2232} cy={741} />
           
-          <SmallRect x={1804} y={1184} />
+          <MediumRect x={1804} y={1184} />
           
           <StyledCircle cx={1480} cy={863} />
           <StyledCircle cx={1480} cy={895} />
