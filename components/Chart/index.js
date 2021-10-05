@@ -125,9 +125,9 @@ const chart = ({ data, label, isByYear, computingPower }) => {
         // align: 'center',
         verticalAlign: "bottom",
         style: {
-          fontSize: "10px",
+          fontSize: isMobile ? "7px" : "8px",
         },
-        x: 0,
+        x: isMobile ? 30 : 10,
         y: 10,
         useHTML: true,
         text:

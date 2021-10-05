@@ -83,7 +83,7 @@ function Benchmark({ benchmark, taskId, benchmarkId }) {
   return (
     <PageTemplate>
       <Container>
-        <Title><a href={`/tasks/${taskId}`}>{benchmark.task_name}</a> / {benchmark.dataset_name}</Title>
+        <Title><a>{benchmark.task_name}</a> / {benchmark.dataset_name}</Title>
         <Table
           tabs={tabs}
           selectedTab={type}
