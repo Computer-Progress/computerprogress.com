@@ -63,6 +63,11 @@ export const StyledButton = styled(MuiButton).attrs({})`
 export const StyledBenchButton = styled(MuiButton).attrs({})`
   background: transparent !important;
   border-radius: 100px !important;
-  font-size: 15px !important;
+  font-size: 0.8rem !important;
   color: white !important;
+  &:hover {
+    /* opacity: 1; */
+    transform: scale(1.01);
+    cursor: pointer;
+  }
 `;

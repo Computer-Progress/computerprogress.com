@@ -27,12 +27,7 @@ import {
   StyledBenchButton
 } from "./styles";
 
-// import KeyboardArrowDown from '@material-ui/icons/ExpandLess';
 import ArrowDropDownIcon from '@material-ui/icons/ArrowDropDown';
-
-
-
-
 import Logo from "../../public/logo_icon.svg";
 import { ChevronDown as ChevronDownIcon } from "react-feather";
 import * as Icon from "react-feather";
@@ -83,7 +78,7 @@ export default function Header({ isHome }) {
       show: true,
     },
     {
-      title: "MS COCO test dev",
+      title: "MS COCO",
       pathname: "/tasks/object-detection/ms-coco",
       show: true,
     },
@@ -205,7 +200,18 @@ export default function Header({ isHome }) {
 
             <StyledSpacer />
 
-            <Box>  
+            {!isMobileSM && (
+              <>
+                {links.map(({ text, href }) => (
+                  <Box key={href}>
+                    <StyledButton size="large" href={href} color="secondary">
+                      <Box fontSize="0.8rem" px={1}>
+                        {text}
+                      </Box>
+                    </StyledButton>
+                  </Box>
+                ))}
+                <Box>  
               <IconButton onClick={handleOpenBenchMenu}>
               <StyledBenchButton
                 id="demo-customized-button"
@@ -253,18 +259,6 @@ export default function Header({ isHome }) {
                 )}
               </Menu>
             </Box>
-
-            {!isMobileSM && (
-              <>
-                {links.map(({ text, href }) => (
-                  <Box key={href}>
-                    <StyledButton size="large" href={href} color="secondary">
-                      <Box fontSize="0.95rem" px={1}>
-                        {text}
-                      </Box>
-                    </StyledButton>
-                  </Box>
-                ))}
                 <StyledSpacer />
               </>
             )}
@@ -355,7 +349,7 @@ export default function Header({ isHome }) {
                     {isMobileSM ? (
                       <Box px={1}>Sign up</Box>
                     ) : (
-                      <Box fontSize="0.95rem" px={1}>
+                      <Box fontSize="0.8rem" px={1}>
                         Sign up
                       </Box>
                     )}
@@ -367,7 +361,7 @@ export default function Header({ isHome }) {
                     {isMobileSM ? (
                       "Sign in"
                     ) : (
-                      <Box fontSize="0.95rem" px={1}>
+                      <Box fontSize="0.8rem" px={1}>
                         Sign in
                       </Box>
                     )}
@@ -386,7 +380,7 @@ export default function Header({ isHome }) {
                 .map(({ text, href }) => (
                   <Box key={href}>
                     <StyledButton href={href} color="secondary">
-                      {text}
+                      <Box fontSize="0.8rem">{text}</Box>
                     </StyledButton>
                   </Box>
                 ))}
