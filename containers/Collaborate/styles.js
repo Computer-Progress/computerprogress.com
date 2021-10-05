@@ -51,6 +51,7 @@ export const StyledBoxTitle = styled(Box).attrs({
 
 export const StyledBox = styled(Box).attrs({
   mt: 5,
+  textAlign: "justify",
 })``;
 
 export const StyledTypographyBodyTitle = styled(Typography).attrs({
