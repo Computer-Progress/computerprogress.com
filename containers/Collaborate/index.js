@@ -83,43 +83,17 @@ export default function Collaborate() {
                 >
                   "The Computational Limits of Deep Learning"
                 </a>{" "}
-                (Thompson et al, 2020). If you use some of our resources, we
-                kindly encourage you to cite us using the following reference:
-              </StyledTypographyBody1>
-            </StyledBox>
-
-            <div className="citation">
-              <Tooltip
-                arrow
-                title={isCopy ? "Copied!" : "Copy"}
-                onClose={() => setIsCopy(false)}
-              >
-                <button onClick={() => copyToClipboard()}>
-                  <CopyIcon />
-                </button>
-              </Tooltip>
-              <pre style={{ "overflow-x": "auto" }}>
-                {`@article\{DBLP:journals/corr/abs-2007-05558,
-  author    = {Neil C. Thompson and
-              Kristjan H. Greenewald and
-              Keeheon Lee and
-              Gabriel F. Manso},
-  title     = {The Computational Limits of Deep Learning},
-  journal   = {CoRR},
-  volume    = {abs/2007.05558},
-  year      = {2020},
-  url       = {https://arxiv.org/abs/2007.05558},
-  eprinttype = {arXiv},
-  eprint    = {2007.05558},
-  timestamp = {Sat, 23 Jan 2021 01:12:47 +0100},
-  biburl    = {https://dblp.org/rec/journals/corr/abs-2007-05558.bib},
-  bibsource = {dblp computer science bibliography, https://dblp.org}
-}`}
-              </pre>
-            </div>
-
-            <StyledBox>
-              <StyledTypographyBody1>
+                . If you use some of our resources, we
+                kindly encourage you to cite us using the following {" "}
+                <Tooltip
+                  arrow
+                  title={isCopy ? "Copied!" : "Copy"}
+                  onClose={() => setIsCopy(false)}
+                >
+                  <a  style={{ color: "#9E1FFF" }} onClick={() => copyToClipboard()}>
+                    citation.{" "}
+                  </a>
+                </Tooltip>
                 For last treatments, you can also read{" "}
                 <a
                   href="https://spectrum.ieee.org/deep-learning-computational-cost"
@@ -127,8 +101,7 @@ export default function Collaborate() {
                   style={{ color: "#9E1FFF" }}
                 >
                   "Deep Learning's Diminishing Returns"
-                </a>{" "}
-                (Thompson et al, 2021).
+                </a>.
               </StyledTypographyBody1>
             </StyledBox>
 
