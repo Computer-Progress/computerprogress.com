@@ -5,43 +5,33 @@ import DoneIcon from "@material-ui/icons/Done";
 
 import { StyledChip } from "./styles";
 
-export default function TableOptions({
-  options,
-  selectedOption,
-  setSelectedOption,
-  optionsTitle,
-  secondaryOptions,
-  selectedSecondaryOption,
-  setSelectedSecondaryOption,
-  secondaryOptionsTitle,
-  fieldName,
-}) {
+export default function TableOptions(props) {
   return (
     <Card style={{ height: "100%", borderRadius: "16px 0 0 16px" }}>
       <Box display="flex" flexDirection="column" p={2}>
-        <Typography variant="h5">{optionsTitle}</Typography>
+        <Typography variant="h5">{props.optionsTitle}</Typography>
 
         <Box display="flex" flexDirection="row" paddingBottom={3} flexWrap="wrap">
-          {options.map((option, index) => (
-            <Box mt={2} key={`${option[fieldName]}${index}`}>
+          {props.options.map((option, index) => (
+            <Box mt={2} key={`${option[props.fieldName]}${index}`}>
               <StyledChip
-                label={option[fieldName]}
-                avatar={selectedOption === index ? <DoneIcon /> : null}
-                onClick={() => setSelectedOption({option, index})}
+                label={option[props.fieldName]}
+                avatar={props.selectedOption === index ? <DoneIcon /> : null}
+                onClick={() => props.setSelectedOption({option, index})}
               />
             </Box>
           ))}
         </Box>
-        {secondaryOptions ? (
+        {props.secondaryOptions ? (
           <>
-            <Typography variant="h5">{secondaryOptionsTitle}</Typography>
+            <Typography variant="h5">{props.secondaryOptionsTitle}</Typography>
             <Box display="flex" flexDirection="row" paddingBottom={3} flexWrap="wrap">
-              {secondaryOptions.map((option, index) => (
-                <Box mt={2} key={`${option[fieldName]}${index}`}>
+              {props.secondaryOptions.map((option, index) => (
+                <Box mt={2} key={`${option[props.fieldName]}${index}`}>
                   <StyledChip
-                    label={option[fieldName]}
-                    avatar={selectedSecondaryOption === index ? <DoneIcon /> : null}
-                    onClick={() => setSelectedSecondaryOption({option, index})}
+                    label={option[props.fieldName]}
+                    avatar={props.selectedSecondaryOption === index ? <DoneIcon /> : null}
+                    onClick={() => props.setSelectedSecondaryOption({option, index})}
                   />
                 </Box>
               ))}
