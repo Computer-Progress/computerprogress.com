@@ -12,42 +12,22 @@ import TaskTableChart from "../TaskTableChart";
 import { MuiTheme } from "../../styles/theme";
 import { StyledGridItem, StyledFlexbox, Footnote } from "./styles";
 
-export default function TaskTable({
-  tabs,
-  selectedTab,
-  onSelectTab,
-  showViewAllTasks,
-  options,
-  optionsTitle,
-  selectedOption,
-  setSelectedOption,
-  secondaryOptions,
-  selectedSecondaryOption,
-  setSelectedSecondaryOption,
-  secondaryOptionsTitle,
-  loading,
-  data,
-  label,
-  computingPower,
-  fieldName,
-  sota,
-  isByYear,
-}) {
+export default function TaskTable(props) {
   const isMobile = useMediaQuery(MuiTheme.breakpoints.down("md"));
   const isMobileXS = useMediaQuery(MuiTheme.breakpoints.down("xs"));
 
   return (
     <>
       <Grid container spacing={1}>
-        <StyledGridItem $order={0} xs={12} lg={showViewAllTasks ? 9 : 12}>
+        <StyledGridItem $order={0} xs={12} lg={props.showViewAllTasks ? 9 : 12}>
           <TaskTableTabs
-            tabs={tabs}
-            selectedTab={selectedTab}
-            onSelectTab={onSelectTab}
+            tabs={props.tabs}
+            selectedTab={props.selectedTab}
+            onSelectTab={props.onSelectTab}
           />
         </StyledGridItem>
 
-        {!isMobile && showViewAllTasks && (
+        {!isMobile && props.showViewAllTasks && (
           <StyledGridItem $order={1} xs={3}>
             <Link href="/tasks">
               <StyledFlexbox>
@@ -60,40 +40,40 @@ export default function TaskTable({
         <StyledGridItem
           $order={3}
           xs={12}
-          sm={showViewAllTasks ? 6 : 12}
-          lg={showViewAllTasks ? 3 : 3}
+          sm={props.showViewAllTasks ? 6 : 12}
+          lg={props.showViewAllTasks ? 3 : 3}
         >
           <TableOptions
-            options={options}
-            selectedOption={selectedOption}
-            setSelectedOption={setSelectedOption}
-            optionsTitle={optionsTitle}
-            secondaryOptions={secondaryOptions}
-            selectedSecondaryOption={selectedSecondaryOption}
-            setSelectedSecondaryOption={setSelectedSecondaryOption}
-            secondaryOptionsTitle={secondaryOptionsTitle}
-            fieldName={fieldName}
+            options={props.options}
+            selectedOption={props.selectedOption}
+            setSelectedOption={props.setSelectedOption}
+            optionsTitle={props.optionsTitle}
+            secondaryOptions={props.secondaryOptions}
+            selectedSecondaryOption={props.selectedSecondaryOption}
+            setSelectedSecondaryOption={props.setSelectedSecondaryOption}
+            secondaryOptionsTitle={props.secondaryOptionsTitle}
+            fieldName={props.fieldName}
           />
         </StyledGridItem>
 
-        <StyledGridItem $order={4} xs={12} lg={showViewAllTasks ? 6 : 9}>
+        <StyledGridItem $order={4} xs={12} lg={props.showViewAllTasks ? 6 : 9}>
           <TaskTableChart
-            isLoading={loading}
-            data={data}
-            label={label}
-            computingPower={computingPower}
-            isByYear={isByYear}
+            isLoading={props.loading}
+            data={props.data}
+            label={props.label}
+            computingPower={props.computingPower}
+            isByYear={props.isByYear}
           />
         </StyledGridItem>
-        {sota ? (
+        {props.sota ? (
           <StyledGridItem $order={isMobile ? 3 : 4} xs={12} sm={6} lg={3}>
             <Box style={{ height: "100%" }} ml={isMobileXS ? 0 : 2}>
-              <TaskTableSOTA sota={sota} />
+              <TaskTableSOTA sota={props.sota} />
             </Box>
           </StyledGridItem>
         ) : null}
       </Grid>
-      {!isByYear ? (
+      {!props.isByYear ? (
         <Footnote>
           * The regression is performed in log-log space but (for
           interpretability) the regression formula is shown in exponential form.
