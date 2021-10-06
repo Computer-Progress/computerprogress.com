@@ -21,7 +21,6 @@ import AutocompleteCreatable from "../AutocompleteCreatable";
 
 import Divider from "../Divider";
 
-import { Target as TargetIcon } from "react-feather";
 import AddIcon from "@material-ui/icons/Add";
 import CloseIcon from "@material-ui/icons/Close";
 

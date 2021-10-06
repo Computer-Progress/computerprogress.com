@@ -1,5 +1,3 @@
-import { Avatar } from "@material-ui/core";
-import { Icon } from "@material-ui/core";
 import { Card, Typography, Box } from "@material-ui/core";
 import DoneIcon from "@material-ui/icons/Done";
 

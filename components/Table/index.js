@@ -1,5 +1,4 @@
 import Link from "next/link";
-import { useEffect, useState } from "react";
 import { useMediaQuery } from "@material-ui/core";
 
 import { Grid, Box, Button } from "@material-ui/core";
