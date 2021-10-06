@@ -51,7 +51,10 @@ export default function ModelInformation(props) {
   useEffect(() => {
     setModel(props.model);
 
-    fetchData();
+    fetchTasks();
+    fetchCpus();
+    fetchGpus();
+    fetchTpus();
   }, [props.undoChangesPressed]);
 
   useEffect(() => {
@@ -96,25 +99,31 @@ export default function ModelInformation(props) {
 
   }, [model.dataset]);
 
-  function fetchData() {
+  function fetchTasks() {
     api.get(`/tasks`)
       .then((response) => {
         const data = response.data;
         setTaskOptions(data);
       })
+  }
 
+  function fetchCpus() {
     api.get(`/cpus`)
       .then((response) => {
         const data = response.data;
         setCpuOptions(data);
       })
+  }
 
+  function fetchGpus() {
     api.get(`/gpus`)
       .then((response) => {
         const data = response.data;
         setGpuOptions(data);
       })
+  }
 
+  function fetchTpus() {
     api.get(`/tpus`)
       .then((response) => {
         const data = response.data;
