@@ -3,7 +3,7 @@ import { ChevronDown as ChevronDownIcon } from "react-feather";
 import { Box, Menu, MenuItem } from "@material-ui/core";
 import { useState } from "react";
 
-export default function Button({ children, onClick, ...props }) {
+export default function Button({ children, onClick, loading, ...props }) {
   const [anchorEl, setAnchorEl] = useState(null);
   const [selected, setSelected] = useState(0);
 
@@ -24,7 +24,7 @@ export default function Button({ children, onClick, ...props }) {
     <Box alignItems="center" display="flex" justifyContent="center">
       <StyledButton onClick={onPress} {...props}>
         <StyledBox {...props}>
-          {props.loading ? <StyledCircularProgress /> : props.options ? props.options[selected].name : children}
+          {loading ? <StyledCircularProgress /> : props.options ? props.options[selected].name : children}
         </StyledBox>
       </StyledButton>
       {props.options ? (
