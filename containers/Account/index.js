@@ -92,11 +92,11 @@ function UserPageTemplate({ pathname }) {
                 scrollButtons="auto"
                 centered
                 TabIndicatorProps={
-                  !isMobile && {
+                  !isMobile ? {
                     style: {
                       display: "none",
                     },
-                  }
+                  } : {}
                 }
                 onChange={handleChange}
               >
