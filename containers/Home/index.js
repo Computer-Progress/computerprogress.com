@@ -1,8 +1,6 @@
 import PageTemplate from "../../components/PageTemplate";
 import { MuiTheme } from "../../styles/theme";
-
 import TaskTable from "../../components/TaskTable";
-
 import CollaborateInvite from "../../components/CollaborateInvite";
 import { Box, useMediaQuery } from "@material-ui/core";
 
@@ -15,8 +13,7 @@ export default function Home({ tasks }) {
         <Box my={3}>
           <TaskTable tasks={tasks} />
         </Box>
-
-        <Box my={3} height="30vh" width={isMobile ? "100%" : "80%"}>
+        <Box my={3} py={5} width={isMobile ? "100%" : "80%"}>
           <CollaborateInvite />
         </Box>
       </Box>

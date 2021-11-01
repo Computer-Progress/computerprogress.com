@@ -7,6 +7,7 @@ export const StyledFlexbox = styled(Box).attrs({
   justifyContent: "center",
 })`
   height: 100%;
+  margin: 10px 0px 10px 0px !important;
 `;
 
 export const StyledButton = styled(Button).attrs({

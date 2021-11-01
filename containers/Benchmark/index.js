@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Container, Title, Download } from "./styles.js";
+import { Container, Title, Download, Footnote } from "./styles.js";
 import Chart from "../../components/Chart";
 import ChartOptions from "../../components/ChartOptions";
 import Tabs from "../../components/Tabs";
@@ -10,6 +10,7 @@ import Table from "../../components/Table";
 import { Creators as navigationActions } from "../../store/ducks/navigation";
 import { useSelector, useDispatch } from "react-redux";
 import { useRouter } from "next/router";
+
 
 function Benchmark({ benchmark, taskId, benchmarkId }) {
   const dispatch = useDispatch();
@@ -86,10 +87,7 @@ function Benchmark({ benchmark, taskId, benchmarkId }) {
   return (
     <PageTemplate>
       <Container>
-        <Title>
-          <a href={`/tasks/${taskId}`}>{benchmark.task_name}</a> /{" "}
-          {benchmark.dataset_name}
-        </Title>
+        <Title><a>{benchmark.task_name}</a> / {benchmark.dataset_name}</Title>
         <Table
           tabs={tabs}
           selectedTab={type}

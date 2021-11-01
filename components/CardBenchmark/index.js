@@ -1,6 +1,9 @@
 // import Link from "next/link";
+import { ArrowRight as ArrowRightIcon } from "react-feather";
+
 import { useTheme } from "@material-ui/core/styles";
-import { useMediaQuery } from "@material-ui/core";
+import { useMediaQuery, Button } from "@material-ui/core";
+
 import {
   StyledBox,
   FlexBox,
@@ -18,8 +21,14 @@ export default function CardBenchmark({ taskId, benchmark }) {
     <Container>
       <Link href={`/tasks/${taskId}/${benchmark.dataset_identifier}`}></Link>
       <StyledBox px={3} py={1}>
-        <h3>{benchmark.dataset_name}</h3>
-
+        <FlexBox alignItems="center">
+          <FlexItem>
+            <h3>{benchmark.dataset_name}</h3>
+          </FlexItem>
+          <FlexItem >
+          <Button color="primary" className="button">View all models</Button>
+          </FlexItem>
+        </FlexBox>
         {isLargeScreen && (
           <>
             <StyledDivider />
@@ -33,11 +42,7 @@ export default function CardBenchmark({ taskId, benchmark }) {
               <FlexItem pl={2}>
                 <p>Paper</p>
 
-                <a
-                  target="_blank"
-                  href={benchmark.sota_paper_link}
-                  rel="noreferrer"
-                >
+                <a target="_blank" href={benchmark.sota_paper_link}>
                   <h4>{benchmark.sota_paper_title}</h4>
                 </a>
               </FlexItem>
@@ -48,7 +53,6 @@ export default function CardBenchmark({ taskId, benchmark }) {
               </FlexItem>
               <FlexItem pl={2} textAlign="right">
                 <p>Hardware Burden</p>
-
                 <h4>
                   {benchmark.sota_hardware_burden ? (
                     <>

@@ -14,7 +14,7 @@ export default function CollaborateInvite() {
       <Box mt={5}>
         <Typography variant="h6">
           <Box fontSize="1.5rem">
-            Collaborate on the understanding of the computational progress!
+            Help the world understand the computational demands of Deep Learning...
           </Box>
         </Typography>
       </Box>

@@ -70,4 +70,8 @@ export const Link = styled.a`
 
 export const Container = styled.div`
   position: relative;
+  &:hover .button {
+    transform: scale(1.06);
+    transition: all 0.3s ease-in-out;
+  }
 `;

@@ -1,4 +1,6 @@
 import styled from "styled-components";
+import { Typography } from "@material-ui/core";
+
 import theme from "../../styles/theme";
 import Button from "../../components/Button";
 
@@ -45,4 +47,10 @@ export const Title = styled.h3`
 export const Download = styled(Button)`
   align-self: flex-end;
   margin-top: 20px !important;
+`;
+
+export const Footnote = styled(Typography)`
+  align-self: flex-start;
+  margin-top: 20px !important;
+  font-size: 13px !important;
 `;

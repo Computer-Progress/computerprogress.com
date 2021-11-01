@@ -22,7 +22,7 @@ export const Wrapper = styled.div`
   font-size: 0.8rem;
   width: 100%;
   padding: 0 3.75%;
-  margin-top: auto;
+  margin-top: 50px;
 `;
 
 export const Container = styled.div`

@@ -13,6 +13,7 @@ export const getServerSideProps = async ({ query }) => {
         benchmark,
         taskId: query.taskId,
         benchmarkId: query.benchmarkId,
+        key: query.taskId + query.benchmarkId
       },
     };
   } catch {

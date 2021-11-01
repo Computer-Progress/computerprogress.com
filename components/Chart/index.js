@@ -8,7 +8,7 @@ import useMediaQuery from "@material-ui/core/useMediaQuery";
 import { MuiTheme } from "../../styles/theme";
 
 const Chart = ({ data, label, isByYear, computingPower }) => {
-  const isMobileXS = useMediaQuery(MuiTheme.breakpoints.down("xs"));
+  const isMobile = useMediaQuery(MuiTheme.breakpoints.down("md"));
 
   const [chartOptions, setChartOptions] = useState({
     title: {
@@ -26,9 +26,8 @@ const Chart = ({ data, label, isByYear, computingPower }) => {
         x = isByYear
           ? new Date(element.paper_publication_date).getFullYear()
           : Math.log10(element[computingPower.value]);
-        y = 1 / (1 - element[label] / 100);
+        y = Math.log10(1 / (1 - element[label] / 100));
         const point = [x, y];
-
         data_points.push(point);
 
         const info = {
@@ -66,7 +65,7 @@ const Chart = ({ data, label, isByYear, computingPower }) => {
           tooltip: {
             headerFormat: "<b>{series.name}</b><br>",
             pointFormatter: function () {
-              let y = (1 - 1 / this.y) * 100;
+              let y = (1 - 10 ** -this.y) * 100;
               y = Math.round(y * 100) / 100;
               let x = Math.round(this.x * 100) / 100;
               return `${label}: ${y}% - ${
@@ -88,10 +87,16 @@ const Chart = ({ data, label, isByYear, computingPower }) => {
           type: "line",
           showInLegend: true,
           color: "#000000",
-          name: result.string
-            .replace("x", isByYear ? " Year" : ` log(${computingPower.name})`)
-            .replace("+ -", " - ")
-            .replace("y", label),
+          name: isByYear
+            ? `${label} = 1 - 10<span dy="-7"  style="font-size: 10px">${-result
+                .equation[0]} &times Year ${
+                result.equation[1]
+              }</span><span dy="7">`
+            : `${label} = 1 - 10<span dy="-7"  style="font-size: 10px">${-result
+                .equation[1]}</span><span dy="7"> &times; (${
+                computingPower.name
+              })</span><span dy="-7" style="font-size: 10px">${-result
+                .equation[0]}</span>`,
           data: [result.points[0], result.points[result.points.length - 1]],
           marker: {
             enabled: false,
@@ -104,18 +109,46 @@ const Chart = ({ data, label, isByYear, computingPower }) => {
           enableMouseTracking: false,
         },
       ],
-
+      exporting: {
+        width: 2000,
+      },
       legend: {
         layout: "vertical",
         align: "center",
         verticalAlign: "top",
+        fontSize: isMobile ? "8px" : "18px",
         symbolHeight: 0.001,
         symbolWidth: 0.001,
         symbolRadius: 0.001,
         fontFamily: "Montserrat, sans-serif",
       },
+      subtitle: {
+        // align: 'center',
+        verticalAlign: "bottom",
+        style: {
+          fontSize: isMobile ? "7px" : "8px",
+        },
+        x: isMobile ? 30 : 10,
+        y: 10,
+        useHTML: true,
+        text:
+          '<a target="_blank" href="https://arxiv.org/abs/2007.05558">' +
+          "Ⓒ The Computational Limits of Deep Learning, N.C. THOMPSON, K. GREENEWALD, K. LEE, G.F. MANSO</a>" +
+          '<a target="_blank" href="https://dblp.uni-trier.de/rec/journals/corr/abs-2007-05558.html?view=bibtex">' +
+          "  [CITE]</a>",
+      },
       credits: {
         enabled: false,
+        text:
+          '<a target="_blank" href="https://arxiv.org/abs/2007.05558">' +
+          "Ⓒ The Computational Limits of Deep Learning, N.C. THOMPSON, K. GREENEWALD, K. LEE, G.F. MANSO</a>" +
+          '<a target="_blank" href="https://dblp.uni-trier.de/rec/journals/corr/abs-2007-05558.html?view=bibtex">' +
+          "  [CITE]</a>",
+        position: {
+          align: "center",
+          y: -2,
+          x: 50,
+        },
       },
       title: {
         text: "",
@@ -127,7 +160,7 @@ const Chart = ({ data, label, isByYear, computingPower }) => {
           style: {
             color: "#333",
             fontWeight: "bold",
-            fontSize: "18px",
+            fontSize: isMobile ? "10px" : "14px",
             fontFamily: "Montserrat, sans-serif",
           },
         },
@@ -151,7 +184,7 @@ const Chart = ({ data, label, isByYear, computingPower }) => {
           style: {
             color: "#333",
             fontWeight: "bold",
-            fontSize: "18px",
+            fontSize: isMobile ? "10px" : "14px",
             fontFamily: "Montserrat, sans-serif",
           },
         },
@@ -161,7 +194,7 @@ const Chart = ({ data, label, isByYear, computingPower }) => {
             fontFamily: "Montserrat, sans-serif",
           },
           formatter: function () {
-            let label = (1 - 1 / this.value) * 100;
+            let label = (1 - 10 ** -this.value) * 100;
             return `${this.value ? label.toFixed(1) : 0}%`;
           },
         },

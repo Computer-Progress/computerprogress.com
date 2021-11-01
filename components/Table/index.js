@@ -10,7 +10,7 @@ import TaskTableSOTA from "../TaskTableSOTA";
 import TaskTableChart from "../TaskTableChart";
 
 import { MuiTheme } from "../../styles/theme";
-import { StyledGridItem, StyledFlexbox } from "./styles";
+import { StyledGridItem, StyledFlexbox, Footnote } from "./styles";
 
 export default function TaskTable({
   tabs,
@@ -34,6 +34,7 @@ export default function TaskTable({
   isByYear,
 }) {
   const isMobile = useMediaQuery(MuiTheme.breakpoints.down("md"));
+  const isMobileXS = useMediaQuery(MuiTheme.breakpoints.down("xs"));
 
   return (
     <>
@@ -50,7 +51,7 @@ export default function TaskTable({
           <StyledGridItem $order={1} xs={3}>
             <Link href="/tasks">
               <StyledFlexbox>
-                <Button color="primary">View all tasks</Button>
+                {/* <Button color="primary">View all tasks</Button> */}
               </StyledFlexbox>
             </Link>
           </StyledGridItem>
@@ -75,11 +76,7 @@ export default function TaskTable({
           />
         </StyledGridItem>
 
-        <StyledGridItem
-          $order={isMobile ? 4 : 4}
-          xs={12}
-          lg={showViewAllTasks ? 6 : 9}
-        >
+        <StyledGridItem $order={4} xs={12} lg={showViewAllTasks ? 6 : 9}>
           <TaskTableChart
             isLoading={loading}
             data={data}
@@ -88,14 +85,21 @@ export default function TaskTable({
             isByYear={isByYear}
           />
         </StyledGridItem>
+
         {sota ? (
           <StyledGridItem $order={isMobile ? 3 : 4} xs={12} sm={6} lg={3}>
-            <Box style={{ height: "100%" }} ml={2}>
+            <Box style={{ height: "100%" }} ml={isMobileXS ? 0 : 2}>
               <TaskTableSOTA sota={sota} />
             </Box>
           </StyledGridItem>
         ) : null}
       </Grid>
+      {!isByYear ? (
+        <Footnote>
+          * The regression is performed in log-log space but (for
+          interpretability) the regression formula is shown in exponential form.
+        </Footnote>
+      ) : null}
     </>
   );
 }
