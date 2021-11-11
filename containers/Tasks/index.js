@@ -10,7 +10,7 @@ export default function Tasks({ tasks }) {
     <ThemeProvider theme={MuiTheme}>
       <PageTemplate>
         <Container>
-          <h2>Machine Learning</h2>
+          <h2>Deep Learning</h2>
           <Box my={3}>
             <Grid container spacing={5} wrap="wrap">
               {tasks.map((item) => (

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Container, Title, Download } from "./styles.js";
+import { Container, Title, Download, Footnote } from "./styles.js";
 import Chart from "../../components/Chart";
 import ChartOptions from "../../components/ChartOptions";
 import Tabs from "../../components/Tabs";
@@ -7,8 +7,15 @@ import PageTemplate from "../../components/PageTemplate";
 import PapersList from "../../components/PapersList";
 import ButtonToTop from "../../components/ButtonToTop";
 import Table from '../../components/Table';
+import { Creators as navigationActions } from '../../store/ducks/navigation'
+import { useSelector, useDispatch } from "react-redux";
+import { useRouter } from "next/router";
+
 
 function Benchmark({ benchmark, taskId, benchmarkId }) {
+  const dispatch = useDispatch();
+  const router = useRouter();
+  const userState = useSelector((state) => state.UserReducer);
   const [data, setData] = useState(benchmark.models);
   const [secondButtons, setSecondButtons] = useState([
     {
@@ -65,10 +72,18 @@ function Benchmark({ benchmark, taskId, benchmarkId }) {
     setSelectedSecondButton(index);
   }
 
+  const onClickDownload = (e) => {
+    if (!userState.id) {
+      e.preventDefault();
+      dispatch(navigationActions.saveUrl(router.pathname))
+      router.replace('/signin')
+    }
+  }
+
   return (
     <PageTemplate>
       <Container>
-        <Title><a href={`/tasks/${taskId}`}>{benchmark.task_name}</a> / {benchmark.dataset_name}</Title>
+        <Title><a>{benchmark.task_name}</a> / {benchmark.dataset_name}</Title>
         <Table
           tabs={tabs}
           selectedTab={type}
@@ -87,7 +102,7 @@ function Benchmark({ benchmark, taskId, benchmarkId }) {
           isByYear={type}
           computingPower={computingPower}
         />
-        <Download contained href={`https://computerprogress.xyz/api/v1/models/${taskId}/${benchmarkId}/csv`}>Download</Download>
+        <Download onClick={onClickDownload} contained href={process.env.NEXT_PUBLIC_BASE_API_URL + `/models/${taskId}/${benchmarkId}/csv`}>Download</Download>
         <PapersList 
           onSelectAccuracy={onSelectAccuracy}
           selectedAccuracy={label}

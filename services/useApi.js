@@ -16,7 +16,7 @@ export default (serverSide) => {
     }
 
     const api = axios.create({
-      baseURL: 'https://computerprogress.xyz/api/v1'
+      baseURL: process.env.NEXT_PUBLIC_BASE_API_URL
     });
 
     api.interceptors.request.use(async config => ({
@@ -39,7 +39,7 @@ export default (serverSide) => {
             type: 'error'
           }));
         } else if (response.status === 403) {
-          router.back()
+          router.replace('/')
           dispatch(alertActions.openAlert({
             open: true,
             message: 'Forbidden',

@@ -2,7 +2,6 @@ import styled from "styled-components";
 import theme from "../../styles/theme";
 import Button from "../../components/Button"
 
-
 export const Container = styled.div`
   display: grid;
   grid-template-columns: 4fr 1fr;

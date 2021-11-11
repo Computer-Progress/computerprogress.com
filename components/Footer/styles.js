@@ -10,13 +10,14 @@ export const HomeWrapper = styled.div`
 
 export const Wrapper = styled.div`
   display: flex;
-  justify-content: flex-end;
+  justify-content: space-between;
   align-items: center;
   flex-wrap: wrap;
   background: linear-gradient(268.88deg, rgba(255, 255, 255, 0.1) -7.38%, #9E1FFF 104.79%), #4e33ff;
   font-size: .8rem;
   width: 100%;
   padding: 0 3.75%;
+  margin-top: 50px;
 `;
 
 export const Container = styled.div`
@@ -93,9 +94,9 @@ export const Logos = styled.div`
 
 export const Text = styled.p`
   display: flex;
+  justify-content: center !important;
   font-weight: 500px;
-  font-size: 1.5rem;
-  margin-bottom: 2rem;
+  font-size: 17px;
   color: ${theme.colors.white};
 `
 
@@ -104,5 +105,12 @@ export const Copyright = styled.p`
   justify-content: flex-end;
   color: ${theme.colors.white};
   text-align: right;
-  font-size: 14px;
+  font-size: 15px;
+`
+
+export const SupportEmail = styled.p`
+  display: flex;
+  justify-content: center !important;
+  color: ${theme.colors.white};
+  font-size: 15px;
 `

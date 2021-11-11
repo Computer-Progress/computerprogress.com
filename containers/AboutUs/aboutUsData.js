@@ -25,7 +25,7 @@ export const textBlocks = [
                 We encourage people to pay attention to this issue and contribute to the understanding \
                 of metrics that can guide the post Moore’s Law world. \
                 
-                Do you want to contribute to Computer Progress? Check our <a href='/collaborate' style="color: #9E1FFF"> “COLLABORATE” </a> page.`,
+                Do you want to contribute to ComputerProgress.com? Check our <a href='/collaborate' style="color: #9E1FFF"> “COLLABORATE” </a> page.`,
   },
 ];
 
@@ -50,35 +50,41 @@ export const researchers = [
   },
   {
     name: "Gabriel F. Manso",
-    workPlace: "MIT",
-    position: "Research Assistant",
+    workPlace: "University of Brasilia",
+    position: "Undergraduate Student",
     imageName: "gabriel-manso.png",
   },
 ];
 
 export const otherContributors = [
   {
+    name: "Gabriel F. Manso",
+    workPlace: "University of Brasilia",
+    position: "Project Lead & Manager",
+    imageName: "gabriel-manso.png",
+  },
+  {
     name: "Andrew Lucas",
-    workPlace: "UnB",
+    workPlace: "University of Brasilia",
     position: "Software Engineer",
     imageName: "andrew-lucas.png",
   },
   {
     name: "Guilherme Banci",
-    workPlace: "UnB",
-    position: "Front-end Developer",
+    workPlace: "University of Brasilia",
+    position: "Software Engineer",
     imageName: "guilherme-banci.jpg",
   },
   {
     name: "Irwin Schmitt",
-    workPlace: "UnB",
+    workPlace: "University of Brasilia",
     position: "Front-end Developer",
     imageName: "irwin-schmitt.png",
   },
   {
     name: "João Egewarth",
-    workPlace: "UnB",
-    position: "UI/UX Designer",
+    workPlace: "University of Brasilia",
+    position: "Product Designer",
     imageName: "joao-egewarth.png",
   },
 ];

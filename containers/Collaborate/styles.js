@@ -13,7 +13,35 @@ export const StyledContainerJoinUs = styled(Container)`
 
 export const StyledFlexboxSection = styled(Box).attrs({
   my: 5,
-})``;
+})`
+.citation{
+  position: relative;
+  background: #ebebeb;
+  padding: 1rem;
+  border: 1px dashed #cccccc;
+  margin-top: 2rem;
+  font-size: 15px;
+  border-radius: 5px;
+  button{
+    position: absolute;
+    right: 1rem;
+    top: 1rem;
+    border: none;
+    border-radius: 5px;
+    padding: 3px;
+    cursor: pointer;
+    :hover{
+      transform: scale(1.05)
+    }
+    :active{
+      transform: scale(1)
+    }
+  }
+  pre{
+    font-family: 'Courier New', Courier, monospace
+  }
+}
+`;
 
 export const StyledBoxTitle = styled(Box).attrs({
   mt: 5,
@@ -23,13 +51,21 @@ export const StyledBoxTitle = styled(Box).attrs({
 
 export const StyledBox = styled(Box).attrs({
   mt: 5,
+  textAlign: "justify",
 })``;
 
 export const StyledTypographyBodyTitle = styled(Typography).attrs({
   variant: "body1",
 })`
   font-weight: 500 !important;
-  font-size: 50px !important;
+  font-size: 40px !important;
+`;
+
+export const StyledTypographyBodyTitle2 = styled(Typography).attrs({
+  variant: "h2",
+})`
+  font-weight: 500 !important;
+  font-size: 25px !important;
 `;
 
 export const StyledTypographyBody1 = styled(Typography).attrs({
@@ -46,7 +82,7 @@ export const StyledTypographyCard = styled(Typography).attrs({
   variant: "h1",
 })`
   font-weight: 500 !important;
-  font-size: 35px !important;
+  font-size: 30px !important;
 `;
 
 export const StyledListIcon = styled.div`

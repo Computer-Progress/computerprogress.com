@@ -2,7 +2,7 @@ export { default } from "../containers/Home";
 
 export async function getServerSideProps() {
   const URL =
-    "https://computerprogress.xyz/api/v1/sota";
+    process.env.NEXT_PUBLIC_BASE_API_URL + "/sota";
 
   try {
     const response = await fetch(URL);

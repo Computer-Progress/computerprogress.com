@@ -10,7 +10,7 @@ import TaskTableSOTA from "../TaskTableSOTA";
 import TaskTableChart from "../TaskTableChart";
 
 import { MuiTheme } from "../../styles/theme";
-import { StyledGridItem, StyledFlexbox } from "./styles";
+import { StyledGridItem, StyledFlexbox, Footnote } from "./styles";
 
 export default function TaskTable({
   tabs,
@@ -31,7 +31,7 @@ export default function TaskTable({
   computingPower,
   fieldName,
   sota,
-  isByYear
+  isByYear,
 }) {
   const isTablet = useMediaQuery(MuiTheme.breakpoints.down("md"));
   const isMobile = useMediaQuery(MuiTheme.breakpoints.down("xs"));
@@ -51,13 +51,18 @@ export default function TaskTable({
           <StyledGridItem $order={1} xs={3}>
             <Link href="/tasks">
               <StyledFlexbox>
-                <Button color="primary">View all tasks</Button>
+                {/* <Button color="primary">View all tasks</Button> */}
               </StyledFlexbox>
             </Link>
           </StyledGridItem>
         )}
 
-        <StyledGridItem $order={3} xs={12} sm={showViewAllTasks ? 6 : 12} lg={showViewAllTasks ? 3 : 3}>
+        <StyledGridItem
+          $order={3}
+          xs={12}
+          sm={showViewAllTasks ? 6 : 12}
+          lg={showViewAllTasks ? 3 : 3}
+        >
           <TableOptions
             options={options}
             selectedOption={selectedOption}
@@ -91,6 +96,12 @@ export default function TaskTable({
           </StyledGridItem>
         ) : null}
       </Grid>
+      {!isByYear ? (
+        <Footnote>
+          * The regression is performed in log-log space but (for
+          interpretability) the regression formula is shown in exponential form.
+        </Footnote>
+      ) : null}
     </>
   );
 }

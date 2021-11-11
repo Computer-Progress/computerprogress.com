@@ -1,5 +1,6 @@
 import { ThemeProvider } from "@material-ui/core/styles";
 import { MuiTheme } from "../../styles/theme";
+import { Copy as CopyIcon } from "react-feather";
 
 import {
   List,
@@ -9,6 +10,7 @@ import {
   Chip,
   Typography,
   Box,
+  Tooltip,
 } from "@material-ui/core";
 
 import PageTemplate from "../../components/PageTemplate";
@@ -24,14 +26,41 @@ import {
   StyledButton,
   StyledBoxTitle,
   StyledTypographyBodyTitle,
+  StyledTypographyBodyTitle2,
   StyledTypographyBody2,
   StyledChip,
   StyledTypographyCard,
   StyledContainerJoinUs,
-  StyledListItemIcon
+  StyledListItemIcon,
 } from "./styles";
+import { useState } from "react";
 
 export default function Collaborate() {
+  const copyToClipboard = () => {
+    navigator.clipboard
+      .writeText(
+        `@article\{DBLP:journals/corr/abs-2007-05558,
+  author    = {Neil C. Thompson and
+              Kristjan H. Greenewald and
+              Keeheon Lee and
+              Gabriel F. Manso},
+  title     = {The Computational Limits of Deep Learning},
+  journal   = {CoRR},
+  volume    = {abs/2007.05558},
+  year      = {2020},
+  url       = {https://arxiv.org/abs/2007.05558},
+  eprinttype = {arXiv},
+  eprint    = {2007.05558},
+  timestamp = {Sat, 23 Jan 2021 01:12:47 +0100},
+  biburl    = {https://dblp.org/rec/journals/corr/abs-2007-05558.bib},
+  bibsource = {dblp computer science bibliography, https://dblp.org}
+}`
+      )
+      .then(() => {
+        setIsCopy(true);
+      });
+  };
+  const [isCopy, setIsCopy] = useState(false);
   return (
     <ThemeProvider theme={MuiTheme}>
       <PageTemplate ignoreContainer>
@@ -39,26 +68,67 @@ export default function Collaborate() {
           <StyledFlexboxSection>
             <StyledBoxTitle mb={8}>
               <StyledTypographyBodyTitle variant="h1" align="center">
-                Learn how to report computing power
+                Reporting Data
               </StyledTypographyBodyTitle>
             </StyledBoxTitle>
 
             <StyledBox>
               <StyledTypographyBody1>
-                Two are the most usual ways used to report the computational
-                burden in Deep Learning:
+                All analysis performed on our website were inspired and
+                discussed in the paper{" "}
+                <a
+                  href="https://arxiv.org/abs/2007.05558"
+                  target="_blank"
+                  style={{ color: "#9E1FFF" }}
+                >
+                  "The Computational Limits of Deep Learning"
+                </a>{" "}
+                . If you use some of our resources, we
+                kindly encourage you to cite us using the following {" "}
+                <Tooltip
+                  arrow
+                  title={isCopy ? "Copied!" : "Copy"}
+                  onClose={() => setIsCopy(false)}
+                >
+                  <a  style={{ color: "#9E1FFF" }} onClick={() => copyToClipboard()}>
+                    citation.{" "}
+                  </a>
+                </Tooltip>
+                For last treatments, you can also read{" "}
+                <a
+                  href="https://spectrum.ieee.org/deep-learning-computational-cost"
+                  target="_blank"
+                  style={{ color: "#9E1FFF" }}
+                >
+                  "Deep Learning's Diminishing Returns"
+                </a>.
+              </StyledTypographyBody1>
+            </StyledBox>
+
+            <StyledBoxTitle mb={8}>
+              <StyledTypographyBodyTitle2 variant="h2" align="center">
+                Estimating Computing Power in Deep Learning
+              </StyledTypographyBodyTitle2>
+            </StyledBoxTitle>
+
+            <StyledBox>
+              <StyledTypographyBody1>
+                The ways we use to report computational burden in Deep Learning
+                are:
               </StyledTypographyBody1>
             </StyledBox>
 
             <StyledBox>
-              <Typography variant="h2">1) Computations per network pass</Typography>
+              <Typography variant="h3">
+                1) Computations per network pass
+              </Typography>
             </StyledBox>
 
             <StyledBox>
               <StyledTypographyBody1>
-                Computations (or operations) per network passs the number of floating-point 
-                operations required for a single pass in the network, also measurable using
-                multiply-adds. 
+                Computations (or operations) per network pass is the number of
+                floating-point operations required for a single pass in the
+                network, also measurable using multiply-adds.
               </StyledTypographyBody1>
             </StyledBox>
 
@@ -75,8 +145,8 @@ export default function Collaborate() {
                   <ListItemText
                     primary={
                       <>
-                        <StyledChip label="Flops"/>    or   {"  "}
-                        <StyledChip label="Multiply-adds"/>
+                        <StyledChip label="Flops" /> or {"  "}
+                        <StyledChip label="Multiply-adds" />
                       </>
                     }
                   />
@@ -85,14 +155,14 @@ export default function Collaborate() {
             </StyledBox>
 
             <StyledBox>
-              <Typography variant="h2">2) Hardware burden</Typography>
+              <Typography variant="h3">2) Hardware burden</Typography>
             </StyledBox>
 
             <StyledBox>
               <StyledTypographyBody1>
-                Hardware burden is the computational capability of the hardware used to train a
-                model. It depends on the model training time and the computation of the hardware
-                used to train the model.
+                Hardware burden is the computational capability of the hardware
+                used to train a model. It depends on the model training time and
+                the computation of the hardware used to train the model.
               </StyledTypographyBody1>
             </StyledBox>
 
@@ -107,7 +177,9 @@ export default function Collaborate() {
                     <StyledListIcon />
                   </StyledListItemIcon>
                   <ListItemText
-                    primary={<StyledChip label="Hardware used (e.g TPU, GPU and/or CPU)"/>}
+                    primary={
+                      <StyledChip label="Hardware used (e.g TPU, GPU and/or CPU)" />
+                    }
                   />
                 </ListItem>
 
@@ -116,7 +188,9 @@ export default function Collaborate() {
                     <StyledListIcon />
                   </StyledListItemIcon>
                   <ListItemText
-                    primary={<StyledChip label="Number of each hardware component used"/>}
+                    primary={
+                      <StyledChip label="Number of each hardware component used" />
+                    }
                   />
                 </ListItem>
 
@@ -125,7 +199,7 @@ export default function Collaborate() {
                     <StyledListIcon />
                   </StyledListItemIcon>
                   <ListItemText
-                    primary={<StyledChip label="Training time"/>}
+                    primary={<StyledChip label="Training time" />}
                   />
                 </ListItem>
               </List>
@@ -138,7 +212,7 @@ export default function Collaborate() {
             <StyledFlexboxSection>
               <Box mb={8}>
                 <StyledTypographyCard variant="h1" align="center">
-                  Why to understand the progress of computing?!
+                  People talking about this issue:
                 </StyledTypographyCard>
               </Box>
 
@@ -151,7 +225,6 @@ export default function Collaborate() {
 
         <StyledContainerJoinUs>
           <StyledFlexboxSection>
-
             <StyledBox>
               <Typography variant="h2" align="center">
                 Join our community!
@@ -160,7 +233,7 @@ export default function Collaborate() {
 
             <StyledBox>
               <Typography variant="h3" align="center">
-                Start contributing to the progress of computing right now!
+                Start contributing to the progress of Deep Learning right now!
               </Typography>
             </StyledBox>
 
@@ -177,7 +250,7 @@ export default function Collaborate() {
             <StyledFlexboxSection>
               <StyledBox>
                 <Typography variant="h2" align="center">
-                  Any question?
+                  Any questions?
                 </Typography>
               </StyledBox>
 
@@ -185,8 +258,8 @@ export default function Collaborate() {
                 <Typography align="center">
                   Don’t hesitate to contact our team:{" "}
                   <strong>
-                    <a href="mailto:contact@computerprogress.com">
-                      contact@computerprogress.com
+                    <a href="mailto:hello@computerprogress.org">
+                      hello@computerprogress.org
                     </a>
                   </strong>
                   .
@@ -199,4 +272,3 @@ export default function Collaborate() {
     </ThemeProvider>
   );
 }
-

@@ -59,7 +59,6 @@ export default function Conversation({ paperId, onPressSaveChanges, onUpdate }) 
         { name: "Approve and comment", value: 'approved' },
         { name: "Decline and comment", value: 'declined' },
         { name: "Request information and comment", value: 'need_information' },
-        { name: "Save changes and comment", value: '' },
       ]
     }
 
@@ -67,7 +66,6 @@ export default function Conversation({ paperId, onPressSaveChanges, onUpdate }) 
       { name: "Approve", value: 'approved' },
       { name: "Decline", value: 'declined' },
       { name: "Request information", value: 'need_information' },
-      { name: "Save changes", value: '' },
     ]
   }, [message])
 
@@ -118,6 +116,7 @@ export default function Conversation({ paperId, onPressSaveChanges, onUpdate }) 
           <OutlinedInput
             multiline
             fullWidth
+            placeholder="Leave a comment..."
             style={{ boxShadow: "10px" }}
             value={message}
             onChange={handleTextChange}
@@ -141,14 +140,7 @@ export default function Conversation({ paperId, onPressSaveChanges, onUpdate }) 
                   options={submitOptions}
                   onClick={onPressOption}
                 ></NewButton>
-              ) : (
-                <NewButton
-                  loading={loading}
-                  onClick={() => onPressOption(3)}
-                >
-                  Save changes
-                </NewButton>
-              )}
+              ) : null}
             </Box>
           </Box>
         </TimelineContent>

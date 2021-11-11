@@ -1,40 +1,16 @@
-import { Wrapper, HomeWrapper, Container, Logos, Text, Copyright } from "./styles.js";
-import FooterWave from "../FooterWave";
+import { Wrapper, Copyright, SupportEmail} from "./styles.js";
 
-export default function Footer({ isHome }) {
-
-  if (isHome) {
-    return (
-      <HomeWrapper>
-          <Container>
-            <Text big>Idealized by:</Text>
-            <Logos>
-                <div>
-                  <h3>Neil C. Thompson</h3>
-                  <p>MIT CSAIL</p>
-                </div>
-                <div>
-                  <h3>Kristjan Greenewald</h3>
-                  <p>MIT-IBM Watson AI Lab</p>
-                </div>
-                <div>
-                  <h3>Keeheon Lee</h3>
-                  <p>Yonsey University</p>
-                </div>
-                <div>
-                  <h3>Gabriel F. Manso</h3>
-                  <p>MIT CSAIL</p>
-                </div>
-            </Logos>
-            <Copyright>© 2021 Computer Progress</Copyright>
-          </Container>
-          <FooterWave />
-      </HomeWrapper>
-    );
-  }
+export default function Footer({}) {
 
   return (
     <Wrapper>
+      <SupportEmail> 
+          Need something? &ensp;
+          <a href="mailto:hello@computerprogress.org">
+            hello@computerprogress.org
+          </a>
+      </SupportEmail>
+     
       <Copyright>© 2021 Computer Progress</Copyright>
     </Wrapper>
   )

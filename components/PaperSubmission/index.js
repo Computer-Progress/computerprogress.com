@@ -1,4 +1,4 @@
-import { useEffect, useState, useMemo } from "react";
+import { useEffect, useState, useRef } from "react";
 import { useForm } from "react-hook-form";
 
 import { ThemeProvider } from "@material-ui/core/styles";
@@ -16,6 +16,7 @@ import { useDispatch } from "react-redux";
 import { Creators as alertActions } from "../../store/ducks/alert";
 import Conversation from "../../components/Conversation";
 import { useRouter } from "next/router";
+import MuiCircularProgress from "@material-ui/core/CircularProgress";
 
 const emptyPaper = {
   title: "",
@@ -34,7 +35,13 @@ export default function PaperSubmission({ submittedPaper }) {
   const [paper, setPaper] = useState({});
   const [nextId, setNextId] = useState(2);
   const [loading, setLoading] = useState(false);
+  const [pageLoading, setPageLoading] = useState(false);
   const [onUpdate, setOnUpdate] = useState(false);
+  const [paperDidChange, setPaperDidChange] = useState(false);
+  const [undoChangesPressed, setUndoChangesPressed] = useState(false);
+
+  const undoRef = useRef(false);
+
   const {
     control,
     register,
@@ -64,24 +71,42 @@ export default function PaperSubmission({ submittedPaper }) {
 
   useEffect(() => {
     if (submittedPaper) {
-      setPaper(submittedPaper.data);
+      const myPaper = JSON.parse(JSON.stringify(submittedPaper.data));
+      setPaper(myPaper);
     } else {
       setPaper({
         ...emptyPaper,
         models: [emptyModel(1)],
       });
     }
-  }, []);
+  }, [undoChangesPressed]);
+
+  useEffect(() => {
+    setUndoChangesPressed(!undoChangesPressed);
+  }, [submittedPaper]);
+
+  useEffect(() => {
+    undoRef.current = false
+
+    setTimeout(() => {
+      undoRef.current = true
+    }, 600);
+  }, [submittedPaper, undoChangesPressed]);
 
   function handlePaperInformationChange(newPaper) {
     setPaper({ ...paper, ...newPaper });
+    if (undoRef.current) {
+      setPaperDidChange(true);
+    }
   }
 
   function handleModelChange(newModel, modelIndex) {
     const newPaper = { ...paper };
     newPaper.models[modelIndex] = newModel;
-
     setPaper(newPaper);
+    if (undoRef.current) {
+      setPaperDidChange(true);
+    }
   }
 
   function addNewModel() {
@@ -114,21 +139,31 @@ export default function PaperSubmission({ submittedPaper }) {
     validateData();
   }
 
+  const undoChanges = () => {
+    setUndoChangesPressed(!undoChangesPressed);
+    setPaperDidChange(false);
+    setPageLoading(true);
+    setTimeout(() => {
+      setPageLoading(false);
+    }, 5);
+  }
+
   const onSubmitAction = async (status) => {
     // console.log(paper);
     setLoading(true);
     try {
       if (submittedPaper) {
-        const response = await api.put(
-          `/submissions/${submittedPaper.id}`,
-          paper
-        );
-        if (status) {
+        if (typeof status === 'string') {
           const response = await api.put(
             `/submissions/${submittedPaper.id}/status`,
             {
               status: status
             }
+          );
+        } else {
+          const response = await api.put(
+            `/submissions/${submittedPaper.id}`,
+            paper
           );
         }
         dispatch(
@@ -139,6 +174,7 @@ export default function PaperSubmission({ submittedPaper }) {
           })
         );
         setOnUpdate(!onUpdate)
+        setPaperDidChange(false);
       } else {
         const response = await api.post("/submissions", paper);
         // console.log("response", response);
@@ -153,7 +189,6 @@ export default function PaperSubmission({ submittedPaper }) {
       }
 
     } catch (err) {
-      console.log(err.response.data);
       dispatch(
         alertActions.openAlert({
           open: true,
@@ -166,7 +201,6 @@ export default function PaperSubmission({ submittedPaper }) {
   };
 
   const onPressSaveChanges = async (item) => {
-    console.log(item)
     handleSubmit(onSubmitAction(item))
   }
 
@@ -177,6 +211,7 @@ export default function PaperSubmission({ submittedPaper }) {
           <Grid item xs={12}>
             <PaperInformation
               paper={paper}
+              undoChangesPressed={undoChangesPressed}
               submittedPaper={submittedPaper?.data}
               handlePaperInformationChange={handlePaperInformationChange}
               control={control}
@@ -184,38 +219,54 @@ export default function PaperSubmission({ submittedPaper }) {
               errors={errors}
             />
           </Grid>
-          {paper.models?.map((model, index) => (
-            <Grid item xs={12} key={model.id}>
-              <ModelInformation
-                model={model}
-                key={model.id}
-                id={model.id}
-                modelIndex={index}
-                handleModelChange={handleModelChange}
-                handleRemoveModel={removeModel}
-                index={index}
-                control={control}
-                register={register}
-                errors={errors}
-              />
-            </Grid>
-          ))}
+          {pageLoading ? <MuiCircularProgress /> : (
+            <>
+              {paper.models?.map((model, index) => (
+                <Grid item xs={12} key={model.id}>
+                  <ModelInformation
+                    model={model}
+                    undoChangesPressed={undoChangesPressed}
+                    key={model.id}
+                    id={model.id}
+                    modelIndex={index}
+                    handleModelChange={handleModelChange}
+                    handleRemoveModel={removeModel}
+                    index={index}
+                    control={control}
+                    register={register}
+                    errors={errors}
+                  />
+                </Grid>
+              ))}
+            </>
+          )}
 
           <Grid item xs={12}>
             <Box display="flex" justifyContent="flex-end">
               <Box pl={1} borderRadius={10}>
                 <OutlinedButton onClick={addNewModel}>New model</OutlinedButton>
               </Box>
-              {!submittedPaper ? (
+              {submittedPaper && paperDidChange ? (
+                <Box pl={1}>
+                  <NewButton
+                    loading={loading}
+                    onClick={undoChanges}
+                    disabled={!paperDidChange}
+                  >
+                    UNDO CHANGES
+                  </NewButton>
+                </Box>
+              ) : null}
+
                 <Box pl={1}>
                   <NewButton
                     loading={loading}
                     onClick={handleSubmit(onSubmitAction)}
+                    disabled={!paperDidChange}
                   >
-                    Submit paper
+                    {submittedPaper ? 'Save changes' : 'Submit paper'}
                   </NewButton>
                 </Box>
-              ) : null}
             </Box>
           </Grid>
         </Grid>

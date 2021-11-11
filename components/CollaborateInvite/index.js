@@ -9,14 +9,14 @@ export default function CollaborateInvite() {
       <Box>
         <Typography variant="h2">
           <Box fontWeight="bold">
-            Your help can change everything!
+            You can change everything!
           </Box>
         </Typography>
       </Box>
       <Box mt={5}>
         <Typography variant="h6">
           <Box fontSize="1.5rem">
-            Collaborate on the understanding of the computational progress!
+            Help the world understand the computational demands of Deep Learning...
           </Box>
         </Typography>
       </Box>

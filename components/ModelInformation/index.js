@@ -13,7 +13,7 @@ import {
   InputAdornment,
   Box,
   Button,
-  Modal,
+  Tooltip,
 } from "@material-ui/core";
 import MuiDivider from "@material-ui/core/Divider";
 
@@ -52,7 +52,7 @@ export default function ModelInformation(props) {
     setModel(props.model);
 
     fetchData();
-  }, []);
+  }, [props.undoChangesPressed]);
 
   useEffect(() => {
     if (props.modelIndex >= 0) {
@@ -256,7 +256,7 @@ export default function ModelInformation(props) {
                 <AutocompleteCreatable
                   {...props.register(`accuracy_type${props.index}`, { required: !model.accuracies.length })}
                   error={!!props.errors[`accuracy_type${props.index}`]}
-                  helperText={!!props.errors[`accuracy_type${props.index}`] && "Accuracy type is required"}
+                  helperText={!!props.errors[`accuracy_type${props.index}`] && "To add the accuracy type, click on the plus icon"}
                   name="accuracy_type"
                   label={"Accuracy type"}
                   options={accuracyOptions}
@@ -275,24 +275,26 @@ export default function ModelInformation(props) {
               </Grid>
 
               <Grid item xs={4}>
-                <TextField
-                  {...props.register(`accuracy_value${props.index}`, { required: !model.accuracies.length })}
-                  error={!!props.errors[`accuracy_value${props.index}`]}
-                  helperText={!!props.errors[`accuracy_value${props.index}`] && "Accuracy value is required"}
-                  label="Value"
-                  value={newAccuracyValue}
-                  fullWidth
-                  InputProps={{
-                    endAdornment: (
-                      <InputAdornment position="end">
-                        <IconButton size="small" onClick={addAccuracy}>
-                          <AddIcon />
-                        </IconButton>
-                      </InputAdornment>
-                    ),
-                  }}
-                  onChange={handleAccuracyValueChange}
-                />
+                <Tooltip title="To add the accuracy type, click the plus icon" placement="top-end">
+                  <TextField
+                    {...props.register(`accuracy_value${props.index}`, { required: !model.accuracies.length })}
+                    error={!!props.errors[`accuracy_value${props.index}`]}
+                    helperText={!!props.errors[`accuracy_value${props.index}`] && "Fill accuracy value and click the plus icon"}
+                    label="Value"
+                    value={newAccuracyValue}
+                    fullWidth
+                    InputProps={{
+                      endAdornment: (
+                        <InputAdornment position="end">
+                          <IconButton size="small" onClick={addAccuracy}>
+                            <AddIcon />
+                          </IconButton>
+                        </InputAdornment>
+                      ),
+                    }}
+                    onChange={handleAccuracyValueChange}
+                  />
+                </Tooltip>
               </Grid>
 
               {model.accuracies.map((accuracy, index) => (
@@ -338,12 +340,12 @@ export default function ModelInformation(props) {
               <Typography variant="h4">Training information</Typography>
             </Grid>
 
-            <Grid item xs={6} md={5} lg={4} xl={3}>
+            <Grid item xs={6}>
               <StyledTextField
                 {...props.register(`TrainingTime${props.index}`, { required: !model.training_time})}
                 error={!!props.errors[`TrainingTime${props.index}`]}
                 helperText={!!props.errors[`TrainingTime${props.index}`] && "Training time is required"}
-                label="Training time"
+                label="Training time (seg)"
                 name="training_time"
                 type="number"
                 value={model.training_time}
@@ -351,7 +353,7 @@ export default function ModelInformation(props) {
               />
             </Grid>
 
-            <Grid item xs={6} md={5} lg={4} xl={3}>
+            <Grid item xs={6}>
               <StyledTextField
                 {...props.register(`Ephocs${props.index}`, { required: !model.epochs })}
                 error={!!props.errors[`Ephocs${props.index}`]}
@@ -497,7 +499,7 @@ export default function ModelInformation(props) {
               <Typography variant="h4">Computation per network pass</Typography>
             </Grid>
 
-            <Grid item xs={6} md={5} lg={4} xl={3}>
+            <Grid item xs={6}>
               <StyledTextField
                 label="Gigaflops"
                 name="gflops"
@@ -507,7 +509,7 @@ export default function ModelInformation(props) {
               />
             </Grid>
 
-            <Grid item xs={6} md={5} lg={4} xl={3}>
+            <Grid item xs={6}>
               <StyledTextField
                 label="Multiply-adds"
                 name="multiply_adds"
@@ -521,7 +523,7 @@ export default function ModelInformation(props) {
               <Typography variant="h4">Other</Typography>
             </Grid>
 
-            <Grid item xs={6} md={5} lg={4} xl={3}>
+            <Grid item xs={6}>
               <StyledTextField
                 label="# of parameters"
                 name="number_of_parameters"
