@@ -1,0 +1,12 @@
+{
+  "type": "service_account",
+  "project_id": "computerprogress",
+  "private_key_id": "20ace770fed6fbd5ae60353a3201a1594bf1f2c1",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvAIBADANBgkqhkiG9w0BAQEFAASCBKYwggSiAgEAAoIBAQDUwDjEgA0/1hQR\nHI/YSE644eVUHoT1xa+XLRwWXDc6ENcQMGI6IrOqAZlRrduDlISLBDZ7csRXXLMN\nP1GTbFUERn6wR0O8EKf5Qyq+ysPp3+Tr3SXNhbOZ/qCgFBr6GvTDWRg23EXZ5TJO\nr8nm43ltbAX7Jfuq0En1yrrx/Ce8ZOOT7sOqdYtnFMjgmwMZyKjNXATAraZeeYJl\nl2uMxKdSIaKpaYpAIqfPtV+wGn1kTbmNero5btLtg/yFHhEf+Lrw+iQpVIDSNG4i\nUrvvAm3I8im3spkmTtOYsoxfJ6gdXCsvzEK3GjWV4WAGams2eb8kjJcSnZYr1a1O\nH9k5u80bAgMBAAECggEABgSCQ1iZFCQPgQszeS6H/39WniIw25MuxZIyka7xDVtN\nlSxXkuv8jfbDaewgSEcxCo36pocKZt6WqyDBdqLuGRPCk8tB1YKl5abqZ7QfhePd\n1NtDLV5QERW1+frBNC+czbiDtuvuRxABc/iEt8GmY4IJl0V6dvKzEz81Od2XS1ZR\nlF9oxbq9CWngr0qTqPzA1+v7yrznDCflVauOjv1aUxN3bY2oXQhEhA0I18Q+6U7z\nvwJvSEE3pW5Ryzm7te6CPWnKXILXuB/YHxBZ2RaHBiU0O5gt8nH4yMp4ZuXluSSY\n4sFiQkJFhT4ccrQUAJYz+XP7B1wwa+tV5C1u19MoHQKBgQD2fF7iT5tsP3KLgEti\npDl8mmoDj35ifcDqG12ksxMq+ygBmPxbH6Fb8I0vPH7WUoxKGUBV2l4w9nL/acFx\nbAFq9BAZg0Q5qdOACsV0vvcLBn1lCWLGWXMSao24vgYhn3FND6SF9ug7cKxzce4K\npEN6i1fc5YoHKOyq+o0usTvwTwKBgQDc9oB9Tu6tDDDbrFdzOM5nx5vMpCtUzROz\nw16+JLyIK848pbeJNmBMD/8sfOdkEYooyty7eU3vpBJaPJzyY71ldbU/pu7d6iQa\ngSmUmjT+iuhV0Axo+Bh5W8PoVdZ2wadb/5vWfLNTlA6WmHkvsBUvHab0Pg98ti/B\n4t1HqGo3dQKBgDfVEjUXLTCG6q5YwDq20mK8I3ls/obWz2T4D+0ntxbMT1KVUcxe\nTNGjmodxn5Vym16Je742uZFDsebTEMNdYLDWWfM9fa3GHydoyTNZsmHn9W12g85E\nIsGwKywGtyLUl/iJq43A0Pft3NJFo1L7xGE0wRFDWVGn3nwYRvSlptsXAoGAd7+L\ngN2PEe9CZzquJf6KNcoCkFQEO6/sVoaxyMBmADIlUc7Jea4jX/VnZ/fE+wFaa6MN\nHvitmQrE+2xP7jjJgrvY30cbut5SdJ69JxCvWad0JFVc9GJH+TUXJcmnMbLffUc4\ncHQiR1A827aELqjxwhgCy+j6Qa8GkL/fBh+qeKUCgYBTNAWPeW2FheS+6nevbYDh\nT/4dA1Kfg6O4pU9Wn3ED9Q/HTwdDcn69UlC98GHyEt3r2/nSK0zZ1DMQZAs43cSi\n5aXu051y/SzjuL4B8aAQD60AbErXiF59FL2KiwkZAQ5Lkcjmcn0mTD8K+jSnh1r2\ngg1iyNgQ9AuxDhnRS1E/iQ==\n-----END PRIVATE KEY-----\n",
+  "client_email": "computerprogress@computerprogress.iam.gserviceaccount.com",
+  "client_id": "109832833318461653675",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/computerprogress%40computerprogress.iam.gserviceaccount.com"
+}
