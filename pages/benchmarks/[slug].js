@@ -18,7 +18,7 @@ export default function Home({ benchmarks, dataset, accuracyTypes }) {
         <Navbar></Navbar>
         <Header benchmarks={benchmarks}></Header>
         <Main accuracyTypes={accuracyTypes} dataset={dataset} benchmarks={benchmarks}></Main>
-        <Footer />
+        <Footer className="bg-black/100" />
       </div>
     </div>
   );

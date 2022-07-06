@@ -6,7 +6,7 @@ if (typeof Highcharts === "object") {
   HighchartsExporting(Highcharts);
 }
 
-export default function Chart({ dataset, xAxis, yAxis }) {
+export default function Chart({ dataset, xAxis, yAxis, downloadCSV }) {
   const linearRegressionLine = (x, y) => {
     const xs = [];
     const ys = [];
@@ -30,10 +30,15 @@ export default function Chart({ dataset, xAxis, yAxis }) {
     const x2 = Math.max.apply(null, xs);
     const y1 = slope * x1 + intercept;
     const y2 = slope * x2 + intercept;
-    return [
-      [x1, y1],
-      [x2, y2],
-    ];
+    return {
+      slope,
+      intercept,
+      r2,
+      points: [
+        [x1, y1],
+        [x2, y2],
+      ],
+    };
   };
   const scatterData = dataset.map((model) => {
     return {
@@ -60,9 +65,15 @@ export default function Chart({ dataset, xAxis, yAxis }) {
       return Math.log10(1 / (1 - model[yAxis.column] / 100));
     });
     const lr = linearRegressionLine(x, y);
-    return lr;
+    console.log(lr);
+    return lr.points;
   };
   const chartOptions = {
+    chart: {
+      spacingBottom:25,
+      spacingTop:50,
+      height: (8 / 16 * 100) + '%' // 16:9 ratio
+    },
     title: {
       text: null,
     },
@@ -73,29 +84,65 @@ export default function Chart({ dataset, xAxis, yAxis }) {
       title: {
         enabled: true,
         text: xAxis.name,
+        margin: 5,
+        style: {
+          fontSize: 22,
+        },
       },
-      minPadding: 0.05,
-      maxPadding: 0.05,
-      allowDecimals: xAxis.column !== "year",
+      minPadding: xAxis.column === "year" ? 0.099 : 0.102,
+      maxPadding: 0.06,
+
+      allowDecimals: false,
       labels: {
+        style: {
+          fontSize: 25,
+        },
         useHTML: true,
         formatter: function () {
           if (xAxis.column === "year") {
-            return `<span>${this.value}</span>`;
+            return `<span class="text-lg">${this.value}</span>`;
           }
-          return `10<sup>${this.value.toFixed(1)}</sup>`;
+          return `<span class="text-lg">10<sup>${this.value}</sup></span>`;
         },
       },
+    },
+    credits: {
+      enabled: true,
+      style: {
+        margin: 10,
+      },
+      position: {
+        align: "center",
+        y: 0,
+      },
+      text:
+        '<a target="_blank" href="https://arxiv.org/abs/2007.05558">' +
+        "Ⓒ The Computational Limits of Deep Learning, N.C. THOMPSON, K. GREENEWALD, K. LEE, G.F. MANSO</a>" +
+        '<a target="_blank" href="https://dblp.uni-trier.de/rec/journals/corr/abs-2007-05558.html?view=bibtex">' +
+        "  [CITE]</a>",
     },
     yAxis: {
       title: {
         text: yAxis.name,
+        margin: 30,
+        style: {
+          fontSize: 22,
+        },
       },
+      // allowDecimals: false,
+      maxPadding: 0,
+      // showLastLabel: false,
+
       labels: {
+        y:-3,
+            x:0,
+            align:'left',
         formatter: function () {
           let label = (1 - 10 ** -this.value) * 100;
           label = Math.round(label * 100) / 100;
-          return `${this.value ? label.toFixed(1) : 0}%`;
+          return `<span class=" text-lg">${
+            this.value ? label.toFixed(0) : 0
+          }%</span>`;
         },
       },
     },
@@ -176,6 +223,32 @@ export default function Chart({ dataset, xAxis, yAxis }) {
         enableMouseTracking: false,
       },
     ],
+    exporting: {
+      menuItemDefinitions: {
+        // Custom definition
+        label: {
+          onclick: function () {
+            downloadCSV();
+          },
+          text: "Download data (CSV)",
+        },
+      },
+      buttons: {
+        contextButton: {
+          menuItems: [
+            "viewFullscreen",
+            "printChart",
+            "separator",
+            "downloadPNG",
+            "downloadJPEG",
+            "downloadPDF",
+            "downloadSVG",
+            "separator",
+            "label",
+          ],
+        },
+      },
+    },
   };
   return <HighchartsReact highcharts={Highcharts} options={chartOptions} />;
 }

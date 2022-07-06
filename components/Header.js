@@ -1,3 +1,4 @@
+import { DocumentTextIcon, NewspaperIcon, PaperClipIcon, UserGroupIcon } from "@heroicons/react/outline";
 import Link from "next/link";
 import { useRouter } from "next/router";
 function classNames(...classes) {
@@ -39,56 +40,71 @@ export default function Header({ benchmarks }) {
           </p>
           <ul className="flex flex-row justify-start flex-wrap gap-x-16 gap-y-4">
             <li className="flex items-center text-sm text-gray-600 gap-1">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                className="h-6 w-6"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-                strokeWidth={2}
+              <a
+                href="https://arxiv.org/abs/2007.05558"
+                target="_blank"
+                rel="noreferrer"
+                className="hover:underline flex items-center text-sm text-gray-600 gap-1"
               >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"
-                />
-              </svg>
-              Paper
+                <DocumentTextIcon className="w-5 h-5"/> Paper
+              </a>
             </li>
             <li className="flex items-center text-sm text-gray-600 gap-1">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                className="h-6 w-6"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-                strokeWidth={2}
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"
-                />
-              </svg>
-              Authors: Kristjan Greenewald, Keeheon Lee, and Gabriel Manso
+              
+              <UserGroupIcon className="w-5 h-5"/> Kristjan Greenewald, Keeheon Lee, and Gabriel
+              Manso
             </li>
-            <li className="flex items-center text-sm text-gray-600 gap-1">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                className="h-6 w-6"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-                strokeWidth={2}
+            <li className="flex items-center text-sm text-gray-600 gap-1 flex-wrap">
+              <NewspaperIcon className="w-5 h-5"/>
+              <a
+                href="https://www.wired.com/story/prepare-artificial-intelligence-produce-less-wizardry/"
+                target="_blank"
+                rel="noreferrer"
+                className="hover:underline"
               >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  d="M11 5.882V19.24a1.76 1.76 0 01-3.417.592l-2.147-6.15M18 13a3 3 0 100-6M5.436 13.683A4.001 4.001 0 017 6h1.832c4.1 0 7.625-1.234 9.168-3v14c-1.543-1.766-5.067-3-9.168-3H7a3.988 3.988 0 01-1.564-.317z"
-                />
-              </svg>{" "}
-              Wired, VentureBeat, Discover, The Next Web, Interesting
-              Engineering, Tech Gig
+                Wired
+              </a>,
+              <a
+                href="https://venturebeat.com/2020/07/15/mit-researchers-warn-that-deep-learning-is-approaching-computational-limits/"
+                target="_blank"
+                rel="noreferrer"
+                className="hover:underline"
+              >
+                VentureBeat
+              </a>,
+              <a
+                href="https://www.discovermagazine.com/technology/the-computational-limits-of-deep-learning-are-closer-than-you-think"
+                target="_blank"
+                rel="noreferrer"
+                className="hover:underline"
+              >
+                Discover
+              </a>,
+              <a
+                href="https://thenextweb.com/neural/2020/07/17/ai-researchers-say-weve-squeezed-nearly-as-much-out-of-modern-computers-as-we-can/"
+                target="_blank"
+                rel="noreferrer"
+                className="hover:underline"
+              >
+                The Next Web
+              </a>,
+              <a
+                href="https://interestingengineering.com/deep-learning-reaching-computational-limits-warns-new-mit-study"
+                target="_blank"
+                rel="noreferrer"
+                className="hover:underline"
+              >
+                Interesting Engineering
+              </a>,
+              <a
+                href="https://content.techgig.com/mit-researchers-warn-that-deep-learning-is-reaching-its-computational-limit/articleshow/77033239.cms"
+                target="_blank"
+                rel="noreferrer"
+                className="hover:underline"
+              >
+                Tech Gig
+              </a>
+              
             </li>
           </ul>
         </div>
@@ -104,11 +120,13 @@ export default function Header({ benchmarks }) {
                   <li
                     className={classNames(
                       item.range == router.query.slug ? "font-bold" : "",
-                      "text-[#AA3248] mt-1"
+                      "text-[#AA3248] mt-1 hover:underline"
                     )}
                     key={item.range}
                   >
-                    <Link href={'/benchmarks/' + item.range}>{item.dataset}</Link>
+                    <Link href={"/benchmarks/" + item.range}>
+                      {item.dataset}
+                    </Link>
                   </li>
                 ))}
               </ul>
