@@ -82,7 +82,6 @@ export default function Main({ benchmarks, dataset, accuracyTypes }) {
 
   // update yAxisOptions when benchmark changes
   useEffect(() => {
-    console.log("benchmark changed");
     setYAxisOptions([
       ...accuracyTypes.map((type) => ({
         name: type,
@@ -93,7 +92,6 @@ export default function Main({ benchmarks, dataset, accuracyTypes }) {
 
   // update yAxis and xAxis when yAxisOptions changes
   useEffect(() => {
-    console.log("yAxisOptions changed");
     setYAxis(yAxisOptions[0]);
     setXAxis(xAxisOptions[0]);
   }, [yAxisOptions, xAxisOptions]);
