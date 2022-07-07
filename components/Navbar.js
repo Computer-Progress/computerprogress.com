@@ -8,6 +8,7 @@ function classNames(...classes) {
 
 export default function Navbar() {
   const navigation = [
+    // { name: "Trends", href: "/trends", current: false },
     { name: "Publications", href: "#", current: false },
     { name: "About us", href: "#", current: false },
   ];

@@ -1,7 +1,7 @@
 import Head from "next/head";
 import Navbar from "../../components/Navbar";
-import Header from "../../components/Header";
-import Main from "../../components/Main";
+import Header from "../../components/benchmarks/Header";
+import Main from "../../components/benchmarks/Main";
 import Footer from "../../components/Footer";
 import { getDataset } from "../../lib/api";
 import { parseBenchmark } from "../../lib/parser";
@@ -25,9 +25,10 @@ export default function Home({ benchmarks, dataset, accuracyTypes }) {
 }
 
 export async function getStaticProps({ params }) {
+  const spreadsheetId = "1xthNnZ_I43SUXzLvuP7TFXsd-XeHDUx_4dedH5sE2GM";
   const [benchmarks, benchmark] = await Promise.all([
-    getDataset("benchmarks"),
-    getDataset(params.slug),
+    getDataset("benchmarks", spreadsheetId),
+    getDataset(params.slug, spreadsheetId),
   ]);
   const { dataset, accuracyTypes } = await parseBenchmark(benchmark);
   return {

@@ -1,3 +1,41 @@
+@import "/trends/graph.css";
+@import "/trends/plotter/multislider.css";
+@import "/trends/plotter/libs/modal.css";
+@import "/trends/plotter/mlp.css";
+.graph-wrapper {
+    width: 100%;
+    height: 100%;
+    padding-top: 20px;
+    padding-right: 20px;
+    padding-bottom: 5px;
+    padding-left: 10px;
+    box-sizing: border-box;
+  }
+
+  #trends-graph {
+    width: 100%;
+    height: 100%;
+  }
+
+  .modal-container {
+    max-width: 400px;
+  }
+
+  .mlp-tooltip-table {
+    border: 0;
+    margin-bottom: 0;
+  }
+
+  .mlp-tooltip-table td {
+    padding: 2px;
+  }
+
+  .mlp-tooltip-table tr, .mlp-tooltip-table td {
+    background-color: rgba(255, 255, 255, 0.95) !important;
+    border: 0;
+  }
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+

@@ -29,19 +29,21 @@ export default function Home() {
               </div>
             </div>
           </div>
-          <div className="video-docker absolute top-0 left-0 w-full h-full overflow-hidden">
+          <div className="video-docker absolute top-0 left-0 w-full h-full overflow-hidden bg-black">
             <video
               className="min-w-full min-h-full absolute object-cover"
-              src="/hero1.webm"
-              type="video/mp4"
+              playsinline
               autoPlay
               muted
               loop
-            ></video>
+            >
+              <source src="hero1.webm" type="video/mp4" />
+              <source src="hero1.mp4" type="video/mp4" />
+              Your browser does not support HTML5 video.
+            </video>
           </div>
- 
         </div>
-          <Footer   />
+        <Footer />
       </div>
     </>
   );
