@@ -273,8 +273,8 @@ export default function Main({ benchmarks, dataset, accuracyTypes }) {
           </div>
 
           <div className="relative overflow-x-auto shadow-md sm:rounded-lg mt-8">
-            <table className="w-full text-sm text-left text-gray-500 dark:text-gray-400">
-              <thead className="text-xs table-fixed text-gray-700 uppercase bg-gray-50  dark:text-gray-400">
+            <table className="w-full text-sm text-left text-gray-500">
+              <thead className="text-xs table-fixed text-gray-700 uppercase bg-gray-50">
                 <tr>
                   <th scope="col" className="px-6 py-3 w-2/5">
                     <button
@@ -364,10 +364,10 @@ export default function Main({ benchmarks, dataset, accuracyTypes }) {
                   <Disclosure key={index}>
                     {({ open }) => (
                       <>
-                        <tr className="border-b  dark:border-gray-700  bg-gray-50  ">
+                        <tr className="border-b   bg-gray-50  ">
                           <th
                             scope="row"
-                            className="px-6 py-2 font-medium text-gray-900 dark:text-white whitespace-pre-wrap"
+                            className="px-6 py-2 font-medium text-gray-900 whitespace-pre-wrap"
                           >
                             {data["name"]}
                           </th>
