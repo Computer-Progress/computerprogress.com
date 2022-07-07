@@ -56,7 +56,7 @@ export default function Chart({ dataset, xAxis, yAxis, downloadCSV }) {
   const lineData = () => {
     const x = dataset.map((model) => {
       if (xAxis.column === "year") {
-        return model[xAxis.column];
+        return Number(model[xAxis.column]);
       }
 
       return Math.log10(model[xAxis.column]);
@@ -65,13 +65,14 @@ export default function Chart({ dataset, xAxis, yAxis, downloadCSV }) {
       return Math.log10(1 / (1 - model[yAxis.column] / 100));
     });
     const lr = linearRegressionLine(x, y);
+    console.log(x,y)
     return lr.points;
   };
   const chartOptions = {
     chart: {
       spacingBottom:25,
       spacingTop:50,
-      height: (8 / 16 * 100) + '%' // 16:9 ratio
+      height: 600, // 16:9 ratio
     },
     title: {
       text: null,
@@ -112,7 +113,7 @@ export default function Chart({ dataset, xAxis, yAxis, downloadCSV }) {
       },
       position: {
         align: "center",
-        y: 0,
+        y: -5,
       },
       text:
         '<a target="_blank" href="https://arxiv.org/abs/2007.05558">' +
@@ -223,6 +224,9 @@ export default function Chart({ dataset, xAxis, yAxis, downloadCSV }) {
       },
     ],
     exporting: {
+      allowHTML: true,
+      scale: 5,
+      sourceWidth: 1200,
       menuItemDefinitions: {
         // Custom definition
         label: {

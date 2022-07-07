@@ -1,5 +1,6 @@
 import { Disclosure } from "@headlessui/react";
 import { MenuIcon, XIcon } from "@heroicons/react/outline";
+import Link from "next/link";
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
@@ -7,22 +8,23 @@ function classNames(...classes) {
 
 export default function Navbar() {
   const navigation = [
-    { name: "Home", href: "/", current: false },
-    { name: "Datasets", href: "#", current: true },
+    { name: "Publications", href: "#", current: false },
     { name: "About us", href: "#", current: false },
   ];
 
   return (
-    <Disclosure as="nav" className="bg-black border-b-[#AA3248] border-b-2">
+    <Disclosure as="nav" className="bg-black border-b-[#70202f] border-b">
       {({ open }) => (
         <>
           <div className="max-w-screen-2xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="flex items-center justify-between h-16">
               <div className="flex items-center">
                 <div className="flex-shrink-0">
-                  <h1 className="text-xl font-bold text-white uppercase">
-                  Computer Progress
+                    <Link href={"/"}>
+                  <h1 className="text-xl cursor-pointer font-bold text-white uppercase">
+                      Computer Progress
                   </h1>
+                      </Link>
                 </div>
               </div>
               <div className="hidden md:block">
@@ -46,7 +48,7 @@ export default function Navbar() {
               </div>
               <div className="-mr-2 flex md:hidden">
                 {/* Mobile menu button */}
-                <Disclosure.Button className="bg-[#AA3248] inline-flex items-center justify-center p-2 rounded-md text-white hover:text-white hover:bg-[#0004] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-[#0004] focus:ring-white">
+                <Disclosure.Button className="bg-black inline-flex items-center justify-center p-2 rounded-md text-white hover:text-white hover:bg-[#0004] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-[#0004] focus:ring-white">
                   <span className="sr-only">Open main menu</span>
                   {open ? (
                     <XIcon className="block h-6 w-6" aria-hidden="true" />

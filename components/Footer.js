@@ -6,7 +6,7 @@ function classNames(...classes) {
 
 export default function Navbar({transparent}) {
   return (
-    <footer className={transparent ? " bg-black/50" : "bg-black border-t-2 border-t-[#AA3248]"}>
+    <footer className={transparent ? " bg-black/50" : "bg-black border-t border-t-[#70202f]"}>
       <div className="max-w-screen-2xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center pb-2">
           <div className="relative h-12 m-2 w-48">

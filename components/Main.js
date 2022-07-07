@@ -324,10 +324,10 @@ export default function Main({ benchmarks, dataset, accuracyTypes }) {
                       className="flex items-center uppercase gap-2"
                       onClick={() => requestSort("computing_power")}
                     >
-                      <p className="flex gap-1">
+                      <div className="flex gap-1">
                         hardware burden
                           <Tooltip position="bottom-left"> Something about hardware burden. Something about hardware burden. Something about hardware burden sdasd asdasd</Tooltip>
-                      </p>
+                      </div>
                       {sortBy.column === "computing_power" &&
                         (sortBy.type === "asc" ? (
                           <SortAscendingIcon className="h-4 w-4 text-gray-300" />
