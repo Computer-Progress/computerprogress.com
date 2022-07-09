@@ -295,7 +295,6 @@ export default function setupControls(mlp) {
       let x = parseFloat(input.value);
       x *= 10;
 
-      console.log(x, formatReal(x));
 
       input.value = formatReal(x);
       input.dispatchEvent(new Event("input"));

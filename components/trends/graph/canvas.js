@@ -92,9 +92,9 @@ export default function setupCanvas(mlp) {
       document.addEventListener("pointerout", this.onPointerEvent.bind(this));
 
       // TODO do we really need eventjs?
-      // this.node.addEventListener( "wheel", this.onWheel.bind(this), {
-      //   passive: false,
-      // });
+      this.node.addEventListener( "wheel", this.onWheel.bind(this), {
+        passive: false,
+      });
     },
 
     getTouchedArea: function (p) {
@@ -288,7 +288,6 @@ export default function setupCanvas(mlp) {
     },
 
     onWheel: function (e, self) {
-      console.log(self)
       let rect = this.node.getBoundingClientRect();
       let pointer = { x: e.clientX - rect.left, y: e.clientY - rect.top };
 
@@ -298,7 +297,7 @@ export default function setupCanvas(mlp) {
         let camBounds = areaUnderPointer.cameraBounds;
         let areaBounds = areaUnderPointer.bounds();
 
-        let zoom = 2 ** (-self.wheelDelta / 800);
+        let zoom = 2 ** (-e.wheelDelta / 800);
 
         let p = areaUnderPointer.canvasToPaper(pointer);
 

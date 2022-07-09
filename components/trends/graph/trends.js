@@ -7,23 +7,23 @@
 // * adding and removing points
 // * importing database from elsewhere?
 //
-import { methods } from './stats'
+import { methods } from "./stats";
 const DAYS_PER_YEAR = 365;
 const DAYS_PER_MONTH = 30;
 
 let regression = methods;
 
 export const defaultParams = {
-  startDate: parseDate('01/01/1950'),
-  endDate: parseDate('01/01/2023'),
+  startDate: parseDate("01/01/1950"),
+  endDate: parseDate("01/01/2023"),
   xAxis: "Publication date",
   yAxis: "Parameters",
   separateCategories: false,
   citationThreshold: 0,
   otherDomainThreshold: 10,
 
-  startDlEra: parseDate('01/01/2009'),
-  startLargeScaleEra: parseDate('01/01/2018'),
+  startDlEra: parseDate("01/01/2009"),
+  startLargeScaleEra: parseDate("01/01/2018"),
 
   largeScaleAction: "ignore",
   outliersAction: "label",
@@ -39,15 +39,15 @@ export const defaultParams = {
 
   splitDomains: [,], // ['Language', 'Vision', 'Games', 'Other', 'All']
 
-  domainsToNotSplit: ['Vision'],
+  domainsToNotSplit: ["Vision"],
 
   ranges: {
-    'Parameters':                              [-Infinity, +Infinity],
-    'Training compute (FLOPs)':                [-Infinity, +Infinity],
-    'Inference compute (FLOPs)':               [-Infinity, +Infinity],
-    'Training dataset size (datapoints)':      [-Infinity, +Infinity],
-    'Inference compute per parameter (FLOPs)': [-Infinity, +Infinity],
-    'Inference compute times parameters':      [-Infinity, +Infinity],
+    Parameters: [-Infinity, +Infinity],
+    "Training compute (FLOPs)": [-Infinity, +Infinity],
+    "Inference compute (FLOPs)": [-Infinity, +Infinity],
+    "Training dataset size (datapoints)": [-Infinity, +Infinity],
+    "Inference compute per parameter (FLOPs)": [-Infinity, +Infinity],
+    "Inference compute times parameters": [-Infinity, +Infinity],
   },
 
   splitDlEra: true,
@@ -61,50 +61,70 @@ export const defaultParams = {
 
 export function init(database) {
   function parseDate(str) {
-    console.log(typeof(str))
-    let fields = str.split("/");
+    if (typeof str == "string") {
+      let fields = str.split("/");
 
-    let day = 1;
-    let month = 1;
-    let year;
+      let day = 1;
+      let month = 1;
+      let year;
 
-    if (fields.length == 1) {
-      year = fields[0];
+      if (fields.length == 1) {
+        year = fields[0];
+      } else {
+        day = fields[0];
+        month = fields[1];
+        year = fields[2];
+      }
+
+      return new Date(year, month - 1, day, 1, 0, 0, 0);
     } else {
-      day   = fields[0];
-      month = fields[1];
-      year  = fields[2];
+      return str;
     }
-
-    return new Date(year, month - 1, day, 1, 0, 0, 0);
   }
 
   function dateToJulianDate(date) {
-    var x = Math.floor((14 - date.getMonth())/12);
+    var x = Math.floor((14 - date.getMonth()) / 12);
     var y = date.getFullYear() + 4800 - x;
     var z = date.getMonth() - 3 + 12 * x;
 
-    var n = date.getDate() + Math.floor(((153 * z) + 2)/5) + (365 * y) + Math.floor(y/4) + Math.floor(y/400) - Math.floor(y/100) - 32045;
+    var n =
+      date.getDate() +
+      Math.floor((153 * z + 2) / 5) +
+      365 * y +
+      Math.floor(y / 4) +
+      Math.floor(y / 400) -
+      Math.floor(y / 100) -
+      32045;
 
     return n;
-  }   
+  }
 
   for (let rowIndex = 0; rowIndex < database.rows.length; rowIndex++) {
     let row = database.rows[rowIndex];
 
     // Parsing
-    row["Publication date"] = row["Publication date"];
-    row["Publication date (julian date)"] = (row["Publication date"]);
-    row["Training compute (FLOPs)"] = parseFloat(row["Training compute (FLOPs)"]);
-    row["Inference compute (FLOPs)"] = parseFloat(row["Inference compute (FLOPs)"]);
-    row["Training dataset size (datapoints)"] = parseFloat(row["Training dataset size (datapoints)"]);
+    row["Publication date"] = parseDate(row["Publication date"]);
+    row["Publication date (julian date)"] = dateToJulianDate(
+      row["Publication date"]
+    );
+    row["Training compute (FLOPs)"] = parseFloat(
+      row["Training compute (FLOPs)"]
+    );
+    row["Inference compute (FLOPs)"] = parseFloat(
+      row["Inference compute (FLOPs)"]
+    );
+    row["Training dataset size (datapoints)"] = parseFloat(
+      row["Training dataset size (datapoints)"]
+    );
     row["Parameters"] = parseFloat(row["Parameters"]);
     row["Citations"] = parseFloat(row["Citations"]);
     if (isNaN(row["Citations"])) row["Citations"] = 0;
 
     // Row augmentation
-    row["Training compute per parameter (FLOPs)"] = row["Training compute (FLOPs)"] / row["Parameters"];
-    row["Training compute times parameters"] = row["Training compute (FLOPs)"] * row["Parameters"];
+    row["Training compute per parameter (FLOPs)"] =
+      row["Training compute (FLOPs)"] / row["Parameters"];
+    row["Training compute times parameters"] =
+      row["Training compute (FLOPs)"] * row["Parameters"];
 
     row["visible"] = true;
   }
@@ -132,8 +152,11 @@ export function generateGraph(database, params) {
       row["_Domain"] = "All";
     }
 
-    if (row["System"] == "AlphaGo Zero" && params.alphagozeroAction == "label") {
-      row["_Domain"] = 'AlphaGo Zero';
+    if (
+      row["System"] == "AlphaGo Zero" &&
+      params.alphagozeroAction == "label"
+    ) {
+      row["_Domain"] = "AlphaGo Zero";
     }
 
     //
@@ -141,7 +164,12 @@ export function generateGraph(database, params) {
     //
 
     // By date
-    if (!(params.startDate <= row["Publication date"] && row["Publication date"] < params.endDate)) {
+    if (
+      !(
+        params.startDate <= row["Publication date"] &&
+        row["Publication date"] < params.endDate
+      )
+    ) {
       continue;
     }
 
@@ -151,7 +179,12 @@ export function generateGraph(database, params) {
     }
 
     // By zeroes/NaNs
-    if (isNaN(row[params.xAxis]) || isNaN(row[params.yAxis]) || row[params.yAxis] == 0 || (params.xAxis != "Publication date" && row[params.xAxis] == 0)) {
+    if (
+      isNaN(row[params.xAxis]) ||
+      isNaN(row[params.yAxis]) ||
+      row[params.yAxis] == 0 ||
+      (params.xAxis != "Publication date" && row[params.xAxis] == 0)
+    ) {
       continue;
     }
 
@@ -175,7 +208,10 @@ export function generateGraph(database, params) {
       continue;
     }
 
-    if (row["System"] == "AlphaGo Zero" && params.alphagozeroAction == "remove") {
+    if (
+      row["System"] == "AlphaGo Zero" &&
+      params.alphagozeroAction == "remove"
+    ) {
       continue;
     }
 
@@ -210,11 +246,23 @@ export function generateGraph(database, params) {
 
   // Define eras
   const eras = [
-    {Era:                   'All', start: params.startDate,          stop: params.endDate},
-    {Era: 'Pre Deep Learning Era', start: params.startDate,          stop: params.startDlEra},
-    {Era:     'Deep Learning Era', start: params.startDlEra,         stop: params.startLargeScaleEra},
-    {Era:       'Large Scale Era', start: params.startLargeScaleEra, stop: params.endDate},
-  ]
+    { Era: "All", start: params.startDate, stop: params.endDate },
+    {
+      Era: "Pre Deep Learning Era",
+      start: params.startDate,
+      stop: params.startDlEra,
+    },
+    {
+      Era: "Deep Learning Era",
+      start: params.startDlEra,
+      stop: params.startLargeScaleEra,
+    },
+    {
+      Era: "Large Scale Era",
+      start: params.startLargeScaleEra,
+      stop: params.endDate,
+    },
+  ];
 
   // Modify eras start-stop to fit the considered timespan and remove the ones outside of it
   for (let eraIndex = eras.length - 1; eraIndex >= 0; eraIndex--) {
@@ -226,7 +274,7 @@ export function generateGraph(database, params) {
     }
 
     // TODO Is this right when there are few systems? You might have made a mistake translating the code.
-    if (era.stop > params.endDate)    era.stop = params.endDate;
+    if (era.stop > params.endDate) era.stop = params.endDate;
     if (era.start < params.startDate) era.start = params.startDate;
   }
 
@@ -237,12 +285,15 @@ export function generateGraph(database, params) {
   for (let rowIndex = 0; rowIndex < rows.length; rowIndex++) {
     let row = rows[rowIndex];
 
-    if (!(params.splitDomains.includes(row["_Domain"]))) {
+    if (!params.splitDomains.includes(row["_Domain"])) {
       continue;
     }
 
     for (let era of eras) {
-      if ((era.start <= row["Publication date"]) && (row["Publication date"] <= era.stop)) {
+      if (
+        era.start <= row["Publication date"] &&
+        row["Publication date"] <= era.stop
+      ) {
         row["_Domain"] += " " + era.Era;
         break;
       }
@@ -253,13 +304,18 @@ export function generateGraph(database, params) {
 
   let regressionResults = regressData(rows, eras, params);
 
-  return {systems: rows, eras: eras, regressionData: regressionResults.lines, regressionInfoTable: regressionResults.infoTable};
+  return {
+    systems: rows,
+    eras: eras,
+    regressionData: regressionResults.lines,
+    regressionInfoTable: regressionResults.infoTable,
+  };
 }
 
 // TODO Regress on each domain
 
 function filterOutliers(rows, params) {
-  rows.sort(function(a,b) {
+  rows.sort(function (a, b) {
     return a["Publication date"] - b["Publication date"];
   });
 
@@ -267,78 +323,87 @@ function filterOutliers(rows, params) {
   let largeScaleRows = [];
 
   for (let axis of [params.xAxis, params.yAxis]) {
-    if (axis == 'Publication date') continue;
+    if (axis == "Publication date") continue;
 
     let loopCount = 0;
 
-    let startFinger = 0
-    let endFinger = 0
+    let startFinger = 0;
+    let endFinger = 0;
 
-    let rollingSum = 0
-    let rollingSquareSum = 0
-    let rollingCount = 0
+    let rollingSum = 0;
+    let rollingSquareSum = 0;
+    let rollingCount = 0;
 
     for (let rowIndex = 0; rowIndex < rows.length; rowIndex++) {
       let row = rows[rowIndex];
       if (row.deleted) continue;
 
       // Filter entries in a 3-year window around the paper
-      let windowSize = params.outlierWindowSize * 52*7*86400e3;
+      let windowSize = params.outlierWindowSize * 52 * 7 * 86400e3;
 
       let window = [
-        new Date(row["Publication date"].getTime() - windowSize/2),
-        new Date(row["Publication date"].getTime() + windowSize/2),
+        new Date(row["Publication date"].getTime() - windowSize / 2),
+        new Date(row["Publication date"].getTime() + windowSize / 2),
       ];
 
-      while (startFinger < rows.length && rows[startFinger]["Publication date"] < window[0]) {
+      while (
+        startFinger < rows.length &&
+        rows[startFinger]["Publication date"] < window[0]
+      ) {
         let v = Math.log10(rows[startFinger][axis]);
         rollingSum -= v;
-        rollingSquareSum -= v*v;
+        rollingSquareSum -= v * v;
         rollingCount--;
         startFinger++;
       }
 
-      while (endFinger < rows.length && rows[endFinger]["Publication date"] < window[1]) {
+      while (
+        endFinger < rows.length &&
+        rows[endFinger]["Publication date"] < window[1]
+      ) {
         let v = Math.log10(rows[endFinger][axis]);
         rollingSum += v;
-        rollingSquareSum += v*v;
+        rollingSquareSum += v * v;
         rollingCount++;
         endFinger++;
       }
 
-      if (rollingCount < 2) continue
+      if (rollingCount < 2) continue;
 
       let v = Math.log10(row[axis]);
 
-      let mean = rollingSum/rollingCount;
-      let variance = (rollingSquareSum/rollingCount) - mean**2;
+      let mean = rollingSum / rollingCount;
+      let variance = rollingSquareSum / rollingCount - mean ** 2;
       let std = Math.sqrt(variance);
 
-      let zScore = (v - mean)/std;
+      let zScore = (v - mean) / std;
 
       if (zScore < params.lowOutliersZValueThreshold) {
         outlierRows.push(row);
       }
 
-      if (zScore > params.highOutliersZValueThreshold && row['Publication date'] > params.startLargeScaleEra) {
+      if (
+        zScore > params.highOutliersZValueThreshold &&
+        row["Publication date"] > params.startLargeScaleEra
+      ) {
         largeScaleRows.push(row);
       }
     }
   }
 
   for (let row of outlierRows) {
-    if (params.outliersAction == 'remove') {
+    if (params.outliersAction == "remove") {
       row.deleted = true;
-    } else if (params.outliersAction == 'label') {
-      row._Domain = 'Outlier';
+    } else if (params.outliersAction == "label") {
+      row._Domain = "Outlier";
     }
   }
 
-  if (params.largeScaleAction == 'label') {
+  if (params.largeScaleAction == "label") {
     for (let row of largeScaleRows) {
       row["_Domain"] = "Large Scale";
     }
-  } else if (params.largeScaleAction == 'isolate') {
+  } else if (params.largeScaleAction == "isolate") {
     for (let row of largeScaleRows) {
       row["_Domain"] = "Large Scale";
     }
@@ -346,13 +411,13 @@ function filterOutliers(rows, params) {
   }
 
   // Drop AlphaGo Zero
-  if (params.bigAlphagoAction == 'remove') {
+  if (params.bigAlphagoAction == "remove") {
     for (let row of largeScaleRows) {
       if ("System" == "AlphaGo Zero" || "System" == "AlphaGo Master") {
         row.deleted = true;
       }
     }
-  } else if (params.bigAlphagoAction == 'label') {
+  } else if (params.bigAlphagoAction == "label") {
     for (let row of largeScaleRows) {
       if ("System" == "AlphaGo Zero" || "System" == "AlphaGo Master") {
         row._Domain = "AlphaGo Zero";
@@ -378,15 +443,18 @@ function filterRecords(rows, params) {
       recordRowsPerDomain[row["_Domain"]] = records;
     }
 
-    if (records.length == 0 || row[params.yAxis] > records[records.length-1][params.yAxis]) {
+    if (
+      records.length == 0 ||
+      row[params.yAxis] > records[records.length - 1][params.yAxis]
+    ) {
       records.push(row);
       allRecords.push(row);
     }
   }
 
-  if (params.recordSettersAction == 'isolate') {
+  if (params.recordSettersAction == "isolate") {
     rows = allRecords;
-  } else if (params.recordSettersAction == 'label') {
+  } else if (params.recordSettersAction == "label") {
     for (let row of allRecords) row._Domain = "Record";
   }
 
@@ -402,7 +470,14 @@ function addEraInfo(rows, eras, params) {
   for (let row of rows) {
     if (row.deleted) continue;
 
-    while (currentEraIndex < eras.length && (eras[currentEraIndex].Era == 'All' || !(eras[currentEraIndex].start <= row["Publication date"] && row["Publication date"] <= eras[currentEraIndex].stop))) {
+    while (
+      currentEraIndex < eras.length &&
+      (eras[currentEraIndex].Era == "All" ||
+        !(
+          eras[currentEraIndex].start <= row["Publication date"] &&
+          row["Publication date"] <= eras[currentEraIndex].stop
+        ))
+    ) {
       currentEraIndex++;
     }
 
@@ -413,11 +488,11 @@ function addEraInfo(rows, eras, params) {
     }
 
     if (era == "Large Scale Era" && !params.splitLargeScaleEra) {
-      era = 'Deep Learning Era';
+      era = "Deep Learning Era";
     }
 
     if (params.domainsToNotSplit.includes(row._Domain)) {
-      era = 'All';
+      era = "All";
     }
 
     row.Era = era;
@@ -443,7 +518,7 @@ function extractEraDomains(eras, rows) {
     let key = row.Era + ";" + row._Domain;
     if (!added.has(key)) {
       added.add(key);
-      group = [];
+      let group = [];
       eraDomains.push([row.Era, row._Domain, group]);
       eraDomainToGroup[key] = group;
     }
@@ -466,7 +541,7 @@ function extractEraDomains(eras, rows) {
 
     // a == b
     return 0;
-  })
+  });
 
   return eraDomains;
 }
@@ -489,11 +564,20 @@ function regressData(rows, eras, params) {
     let y = [];
 
     for (let row of group) {
-      let xv = (params.xAxis == "Publication date") ? dateToJulianDate(row["Publication date"]) : Math.log10(row[params.xAxis]);
+      let xv =
+        params.xAxis == "Publication date"
+          ? dateToJulianDate(row["Publication date"])
+          : Math.log10(row[params.xAxis]);
       let yv = Math.log10(row[params.yAxis]);
 
-      if (xv < minX) {minX = xv; minEra = row._Era};
-      if (xv > maxX) {maxX = xv; maxEra = row._Era};
+      if (xv < minX) {
+        minX = xv;
+        minEra = row._Era;
+      }
+      if (xv > maxX) {
+        maxX = xv;
+        maxEra = row._Era;
+      }
 
       x.push(xv);
       y.push(yv);
@@ -510,44 +594,57 @@ function regressData(rows, eras, params) {
     let bestSlope = model.coeffs[0];
 
     let quantiles = {
-      low:    0.025,
-      median: 0.500,
-      high:   0.975,
+      low: 0.025,
+      median: 0.5,
+      high: 0.975,
     };
-    let bootstrappingResults = bootstrapping(x, y, params.bootstrapSampleSize, params.adjustForEstimateUncertainty, quantiles);
+    let bootstrappingResults = bootstrapping(
+      x,
+      y,
+      params.bootstrapSampleSize,
+      params.adjustForEstimateUncertainty,
+      quantiles
+    );
 
     let slopeSummary;
     let lowSlope = bootstrappingResults.quantiles.low;
     let medianSlope = bootstrappingResults.quantiles.median;
     let highSlope = bootstrappingResults.quantiles.high;
 
-    if (params.xAxis == 'Publication date') {
+    if (params.xAxis == "Publication date") {
       bestSlope *= DAYS_PER_YEAR;
       lowSlope *= DAYS_PER_YEAR;
       medianSlope *= DAYS_PER_YEAR;
       highSlope *= DAYS_PER_YEAR;
-      info.Slope = `${bestSlope.toFixed(1)} OOMs/year [${lowSlope.toFixed(1)} ; ${medianSlope.toFixed(1)} ; ${highSlope.toFixed(1)}]`
-      info.bestSlope = `${bestSlope.toFixed(1)} OOMs/year`
+      info.Slope = `${bestSlope.toFixed(1)} OOMs/year [${lowSlope.toFixed(
+        1
+      )} ; ${medianSlope.toFixed(1)} ; ${highSlope.toFixed(1)}]`;
+      info.bestSlope = `${bestSlope.toFixed(1)} OOMs/year`;
     } else {
-      info.bestSlope = `${bestSlope.toExponential(1)}`
-      info.Slope = `${bestSlope.toExponential(1)} [${lowSlope.toExponential(1)} ; ${medianSlope.toExponential(1)} ; ${highSlope.toExponential(1)}]`
+      info.bestSlope = `${bestSlope.toExponential(1)}`;
+      info.Slope = `${bestSlope.toExponential(1)} [${lowSlope.toExponential(
+        1
+      )} ; ${medianSlope.toExponential(1)} ; ${highSlope.toExponential(1)}]`;
     }
 
-
     // Doubling time
-    if (params.xAxis == 'Publication date') {
+    if (params.xAxis == "Publication date") {
       let doublingTimes = [];
       for (let slope of bootstrappingResults.slopes) {
         // TODO Zero slopes
         doublingTimes.push(Math.log10(2) / slope / DAYS_PER_MONTH);
       }
 
-      let bestDoublingTime   = Math.log10(2) / model.coeffs[0] / DAYS_PER_MONTH;
-      let lowDoublingTime    = quantile(doublingTimes, quantiles.low);
+      let bestDoublingTime = Math.log10(2) / model.coeffs[0] / DAYS_PER_MONTH;
+      let lowDoublingTime = quantile(doublingTimes, quantiles.low);
       let medianDoublingTime = quantile(doublingTimes, quantiles.median);
-      let highDoublingTime   = quantile(doublingTimes, quantiles.high);
+      let highDoublingTime = quantile(doublingTimes, quantiles.high);
 
-      info["Doubling time"] = `${bestDoublingTime.toFixed(1)} months [${lowDoublingTime.toFixed(1)} ; ${medianDoublingTime.toFixed(1)} ; ${highDoublingTime.toFixed(1)}]`;
+      info["Doubling time"] = `${bestDoublingTime.toFixed(
+        1
+      )} months [${lowDoublingTime.toFixed(1)} ; ${medianDoublingTime.toFixed(
+        1
+      )} ; ${highDoublingTime.toFixed(1)}]`;
     }
 
     info._slopes = bootstrappingResults.slopes;
@@ -555,14 +652,17 @@ function regressData(rows, eras, params) {
     info.R2 = model.r2.toFixed(2);
     info._group = group; // For testing purposes
 
-// ---> Model only, I think
+    // ---> Model only, I think
 
     // Extract predictions
 
-    let xPred; 
-    if (params.xAxis == 'Publication date') {
+    let xPred;
+    if (params.xAxis == "Publication date") {
       // Stretch datapoints to cover the corresponding era
-      xPred = [dateToJulianDate(minEra.start), dateToJulianDate(maxEra.stop) - 0.0001];
+      xPred = [
+        dateToJulianDate(minEra.start),
+        dateToJulianDate(maxEra.stop) - 0.0001,
+      ];
     } else {
       xPred = [minX, maxX];
     }
@@ -571,18 +671,20 @@ function regressData(rows, eras, params) {
 
     // Postprocessing
 
-    if (params.xAxis == 'Publication date') {
+    if (params.xAxis == "Publication date") {
       xPred[0] = julianDateToDate(xPred[0]);
       xPred[1] = julianDateToDate(xPred[1]);
     } else {
-      xPred[0] = 10.0**xPred[0];
-      xPred[1] = 10.0**xPred[1];
+      xPred[0] = 10.0 ** xPred[0];
+      xPred[1] = 10.0 ** xPred[1];
     }
 
-    yPred[0] = 10.0**yPred[0];
-    yPred[1] = 10.0**yPred[1];
+    yPred[0] = 10.0 ** yPred[0];
+    yPred[1] = 10.0 ** yPred[1];
 
-    info['Scale (start / end)'] = `${yPred[0].toExponential(0)} / ${yPred[1].toExponential(0)}`;
+    info["Scale (start / end)"] = `${yPred[0].toExponential(
+      0
+    )} / ${yPred[1].toExponential(0)}`;
 
     infoTable.push(info);
 
@@ -598,14 +700,20 @@ function regressData(rows, eras, params) {
 
   lines.sort((a, b) => a[params.xAxis] - b[params.xAxis]);
 
-  return {lines: lines, infoTable: infoTable};
+  return { lines: lines, infoTable: infoTable };
 }
 
-function bootstrapping(x, y, sampleSize, adjustForEstimateUncertainty, quantiles) {
+function bootstrapping(
+  x,
+  y,
+  sampleSize,
+  adjustForEstimateUncertainty,
+  quantiles
+) {
   quantiles ||= {
-    low:    0.025,
-    median: 0.500,
-    high:   0.975,
+    low: 0.025,
+    median: 0.5,
+    high: 0.975,
   };
 
   let slopes = [];
@@ -615,8 +723,8 @@ function bootstrapping(x, y, sampleSize, adjustForEstimateUncertainty, quantiles
   let x2 = [];
   let xy = [];
   for (let i = 0; i < x.length; i++) {
-    x2.push(x[i]**2);
-    xy.push(x[i]*y[i]);
+    x2.push(x[i] ** 2);
+    xy.push(x[i] * y[i]);
   }
 
   let sampleIndices = Array(n);
@@ -659,7 +767,9 @@ function bootstrapping(x, y, sampleSize, adjustForEstimateUncertainty, quantiles
 
     let data = [];
     for (let i of sampleIndices) {
-      let noise = adjustForEstimateUncertainty ? randomFloat(Math.log10(1/2), Math.log10(2)) : 0;
+      let noise = adjustForEstimateUncertainty
+        ? randomFloat(Math.log10(1 / 2), Math.log10(2))
+        : 0;
       data.push([x[i], y[i] + noise]);
     }
 
@@ -675,7 +785,7 @@ function bootstrapping(x, y, sampleSize, adjustForEstimateUncertainty, quantiles
     quantileValues[key] = quantile(slopes, quantiles[key], true);
   }
 
-  return {slopes: slopes, quantiles: quantileValues};
+  return { slopes: slopes, quantiles: quantileValues };
 }
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -693,7 +803,7 @@ function quantile(arr, q, sorted) {
   let fractionalPart = i - integerPart;
 
   let left = arr[integerPart];
-  let right = arr[Math.min(integerPart+1, arr.length-1)];
+  let right = arr[Math.min(integerPart + 1, arr.length - 1)];
 
   return (1 - fractionalPart) * left + fractionalPart * right;
 }
@@ -730,9 +840,9 @@ function parseDate(str) {
   if (fields.length == 1) {
     year = fields[0];
   } else {
-    day   = fields[0];
+    day = fields[0];
     month = fields[1];
-    year  = fields[2];
+    year = fields[2];
   }
 
   return new Date(year, month - 1, day, 1, 0, 0, 0);
@@ -743,7 +853,7 @@ function print(obj) {
 }
 
 function shallowCopy(obj) {
-  return {...obj};
+  return { ...obj };
 }
 
 function deepCopy(obj) {
@@ -753,14 +863,21 @@ function deepCopy(obj) {
 // TODO Check this!
 function dateToJulianDate(date) {
   let month = date.getMonth() + 1;
-  var x = Math.floor((14 - month)/12);
+  var x = Math.floor((14 - month) / 12);
   var y = date.getFullYear() + 4800 - x;
   var z = month - 3 + 12 * x;
 
-  var n = date.getDate() + Math.floor(((153 * z) + 2)/5) + (365 * y) + Math.floor(y/4) + Math.floor(y/400) - Math.floor(y/100) - 32045;
+  var n =
+    date.getDate() +
+    Math.floor((153 * z + 2) / 5) +
+    365 * y +
+    Math.floor(y / 4) +
+    Math.floor(y / 400) -
+    Math.floor(y / 100) -
+    32045;
 
   return n;
-}   
+}
 
 function julianDateToDate(julianDate) {
   // https://stackoverflow.com/a/26371251

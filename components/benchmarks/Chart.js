@@ -89,7 +89,6 @@ export default function Chart({ dataset, xAxis, yAxis, downloadCSV }) {
       return Math.log10(1 / (1 - model[yAxis.column] / 100));
     });
     const lr = linearRegressionLine(x, y);
-    console.log(x, y);
     return lr.points;
   };
   const chartOptions = {

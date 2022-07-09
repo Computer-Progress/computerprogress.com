@@ -1,8 +1,7 @@
 import { init, defaultParams, generateGraph } from "./trends";
-import { db } from "./database";
-import presets  from "./presets";
-import {Modal} from './modal'
-export default function buildTrendsGraph(container, mlp, args) {
+import presets from "./presets";
+import { Modal } from "./modal";
+export default function buildTrendsGraph(container, mlp, db,  args) {
   "use strict";
 
   let eraColors = ["#e5ae38", "#30a2da", "#fc4f30"];
@@ -188,7 +187,6 @@ export default function buildTrendsGraph(container, mlp, args) {
   /////////////////////////////////////////////////////
   // Initialization
   /////////////////////////////////////////////////////
-  console.log(db)
   const database = init(db);
 
   /////////////////////////////////////////////////////
@@ -956,7 +954,8 @@ export default function buildTrendsGraph(container, mlp, args) {
   let prevXAxis = "";
   let prevYAxis = "";
 
-  let prevParams = {};
+  let prevParams = { ...defaultParams };
+  let params = { ...defaultParams, ...args.options };
 
   v.on("optionsChanged", onChange);
   onChange({ options: params });
@@ -994,8 +993,8 @@ export default function buildTrendsGraph(container, mlp, args) {
       resetCamera = true;
     }
 
-    const prevParams = { ...defaultParams };
-    const params = { ...defaultParams, ...args.options };
+    prevParams = { ...defaultParams };
+    params = { ...defaultParams, ...args.options };
 
     for (let button of xButtonGroup.getElementsByTagName("button")) {
       if (button.dataset.value == params.xAxis) {
@@ -1328,7 +1327,16 @@ export default function buildTrendsGraph(container, mlp, args) {
 
       v.setCamera({ x0: minX, y0: minY / 1.5, x1: maxX, y1: maxY * 1.5 });
     }
+    const event = new CustomEvent("graphChanged", { detail: { params } });
+    document.dispatchEvent(event);
 
     v.requestRenderAll();
   }
+  document.addEventListener("updateTrendsGraph", function (e) {
+    if (document.getElementsByClassName("plotter-container").length > 0) {
+      console.log(e.detail)
+      const params = e.detail.params;
+      onChange({ options: params });
+    }
+  });
 }

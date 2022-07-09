@@ -1,5 +1,5 @@
 import { getDateMultislider } from "./multislider";
-import {scaleLinear, scaleTime, scaleLog} from "d3-scale";
+import { scaleLinear, scaleTime, scaleLog } from "d3-scale";
 import { canvasTxt } from "canvas-txt";
 export default function setupPlotter(mlp) {
   "use strict";
@@ -794,7 +794,6 @@ export default function setupPlotter(mlp) {
           control.on("change", (e) => self.onControlChanged(e, control));
         }
       }
-      console.log(node);
       this.nodes.options.appendChild(node);
     },
 
@@ -812,7 +811,7 @@ export default function setupPlotter(mlp) {
       let self = this;
 
       self.multiSliderOptionNames = optionNames;
-      const DM = getDateMultislider(mlp)
+      const DM = getDateMultislider(mlp);
       self.multislider = new DM({
         parent: self.nodes.dateSlider,
         min: range[0],
