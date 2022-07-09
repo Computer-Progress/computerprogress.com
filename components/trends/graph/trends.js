@@ -7,13 +7,13 @@
 // * adding and removing points
 // * importing database from elsewhere?
 //
-
+import { methods } from './stats'
 const DAYS_PER_YEAR = 365;
 const DAYS_PER_MONTH = 30;
 
 let regression = methods;
 
-let params = {
+export const defaultParams = {
   startDate: parseDate('01/01/1950'),
   endDate: parseDate('01/01/2023'),
   xAxis: "Publication date",
@@ -59,8 +59,9 @@ let params = {
   adjustForEstimateUncertainty: true,
 };
 
-function init(database) {
+export function init(database) {
   function parseDate(str) {
+    console.log(typeof(str))
     let fields = str.split("/");
 
     let day = 1;
@@ -92,8 +93,8 @@ function init(database) {
     let row = database.rows[rowIndex];
 
     // Parsing
-    row["Publication date"] = parseDate(row["Publication date"]);
-    row["Publication date (julian date)"] = dateToJulianDate(row["Publication date"]);
+    row["Publication date"] = row["Publication date"];
+    row["Publication date (julian date)"] = (row["Publication date"]);
     row["Training compute (FLOPs)"] = parseFloat(row["Training compute (FLOPs)"]);
     row["Inference compute (FLOPs)"] = parseFloat(row["Inference compute (FLOPs)"]);
     row["Training dataset size (datapoints)"] = parseFloat(row["Training dataset size (datapoints)"]);
@@ -111,7 +112,7 @@ function init(database) {
   return database;
 }
 
-function generateGraph(database, params) {
+export function generateGraph(database, params) {
   // TODO Check this
   let minDate = params.endDate;
   let maxDate = params.startDate;
@@ -208,7 +209,7 @@ function generateGraph(database, params) {
   //
 
   // Define eras
-  eras = [
+  const eras = [
     {Era:                   'All', start: params.startDate,          stop: params.endDate},
     {Era: 'Pre Deep Learning Era', start: params.startDate,          stop: params.startDlEra},
     {Era:     'Deep Learning Era', start: params.startDlEra,         stop: params.startLargeScaleEra},

@@ -1,7 +1,7 @@
 // Taken from https://daily-dev-tips.com/posts/vanilla-javascript-modal-pop-up/
 
 
-function Modal(element) {
+export function Modal(element) {
   let self = this;
 
   self.element = element;

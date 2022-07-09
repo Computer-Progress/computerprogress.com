@@ -1,21 +1,21 @@
-(function () {
-  let HalfSqrt3 = Math.sqrt(3)/2;
-  let Tan30 = Math.tan(30 * Math.PI/180);
+export default function setupObjects(mlp) {
+  let HalfSqrt3 = Math.sqrt(3) / 2;
+  let Tan30 = Math.tan((30 * Math.PI) / 180);
 
   // From Vega (https://github.com/vega/vega)
   // TODO Ensure they are properly credited
   mlp.pointSymbols = {
-    'circle': {
+    circle: {
       draw: function (context, size) {
         const r = Math.sqrt(size) / 2;
         context.moveTo(r, 0);
-        context.arc(0, 0, r, 0, 2*Math.PI);
-      }
+        context.arc(0, 0, r, 0, 2 * Math.PI);
+      },
     },
-    'cross': {
+    cross: {
       draw: function (context, size) {
         var r = Math.sqrt(size) / 2,
-            s = r / 2.5;
+          s = r / 2.5;
         context.moveTo(-r, -s);
         context.lineTo(-r, s);
         context.lineTo(-s, s);
@@ -29,9 +29,9 @@
         context.lineTo(-s, -r);
         context.lineTo(-s, -s);
         context.closePath();
-      }
+      },
     },
-    'diamond': {
+    diamond: {
       draw: function (context, size) {
         const r = Math.sqrt(size) / 2;
         context.moveTo(-r, 0);
@@ -39,21 +39,21 @@
         context.lineTo(r, 0);
         context.lineTo(0, r);
         context.closePath();
-      }
+      },
     },
-    'square': {
+    square: {
       draw: function (context, size) {
         var w = Math.sqrt(size),
-            x = -w / 2;
+          x = -w / 2;
         context.rect(x, x, w, w);
-      }
+      },
     },
-    'arrow': {
+    arrow: {
       draw: function (context, size) {
         var r = Math.sqrt(size) / 2,
-            s = r / 7,
-            t = r / 2.5,
-            v = r / 8;
+          s = r / 7,
+          t = r / 2.5,
+          v = r / 8;
         context.moveTo(-s, r);
         context.lineTo(s, r);
         context.lineTo(s, -v);
@@ -62,78 +62,78 @@
         context.lineTo(-t, -v);
         context.lineTo(-s, -v);
         context.closePath();
-      }
+      },
     },
-    'wedge': {
+    wedge: {
       draw: function (context, size) {
         var r = Math.sqrt(size) / 2,
-            h = HalfSqrt3 * r,
-            o = h - r * Tan30,
-            b = r / 4;
+          h = HalfSqrt3 * r,
+          o = h - r * Tan30,
+          b = r / 4;
         context.moveTo(0, -h - o);
         context.lineTo(-b, h - o);
         context.lineTo(b, h - o);
         context.closePath();
-      }
+      },
     },
-    'triangle': {
+    triangle: {
       draw: function (context, size) {
         var r = Math.sqrt(size) / 2,
-            h = HalfSqrt3 * r,
-            o = h - r * Tan30;
+          h = HalfSqrt3 * r,
+          o = h - r * Tan30;
         context.moveTo(0, -h - o);
         context.lineTo(-r, h - o);
         context.lineTo(r, h - o);
         context.closePath();
-      }
+      },
     },
-    'triangle-up': {
+    "triangle-up": {
       draw: function (context, size) {
         var r = Math.sqrt(size) / 2,
-            h = HalfSqrt3 * r;
+          h = HalfSqrt3 * r;
         context.moveTo(0, -h);
         context.lineTo(-r, h);
         context.lineTo(r, h);
         context.closePath();
-      }
+      },
     },
-    'triangle-down': {
+    "triangle-down": {
       draw: function (context, size) {
         var r = Math.sqrt(size) / 2,
-            h = HalfSqrt3 * r;
+          h = HalfSqrt3 * r;
         context.moveTo(0, h);
         context.lineTo(-r, -h);
         context.lineTo(r, -h);
         context.closePath();
-      }
+      },
     },
-    'triangle-right': {
+    "triangle-right": {
       draw: function (context, size) {
         var r = Math.sqrt(size) / 2,
-            h = HalfSqrt3 * r;
+          h = HalfSqrt3 * r;
         context.moveTo(h, 0);
         context.lineTo(-h, -r);
         context.lineTo(-h, r);
         context.closePath();
-      }
+      },
     },
-    'triangle-left': {
+    "triangle-left": {
       draw: function (context, size) {
         var r = Math.sqrt(size) / 2,
-            h = HalfSqrt3 * r;
+          h = HalfSqrt3 * r;
         context.moveTo(-h, 0);
         context.lineTo(h, -r);
         context.lineTo(h, r);
         context.closePath();
-      }
+      },
     },
-    'stroke': {
+    stroke: {
       draw: function (context, size) {
         const r = Math.sqrt(size) / 2;
         context.moveTo(-r, 0);
         context.lineTo(r, 0);
-      }
-    }
+      },
+    },
   };
 
   mlp.Object = mlp.createClass({
@@ -147,52 +147,55 @@
 
     group: null,
 
-    cursor: 'auto',
+    cursor: "auto",
 
-    initialize: function(options) {
-      this.interactive = ('interactive' in options) ? options.interactive : true;
-      this.visible = ('visible' in options) ? options.visible : true;
+    initialize: function (options) {
+      this.interactive = "interactive" in options ? options.interactive : true;
+      this.visible = "visible" in options ? options.visible : true;
       this.area = options.area;
       this.plotter = options.plotter;
       this.group = options.group;
-      this.cursor = options.cursor || 'auto';
+      this.cursor = options.cursor || "auto";
     },
 
-    canvasDistanceToPoint: function(canvasPoint) {
+    canvasDistanceToPoint: function (canvasPoint) {
       return Infinity;
     },
 
-    render: function(context) {
-    },
+    render: function (context) {},
   });
 
   mlp.Point = mlp.createClass(mlp.Object, {
     paperCoords: null,
     dataCoords: null,
-    shape: 'circle',
+    shape: "circle",
     fill: null,
-    stroke: '#1f77b4',
+    stroke: "#1f77b4",
 
-    initialize: function(paperCoords, dataCoords, options) {
+    initialize: function (paperCoords, dataCoords, options) {
       options ||= {};
 
-      this.callSuper('initialize', options);
-      this.paperCoords = {...paperCoords};
-      this.dataCoords = {...dataCoords};
-      this.shape = options.shape || 'circle';
+      this.callSuper("initialize", options);
+      this.paperCoords = { ...paperCoords };
+      this.dataCoords = { ...dataCoords };
+      this.shape = options.shape || "circle";
       this.fill = options.fill;
-      this.stroke = ('stroke' in options) ? options.stroke : '#1f77b4';
+      this.stroke = "stroke" in options ? options.stroke : "#1f77b4";
     },
 
-    canvasDistanceToPoint: function(canvasPoint) {
+    canvasDistanceToPoint: function (canvasPoint) {
       return mlp.dist(canvasPoint, this.area.paperToCanvas(this.paperCoords));
     },
 
-    render: function(context) {
+    render: function (context) {
       let areaBounds = this.area.bounds();
       let cameraBounds = this.area.cameraBounds;
 
-      let q = mlp.Converter.paperToCanvas(this.paperCoords, areaBounds, cameraBounds);
+      let q = mlp.Converter.paperToCanvas(
+        this.paperCoords,
+        areaBounds,
+        cameraBounds
+      );
 
       context.lineWidth = 2;
       context.strokeStyle = this.stroke;
@@ -208,10 +211,10 @@
 
       let shape = this.shape;
 
-      if (typeof shape == 'function') {
+      if (typeof shape == "function") {
         shape(context, shapeSize);
       } else {
-        if (!(shape in mlp.pointSymbols)) shape = 'circle';
+        if (!(shape in mlp.pointSymbols)) shape = "circle";
         mlp.pointSymbols[this.shape].draw(context, shapeSize);
       }
 
@@ -226,19 +229,19 @@
     paperPoints: null,
     dataPoints: null,
     fill: null,
-    stroke: '#1f77b4',
+    stroke: "#1f77b4",
 
-    initialize: function(paperPoints, dataPoints, options) {
+    initialize: function (paperPoints, dataPoints, options) {
       options ||= {};
 
-      this.callSuper('initialize', options);
+      this.callSuper("initialize", options);
       this.paperPoints = paperPoints.slice();
       this.dataPoints = dataPoints.slice();
       this.fill = options.fill;
-      this.stroke = ('stroke' in options) ? options.stroke : '#1f77b4';
+      this.stroke = "stroke" in options ? options.stroke : "#1f77b4";
     },
 
-    canvasDistanceToPoint: function(canvasPoint) {
+    canvasDistanceToPoint: function (canvasPoint) {
       let canvasPoints = [];
 
       for (let point of this.paperPoints) {
@@ -248,12 +251,13 @@
       return mlp.distToPolyline(canvasPoint, canvasPoints);
     },
 
-    render: function(context) {
+    render: function (context) {
       let areaBounds = this.area.bounds();
       let cameraBounds = this.area.cameraBounds;
 
       let qs = [];
-      for (let p of this.paperPoints) qs.push(mlp.Converter.paperToCanvas(p, areaBounds, cameraBounds));
+      for (let p of this.paperPoints)
+        qs.push(mlp.Converter.paperToCanvas(p, areaBounds, cameraBounds));
 
       context.lineWidth = 2;
       context.strokeStyle = this.stroke;
@@ -289,27 +293,30 @@
 
     position: null,
 
-    fill: 'black',
+    fill: "black",
 
-    stroke: '#1f77b4',
+    stroke: "#1f77b4",
 
-    initialize: function(text, options) {
+    initialize: function (text, options) {
       options ||= {};
 
-      this.callSuper('initialize', options);
-      this.text                = text;
-      this.fontFamily          = options.fontFamily;
-      this.fontSize            = options.fontSize;
-      this.fontWeight          = options.fontWeight;
-      this.position            = ('position' in options)            ? options.position : {x: 0, y: 0};
-      this.normalizedBasePoint = ('normalizedBasePoint' in options) ? options.normalizedBasePoint : {x: 0, y: 1};
-      this.rotation            = ('rotation' in options)            ? options.rotation : 0;
-      this.fill                = ('fill' in options)                ? options.fill : 'black';
-      this.offset              = ('offset' in options)              ? options.offset : {x: 0, y: 0};
-      this.stroke              = options.stroke;
+      this.callSuper("initialize", options);
+      this.text = text;
+      this.fontFamily = options.fontFamily;
+      this.fontSize = options.fontSize;
+      this.fontWeight = options.fontWeight;
+      this.position = "position" in options ? options.position : { x: 0, y: 0 };
+      this.normalizedBasePoint =
+        "normalizedBasePoint" in options
+          ? options.normalizedBasePoint
+          : { x: 0, y: 1 };
+      this.rotation = "rotation" in options ? options.rotation : 0;
+      this.fill = "fill" in options ? options.fill : "black";
+      this.offset = "offset" in options ? options.offset : { x: 0, y: 0 };
+      this.stroke = options.stroke;
     },
 
-    canvasDistanceToPoint: function(canvasPoint) {
+    canvasDistanceToPoint: function (canvasPoint) {
       let dist = Infinity;
 
       let bounds = this.getBounds();
@@ -320,52 +327,96 @@
       return dist;
     },
 
-    getBounds: function() {
+    getBounds: function () {
       let areaBounds = this.area.bounds();
       let cameraBounds = this.area.cameraBounds;
 
       this.area.context.save();
-      this.area.context.font = (this.fontWeight || 'bold') + ' ' + (this.fontSize || 14) + 'px ' + (this.fontFamily || 'sans');
-      let textBounds = mlp.rect(mlp.getTextBounds(this.area.context, this.text));
+      this.area.context.font =
+        (this.fontWeight || "bold") +
+        " " +
+        (this.fontSize || 14) +
+        "px " +
+        (this.fontFamily || "sans");
+      let textBounds = mlp.rect(
+        mlp.getTextBounds(this.area.context, this.text)
+      );
       this.area.context.restore();
 
-      let q = mlp.Converter.paperToCanvas(this.position, areaBounds, cameraBounds);
+      let q = mlp.Converter.paperToCanvas(
+        this.position,
+        areaBounds,
+        cameraBounds
+      );
 
-      let basePointX = (1 - this.normalizedBasePoint.x) * textBounds.x0 + this.normalizedBasePoint.x * textBounds.x1;
-      let basePointY = (1 - this.normalizedBasePoint.y) * textBounds.y1 + this.normalizedBasePoint.y * textBounds.y0;
+      let basePointX =
+        (1 - this.normalizedBasePoint.x) * textBounds.x0 +
+        this.normalizedBasePoint.x * textBounds.x1;
+      let basePointY =
+        (1 - this.normalizedBasePoint.y) * textBounds.y1 +
+        this.normalizedBasePoint.y * textBounds.y0;
 
       let x = q.x - basePointX;
       let y = q.y - basePointY;
 
-      let absoluteTextBounds = {...textBounds};
+      let absoluteTextBounds = { ...textBounds };
       absoluteTextBounds.x0 += x;
       absoluteTextBounds.x1 += x;
       absoluteTextBounds.y0 += y;
       absoluteTextBounds.y1 += y;
 
-      let angle = this.rotation * Math.PI/180;
+      let angle = (this.rotation * Math.PI) / 180;
 
-      let a = mlp.rotate({x: absoluteTextBounds.x0, y: absoluteTextBounds.y0}, q, angle);
-      let b = mlp.rotate({x: absoluteTextBounds.x0, y: absoluteTextBounds.y1}, q, angle);
-      let c = mlp.rotate({x: absoluteTextBounds.x1, y: absoluteTextBounds.y1}, q, angle);
-      let d = mlp.rotate({x: absoluteTextBounds.x1, y: absoluteTextBounds.y0}, q, angle);
+      let a = mlp.rotate(
+        { x: absoluteTextBounds.x0, y: absoluteTextBounds.y0 },
+        q,
+        angle
+      );
+      let b = mlp.rotate(
+        { x: absoluteTextBounds.x0, y: absoluteTextBounds.y1 },
+        q,
+        angle
+      );
+      let c = mlp.rotate(
+        { x: absoluteTextBounds.x1, y: absoluteTextBounds.y1 },
+        q,
+        angle
+      );
+      let d = mlp.rotate(
+        { x: absoluteTextBounds.x1, y: absoluteTextBounds.y0 },
+        q,
+        angle
+      );
 
       return [a, b, c, d];
     },
 
-    render: function(context) {
+    render: function (context) {
       let areaBounds = this.area.bounds();
       let cameraBounds = this.area.cameraBounds;
 
       context.save();
 
-      context.font = (this.fontWeight || 'bold') + ' ' + (this.fontSize || 14) + 'px ' + (this.fontFamily || 'sans');
+      context.font =
+        (this.fontWeight || "bold") +
+        " " +
+        (this.fontSize || 14) +
+        "px " +
+        (this.fontFamily || "sans");
       let textBounds = mlp.rect(mlp.getTextBounds(context, this.text));
 
-      let q = mlp.Converter.paperToCanvas(this.position, areaBounds, cameraBounds);
+      let q = mlp.Converter.paperToCanvas(
+        this.position,
+        areaBounds,
+        cameraBounds
+      );
 
-      let basePointX = (1 - this.normalizedBasePoint.x) * textBounds.x0 + this.normalizedBasePoint.x * textBounds.x1;
-      let basePointY = (1 - this.normalizedBasePoint.y) * textBounds.y1 + this.normalizedBasePoint.y * textBounds.y0;
+      let basePointX =
+        (1 - this.normalizedBasePoint.x) * textBounds.x0 +
+        this.normalizedBasePoint.x * textBounds.x1;
+      let basePointY =
+        (1 - this.normalizedBasePoint.y) * textBounds.y1 +
+        this.normalizedBasePoint.y * textBounds.y0;
 
       let x = q.x - basePointX;
       let y = q.y - basePointY;
@@ -373,7 +424,7 @@
       context.strokeStyle = this.stroke;
       context.fillStyle = this.fill;
 
-      let angle = this.rotation * Math.PI/180;
+      let angle = (this.rotation * Math.PI) / 180;
 
       if (angle) {
         context.translate(q.x, q.y);
@@ -384,7 +435,7 @@
       x += this.offset.x;
       y += this.offset.y;
 
-      if (this.fill)  context.fillText(this.text, x, y);
+      if (this.fill) context.fillText(this.text, x, y);
       if (this.stoke) context.strokeText(this.text, x, y);
 
       context.restore();
@@ -398,16 +449,20 @@
     x1: 0,
     y1: 0,
 
-    initialize: function(x0, y0, x1, y1, options) {
-      this.callSuper('initialize', options);
+    initialize: function (x0, y0, x1, y1, options) {
+      this.callSuper("initialize", options);
       this.x0 = x0;
       this.y0 = y0;
       this.x1 = x1;
       this.y1 = y1;
     },
 
-    canvasDistanceToPoint: function(canvasPoint) {
-      return this.distToLine(canvasPoint, {x: this.x0, y: this.y0}, {x: this.x1, y: this.y1});
-    }
+    canvasDistanceToPoint: function (canvasPoint) {
+      return this.distToLine(
+        canvasPoint,
+        { x: this.x0, y: this.y0 },
+        { x: this.x1, y: this.y1 }
+      );
+    },
   });
-})();
+}

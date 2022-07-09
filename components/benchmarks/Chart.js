@@ -7,6 +7,30 @@ if (typeof Highcharts === "object") {
 }
 
 export default function Chart({ dataset, xAxis, yAxis, downloadCSV }) {
+  function formatFLOPs(flops, decimals = 2) {
+    const parsedFlops = Number(flops);
+    if (parsedFlops === 0) return "0 flops";
+
+    const k = 1024;
+    const dm = decimals < 0 ? 0 : decimals;
+    const sizes = [
+      "FLOPs",
+      "KFLOPs",
+      "MFLOPs",
+      "GFLOPs",
+      "TFLOPs",
+      "PFLOPs",
+      "EFLOPs",
+      "ZFLOPs",
+      "YFLOPs",
+    ];
+
+    const i = Math.floor(Math.log(parsedFlops) / Math.log(k));
+
+    return (
+      parseFloat((parsedFlops / Math.pow(k, i)).toFixed(dm)) + " " + sizes[i]
+    );
+  }
   const linearRegressionLine = (x, y) => {
     const xs = [];
     const ys = [];
@@ -65,13 +89,13 @@ export default function Chart({ dataset, xAxis, yAxis, downloadCSV }) {
       return Math.log10(1 / (1 - model[yAxis.column] / 100));
     });
     const lr = linearRegressionLine(x, y);
-    console.log(x,y)
+    console.log(x, y);
     return lr.points;
   };
   const chartOptions = {
     chart: {
-      spacingBottom:25,
-      spacingTop:50,
+      spacingBottom: 25,
+      spacingTop: 50,
       height: 600, // 16:9 ratio
     },
     title: {
@@ -83,7 +107,8 @@ export default function Chart({ dataset, xAxis, yAxis, downloadCSV }) {
     xAxis: {
       title: {
         enabled: true,
-        text: xAxis.name,
+        text:
+          xAxis.name === "Hardware Burden" ? "Hardware Burden (FLOPs)" : "Year",
         margin: 5,
         style: {
           fontSize: 22,
@@ -134,9 +159,9 @@ export default function Chart({ dataset, xAxis, yAxis, downloadCSV }) {
       // showLastLabel: false,
 
       labels: {
-        y:-3,
-            x:0,
-            align:'left',
+        y: -3,
+        x: 0,
+        align: "left",
         formatter: function () {
           let label = (1 - 10 ** -this.value) * 100;
           label = Math.round(label * 100) / 100;
@@ -156,11 +181,16 @@ export default function Chart({ dataset, xAxis, yAxis, downloadCSV }) {
         let y = (1 - 10 ** -this.y) * 100;
         y = Math.round(y * 100) / 100;
         let x = Math.round(this.x * 100) / 100;
-        return `<div class="bg-white block px-3 py-2 mt-[1px] ml-[1px]"> ${
+        const formatXAxis = (x) => {
+          if (xAxis.column === "year") {
+            return `<span class="">${x}</span>`;
+          }
+          return `<span class="">10<sup>${x}</sup></span>`;
+        }
+        return `<div class="bg-white block px-3 py-2 mt-[1px] ml-[1px]"> <b>${
           this.point.name
-        }<br>${yAxis.name}: ${y}% <br> ${xAxis.name}: 10<sup>${x.toFixed(
-          1
-        )}</sup></div>`;
+        }</b><br>${yAxis.name}: ${y}% <br> ${xAxis.name}: ${formatXAxis(x)}</div>`;
+        
       },
     },
     plotOptions: {

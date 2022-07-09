@@ -29,15 +29,13 @@ const Tooltip = ({ children, position }) => {
           />
           <div
             className={
-              (pos.includes('right') ? " -left-3/4 " : " -right-3/4 ") +
-              (pos.includes('top') ? " bottom-full " : " top-full ") +
+              (pos.includes("right") ? " -left-3/4 " : " -right-3/4 ") +
+              (pos.includes("top") ? " bottom-full " : " top-full ") +
               (popoverShow ? "" : "hidden ") +
               "absolute rounded-lg bg-black bg-opacity-70  z-50 font-normal leading-normal w-max max-w-xs text-sm  break-words "
             }
           >
-            <div className="text-white p-2 normal-case">
-              {children}
-            </div>
+            <div className="text-white p-2 normal-case">{children}</div>
           </div>
         </div>
       </div>
@@ -62,7 +60,7 @@ export default function Main({ benchmarks, dataset, accuracyTypes }) {
 
   const [xAxisOptions, setXAxisOptions] = useState([
     {
-      name: "Hadware Burden",
+      name: "Hardware Burden",
       column: "computing_power",
     },
     {
@@ -173,10 +171,35 @@ export default function Main({ benchmarks, dataset, accuracyTypes }) {
     }, 100);
   }
 
+  function formatUnit(value, unit, decimals = 2) {
+    const parsedValue = Number(value);
+    if (parsedValue === 0) return "0 flops";
+
+    const k = 1024;
+    const dm = decimals < 0 ? 0 : decimals;
+    const sizes = [
+      unit,
+      "K" + unit,
+      "M" + unit,
+      "G" + unit,
+      "T" + unit,
+      "P" + unit,
+      "E" + unit,
+      "Z" + unit,
+      "Y" + unit,
+    ];
+
+    const i = Math.floor(Math.log(parsedValue) / Math.log(k));
+
+    return (
+      parseFloat((parsedValue / Math.pow(k, i)).toFixed(dm)) + " " + sizes[i]
+    );
+  }
+
   //   ==============================================================
 
   return (
-    <main>
+    <main className="flex-grow">
       <div className="max-w-7xl mx-auto pb-6 sm:px-6 lg:px-8 mt-10">
         {/* Replace with your content */}
         <div>
@@ -264,15 +287,23 @@ export default function Main({ benchmarks, dataset, accuracyTypes }) {
             </Menu>
           </div>
           <div>
-            <Chart
-              dataset={filteredDataset}
-              xAxis={xAxis}
-              yAxis={yAxis}
-              downloadCSV={downloadCSV}
-            />
+            {filteredDataset.length > 2 ? (
+              <Chart
+                dataset={filteredDataset}
+                xAxis={xAxis}
+                yAxis={yAxis}
+                downloadCSV={downloadCSV}
+              />
+            ) : (
+              <div className="mt-8 text-center bg-slate-50 py-16">
+                <p className="text-gray-900 ">
+                  No data available for this benchmark. Try change axis.
+                </p>
+              </div>
+            )}
           </div>
 
-          <div className="relative overflow-x-auto shadow-md sm:rounded-lg mt-8">
+          <div className="relative overflow-x-auto  shadow-md sm:rounded-lg mt-8 mb-16">
             <table className="w-full text-sm text-left text-gray-500">
               <thead className="text-xs table-fixed text-gray-700 uppercase bg-gray-50">
                 <tr>
@@ -326,7 +357,12 @@ export default function Main({ benchmarks, dataset, accuracyTypes }) {
                     >
                       <div className="flex gap-1">
                         hardware burden
-                          <Tooltip position="bottom-left"> Something about hardware burden. Something about hardware burden. Something about hardware burden sdasd asdasd</Tooltip>
+                        <Tooltip position="bottom-left">
+                          {" "}
+                          Something about hardware burden. Something about
+                          hardware burden. Something about hardware burden sdasd
+                          asdasd
+                        </Tooltip>
                       </div>
                       {sortBy.column === "computing_power" &&
                         (sortBy.type === "asc" ? (
@@ -336,20 +372,6 @@ export default function Main({ benchmarks, dataset, accuracyTypes }) {
                         ))}
                     </button>
                   </th>
-                  {/* <th scope="col" className="px-6 py-3">
-                    <button
-                    className="flex items-center uppercase gap-2"
-                      onClick={() => requestSort(xAxis.column)}
-                    >
-                      <p>{xAxis.name}</p>
-                      {sortBy.column === xAxis.column &&
-                        (sortBy.type === "asc" ? (
-                          <SortAscendingIcon className="h-4 w-4 text-gray-300" />
-                        ) : (
-                          <SortDescendingIcon className="h-4 w-4 text-gray-300" />
-                        ))}
-                    </button>
-                  </th> */}
                   <th scope="col" className="px-6 py-3">
                     <span className="sr-only">open</span>
                   </th>
@@ -357,166 +379,186 @@ export default function Main({ benchmarks, dataset, accuracyTypes }) {
               </thead>
 
               <tbody>
-                {(showMore
-                  ? filteredDataset
-                  : filteredDataset.slice(0, 10)
-                ).map((data, index) => (
-                  <Disclosure key={index}>
-                    {({ open }) => (
-                      <>
-                        <tr className="border-b   bg-gray-50  ">
-                          <th
-                            scope="row"
-                            className="px-6 py-2 font-medium text-gray-900 whitespace-pre-wrap"
-                          >
-                            {data["name"]}
-                          </th>
-                          <td className="px-6 py-2">{data["year"]}</td>
+                {filteredDataset.length > 0 ? (
+                  (showMore
+                    ? filteredDataset
+                    : filteredDataset.slice(0, 10)
+                  ).map((data, index) => (
+                    <Disclosure key={index}>
+                      {({ open }) => (
+                        <>
+                          <tr className="border-b   bg-gray-50  ">
+                            <th
+                              scope="row"
+                              className="px-6 py-2 font-medium text-gray-900 whitespace-pre-wrap"
+                            >
+                              {data["name"]}
+                            </th>
+                            <td className="px-6 py-2">{data["year"]}</td>
 
-                          <td className="px-6 py-2">{data[yAxis.column]}</td>
-                          <td className="px-6 py-2">
-                            {data["computing_power"]}
-                          </td>
-                          {/* <td className="px-6 py-2">{data[xAxis.column]}</td> */}
-                          <td className="px-6 py-2 text-right">
-                            <Disclosure.Button className="py-2">
-                              {open ? (
-                                <svg
-                                  xmlns="http://www.w3.org/2000/svg"
-                                  className="h-6 w-6"
-                                  fill="none"
-                                  viewBox="0 0 24 24"
-                                  stroke="currentColor"
-                                  strokeWidth={2}
-                                >
-                                  <path
-                                    strokeLinecap="round"
-                                    strokeLinejoin="round"
-                                    d="M18 12H6"
-                                  />
-                                </svg>
-                              ) : (
-                                <svg
-                                  xmlns="http://www.w3.org/2000/svg"
-                                  className="h-6 w-6"
-                                  fill="none"
-                                  viewBox="0 0 24 24"
-                                  stroke="currentColor"
-                                  strokeWidth={2}
-                                >
-                                  <path
-                                    strokeLinecap="round"
-                                    strokeLinejoin="round"
-                                    d="M12 6v6m0 0v6m0-6h6m-6 0H6"
-                                  />
-                                </svg>
-                              )}
-                            </Disclosure.Button>
-                          </td>
-                        </tr>
-
-                        <Disclosure.Panel as="tr" className="   bg-white  ">
-                          <td colSpan="5">
-                            <div className="border-x-[#AA3248] border-x-2 p-6 sm:grid sm:grid-cols-2 gap-8">
-                              <div>
-                                <h2 className="font-bold">Paper</h2>
-                                <div className="flex gap-8 mt-1">
-                                  <div>
-                                    <p className="text-xs">Title</p>
-                                    <p className="text-gray-900 flex gap-1">
-                                      <a
-                                        className="text-[#AA3248] hover:underline"
-                                        title="paper link"
-                                        href={data["paper_link"]}
-                                        target="_blank"
-                                        rel="noreferrer"
-                                      >
-                                        <span className="whitespace-pre-wrap">
-                                          {data["title"]}
-                                        </span>
-                                      </a>
-                                    </p>
-                                  </div>
-                                  <div></div>
-                                </div>
-                              </div>
-                              <div>
-                                <h2 className="font-bold">External links</h2>
-
-                                <p className="text-[#21cbce]">
-                                  <a
-                                    className="text-[#21cbce]"
-                                    title="paper with code"
-                                    href={
-                                      "https://paperswithcode.com" +
-                                      data["paper_with_code"]
-                                    }
-                                    target="_blank"
-                                    rel="noreferrer"
+                            <td className="px-6 py-2">{data[yAxis.column]}</td>
+                            <td className="px-6 py-2">
+                              {data["computing_power"]
+                                ? formatUnit(data["computing_power"], "FLOPs")
+                                : "-"}
+                            </td>
+                            {/* <td className="px-6 py-2">{data[xAxis.column]}</td> */}
+                            <td className="px-6 py-2 text-right">
+                              <Disclosure.Button className="py-2">
+                                {open ? (
+                                  <svg
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    className="h-6 w-6"
+                                    fill="none"
+                                    viewBox="0 0 24 24"
+                                    stroke="currentColor"
+                                    strokeWidth={2}
                                   >
-                                    <svg
-                                      xmlns="http://www.w3.org/2000/svg"
-                                      viewBox="0 0 512 512"
-                                      className="h-5 w-5"
-                                      fill="currentColor"
-                                    >
-                                      <path d="M88 128h48v256H88zm144 0h48v256h-48zm-72 16h48v224h-48zm144 0h48v224h-48zm72-16h48v256h-48z"></path>
-                                      <path d="M104 104V56H16v400h88v-48H64V104zm304-48v48h40v304h-40v48h88V56z"></path>
-                                    </svg>{" "}
-                                  </a>
-                                </p>
-                              </div>
+                                    <path
+                                      strokeLinecap="round"
+                                      strokeLinejoin="round"
+                                      d="M18 12H6"
+                                    />
+                                  </svg>
+                                ) : (
+                                  <svg
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    className="h-6 w-6"
+                                    fill="none"
+                                    viewBox="0 0 24 24"
+                                    stroke="currentColor"
+                                    strokeWidth={2}
+                                  >
+                                    <path
+                                      strokeLinecap="round"
+                                      strokeLinejoin="round"
+                                      d="M12 6v6m0 0v6m0-6h6m-6 0H6"
+                                    />
+                                  </svg>
+                                )}
+                              </Disclosure.Button>
+                            </td>
+                          </tr>
 
-                              <div>
-                                <h2 className="font-bold">
-                                  Model Characteristics
-                                </h2>
-
-                                <div className="flex gap-5 mt-1">
-                                  <div>
-                                    <p className="text-xs flex gap-1">
-                                      Operations per network pass
-                                      <Tooltip position="bottom-right"> Something about hardware burden. Something about hardware burden. Something about hardware burden sdasd asdasd</Tooltip>
-
-                                    </p>
-                                    <p className="text-gray-900">
-                                      {data["flops"] ||
-                                        data["multiadds"] * 2 ||
-                                        "-"}
-                                      {(data["flops"] || data["multiadds"]) &&
-                                        " FLOPS"}
-                                    </p>
-                                  </div>
-                                  <div>
-                                    <p className="text-xs">Paramenters</p>
-                                    <p className="text-gray-900">
-                                      {data["parameters"] || "-"}
-                                    </p>
-                                  </div>
-                                </div>
-                              </div>
-                              <div>
-                                <h2 className="font-bold">
-                                  Peformance metrics
-                                </h2>
-                                <div className="flex gap-5 mt-1">
-                                  {accuracyTypes.map((metric, index) => (
-                                    <div key={index}>
-                                      <p className="text-xs">{metric}</p>
-                                      <p className="text-gray-900">
-                                        {data[metric] || "-"}
+                          <Disclosure.Panel as="tr" className="   bg-white  ">
+                            <td colSpan="5">
+                              <div className="border-x-[#AA3248] border-x-2 p-6 sm:grid sm:grid-cols-2 gap-8">
+                                <div>
+                                  <h2 className="font-bold">Paper</h2>
+                                  <div className="flex gap-8 mt-1">
+                                    <div>
+                                      <p className="text-xs">Title</p>
+                                      <p className="text-gray-900 flex gap-1">
+                                        <a
+                                          className="text-[#AA3248] hover:underline"
+                                          title="paper link"
+                                          href={data["paper_link"]}
+                                          target="_blank"
+                                          rel="noreferrer"
+                                        >
+                                          <span className="whitespace-pre-wrap">
+                                            {data["title"]}
+                                          </span>
+                                        </a>
                                       </p>
                                     </div>
-                                  ))}
+                                    <div></div>
+                                  </div>
+                                </div>
+                                <div>
+                                  <h2 className="font-bold">External links</h2>
+
+                                  <p className="text-[#21cbce] ">
+                                    <a
+                                      className="text-[#21cbce] inline-block"
+                                      title="paper with code"
+                                      href={
+                                        "https://paperswithcode.com" +
+                                        data["paper_with_code"]
+                                      }
+                                      target="_blank"
+                                      rel="noreferrer"
+                                    >
+                                      <svg
+                                        xmlns="http://www.w3.org/2000/svg"
+                                        viewBox="0 0 512 512"
+                                        className="h-5 w-5"
+                                        fill="currentColor"
+                                      >
+                                        <path d="M88 128h48v256H88zm144 0h48v256h-48zm-72 16h48v224h-48zm144 0h48v224h-48zm72-16h48v256h-48z"></path>
+                                        <path d="M104 104V56H16v400h88v-48H64V104zm304-48v48h40v304h-40v48h88V56z"></path>
+                                      </svg>{" "}
+                                    </a>
+                                  </p>
+                                </div>
+
+                                <div>
+                                  <h2 className="font-bold">
+                                    Model Characteristics
+                                  </h2>
+
+                                  <div className="flex gap-5 mt-1">
+                                    <div>
+                                      <p className="text-xs flex gap-1">
+                                        Operations per network pass
+                                        <Tooltip position="bottom-right">
+                                          {" "}
+                                          Something about hardware burden.
+                                          Something about hardware burden.
+                                          Something about hardware burden sdasd
+                                          asdasd
+                                        </Tooltip>
+                                      </p>
+                                      <p className="text-gray-900">
+                                        {(data["flops"] &&
+                                          formatUnit(data["flops"], "FLOPs")) ||
+                                          (data["multiadds"] &&
+                                            formatUnit(
+                                              data["multiadds"] * 2,
+                                              "FLOPs"
+                                            )) ||
+                                          "-"}
+                                      </p>
+                                    </div>
+                                    <div>
+                                      <p className="text-xs">Paramenters</p>
+                                      <p className="text-gray-900">
+                                        {(data["parameters"] &&
+                                          formatUnit(data["parameters"], "")) ||
+                                          "-"}
+                                      </p>
+                                    </div>
+                                  </div>
+                                </div>
+                                <div>
+                                  <h2 className="font-bold">
+                                    Peformance metrics
+                                  </h2>
+                                  <div className="flex gap-5 mt-1">
+                                    {accuracyTypes.map((metric, index) => (
+                                      <div key={index}>
+                                        <p className="text-xs">{metric}</p>
+                                        <p className="text-gray-900">
+                                          {data[metric] || "-"}
+                                        </p>
+                                      </div>
+                                    ))}
+                                  </div>
                                 </div>
                               </div>
-                            </div>
-                          </td>
-                        </Disclosure.Panel>
-                      </>
-                    )}
-                  </Disclosure>
-                ))}
+                            </td>
+                          </Disclosure.Panel>
+                        </>
+                      )}
+                    </Disclosure>
+                  ))
+                ) : (
+                  <tr className="text-center">
+                    <td colSpan="5" className="text-gray-900 py-2">
+                      No data available
+                    </td>
+                  </tr>
+                )}
               </tbody>
             </table>
           </div>

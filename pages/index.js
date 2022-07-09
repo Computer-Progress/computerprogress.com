@@ -12,7 +12,7 @@ export default function Home() {
         'The Computation Limits of Deep Learning is a paper published in the journal "Computation and Computational Complexity".',
       date: "2007",
 
-      authors: "Thompson, N., et al",
+      authors: "Thompson, N. et al",
 
       href: "/benchmarks/image-classification-on-imagenet",
       image: "/chart-imagenet.png",
@@ -22,8 +22,7 @@ export default function Home() {
       description:
         'The Computation Trends Across Three Eras of Machine Learning is a paper published in the journal "Computation and Computational Complexity".',
       date: "2007",
-      authors:
-        "Sevilla, J., et al",
+      authors: "Sevilla, J. et al",
       href: "/trends",
       image: "/chart-trends.png",
     },
@@ -44,66 +43,70 @@ export default function Home() {
         </Head>
 
         <Navbar></Navbar>
-        <div className="relative  h-96  flex flex-col items-center min-w-screen justify-end flex-1">
+        <div className="relative  h-[30rem]  flex flex-col items-center min-w-screen justify-end flex-1">
           <div className="    max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 flex-1 flex items-center">
-              <h2 className="text-white text-3xl text-center font-bold">
-                We’re a team working to understand the economic and technical
-                foundations of progress in computing
-              </h2>
+            <h2 className="text-white text-2xl sm:text-3xl text-center font-bold">
+              We’re a team working to understand the economic and technical
+              foundations of progress in computing
+            </h2>
           </div>
           <div className="video-docker -z-10 absolute top-0 left-0 w-full h-full overflow-hidden bg-transparent">
-              <video
-                id="bgVideo"
-                className="min-w-full min-h-full absolute object-cover "
-                playsInline
-                autoPlay
-                muted
-                loop
-              >
-                <source src="hero1.webm" type="video/mp4" />
-                <source src="hero1.mp4" type="video/mp4" />
-                Your browser does not support HTML5 video.
-              </video>
+            <video
+              id="bgVideo"
+              className="min-w-full min-h-full absolute object-cover "
+              playsInline
+              autoPlay
+              muted
+              loop
+            >
+              <source src="hero1.webm" type="video/mp4" />
+              <source src="hero1.mp4" type="video/mp4" />
+              Your browser does not support HTML5 video.
+            </video>
           </div>
         </div>
-        <div className="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8 mb-16">
-          <h3 className="mt-8 text-gray-900 text-3xl font-bold">Our work</h3>
-          <div className="mt-6 grid grid-cols-1 sm:grid-cols-3 gap-6 place-items-stretch">
-            {ourWork.map((item, index) => (
-              <a
-                className="w-full h-full rounded-lg bg-transparent flex flex-1 flex-col justify-between  shadow-lg border-1 border-gray-200"
-                href={item.href}
-                key={index}
-              >
-                <div className="relative aspect-video bg-white rounded-t-lg w-full overflow-hidden ">
-                  <Image
-                    alt={item.title}
-                    layout="fill"
-                    objectFit="cover"
-                    src={item.image}
-                  />
-                </div>
-                <div className="bg-white flex-1 rounded-r-lg  p-4 flex flex-col items-end justify-end leading-normal">
-                  <div className="flex-1">
-                    <h4 className="text-gray-900 font-medium text-lg mb-2 leading-tight">
-                      {item.title}
-                    </h4>
-                    <p className="text-gray-500 font-normal text-md mb-2 ">
-                      {item.description}
-                    </p>
+        <div className="bg-gray-50 pb-16">
+          <div className="max-w-7xl mx-auto bg-gray-0 py-6 px-4 sm:px-6 lg:px-8 ">
+            <h3 className="mt-8 text-gray-900 text-2xl sm:text-3xl font-bold">
+              Our work:
+            </h3>
+            <div className="mt-6 grid grid-cols-1 sm:grid-cols-2  lg:grid-cols-3 gap-6 place-items-stretch">
+              {ourWork.map((item, index) => (
+                <a
+                  className="w-full h-full rounded-lg bg-transparent flex flex-1 flex-col justify-between border shadow-lg border-1 border-gray-200 hover:border-gray-300"
+                  href={item.href}
+                  key={index}
+                >
+                  <div className="relative aspect-video bg-white rounded-t-lg w-full overflow-hidden ">
+                    <Image
+                      alt={item.title}
+                      layout="fill"
+                      objectFit="cover"
+                      src={item.image}
+                    />
                   </div>
-                  <div className="">
-                    <span className="text-gray-500 font-normal text-sm">
-                      By {item.authors}
-                    </span>
-                    {" - "}
-                    <span className="text-gray-500 font-normal text-sm">
-                      {item.date}
-                    </span>
+                  <div className="bg-white flex-1 rounded-b-lg  p-4 flex flex-col items-end justify-end leading-normal">
+                    <div className="flex-1">
+                      <h4 className="text-gray-900 font-medium text-lg mb-2 leading-tight">
+                        {item.title}
+                      </h4>
+                      <p className="text-gray-500 font-normal text-md mb-2 ">
+                        {item.description}
+                      </p>
+                    </div>
+                    <div className="">
+                      <span className="text-gray-500 font-normal text-sm">
+                        By {item.authors}
+                      </span>
+                      {" - "}
+                      <span className="text-gray-500 font-normal text-sm">
+                        {item.date}
+                      </span>
+                    </div>
                   </div>
-                </div>
-              </a>
-            ))}
+                </a>
+              ))}
+            </div>
           </div>
         </div>
         <Footer />
