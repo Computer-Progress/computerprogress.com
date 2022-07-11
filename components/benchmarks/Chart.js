@@ -139,6 +139,7 @@ export default function Chart({ dataset, xAxis, yAxis, downloadCSV }) {
         align: "center",
         y: -5,
       },
+      href: "",
       text:
         '<a target="_blank" href="https://arxiv.org/abs/2007.05558">' +
         "Ⓒ The Computational Limits of Deep Learning, N.C. THOMPSON, K. GREENEWALD, K. LEE, G.F. MANSO</a>" +
@@ -185,11 +186,12 @@ export default function Chart({ dataset, xAxis, yAxis, downloadCSV }) {
             return `<span class="">${x}</span>`;
           }
           return `<span class="">10<sup>${x}</sup></span>`;
-        }
+        };
         return `<div class="bg-white block px-3 py-2 mt-[1px] ml-[1px]"> <b>${
           this.point.name
-        }</b><br>${yAxis.name}: ${y}% <br> ${xAxis.name}: ${formatXAxis(x)}</div>`;
-        
+        }</b><br>${yAxis.name}: ${y}% <br> ${xAxis.name}: ${formatXAxis(
+          x
+        )}</div>`;
       },
     },
     plotOptions: {

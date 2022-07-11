@@ -560,14 +560,15 @@ export default function setupPlotter(mlp) {
         direction: mlp.AxisDirection.VERTICAL,
       });
 
-      let axisFontSize = 21;
+      let axisFontSize = 24;
 
       this.yAxisLabel = this.addText("y", {
         rotation: 90,
         area: this.yAxisArea,
-        fontSize: axisFontSize,
-        fill: "#333",
-        fontWeight: "bold",
+        fontSize: '22',
+        fill: "#666666",
+        fontWeight: "normal",
+        fontFamily: "'Lucida Grande', 'Lucida Sans Unicode', Arial, Helvetica, sans-serif",
         normalizedBasePoint: { x: 0.5, y: 1.0 },
       });
 
@@ -581,7 +582,7 @@ export default function setupPlotter(mlp) {
         text.area.context.font =
           (text.fontWeight || "bold") +
           " " +
-          (text.fontSize || 14) +
+          (text.fontSize || 24) +
           "px " +
           (text.fontFamily || "sans");
         let textBounds = mlp.rect(
@@ -603,7 +604,9 @@ export default function setupPlotter(mlp) {
       this.xAxisLabel = this.addText("x", {
         area: this.xAxisArea,
         fontSize: axisFontSize,
-        fill: "#333",
+        fill: "#666666",
+
+        fontFamily: "'Lucida Grande', 'Lucida Sans Unicode', Arial, Helvetica, sans-serif",
         fontWeight: "bold",
         normalizedBasePoint: { x: 0.5, y: 0.5 },
       });

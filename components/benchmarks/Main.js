@@ -289,7 +289,8 @@ export default function Main({ benchmarks, dataset, accuracyTypes }) {
           <div>
             {filteredDataset.length > 2 ? (
               <Chart
-                dataset={filteredDataset}
+                dataset={dataset
+                  .filter((x) => x[xAxis.column] && x[yAxis.column])}
                 xAxis={xAxis}
                 yAxis={yAxis}
                 downloadCSV={downloadCSV}
@@ -297,15 +298,15 @@ export default function Main({ benchmarks, dataset, accuracyTypes }) {
             ) : (
               <div className="mt-8 text-center bg-slate-50 py-16">
                 <p className="text-gray-900 ">
-                  No data available for this benchmark. Try change axis.
+                Not enough data is available for this benchmark. Try changing the axes.
                 </p>
               </div>
             )}
           </div>
 
-          <div className="relative overflow-x-auto  shadow-md sm:rounded-lg mt-8">
+          <div className=" shadow-md sm:rounded-lg mt-8">
             <table className="w-full text-sm text-left text-gray-500">
-              <thead className="text-xs table-fixed text-gray-700 uppercase bg-gray-50">
+              <thead className="sticky top-0 text-xs table-fixed text-gray-700 uppercase bg-gray-50">
                 <tr>
                   <th scope="col" className="px-6 py-3 w-2/5">
                     <button
@@ -357,12 +358,12 @@ export default function Main({ benchmarks, dataset, accuracyTypes }) {
                     >
                       <div className="flex gap-1">
                         hardware burden
-                        <Tooltip position="bottom-left">
+                        {/* <Tooltip position="bottom-left">
                           {" "}
                           Something about hardware burden. Something about
                           hardware burden. Something about hardware burden sdasd
                           asdasd
-                        </Tooltip>
+                        </Tooltip> */}
                       </div>
                       {sortBy.column === "computing_power" &&
                         (sortBy.type === "asc" ? (
@@ -501,13 +502,13 @@ export default function Main({ benchmarks, dataset, accuracyTypes }) {
                                     <div>
                                       <p className="text-xs flex gap-1">
                                         Operations per network pass
-                                        <Tooltip position="bottom-right">
+                                        {/* <Tooltip position="bottom-right">
                                           {" "}
                                           Something about hardware burden.
                                           Something about hardware burden.
                                           Something about hardware burden sdasd
                                           asdasd
-                                        </Tooltip>
+                                        </Tooltip> */}
                                       </p>
                                       <p className="text-gray-900">
                                         {(data["flops"] &&

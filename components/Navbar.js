@@ -43,30 +43,26 @@ export default function Navbar() {
               <div className="hidden md:block">
                 <div className="ml-10 flex items-baseline space-x-4">
                   {/* Profile dropdown */}
-                  <Menu as="div" className=" relative">
-                    <Menu.Button className="bg-[#000] text-white px-3 py-2 rounded-md text-sm font-medium">
+                  <div className=" group inline-block relative">
+                    <button className="bg-[#000] text-white px-3 py-2 rounded-md text-sm font-medium">
                       Datasets
                       <span className="sr-only">Open user menu</span>
-                    </Menu.Button>
+                    </button>
 
-                    <Menu.Items className="z-30 origin-top-right absolute right-0 mt-2 w-max rounded-md shadow-lg py-1 bg-white ring-1 ring-black ring-opacity-5 focus:outline-none">
+                    <ul className="absolute hidden group-hover:block z-30 origin-top-right right-0  w-max rounded-md shadow-lg py-1 bg-white ring-1 ring-black ring-opacity-5 focus:outline-none">
                       {userNavigation.map((item) => (
-                        <Menu.Item key={item.name}>
-                          {({ active }) => (
-                            <a
-                              href={item.href}
-                              className={classNames(
-                                active ? "bg-gray-100" : "",
-                                "block px-4 py-2 text-sm text-gray-700"
-                              )}
-                            >
-                              {item.name}
-                            </a>
-                          )}
-                        </Menu.Item>
+                        <a
+                          key={item.name}
+                          href={item.href}
+                          className=
+                             "hover:bg-gray-100 block px-4 py-2 text-sm text-gray-700"
+                          
+                        >
+                          {item.name}
+                        </a>
                       ))}
-                    </Menu.Items>
-                  </Menu>
+                    </ul>
+                  </div>
                   {navigation.map((item) => (
                     <a
                       key={item.name}
@@ -95,7 +91,7 @@ export default function Navbar() {
 
           <Disclosure.Panel className="md:hidden">
             <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3">
-              <Disclosure as="div" className="w-full" >
+              <Disclosure as="div" className="w-full">
                 <Disclosure.Button className="w-full text-left bg-[#000] text-white px-3 py-2 rounded-md text-sm font-medium">
                   Datasets
                   <span className="sr-only">Open user menu</span>
@@ -103,15 +99,15 @@ export default function Navbar() {
 
                 <Disclosure.Panel className="">
                   {userNavigation.map((item) => (
-                     <Disclosure.Button
-                     key={item.name}
-                     as="a"
-                     href={item.href}
-                     className="bg-[#000] text-white block pl-8 px-3 py-2 rounded-md text-sm font-medium"
-                     aria-current={item.current ? "page" : undefined}
-                   >
-                     {item.name}
-                   </Disclosure.Button>
+                    <Disclosure.Button
+                      key={item.name}
+                      as="a"
+                      href={item.href}
+                      className="bg-[#000] text-white block pl-8 px-3 py-2 rounded-md text-sm font-medium"
+                      aria-current={item.current ? "page" : undefined}
+                    >
+                      {item.name}
+                    </Disclosure.Button>
                   ))}
                 </Disclosure.Panel>
               </Disclosure>

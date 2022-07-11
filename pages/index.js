@@ -9,8 +9,8 @@ export default function Home() {
     {
       title: "The Computation Limits of Deep Learning",
       description:
-        'The Computation Limits of Deep Learning is a paper published in the journal "Computation and Computational Complexity".',
-      date: "2007",
+        'This project aims to catalog the deep learning’s voracious appetite for computing power, showing that progress across a wide variety of applications is strongly reliant on increases in computing power.',
+      date: "2022",
 
       authors: "Thompson, N. et al",
 
@@ -20,8 +20,8 @@ export default function Home() {
     {
       title: "Compute Trends Across Three Eras of Machine Learning",
       description:
-        'The Computation Trends Across Three Eras of Machine Learning is a paper published in the journal "Computation and Computational Complexity".',
-      date: "2007",
+        'This project aims to highlight the fast-growing compute requirements for training advanced ML systems of three eras: the Pre Deep Learning Era, the Deep Learning Era and the Large-Scale Era.',
+      date: "2022",
       authors: "Sevilla, J. et al",
       href: "/trends",
       image: "/chart-trends.png",

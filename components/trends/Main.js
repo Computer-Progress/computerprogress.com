@@ -241,7 +241,7 @@ export default function Main({ dataset }) {
             ) : (
               <div className="mt-8 text-center bg-slate-50 py-16">
                 <p className="text-gray-900 ">
-                  No data available for this benchmark. Try change axis.
+                Not enough data is available for this benchmark. Try changing the axes.
                 </p>
               </div>
             )}
