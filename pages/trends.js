@@ -33,7 +33,7 @@ export default function Home({ dataset }) {
 
         {/* <!-- Open Graph / Facebook --> */}
         <meta property="og:type" content="website" />
-        <meta property="og:url" content="https://computerprogress.com/trends" />
+        <meta property="og:url" content="https://new-computerprogress.d2a3k566pnqgrg.amplifyapp.com/trends" />
         <meta property="og:title" content="Compute Trends Across Three Eras of Machine Learning - Computer Progress" />
         <meta
           property="og:description"
@@ -42,12 +42,12 @@ export default function Home({ dataset }) {
         />
         <meta
           property="og:image"
-          content="https://computerprogress.com/meta_logo.png"
+          content="https://new-computerprogress.d2a3k566pnqgrg.amplifyapp.com/meta_logo.png"
         />
 
         {/* <!-- Twitter --> */}
         <meta property="twitter:card" content="summary_large_image" />
-        <meta property="twitter:url" content="https://computerprogress.com/trends" />
+        <meta property="twitter:url" content="https://new-computerprogress.d2a3k566pnqgrg.amplifyapp.com/trends" />
         <meta property="twitter:title" content="Compute Trends Across Three Eras of Machine Learning - Computer Progress" />
         <meta
           property="twitter:description"
@@ -56,7 +56,7 @@ export default function Home({ dataset }) {
         />
         <meta
           property="twitter:image"
-          content="https://computerprogress.com/meta_logo.png"
+          content="https://new-computerprogress.d2a3k566pnqgrg.amplifyapp.com/meta_logo.png"
         />
       </Head>
       <div className="min-h-full">

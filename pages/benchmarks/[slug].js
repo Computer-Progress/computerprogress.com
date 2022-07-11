@@ -36,7 +36,7 @@ export default function Home({ benchmarks, dataset, accuracyTypes }) {
 
         {/* <!-- Open Graph / Facebook --> */}
         <meta property="og:type" content="website" />
-        <meta property="og:url" content="https://computerprogress.com/benchmarks" />
+        <meta property="og:url" content="https://new-computerprogress.d2a3k566pnqgrg.amplifyapp.com/benchmarks" />
         <meta property="og:title" content="The Computation Limits of Deep Learning
  - Computer Progress" />
         <meta
@@ -46,12 +46,12 @@ export default function Home({ benchmarks, dataset, accuracyTypes }) {
         />
         <meta
           property="og:image"
-          content="https://computerprogress.com/meta_logo.png"
+          content="https://new-computerprogress.d2a3k566pnqgrg.amplifyapp.com/meta_logo.png"
         />
 
         {/* <!-- Twitter --> */}
         <meta property="twitter:card" content="summary_large_image" />
-        <meta property="twitter:url" content="https://computerprogress.com/benchmarks" />
+        <meta property="twitter:url" content="https://new-computerprogress.d2a3k566pnqgrg.amplifyapp.com/benchmarks" />
         <meta property="twitter:title" content="The Computation Limits of Deep Learning
  - Computer Progress" />
         <meta
@@ -61,7 +61,7 @@ export default function Home({ benchmarks, dataset, accuracyTypes }) {
         />
         <meta
           property="twitter:image"
-          content="https://computerprogress.com/meta_logo.png"
+          content="https://new-computerprogress.d2a3k566pnqgrg.amplifyapp.com/meta_logo.png"
         />
       </Head>
       <div className="min-h-screen flex flex-col">

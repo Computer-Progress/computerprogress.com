@@ -61,7 +61,7 @@ export default function Home() {
 
         {/* <!-- Open Graph / Facebook --> */}
         <meta property="og:type" content="website" />
-        <meta property="og:url" content="https://computerprogress.com/" />
+        <meta property="og:url" content="https://new-computerprogress.d2a3k566pnqgrg.amplifyapp.com/" />
         <meta property="og:title" content="Computer Progress" />
         <meta
           property="og:description"
@@ -69,12 +69,12 @@ export default function Home() {
         />
         <meta
           property="og:image"
-          content="https://computerprogress.com/meta_logo.png"
+          content="https://new-computerprogress.d2a3k566pnqgrg.amplifyapp.com/meta_logo.png"
         />
 
         {/* <!-- Twitter --> */}
         <meta property="twitter:card" content="summary_large_image" />
-        <meta property="twitter:url" content="https://computerprogress.com/" />
+        <meta property="twitter:url" content="https://new-computerprogress.d2a3k566pnqgrg.amplifyapp.com/" />
         <meta property="twitter:title" content="Computer Progress" />
         <meta
           property="twitter:description"
@@ -83,7 +83,7 @@ export default function Home() {
         />
         <meta
           property="twitter:image"
-          content="https://computerprogress.com/meta_logo.png"
+          content="https://new-computerprogress.d2a3k566pnqgrg.amplifyapp.com/meta_logo.png"
         />
       </Head>
 
