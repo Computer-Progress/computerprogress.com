@@ -124,7 +124,7 @@ export default function Header({ benchmarks }) {
                     )}
                     key={item.range}
                   >
-                    <Link href={"/benchmarks/" + item.range}>
+                    <Link scroll={false} href={"/benchmarks/" + item.range}>
                       {item.dataset}
                     </Link>
                   </li>

@@ -16,12 +16,12 @@ export default function Main({ dataset }) {
 
   const [yAxisOptions, setYAxisOptions] = useState([
     {
-      name: "Parameters",
-      column: "Parameters",
-    },
-    {
       name: "Training compute (FLOPs)",
       column: "Training compute (FLOPs)",
+    },
+    {
+      name: "Parameters",
+      column: "Parameters",
     },
     {
       name: "Inference compute (FLOPs)",
@@ -150,11 +150,12 @@ export default function Main({ dataset }) {
   //   ==============================================================
 
   return (
-    <main className="flex-grow">
+    <main className="flex-grow mb-16">
       <div className="max-w-7xl mx-auto pb-6 sm:px-6 lg:px-8 mt-10">
         {/* Replace with your content */}
         <div>
-          <h1 className="text-xl font-bold text-center text-gray-900">Aha</h1>
+          <h1 className="text-xl font-bold text-center text-gray-900">Parameter, Compute and Data Trends in Machine Learning
+</h1>
           <div className="grid grid-cols-[1fr_1fr_min-content_1fr_1fr] items-center gap-2 justify-center mt-5">
             <Menu
               as="div"
@@ -246,7 +247,7 @@ export default function Main({ dataset }) {
             )}
           </div>
 
-          <div className="relative overflow-x-auto  shadow-md sm:rounded-lg mt-8 mb-16">
+          <div className="relative overflow-x-auto  shadow-md sm:rounded-lg mt-8">
             <table className="w-full text-sm text-left text-gray-500">
               <thead className="text-xs table-fixed text-gray-700 uppercase bg-gray-50">
                 <tr>
@@ -321,7 +322,7 @@ export default function Main({ dataset }) {
                               </td>
                             ) : (
                               <td className="px-6 py-2">
-                                {data[yAxis.column]}
+                                {data[yAxis.column] ? data[yAxis.column] : '-'}
                               </td>
                             )}
 
@@ -331,7 +332,7 @@ export default function Main({ dataset }) {
                               </td>
                             ) : (
                               <td className="px-6 py-2">
-                                {data[xAxis.column]}
+                                {data[xAxis.column] ? data[xAxis.column] : '-'}
                               </td>
                             )}
                             {/* <td className="px-6 py-2">{data[xAxis.column]}</td> */}

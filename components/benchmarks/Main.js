@@ -199,7 +199,7 @@ export default function Main({ benchmarks, dataset, accuracyTypes }) {
   //   ==============================================================
 
   return (
-    <main className="flex-grow">
+    <main className="flex-grow  mb-16">
       <div className="max-w-7xl mx-auto pb-6 sm:px-6 lg:px-8 mt-10">
         {/* Replace with your content */}
         <div>
@@ -303,7 +303,7 @@ export default function Main({ benchmarks, dataset, accuracyTypes }) {
             )}
           </div>
 
-          <div className="relative overflow-x-auto  shadow-md sm:rounded-lg mt-8 mb-16">
+          <div className="relative overflow-x-auto  shadow-md sm:rounded-lg mt-8">
             <table className="w-full text-sm text-left text-gray-500">
               <thead className="text-xs table-fixed text-gray-700 uppercase bg-gray-50">
                 <tr>

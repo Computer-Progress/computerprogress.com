@@ -9,7 +9,7 @@ export default function Header() {
     <header className=" bg-gray-100">
       <div className="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
         <h1 className="text-3xl font-bold text-gray-900">
-          Parameter, Compute and Data Trends in Machine Learning
+        Compute Trends Across Three Eras of Machine Learning
         </h1>
         <div className="flex gap-5 flex-col">
           <p className="mt-5 text-sm text-gray-600 text-justify">
