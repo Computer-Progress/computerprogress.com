@@ -1,4 +1,9 @@
-import { DocumentTextIcon, NewspaperIcon, PaperClipIcon, UserGroupIcon } from "@heroicons/react/outline";
+import {
+  DocumentTextIcon,
+  NewspaperIcon,
+  PaperClipIcon,
+  UserGroupIcon,
+} from "@heroicons/react/outline";
 import Link from "next/link";
 import { useRouter } from "next/router";
 function classNames(...classes) {
@@ -27,7 +32,7 @@ export default function Header({ benchmarks }) {
             triumphing over humans in the game of Go to world-leading
             performance in image classification, voice recognition, translation,
             and other tasks. But this progress has come with a voracious
-            appetite for computing power. This article catalogs the extent of
+            appetite for computing power. This project catalogs the extent of
             this dependency, showing that progress across a wide variety of
             applications is strongly reliant on increases in computing power.
             Extrapolating forward this reliance reveals that progress along
@@ -46,16 +51,15 @@ export default function Header({ benchmarks }) {
                 rel="noreferrer"
                 className="hover:underline flex items-center text-sm text-gray-600 gap-1"
               >
-                <DocumentTextIcon className="w-5 h-5"/> Paper
+                <DocumentTextIcon className="w-5 h-5" /> Paper
               </a>
             </li>
             <li className="flex items-center text-sm text-gray-600 gap-1">
-              
-              <UserGroupIcon className="w-5 h-5"/> Kristjan Greenewald, Keeheon Lee, and Gabriel
-              Manso
+              <UserGroupIcon className="w-5 h-5" /> Neil Thompson, Kristjan
+              Greenewald, Keeheon Lee, and Gabriel Manso
             </li>
             <li className="flex items-center text-sm text-gray-600 gap-1 flex-wrap">
-              <NewspaperIcon className="w-5 h-5"/>
+              <NewspaperIcon className="w-5 h-5" />
               <a
                 href="https://www.wired.com/story/prepare-artificial-intelligence-produce-less-wizardry/"
                 target="_blank"
@@ -63,7 +67,8 @@ export default function Header({ benchmarks }) {
                 className="hover:underline"
               >
                 Wired
-              </a>,
+              </a>
+              ,
               <a
                 href="https://venturebeat.com/2020/07/15/mit-researchers-warn-that-deep-learning-is-approaching-computational-limits/"
                 target="_blank"
@@ -71,7 +76,8 @@ export default function Header({ benchmarks }) {
                 className="hover:underline"
               >
                 VentureBeat
-              </a>,
+              </a>
+              ,
               <a
                 href="https://www.discovermagazine.com/technology/the-computational-limits-of-deep-learning-are-closer-than-you-think"
                 target="_blank"
@@ -79,7 +85,8 @@ export default function Header({ benchmarks }) {
                 className="hover:underline"
               >
                 Discover
-              </a>,
+              </a>
+              ,
               <a
                 href="https://thenextweb.com/neural/2020/07/17/ai-researchers-say-weve-squeezed-nearly-as-much-out-of-modern-computers-as-we-can/"
                 target="_blank"
@@ -87,7 +94,8 @@ export default function Header({ benchmarks }) {
                 className="hover:underline"
               >
                 The Next Web
-              </a>,
+              </a>
+              ,
               <a
                 href="https://interestingengineering.com/deep-learning-reaching-computational-limits-warns-new-mit-study"
                 target="_blank"
@@ -95,7 +103,8 @@ export default function Header({ benchmarks }) {
                 className="hover:underline"
               >
                 Interesting Engineering
-              </a>,
+              </a>
+              ,
               <a
                 href="https://content.techgig.com/mit-researchers-warn-that-deep-learning-is-reaching-its-computational-limit/articleshow/77033239.cms"
                 target="_blank"
@@ -104,7 +113,6 @@ export default function Header({ benchmarks }) {
               >
                 Tech Gig
               </a>
-              
             </li>
           </ul>
         </div>
