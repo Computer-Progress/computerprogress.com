@@ -1,6 +1,7 @@
 import Highcharts from "highcharts";
 import HighchartsReact from "highcharts-react-official";
 import HighchartsExporting from "highcharts/modules/exporting";
+import { useEffect } from "react";
 
 if (typeof Highcharts === "object") {
   HighchartsExporting(Highcharts);
@@ -284,5 +285,12 @@ export default function Chart({ dataset, xAxis, yAxis, downloadCSV }) {
       },
     },
   };
+  useEffect(() => {
+    for (var i = 0; i < Highcharts.charts.length; i++) {
+      if (Highcharts.charts[i] !== undefined) {
+        Highcharts.charts[i].reflow();
+      }
+    }
+  });
   return <HighchartsReact highcharts={Highcharts} options={chartOptions} />;
 }

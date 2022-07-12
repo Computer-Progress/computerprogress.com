@@ -304,7 +304,7 @@ export default function Main({ benchmarks, dataset, accuracyTypes }) {
             )}
           </div>
 
-          <div className=" overflow-x-auto shadow-md sm:rounded-lg mt-8">
+          <div className=" shadow-md sm:rounded-lg mt-8">
             <table className="w-full text-sm text-left text-gray-500">
               <thead className="sticky top-0 text-xs table-fixed text-gray-700 uppercase bg-gray-50">
                 <tr>
