@@ -43,7 +43,7 @@ export default function Header({ benchmarks }) {
             from changes to deep learning or from moving to other machine
             learning methods.
           </p>
-          <ul className="flex flex-row justify-start flex-wrap gap-x-16 gap-y-4">
+          <ul className="flex flex-row justify-start flex-wrap sm:flex-nowrap sm:justify-between gap-x-8 gap-y-4">
             <li className="flex items-center text-sm text-gray-600 gap-1">
               <a
                 href="https://arxiv.org/abs/2007.05558"
@@ -55,64 +55,69 @@ export default function Header({ benchmarks }) {
               </a>
             </li>
             <li className="flex items-center text-sm text-gray-600 gap-1">
-              <UserGroupIcon className="w-5 h-5" /> Neil Thompson, Kristjan
-              Greenewald, Keeheon Lee, and Gabriel Manso
+              <UserGroupIcon className="w-5 h-5" />{" "}
+              <p className="whitespace-pre-wrap">
+                Neil Thompson, Kristjan Greenewald, Keeheon Lee, and Gabriel
+                Manso
+              </p>
             </li>
-            <li className="flex items-center text-sm text-gray-600 gap-1 flex-wrap">
+            <li className="flex items-center text-sm text-gray-600 gap-1">
               <NewspaperIcon className="w-5 h-5" />
-              <a
-                href="https://www.wired.com/story/prepare-artificial-intelligence-produce-less-wizardry/"
-                target="_blank"
-                rel="noreferrer"
-                className="hover:underline"
-              >
-                Wired
-              </a>
-              ,
-              <a
-                href="https://venturebeat.com/2020/07/15/mit-researchers-warn-that-deep-learning-is-approaching-computational-limits/"
-                target="_blank"
-                rel="noreferrer"
-                className="hover:underline"
-              >
-                VentureBeat
-              </a>
-              ,
-              <a
-                href="https://www.discovermagazine.com/technology/the-computational-limits-of-deep-learning-are-closer-than-you-think"
-                target="_blank"
-                rel="noreferrer"
-                className="hover:underline"
-              >
-                Discover
-              </a>
-              ,
-              <a
-                href="https://thenextweb.com/neural/2020/07/17/ai-researchers-say-weve-squeezed-nearly-as-much-out-of-modern-computers-as-we-can/"
-                target="_blank"
-                rel="noreferrer"
-                className="hover:underline"
-              >
-                The Next Web
-              </a>
-              ,
-              <a
-                href="https://interestingengineering.com/deep-learning-reaching-computational-limits-warns-new-mit-study"
-                target="_blank"
-                rel="noreferrer"
-                className="hover:underline"
-              >
-                Interesting Engineering
-              </a>
-              ,
-              <a
-                href="https://content.techgig.com/mit-researchers-warn-that-deep-learning-is-reaching-its-computational-limit/articleshow/77033239.cms"
-                target="_blank"
-                rel="noreferrer"
-                className="hover:underline"
-              >
-                Tech Gig
-              </a>
+              <p className="whitespace-pre-wrap">
+                <a
+                  href="https://www.wired.com/story/prepare-artificial-intelligence-produce-less-wizardry/"
+                  target="_blank"
+                  rel="noreferrer"
+                  className="hover:underline"
+                >
+                  Wired 
+                </a>
+                ,{' '}
+                <a
+                  href="https://venturebeat.com/2020/07/15/mit-researchers-warn-that-deep-learning-is-approaching-computational-limits/"
+                  target="_blank"
+                  rel="noreferrer"
+                  className="hover:underline"
+                >
+                  VentureBeat
+                </a>
+                ,{' '}
+                <a
+                  href="https://www.discovermagazine.com/technology/the-computational-limits-of-deep-learning-are-closer-than-you-think"
+                  target="_blank"
+                  rel="noreferrer"
+                  className="hover:underline"
+                >
+                  Discover
+                </a>
+                ,{' '}
+                <a
+                  href="https://thenextweb.com/neural/2020/07/17/ai-researchers-say-weve-squeezed-nearly-as-much-out-of-modern-computers-as-we-can/"
+                  target="_blank"
+                  rel="noreferrer"
+                  className="hover:underline"
+                >
+                  The Next Web
+                </a>
+                ,{' '}
+                <a
+                  href="https://interestingengineering.com/deep-learning-reaching-computational-limits-warns-new-mit-study"
+                  target="_blank"
+                  rel="noreferrer"
+                  className="hover:underline"
+                >
+                  Interesting Engineering
+                </a>
+                ,{' '}
+                <a
+                  href="https://content.techgig.com/mit-researchers-warn-that-deep-learning-is-reaching-its-computational-limit/articleshow/77033239.cms"
+                  target="_blank"
+                  rel="noreferrer"
+                  className="hover:underline"
+                >
+                  Tech Gig
+                </a>
+              </p>
             </li>
           </ul>
         </div>
