@@ -43,7 +43,7 @@ export default function Header({ benchmarks }) {
             from changes to deep learning or from moving to other machine
             learning methods.
           </p>
-          <ul className="flex flex-row justify-start flex-wrap sm:flex-nowrap sm:justify-between gap-x-8 gap-y-4">
+          <ul className="flex flex-col sm:flex-row justify-start  gap-x-8 gap-y-4">
             <li className="flex items-center text-sm text-gray-600 gap-1">
               <a
                 href="https://arxiv.org/abs/2007.05558"
