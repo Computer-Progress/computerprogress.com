@@ -97,6 +97,30 @@ export default function Chart({ dataset, xAxis, yAxis, downloadCSV }) {
       spacingBottom: 25,
       spacingTop: 50,
       height: 600, // 16:9 ratio
+      events: {
+        beforePrint: function () {
+          console.log(this.credits);
+          this.update({
+            credits: {
+              enabled: true,
+              text:
+                '<a target="_blank" href="https://arxiv.org/abs/2007.05558">' +
+                "Ⓒ The Computational Limits of Deep Learning, N.C. THOMPSON, K. GREENEWALD, K. LEE, G.F. MANSO</a>",
+            },
+          });
+        },
+        afterPrint: function () {
+          this.update({
+            credits: {
+              enabled: true,
+              text:
+                '<a target="_blank" href="https://arxiv.org/abs/2007.05558">' +
+                "Ⓒ The Computational Limits of Deep Learning, N.C. THOMPSON, K. GREENEWALD, K. LEE, G.F. MANSO</a>" +
+                ' [<a target="_blank" href="https://dblp.org/rec/journals/corr/abs-2007-05558.html">CITE</a>, <a target="_blank" href="https://dblp.uni-trier.de/rec/journals/corr/abs-2007-05558.html?view=bibtex">BibTex</a>]',
+            },
+          });
+        },
+      },
     },
     title: {
       text: null,
@@ -144,8 +168,7 @@ export default function Chart({ dataset, xAxis, yAxis, downloadCSV }) {
       text:
         '<a target="_blank" href="https://arxiv.org/abs/2007.05558">' +
         "Ⓒ The Computational Limits of Deep Learning, N.C. THOMPSON, K. GREENEWALD, K. LEE, G.F. MANSO</a>" +
-        '<a target="_blank" href="https://dblp.uni-trier.de/rec/journals/corr/abs-2007-05558.html?view=bibtex">' +
-        "  [CITE]</a>",
+        ' [<a target="_blank" href="https://dblp.org/rec/journals/corr/abs-2007-05558.html">CITE</a>, <a target="_blank" href="https://dblp.uni-trier.de/rec/journals/corr/abs-2007-05558.html?view=bibtex">BibTex</a>]',
     },
     yAxis: {
       title: {
@@ -256,6 +279,7 @@ export default function Chart({ dataset, xAxis, yAxis, downloadCSV }) {
       },
     ],
     exporting: {
+      enabled: false,
       allowHTML: true,
       scale: 5,
       sourceWidth: 1200,
@@ -286,11 +310,77 @@ export default function Chart({ dataset, xAxis, yAxis, downloadCSV }) {
     },
   };
   useEffect(() => {
+    console.log(Highcharts.charts);
     for (var i = 0; i < Highcharts.charts.length; i++) {
       if (Highcharts.charts[i] !== undefined) {
         Highcharts.charts[i].reflow();
       }
     }
   });
-  return <HighchartsReact highcharts={Highcharts} options={chartOptions} />;
+
+  function ChartFullScreen() {
+    const chart = Highcharts.charts.find((chart) => chart !== undefined);
+    if (chart) {
+      chart.fullscreen.toggle();
+    }
+  }
+
+  function downloadGraph() {
+    const chart = Highcharts.charts.find((chart) => chart !== undefined);
+    if (chart) {
+      chart.exportChart(
+        {
+          type: "image/png",
+          filename: "graph",
+        },
+        {
+          credits: {
+            enabled: true,
+            text:
+              '<a target="_blank" href="https://arxiv.org/abs/2007.05558">' +
+              "Ⓒ The Computational Limits of Deep Learning, N.C. THOMPSON, K. GREENEWALD, K. LEE, G.F. MANSO</a>",
+          },
+        }
+      );
+    }
+  }
+
+  function printGraph() {
+    const chart = Highcharts.charts.find((chart) => chart !== undefined);
+    if (chart) {
+      chart.print();
+    }
+  }
+
+  return (
+    <div className="w-full">
+      <HighchartsReact highcharts={Highcharts} options={chartOptions} />
+      <div className="flex items-center justify-end gap-2 mt-3">
+        <button
+          className="px-2 py-1 hover:underline text-[#AA3248] text-sm rounded-lg"
+          onClick={() => ChartFullScreen()}
+        >
+          Full screen
+        </button>
+        <button
+          className="px-2 py-1 hover:underline text-[#AA3248] text-sm rounded-lg"
+          onClick={() => printGraph()}
+        >
+          Print graph
+        </button>
+        <button
+          className="px-2 py-1 hover:underline text-[#AA3248] text-sm rounded-lg"
+          onClick={() => downloadGraph()}
+        >
+          Download graph
+        </button>
+        <button
+          className="px-2 py-1 hover:underline text-[#AA3248] text-sm rounded-lg"
+          onClick={() => downloadCSV()}
+        >
+          Download data
+        </button>
+      </div>
+    </div>
+  );
 }

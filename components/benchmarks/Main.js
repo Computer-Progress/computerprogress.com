@@ -289,8 +289,9 @@ export default function Main({ benchmarks, dataset, accuracyTypes }) {
           <div>
             {filteredDataset.length > 2 ? (
               <Chart
-                dataset={dataset
-                  .filter((x) => x[xAxis.column] && x[yAxis.column])}
+                dataset={dataset.filter(
+                  (x) => x[xAxis.column] && x[yAxis.column]
+                )}
                 xAxis={xAxis}
                 yAxis={yAxis}
                 downloadCSV={downloadCSV}
@@ -298,7 +299,8 @@ export default function Main({ benchmarks, dataset, accuracyTypes }) {
             ) : (
               <div className="mt-8 text-center bg-slate-50 py-16">
                 <p className="text-gray-900 ">
-                Not enough data is available for this benchmark. Try changing the axes.
+                  Not enough data is available for this benchmark. Try changing
+                  the axes.
                 </p>
               </div>
             )}
@@ -471,7 +473,7 @@ export default function Main({ benchmarks, dataset, accuracyTypes }) {
 
                                   <p className="text-[#21cbce] ">
                                     <a
-                                      className="text-[#21cbce] inline-block"
+                                      className="text-[#21cbce] hover:text-[#1eb2b4] inline-flex gap-1 justify-start"
                                       title="paper with code"
                                       href={
                                         "https://paperswithcode.com" +
@@ -480,6 +482,8 @@ export default function Main({ benchmarks, dataset, accuracyTypes }) {
                                       target="_blank"
                                       rel="noreferrer"
                                     >
+                                      {" "}
+                                      Paper with code
                                       <svg
                                         xmlns="http://www.w3.org/2000/svg"
                                         viewBox="0 0 512 512"
@@ -576,6 +580,33 @@ export default function Main({ benchmarks, dataset, accuracyTypes }) {
           )}
         </div>
         {/* /End replace */}
+      </div>
+      <div className="max-w-screen-xl mx-auto py-16 px-4 sm:px-6 lg:px-8">
+        <div className="bg-black rounded-lg shadow-xl overflow-hidden lg:grid lg:grid-cols-2 lg:gap-4">
+          <div className="pt-10 pb-12 px-6 sm:pt-16 sm:px-16 lg:py-16 lg:pr-0 xl:py-20 xl:px-20">
+            <div className="lg:self-center">
+              <h2 className="text-3xl leading-9 font-extrabold text-white sm:text-4xl sm:leading-10">
+                <span className="block">Want to contribute?</span>
+              </h2>
+              <p className="mt-4 text-lg leading-6 text-gray-200">
+                You have access to our database where you can point out any errors or suggest changes
+              </p>
+              <a
+                href="https://docs.google.com/spreadsheets/d/1xthNnZ_I43SUXzLvuP7TFXsd-XeHDUx_4dedH5sE2GM/edit#gid=1571653277" rel="noopener noreferrer" target="_blank"
+                className="mt-8 bg-white border border-transparent rounded-md shadow px-6 py-3 inline-flex items-center text-base leading-6 font-medium text-[#AA3248] hover:text-[#8a283a] hover:bg-gray-50 transition duration-150 ease-in-out"
+              >
+                Go to database
+              </a>
+            </div>
+          </div>
+          <div className="relative pb-3/5 -mt-6 md:pb-1/2">
+            <img
+              className="absolute inset-0 w-full h-full transform translate-x-6 translate-y-6 rounded-md object-cover object-left-top sm:translate-x-16 lg:translate-y-20"
+              src="/database.png"
+              alt="App screenshot"
+            />
+          </div>
+        </div>
       </div>
     </main>
   );

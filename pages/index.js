@@ -4,26 +4,29 @@ import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import { useEffect } from "react";
 import Image from "next/image";
+import { ArrowRightIcon } from "@heroicons/react/outline";
 export default function Home() {
   const ourWork = [
     {
       title: "The Computation Limits of Deep Learning",
       description:
-        'This project aims to catalog the deep learning’s voracious appetite for computing power, showing that progress across a wide variety of applications is strongly reliant on increases in computing power.',
+        "This project aims to catalog the deep learning’s voracious appetite for computing power, showing that progress across a wide variety of applications is strongly reliant on increases in computing power.",
       date: "2022",
 
       authors: "Thompson, N. et al",
 
-      href: "/benchmarks/image-classification-on-imagenet",
+      paperUrl: "/benchmarks/image-classification-on-imagenet",
+      dataUrl: "/benchmarks/image-classification-on-imagenet",
       image: "/chart-imagenet.png",
     },
     {
       title: "Compute Trends Across Three Eras of Machine Learning",
       description:
-        'This project aims to highlight the fast-growing compute requirements for training advanced ML systems of three eras: the Pre Deep Learning Era, the Deep Learning Era and the Large-Scale Era.',
+        "This project aims to highlight the fast-growing compute requirements for training advanced ML systems of three eras: the Pre Deep Learning Era, the Deep Learning Era and the Large-Scale Era.",
       date: "2022",
       authors: "Sevilla, J. et al",
-      href: "/trends",
+      paperUrl: "/trends",
+      dataUrl: "/trends",
       image: "/chart-trends.png",
     },
   ];
@@ -36,66 +39,74 @@ export default function Home() {
   return (
     <>
       <div className="min-h-screen relative">
-      <Head>
-        <title>
-          Computer Progress</title>
-        <meta
-          name="description"
-          content="Working to understand the economic and technical foundations of progress in computing"
-        />
-        <meta
-          name="keywords"
-          content="Computer Progress, Deep Learning, Computation Power"
-        />
-        <meta name="robots" content="index, follow" />
-        <meta httpEquiv="Content-Type" content="text/html; charset=utf-8" />
-        <meta name="language" content="English"></meta>
-        <link rel="icon" href="/favicon.ico" />
-        {/* <!-- Primary Meta Tags --> */}
-        <meta name="title" content="Computer Progress" />
-        <meta
-          name="description"
-          content="Working to understand the economic and technical foundations of progress in computing
+        <Head>
+          <title>Computer Progress</title>
+          <meta
+            name="description"
+            content="Working to understand the economic and technical foundations of progress in computing"
+          />
+          <meta
+            name="keywords"
+            content="Computer Progress, Deep Learning, Computation Power"
+          />
+          <meta name="robots" content="index, follow" />
+          <meta httpEquiv="Content-Type" content="text/html; charset=utf-8" />
+          <meta name="language" content="English"></meta>
+          <link rel="icon" href="/favicon.ico" />
+          {/* <!-- Primary Meta Tags --> */}
+          <meta name="title" content="Computer Progress" />
+          <meta
+            name="description"
+            content="Working to understand the economic and technical foundations of progress in computing
 "
-        />
+          />
 
-        {/* <!-- Open Graph / Facebook --> */}
-        <meta property="og:type" content="website" />
-        <meta property="og:url" content="https://new-computerprogress.d2a3k566pnqgrg.amplifyapp.com/" />
-        <meta property="og:title" content="Computer Progress" />
-        <meta
-          property="og:description"
-          content="Working to understand the economic and technical foundations of progress in computing"
-        />
-        <meta
-          property="og:image"
-          content="https://new-computerprogress.d2a3k566pnqgrg.amplifyapp.com/meta_logo.png"
-        />
+          {/* <!-- Open Graph / Facebook --> */}
+          <meta property="og:type" content="website" />
+          <meta
+            property="og:url"
+            content="https://new-computerprogress.d2a3k566pnqgrg.amplifyapp.com/"
+          />
+          <meta property="og:title" content="Computer Progress" />
+          <meta
+            property="og:description"
+            content="Working to understand the economic and technical foundations of progress in computing"
+          />
+          <meta
+            property="og:image"
+            content="https://new-computerprogress.d2a3k566pnqgrg.amplifyapp.com/meta_logo.png"
+          />
 
-        {/* <!-- Twitter --> */}
-        <meta property="twitter:card" content="summary_large_image" />
-        <meta property="twitter:url" content="https://new-computerprogress.d2a3k566pnqgrg.amplifyapp.com/" />
-        <meta property="twitter:title" content="Computer Progress" />
-        <meta
-          property="twitter:description"
-          content="Working to understand the economic and technical foundations of progress in computing
+          {/* <!-- Twitter --> */}
+          <meta property="twitter:card" content="summary_large_image" />
+          <meta
+            property="twitter:url"
+            content="https://new-computerprogress.d2a3k566pnqgrg.amplifyapp.com/"
+          />
+          <meta property="twitter:title" content="Computer Progress" />
+          <meta
+            property="twitter:description"
+            content="Working to understand the economic and technical foundations of progress in computing
 "
-        />
-        <meta
-          property="twitter:image"
-          content="https://new-computerprogress.d2a3k566pnqgrg.amplifyapp.com/meta_logo.png"
-        />
-      </Head>
+          />
+          <meta
+            property="twitter:image"
+            content="https://new-computerprogress.d2a3k566pnqgrg.amplifyapp.com/meta_logo.png"
+          />
+        </Head>
 
-        <Navbar></Navbar>
+        <Navbar hideLogo={true}></Navbar>
         <div className="relative  h-[30rem]  flex flex-col items-center min-w-screen justify-end flex-1">
-          <div className="    max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 flex-1 flex items-center">
-            <h2 className="text-white text-2xl sm:text-3xl text-center font-bold">
+          <div className="    max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 flex-1 flex flex-col justify-center items-center">
+            <h1 className="text-white text-3xl sm:text-5xl text-center font-bold">
+              COMPUTER PROGRESS
+            </h1>
+            <h2 className="text-white text-lg sm:text-xl mt-8 text-center font-bold">
               Working to understand the economic and technical foundations of
               progress in computing
             </h2>
           </div>
-          <div className="video-docker -z-10 absolute top-0 left-0 w-full h-full overflow-hidden bg-transparent">
+          <div className="bg-black video-docker -z-10 absolute top-0 left-0 w-full h-full overflow-hidden bg-transparent">
             <video
               id="bgVideo"
               className="min-w-full min-h-full absolute object-cover "
@@ -117,9 +128,8 @@ export default function Home() {
             </h3>
             <div className="mt-6 grid grid-cols-1 sm:grid-cols-2  lg:grid-cols-3 gap-6 place-items-stretch">
               {ourWork.map((item, index) => (
-                <a
+                <div
                   className="w-full h-full rounded-lg bg-transparent flex flex-1 flex-col justify-between border shadow-lg border-1 border-gray-200 hover:border-gray-300"
-                  href={item.href}
                   key={index}
                 >
                   <div className="relative aspect-video bg-white rounded-t-lg w-full overflow-hidden ">
@@ -139,6 +149,20 @@ export default function Home() {
                         {item.description}
                       </p>
                     </div>
+                    <div className="my-5 flex w-full items-center justify-around">
+                      <a
+                        className="bg-[#AA3248] flex items-center justify-center px-4 py-1 text-white gap-1 rounded-lg font-medium"
+                        href={item.paperUrl}
+                      >
+                        PAPER <ArrowRightIcon className="w-4 h-4" />
+                      </a>
+                      <a
+                        className="bg-[#AA3248] flex items-center justify-center px-4 py-1 text-white gap-1 rounded-lg font-medium"
+                        href={item.dataUrl}
+                      >
+                        DATA <ArrowRightIcon className="w-4 h-4" />
+                      </a>
+                    </div>
                     <div className="">
                       <span className="text-gray-500 font-normal text-sm">
                         By {item.authors}
@@ -149,7 +173,7 @@ export default function Home() {
                       </span>
                     </div>
                   </div>
-                </a>
+                </div>
               ))}
             </div>
           </div>

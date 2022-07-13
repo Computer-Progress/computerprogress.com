@@ -7,14 +7,8 @@ function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
 }
 
-export default function Navbar() {
-  const navigation = [{ name: "About us", href: "/trends", current: false }];
-  const user = {
-    name: "Tom Cook",
-    email: "tom@example.com",
-    imageUrl:
-      "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80",
-  };
+export default function Navbar({ hideLogo }) {
+  const navigation = [{ name: "About us", href: "/about", current: false }];
   const userNavigation = [
     {
       name: "The Computation Limits of Deep Learning",
@@ -33,11 +27,13 @@ export default function Navbar() {
             <div className="flex items-center justify-between h-16">
               <div className="flex items-center">
                 <div className="flex-shrink-0">
-                  <Link href={"/"}>
-                    <h1 className="text-xl cursor-pointer font-bold text-white uppercase">
-                      Computer Progress
-                    </h1>
-                  </Link>
+                  {!hideLogo && (
+                    <Link href={"/"}>
+                      <h1 className="text-xl cursor-pointer font-bold text-white uppercase">
+                        Computer Progress
+                      </h1>
+                    </Link>
+                  )}
                 </div>
               </div>
               <div className="hidden md:block">
@@ -54,9 +50,7 @@ export default function Navbar() {
                         <a
                           key={item.name}
                           href={item.href}
-                          className=
-                             "hover:bg-gray-100 block px-4 py-2 text-sm text-gray-700"
-                          
+                          className="hover:bg-gray-100 block px-4 py-2 text-sm text-gray-700"
                         >
                           {item.name}
                         </a>
