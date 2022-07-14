@@ -292,6 +292,7 @@ export default function Main({ benchmarks, dataset, accuracyTypes }) {
                 dataset={dataset.filter(
                   (x) => x[xAxis.column] && x[yAxis.column]
                 )}
+                benchmark={`${benchmark[0]} on ${benchmark[1]}`}
                 xAxis={xAxis}
                 yAxis={yAxis}
                 downloadCSV={downloadCSV}
@@ -602,7 +603,7 @@ export default function Main({ benchmarks, dataset, accuracyTypes }) {
           <div className="relative pb-3/5 -mt-6 md:pb-1/2">
             <img
               className="absolute inset-0 w-full h-full transform translate-x-6 translate-y-6 rounded-md object-cover object-left-top sm:translate-x-16 lg:translate-y-20"
-              src="/database.png"
+              src="/database.jpg"
               alt="App screenshot"
             />
           </div>

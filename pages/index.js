@@ -4,7 +4,12 @@ import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import { useEffect } from "react";
 import Image from "next/image";
-import { ArrowRightIcon } from "@heroicons/react/outline";
+import {
+  ArrowRightIcon,
+  LinkIcon,
+  PaperClipIcon,
+  TableIcon,
+} from "@heroicons/react/outline";
 export default function Home() {
   const ourWork = [
     {
@@ -15,8 +20,8 @@ export default function Home() {
 
       authors: "Thompson, N. et al",
 
-      paperUrl: "/benchmarks/image-classification-on-imagenet",
-      dataUrl: "/benchmarks/image-classification-on-imagenet",
+      paperUrl: "https://arxiv.org/abs/2007.05558",
+      dataUrl: "/computation-limits-deep-learning/image-classification-on-imagenet",
       image: "/chart-imagenet.png",
     },
     {
@@ -25,8 +30,8 @@ export default function Home() {
         "This project aims to highlight the fast-growing compute requirements for training advanced ML systems of three eras: the Pre Deep Learning Era, the Deep Learning Era and the Large-Scale Era.",
       date: "2022",
       authors: "Sevilla, J. et al",
-      paperUrl: "/trends",
-      dataUrl: "/trends",
+      paperUrl: "https://arxiv.org/abs/2202.05924",
+      dataUrl: "/compute-trends-machine-learning",
       image: "/chart-trends.png",
     },
   ];
@@ -101,7 +106,7 @@ export default function Home() {
             <h1 className="text-white text-3xl sm:text-5xl text-center font-bold">
               COMPUTER PROGRESS
             </h1>
-            <h2 className="text-white text-lg sm:text-xl mt-8 text-center font-bold">
+            <h2 className="text-white text-lg sm:text-2xl mt-8 text-center font-bold">
               Working to understand the economic and technical foundations of
               progress in computing
             </h2>
@@ -149,28 +154,42 @@ export default function Home() {
                         {item.description}
                       </p>
                     </div>
-                    <div className="my-5 flex w-full items-center justify-around">
-                      <a
-                        className="bg-[#AA3248] flex items-center justify-center px-4 py-1 text-white gap-1 rounded-lg font-medium"
-                        href={item.paperUrl}
-                      >
-                        PAPER <ArrowRightIcon className="w-4 h-4" />
-                      </a>
-                      <a
-                        className="bg-[#AA3248] flex items-center justify-center px-4 py-1 text-white gap-1 rounded-lg font-medium"
-                        href={item.dataUrl}
-                      >
-                        DATA <ArrowRightIcon className="w-4 h-4" />
-                      </a>
-                    </div>
-                    <div className="">
-                      <span className="text-gray-500 font-normal text-sm">
-                        By {item.authors}
-                      </span>
-                      {" - "}
-                      <span className="text-gray-500 font-normal text-sm">
-                        {item.date}
-                      </span>
+                    <div className="flex items-center justify-between gap-2 w-full mt-4">
+                      <div className="flex gap-4">
+                        <a
+                          className="flex items-center justify-center  py-1 hover:underline text-[#AA3248] gap-1 rounded-lg font-medium"
+                          href={item.paperUrl}
+                        >
+                          <LinkIcon className="w-5 h-5" /> Paper
+                        </a>
+                        <a
+                          className="flex items-center justify-center  py-1 hover:underline text-[#AA3248] gap-1 rounded-lg font-medium"
+                          href={item.dataUrl}
+                        >
+                          <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            width="61.563"
+                            height="61.54"
+                            className="w-[1.1rem] h-[1.1rem]"
+                            fill="currentColor"
+                            viewBox="292.828 218.506 61.563 61.54"
+                          >
+                            <path d="M297.36 275.532h57.031l-.027 4.514h-61.536l.014-2.258.355-59.282h4.505l-.342 57.026z"></path>
+                            <path d="M330.733 256.678l13.529-23.196 3.891 2.244-16.028 27.481-15.648-11.087-11.686 20.036-3.892-2.244 14.187-24.321 2.004 1.42 13.643 9.667z"></path>
+                            <path d="M350.985 228.018l.076 10.325.015 2.188-1.903-1.07-8.981-5.043-1.9-1.068 1.889-1.119 8.905-5.282 1.884-1.118.015 2.187z"></path>
+                          </svg>{" "}
+                          Data
+                        </a>
+                      </div>
+                      <div className="">
+                        <span className="text-gray-500 font-normal text-sm">
+                          By {item.authors}
+                        </span>
+                        {" - "}
+                        <span className="text-gray-500 font-normal text-sm">
+                          {item.date}
+                        </span>
+                      </div>
                     </div>
                   </div>
                 </div>

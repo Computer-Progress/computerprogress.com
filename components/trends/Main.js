@@ -10,9 +10,7 @@ import { init } from "./graph/trends";
 import Chart from "./Chart";
 
 export default function Main({ dataset }) {
-  const [parsedDataset, setparsedDataset] = useState(
-    dataset
-  );
+  const [parsedDataset, setparsedDataset] = useState(dataset);
 
   const [yAxisOptions, setYAxisOptions] = useState([
     {
@@ -98,8 +96,8 @@ export default function Main({ dataset }) {
   }, [xAxis, yAxis, parsedDataset]);
 
   useEffect(() => {
-    setSortBy({ column: yAxis.column, type: "desc" });
-  }, [yAxis]);
+    setSortBy({ column: 'Training Compute (FLOPs)', type: "desc" });
+  }, []);
 
   function requestSort(column) {
     setSortBy({
@@ -110,10 +108,12 @@ export default function Main({ dataset }) {
       parsedDataset
         .filter((x) => x[xAxis.column] && x[yAxis.column])
         .sort((a, b) => {
-          if (a[column].toLowerCase() < b[column].toLowerCase()) {
+          const A = typeof a[column] === "string" ? a[column].toLowerCase() : a[column]; 
+          const B = typeof b[column] === "string" ? b[column].toLowerCase() : b[column];
+          if (A < B) {
             return sortBy.type === "asc" ? 1 : -1;
           }
-          if (a[column].toLowerCase() > b[column].toLowerCase()) {
+          if (A > B) {
             return sortBy.type === "asc" ? -1 : 1;
           }
           return 0;
@@ -154,8 +154,9 @@ export default function Main({ dataset }) {
       <div className="max-w-7xl mx-auto pb-6 sm:px-6 lg:px-8 mt-10">
         {/* Replace with your content */}
         <div>
-          <h1 className="text-xl font-bold text-center text-gray-900">Parameter, Compute and Data Trends in Machine Learning
-</h1>
+          <h1 className="text-xl font-bold text-center text-gray-900">
+            Parameter, Compute and Data Trends in Machine Learning
+          </h1>
           <div className="grid grid-cols-[1fr_1fr_min-content_1fr_1fr] items-center gap-2 justify-center mt-5">
             <Menu
               as="div"
@@ -241,7 +242,8 @@ export default function Main({ dataset }) {
             ) : (
               <div className="mt-8 text-center bg-slate-50 py-16">
                 <p className="text-gray-900 ">
-                Not enough data is available for this benchmark. Try changing the axes.
+                  Not enough data is available for this benchmark. Try changing
+                  the axes.
                 </p>
               </div>
             )}
@@ -254,10 +256,10 @@ export default function Main({ dataset }) {
                   <th scope="col" className="px-6 py-3 w-2/5">
                     <button
                       className="flex items-center uppercase gap-2"
-                      onClick={() => requestSort("name")}
+                      onClick={() => requestSort("System")}
                     >
                       <p>Model</p>
-                      {sortBy.column === "name" &&
+                      {sortBy.column === "System" &&
                         (sortBy.type === "asc" ? (
                           <SortAscendingIcon className="h-4 w-4 text-gray-300" />
                         ) : (
@@ -266,6 +268,49 @@ export default function Main({ dataset }) {
                     </button>
                   </th>
                   <th scope="col" className="px-6 py-3 w-1/5">
+                    <button
+                      className="flex items-center uppercase gap-2"
+                      onClick={() => requestSort("Training compute (FLOPs)")}
+                    >
+                      <p>Training compute</p>
+                      {sortBy.column === "Training compute (FLOPs)" &&
+                        (sortBy.type === "asc" ? (
+                          <SortAscendingIcon className="h-4 w-4 text-gray-300" />
+                        ) : (
+                          <SortDescendingIcon className="h-4 w-4 text-gray-300" />
+                        ))}
+                    </button>
+                  </th>
+
+                  <th scope="col" className="px-6 py-3 w-1/5">
+                    <button
+                      className="flex items-center uppercase gap-2"
+                      onClick={() => requestSort("Year")}
+                    >
+                      <p>Year</p>
+                      {sortBy.column === "Year" &&
+                        (sortBy.type === "asc" ? (
+                          <SortAscendingIcon className="h-4 w-4 text-gray-300" />
+                        ) : (
+                          <SortDescendingIcon className="h-4 w-4 text-gray-300" />
+                        ))}
+                    </button>
+                  </th>
+                  <th scope="col" className="px-6 py-3 w-1/5">
+                    <button
+                      className="flex items-center uppercase gap-2"
+                      onClick={() => requestSort("Parameters")}
+                    >
+                      <p>Parameters</p>
+                      {sortBy.column === "Parameters" &&
+                        (sortBy.type === "asc" ? (
+                          <SortAscendingIcon className="h-4 w-4 text-gray-300" />
+                        ) : (
+                          <SortDescendingIcon className="h-4 w-4 text-gray-300" />
+                        ))}
+                    </button>
+                  </th>
+                  {/* <th scope="col" className="px-6 py-3 w-1/5">
                     <button
                       className="flex items-center uppercase gap-2"
                       onClick={() => requestSort(yAxis.column)}
@@ -293,7 +338,7 @@ export default function Main({ dataset }) {
                           <SortDescendingIcon className="h-4 w-4 text-gray-300" />
                         ))}
                     </button>
-                  </th>
+                  </th> */}
                   <th scope="col" className="px-6 py-3">
                     <span className="sr-only">open</span>
                   </th>
@@ -316,26 +361,21 @@ export default function Main({ dataset }) {
                             >
                               {data["System"]}
                             </th>
-                            {yAxis.column === "Publication date" && typeof(data[yAxis.column]) == 'object'  ? (
-                              <td className="px-6 py-2">
-                                {data[yAxis.column].getFullYear()}
-                              </td>
-                            ) : (
-                              <td className="px-6 py-2">
-                                {data[yAxis.column] ? data[yAxis.column] : '-'}
-                              </td>
-                            )}
+                            <td className="px-6 py-2">
+                              {data["Training compute (FLOPs)"]
+                                ? formatUnit(
+                                    data["Training compute (FLOPs)"],
+                                    "FLOPs"
+                                  )
+                                : "-"}
+                            </td>
+                            <td className="px-6 py-2">{data["Year"]}</td>
+                            <td className="px-6 py-2">
+                              {(data["Parameters"] &&
+                                formatUnit(data["Parameters"], "")) ||
+                                "-"}
+                            </td>
 
-                            {xAxis.column === "Publication date" && typeof(data[xAxis.column]) == 'object' ? (
-                              <td className="px-6 py-2">
-                                {data[xAxis.column].getFullYear()}
-                              </td>
-                            ) : (
-                              <td className="px-6 py-2">
-                                {data[xAxis.column] ? data[xAxis.column] : '-'}
-                              </td>
-                            )}
-                            {/* <td className="px-6 py-2">{data[xAxis.column]}</td> */}
                             <td className="px-6 py-2 text-right">
                               <Disclosure.Button className="py-2">
                                 {open ? (
@@ -375,92 +415,55 @@ export default function Main({ dataset }) {
 
                           <Disclosure.Panel as="tr" className="   bg-white  ">
                             <td colSpan="5">
-                              <div className="border-x-[#AA3248] border-x-2 p-6 sm:grid sm:grid-cols-2 gap-8">
-                                <div>
-                                  <h2 className="font-bold">Paper</h2>
-                                  <div className="flex gap-8 mt-1">
-                                    <div>
-                                      <p className="text-xs">Title</p>
-                                      <p className="text-gray-900 flex gap-1">
-                                        <a
-                                          className="text-[#AA3248] hover:underline"
-                                          title="paper link"
-                                          href={data["Link"]}
-                                          target="_blank"
-                                          rel="noreferrer"
-                                        >
-                                          <span className="whitespace-pre-wrap">
-                                            {data["Reference"]}
-                                          </span>
-                                        </a>
-                                      </p>
-                                    </div>
-                                    <div></div>
-                                  </div>
-                                </div>
-                                <div>
-                                  <h2 className="font-bold">External links</h2>
-
-                                  <p className="text-[#21cbce] ">
-                                    <a
-                                      className="text-[#21cbce] inline-block"
-                                      title="paper with code"
-                                      href={
-                                        "https://paperswithcode.com" +
-                                        data["paper_with_code"]
-                                      }
-                                      target="_blank"
-                                      rel="noreferrer"
-                                    >
-                                      <svg
-                                        xmlns="http://www.w3.org/2000/svg"
-                                        viewBox="0 0 512 512"
-                                        className="h-5 w-5"
-                                        fill="currentColor"
+                              <div className="border-x-[#AA3248] border-x-2 p-6  gap-8">
+                                <div className="grid sm:grid-cols-2 md:grid-cols-[2fr_repeat(4,_1fr)] gap-8 mt-1">
+                                  <div>
+                                    <p className="text-xs">Paper Title</p>
+                                    <p className="text-gray-900 flex gap-1">
+                                      <a
+                                        className="text-[#AA3248] hover:underline"
+                                        title="paper link"
+                                        href={data["Link"]}
+                                        target="_blank"
+                                        rel="noreferrer"
                                       >
-                                        <path d="M88 128h48v256H88zm144 0h48v256h-48zm-72 16h48v224h-48zm144 0h48v224h-48zm72-16h48v256h-48z"></path>
-                                        <path d="M104 104V56H16v400h88v-48H64V104zm304-48v48h40v304h-40v48h88V56z"></path>
-                                      </svg>{" "}
-                                    </a>
-                                  </p>
-                                </div>
-
-                                <div>
-                                  <h2 className="font-bold">
-                                    Model Characteristics
-                                  </h2>
-
-                                  <div className="flex gap-5 mt-1">
-                                    <div>
-                                      <p className="text-xs flex gap-1">
-                                        Operations per network pass
-                                      </p>
-                                      <p className="text-gray-900">
-                                        {(data["flops"] &&
-                                          formatUnit(data["flops"], "FLOPs")) ||
-                                          (data["multiadds"] &&
-                                            formatUnit(
-                                              data["multiadds"] * 2,
-                                              "FLOPs"
-                                            )) ||
-                                          "-"}
-                                      </p>
-                                    </div>
-                                    <div>
-                                      <p className="text-xs">Paramenters</p>
-                                      <p className="text-gray-900">
-                                        {(data["parameters"] &&
-                                          formatUnit(data["parameters"], "")) ||
-                                          "-"}
-                                      </p>
-                                    </div>
+                                        <span className="whitespace-pre-wrap">
+                                          {data["Reference"] || "-"}
+                                        </span>
+                                      </a>
+                                    </p>
                                   </div>
-                                </div>
-                                <div>
-                                  <h2 className="font-bold">
-                                    Peformance metrics
-                                  </h2>
-                                  <div className="flex gap-5 mt-1"></div>
+                                  <div>
+                                    <p className="text-xs">Domain</p>
+                                    <p className="text-gray-900 flex gap-1">
+                                      {data["Domain"] || "-"}
+                                    </p>
+                                  </div>
+                                  <div>
+                                    <p className="text-xs">Paramenters</p>
+                                    <p className="text-gray-900 flex gap-1">
+                                      {(data["Parameters"] &&
+                                        formatUnit(data["Parameters"], "")) ||
+                                        "-"}
+                                    </p>
+                                  </div>
+                                  <div>
+                                    <p className="text-xs">
+                                      Organization categorization
+                                    </p>
+                                    <p className="text-gray-900 flex gap-1">
+                                      {data["Organization Categorization"] ||
+                                        "-"}
+                                    </p>
+                                  </div>
+                                  <div>
+                                    <p className="text-xs">
+                                      Inclusion criteria
+                                    </p>
+                                    <p className="text-gray-900 flex gap-1">
+                                      {data["Inclusion criteria"] || "-"}
+                                    </p>
+                                  </div>
                                 </div>
                               </div>
                             </td>

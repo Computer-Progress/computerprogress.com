@@ -1,3 +1,4 @@
+import { MailIcon } from "@heroicons/react/outline";
 import Image from "next/image";
 
 function classNames(...classes) {
@@ -23,10 +24,10 @@ export default function Navbar({ transparent }) {
             </a>
           </div>
           <p className="text-gray-100 text-sm items-end justify-center flex flex-col gap-2 ">
-            <a  href="mailto:hello@computerprogress.org">
-              Contact: hello@computerprogress.org
-            </a>
              © 2022 Computer Progress
+            <a className="flex items-center gap-1"  href="mailto:hello@computerprogress.org">
+            <MailIcon  strokeWidth="1" className="w-4 h-4" /> hello@computerprogress.org
+            </a>
           </p>
         </div>
       </div>

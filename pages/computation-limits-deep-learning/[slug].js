@@ -36,7 +36,7 @@ export default function Home({ benchmarks, dataset, accuracyTypes }) {
 
         {/* <!-- Open Graph / Facebook --> */}
         <meta property="og:type" content="website" />
-        <meta property="og:url" content="https://new-computerprogress.d2a3k566pnqgrg.amplifyapp.com/benchmarks" />
+        <meta property="og:url" content="https://new-computerprogress.d2a3k566pnqgrg.amplifyapp.com/computation-limits-deep-learning" />
         <meta property="og:title" content="The Computation Limits of Deep Learning
  - Computer Progress" />
         <meta
@@ -51,7 +51,7 @@ export default function Home({ benchmarks, dataset, accuracyTypes }) {
 
         {/* <!-- Twitter --> */}
         <meta property="twitter:card" content="summary_large_image" />
-        <meta property="twitter:url" content="https://new-computerprogress.d2a3k566pnqgrg.amplifyapp.com/benchmarks" />
+        <meta property="twitter:url" content="https://new-computerprogress.d2a3k566pnqgrg.amplifyapp.com/computation-limits-deep-learning" />
         <meta property="twitter:title" content="The Computation Limits of Deep Learning
  - Computer Progress" />
         <meta

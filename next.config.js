@@ -8,8 +8,8 @@ const nextConfig = {
   async redirects() {
     return [
       {
-        source: '/benchmarks',
-        destination: '/benchmarks/image-classification-on-imagenet',
+        source: '/computation-limits-deep-learning',
+        destination: '/computation-limits-deep-learning/image-classification-on-imagenet',
         permanent: true,
       },
     ]

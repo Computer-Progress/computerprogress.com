@@ -33,7 +33,7 @@ export default function Home({ dataset }) {
 
         {/* <!-- Open Graph / Facebook --> */}
         <meta property="og:type" content="website" />
-        <meta property="og:url" content="https://new-computerprogress.d2a3k566pnqgrg.amplifyapp.com/trends" />
+        <meta property="og:url" content="https://new-computerprogress.d2a3k566pnqgrg.amplifyapp.com/compute-trends-machine-learning" />
         <meta property="og:title" content="Compute Trends Across Three Eras of Machine Learning - Computer Progress" />
         <meta
           property="og:description"
@@ -47,7 +47,7 @@ export default function Home({ dataset }) {
 
         {/* <!-- Twitter --> */}
         <meta property="twitter:card" content="summary_large_image" />
-        <meta property="twitter:url" content="https://new-computerprogress.d2a3k566pnqgrg.amplifyapp.com/trends" />
+        <meta property="twitter:url" content="https://new-computerprogress.d2a3k566pnqgrg.amplifyapp.com/compute-trends-machine-learning" />
         <meta property="twitter:title" content="Compute Trends Across Three Eras of Machine Learning - Computer Progress" />
         <meta
           property="twitter:description"

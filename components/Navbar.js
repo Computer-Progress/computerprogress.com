@@ -8,15 +8,15 @@ function classNames(...classes) {
 }
 
 export default function Navbar({ hideLogo }) {
-  const navigation = [{ name: "About us", href: "/about", current: false }];
+  const navigation = [{ name: "About", href: "/about", current: false }];
   const userNavigation = [
     {
       name: "The Computation Limits of Deep Learning",
-      href: "/benchmarks/image-classification-on-imagenet",
+      href: "/computation-limits-deep-learning/image-classification-on-imagenet",
     },
     {
       name: "Compute Trends Across Three Eras of Machine Learning",
-      href: "/trends",
+      href: "/compute-trends-machine-learning",
     },
   ];
   return (

@@ -1,3 +1,4 @@
+import { ArrowsExpandIcon, DownloadIcon } from "@heroicons/react/outline";
 import Highcharts from "highcharts";
 import HighchartsReact from "highcharts-react-official";
 import HighchartsExporting from "highcharts/modules/exporting";
@@ -7,7 +8,13 @@ if (typeof Highcharts === "object") {
   HighchartsExporting(Highcharts);
 }
 
-export default function Chart({ dataset, xAxis, yAxis, downloadCSV }) {
+export default function Chart({
+  dataset,
+  xAxis,
+  yAxis,
+  downloadCSV,
+  benchmark,
+}) {
   function formatFLOPs(flops, decimals = 2) {
     const parsedFlops = Number(flops);
     if (parsedFlops === 0) return "0 flops";
@@ -164,11 +171,12 @@ export default function Chart({ dataset, xAxis, yAxis, downloadCSV }) {
         align: "center",
         y: -5,
       },
+      useHTML: true,
       href: "",
       text:
         '<a target="_blank" href="https://arxiv.org/abs/2007.05558">' +
         "Ⓒ The Computational Limits of Deep Learning, N.C. THOMPSON, K. GREENEWALD, K. LEE, G.F. MANSO</a>" +
-        ' [<a target="_blank" href="https://dblp.org/rec/journals/corr/abs-2007-05558.html">CITE</a>, <a target="_blank" href="https://dblp.uni-trier.de/rec/journals/corr/abs-2007-05558.html?view=bibtex">BibTex</a>]',
+        ' [<a style="color: black;" target="_blank" href="https://dblp.org/rec/journals/corr/abs-2007-05558.html">CITE</a>, <a style="color: black;" target="_blank" href="https://dblp.uni-trier.de/rec/journals/corr/abs-2007-05558.html?view=bibtex">BibTex</a>]',
     },
     yAxis: {
       title: {
@@ -331,7 +339,7 @@ export default function Chart({ dataset, xAxis, yAxis, downloadCSV }) {
       chart.exportChart(
         {
           type: "image/png",
-          filename: "graph",
+          filename: benchmark,
         },
         {
           credits: {
@@ -353,32 +361,28 @@ export default function Chart({ dataset, xAxis, yAxis, downloadCSV }) {
   }
 
   return (
-    <div className="w-full">
+    <div className="w-full relative">
       <HighchartsReact highcharts={Highcharts} options={chartOptions} />
-      <div className="flex items-center justify-end gap-2 mt-3">
+      <div className="flex items-center justify-end gap-4 mt-3 px-2 sm:px-0 lg:absolute bottom-0.5 right-0">
         <button
-          className="px-2 py-1 hover:underline text-[#AA3248] text-sm rounded-lg"
+          className="flex gap-1 items-center uppercase  hover:underline text-[#AA3248] text-sm rounded-lg"
           onClick={() => ChartFullScreen()}
         >
-          Full screen
+          <ArrowsExpandIcon className="w-4 h-4" />
+          full screen
         </button>
+
         <button
-          className="px-2 py-1 hover:underline text-[#AA3248] text-sm rounded-lg"
-          onClick={() => printGraph()}
-        >
-          Print graph
-        </button>
-        <button
-          className="px-2 py-1 hover:underline text-[#AA3248] text-sm rounded-lg"
+          className="flex gap-1 items-center uppercase hover:underline text-[#AA3248] text-sm rounded-lg"
           onClick={() => downloadGraph()}
         >
-          Download graph
+          <DownloadIcon className="w-4 h-4" /> graph
         </button>
         <button
-          className="px-2 py-1 hover:underline text-[#AA3248] text-sm rounded-lg"
+          className="flex gap-1 items-center uppercase hover:underline text-[#AA3248] text-sm rounded-lg"
           onClick={() => downloadCSV()}
         >
-          Download data
+          <DownloadIcon className="w-4 h-4" /> data
         </button>
       </div>
     </div>

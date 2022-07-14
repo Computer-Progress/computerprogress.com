@@ -64,12 +64,12 @@ export default function About() {
         </Head>
 
         <Navbar></Navbar>
-        <main className="flex-1 bg-gray-50 pb-16">
+        <main className="flex-1 bg-gray-50 pb-12">
           <div className="bg-black">
             <div className="max-w-screen-xl mx-auto py-16 px-4 sm:py-24 sm:px-6 lg:px-8 lg:flex lg:justify-center">
               <div className="max-w-xl">
                 <h2 className="text-4xl leading-10 font-medium text-white sm:text-5xl sm:leading-none sm:tracking-tight lg:text-6xl">
-                  About us
+                  About
                 </h2>
               </div>
             </div>
@@ -91,12 +91,32 @@ export default function About() {
                   <Image
                     src="/futuretech light.svg"
                     alt="future tech"
-                    height={120}
-                    width={300}
+                    height={200}
+                    width={400}
                   />
                 </a>
               </div>
             </div>
+            <div className="text-lg max-w-prose  mx-auto mb-12">
+              <h2 className="text-2xl font-bold text-gray-900 leading-8 mb-2">
+                Contributing
+              </h2>
+              <p className="text-md text-gray-500 leading-8">
+                We link to Google sheets at the bottom of each Project page.
+                Please leave a comment on the sheets to point out any errors and
+                to suggest changes.
+              </p>
+            </div>
+            <div className="text-lg max-w-prose  mx-auto mb-12">
+              <h2 className="text-2xl font-bold text-gray-900 leading-8 mb-2">
+                Team
+              </h2>
+              <p className="text-lg text-gray-500 leading-8">
+                The Computer Progress initiative is managed by Gabriel Manso,
+                Neil Thompson.
+              </p>
+            </div>
+          
             <div className="text-lg max-w-prose  mx-auto mb-12">
               <h2 className="text-2xl font-bold text-gray-900 leading-8 mb-2">
                 Collaborators
@@ -117,38 +137,7 @@ export default function About() {
                 </a>
               </div>
             </div>
-            <div className="text-lg max-w-prose  mx-auto mb-12">
-              <h2 className="text-2xl font-bold text-gray-900 leading-8 mb-2">
-                Team
-              </h2>
-              <p className="text-lg text-gray-500 leading-8">
-                The Computer Progress initiative is managed by Gabriel Manso,
-                Neil Thompson.
-              </p>
-            </div>
-            <div className="text-lg max-w-prose  mx-auto mb-12">
-              <h2 className="text-2xl font-bold text-gray-900 leading-8 mb-2">
-                Contributing
-              </h2>
-              <p className="text-md text-gray-500 leading-8">
-                We link to Google sheets at the bottom of each Project page.
-                Please leave a comment on the sheets to point out any errors and
-                to suggest changes.
-              </p>
-            </div>
-            <div className="text-lg max-w-prose  mx-auto mb-12">
-              <h2 className="text-2xl font-bold text-gray-900 leading-8 mb-2">
-                Contact
-              </h2>
-              <p className="text-md text-gray-500 leading-8">
-                <a
-                  className="flex gap-1 items-center"
-                  href="mailto:hello@computerprogress.org"
-                >
-                  <MailIcon className="w-5 h-5" /> hello@computerprogress.org
-                </a>
-              </p>
-            </div>
+            
           </div>
         </main>
 
