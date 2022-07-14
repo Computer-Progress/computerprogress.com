@@ -14,7 +14,7 @@ export default function Main({ dataset }) {
 
   const [yAxisOptions, setYAxisOptions] = useState([
     {
-      name: "Training compute (FLOPs)",
+      name: "Training compute ",
       column: "Training compute (FLOPs)",
     },
     {
@@ -22,15 +22,15 @@ export default function Main({ dataset }) {
       column: "Parameters",
     },
     {
-      name: "Inference compute (FLOPs)",
+      name: "Inference compute",
       column: "Inference compute (FLOPs)",
     },
     {
-      name: "Training dataset size (datapoints)",
+      name: "Training dataset size ",
       column: "Training dataset size (datapoints)",
     },
     {
-      name: "Training compute per parameter (FLOPs)",
+      name: "Training compute per parameter",
       column: "Training compute per parameter (FLOPs)",
     },
     {
@@ -49,19 +49,19 @@ export default function Main({ dataset }) {
       column: "Parameters",
     },
     {
-      name: "Training compute (FLOPs)",
+      name: "Training compute",
       column: "Training compute (FLOPs)",
     },
     {
-      name: "Inference compute (FLOPs)",
+      name: "Inference compute",
       column: "Inference compute (FLOPs)",
     },
     {
-      name: "Training dataset size (datapoints)",
+      name: "Training dataset size",
       column: "Training dataset size (datapoints)",
     },
     {
-      name: "Training compute per parameter (FLOPs)",
+      name: "Training compute per parameter",
       column: "Training compute per parameter (FLOPs)",
     },
     {
@@ -96,7 +96,7 @@ export default function Main({ dataset }) {
   }, [xAxis, yAxis, parsedDataset]);
 
   useEffect(() => {
-    setSortBy({ column: 'Training Compute (FLOPs)', type: "desc" });
+    setSortBy({ column: "Training Compute (FLOPs)", type: "desc" });
   }, []);
 
   function requestSort(column) {
@@ -108,8 +108,10 @@ export default function Main({ dataset }) {
       parsedDataset
         .filter((x) => x[xAxis.column] && x[yAxis.column])
         .sort((a, b) => {
-          const A = typeof a[column] === "string" ? a[column].toLowerCase() : a[column]; 
-          const B = typeof b[column] === "string" ? b[column].toLowerCase() : b[column];
+          const A =
+            typeof a[column] === "string" ? a[column].toLowerCase() : a[column];
+          const B =
+            typeof b[column] === "string" ? b[column].toLowerCase() : b[column];
           if (A < B) {
             return sortBy.type === "asc" ? 1 : -1;
           }
@@ -157,7 +159,7 @@ export default function Main({ dataset }) {
           <h1 className="text-xl font-bold text-center text-gray-900">
             Parameter, Compute and Data Trends in Machine Learning
           </h1>
-          <div className="grid grid-cols-[1fr_1fr_min-content_1fr_1fr] items-center gap-2 justify-center mt-5">
+          <div className="hidden sm:grid grid-cols-[1fr_1fr_min-content_1fr_1fr] items-center gap-2 justify-center mt-5">
             <Menu
               as="div"
               className="col-start-2 place-self-end  relative inline-block text-left"
@@ -236,7 +238,7 @@ export default function Main({ dataset }) {
               </Menu.Items>
             </Menu>
           </div>
-          <div>
+          <div className="hidden sm:block">
             {filteredDataset.length > 2 ? (
               <Chart dataset={parsedDataset} xAxis={xAxis} yAxis={yAxis} />
             ) : (
@@ -249,11 +251,11 @@ export default function Main({ dataset }) {
             )}
           </div>
 
-          <div className="relative overflow-x-auto  shadow-md sm:rounded-lg mt-8">
-            <table className="w-full text-sm text-left text-gray-500">
-              <thead className="text-xs table-fixed text-gray-700 uppercase bg-gray-50">
+          <div className="relative   shadow-md sm:rounded-lg mt-8">
+            <table className="w-full overflow-x-auto text-sm text-left text-gray-500">
+              <thead className="text-xs sticky top-0  table-fixed text-gray-700 uppercase bg-gray-50">
                 <tr>
-                  <th scope="col" className="px-6 py-3 w-2/5">
+                  <th scope="col" className="px-6 py-3 sm:w-2/5">
                     <button
                       className="flex items-center uppercase gap-2"
                       onClick={() => requestSort("System")}
@@ -267,7 +269,10 @@ export default function Main({ dataset }) {
                         ))}
                     </button>
                   </th>
-                  <th scope="col" className="px-6 py-3 w-1/5">
+                  <th
+                    scope="col"
+                    className="hidden sm:table-cell px-6 py-3 w-1/5"
+                  >
                     <button
                       className="flex items-center uppercase gap-2"
                       onClick={() => requestSort("Training compute (FLOPs)")}
@@ -282,7 +287,10 @@ export default function Main({ dataset }) {
                     </button>
                   </th>
 
-                  <th scope="col" className="px-6 py-3 w-1/5">
+                  <th
+                    scope="col"
+                    className="hidden sm:table-cell px-6 py-3 w-1/5"
+                  >
                     <button
                       className="flex items-center uppercase gap-2"
                       onClick={() => requestSort("Year")}
@@ -296,7 +304,10 @@ export default function Main({ dataset }) {
                         ))}
                     </button>
                   </th>
-                  <th scope="col" className="px-6 py-3 w-1/5">
+                  <th
+                    scope="col"
+                    className="hidden sm:table-cell  px-6 py-3 w-1/5"
+                  >
                     <button
                       className="flex items-center uppercase gap-2"
                       onClick={() => requestSort("Parameters")}
@@ -310,35 +321,7 @@ export default function Main({ dataset }) {
                         ))}
                     </button>
                   </th>
-                  {/* <th scope="col" className="px-6 py-3 w-1/5">
-                    <button
-                      className="flex items-center uppercase gap-2"
-                      onClick={() => requestSort(yAxis.column)}
-                    >
-                      <p>{yAxis.name}</p>
-                      {sortBy.column === yAxis.column &&
-                        (sortBy.type === "asc" ? (
-                          <SortAscendingIcon className="h-4 w-4 text-gray-300" />
-                        ) : (
-                          <SortDescendingIcon className="h-4 w-4 text-gray-300" />
-                        ))}
-                    </button>
-                  </th>
 
-                  <th scope="col" className="px-6 py-3 w-1/5">
-                    <button
-                      className="flex items-center uppercase gap-2"
-                      onClick={() => requestSort(xAxis.column)}
-                    >
-                      <p>{xAxis.name}</p>
-                      {sortBy.column === xAxis.column &&
-                        (sortBy.type === "asc" ? (
-                          <SortAscendingIcon className="h-4 w-4 text-gray-300" />
-                        ) : (
-                          <SortDescendingIcon className="h-4 w-4 text-gray-300" />
-                        ))}
-                    </button>
-                  </th> */}
                   <th scope="col" className="px-6 py-3">
                     <span className="sr-only">open</span>
                   </th>
@@ -361,7 +344,7 @@ export default function Main({ dataset }) {
                             >
                               {data["System"]}
                             </th>
-                            <td className="px-6 py-2">
+                            <td className="hidden sm:table-cell px-6 py-2">
                               {data["Training compute (FLOPs)"]
                                 ? formatUnit(
                                     data["Training compute (FLOPs)"],
@@ -369,8 +352,10 @@ export default function Main({ dataset }) {
                                   )
                                 : "-"}
                             </td>
-                            <td className="px-6 py-2">{data["Year"]}</td>
-                            <td className="px-6 py-2">
+                            <td className="hidden sm:table-cell px-6 py-2">
+                              {data["Year"]}
+                            </td>
+                            <td className="hidden sm:table-cell px-6 py-2">
                               {(data["Parameters"] &&
                                 formatUnit(data["Parameters"], "")) ||
                                 "-"}
@@ -433,18 +418,16 @@ export default function Main({ dataset }) {
                                       </a>
                                     </p>
                                   </div>
+                                  <div className="block sm:hidden">
+                                    <p className=" text-xs">Year</p>
+                                    <p className="text-gray-900 flex gap-1">
+                                      {data["Year"] || "-"}
+                                    </p>
+                                  </div>
                                   <div>
                                     <p className="text-xs">Domain</p>
                                     <p className="text-gray-900 flex gap-1">
                                       {data["Domain"] || "-"}
-                                    </p>
-                                  </div>
-                                  <div>
-                                    <p className="text-xs">Paramenters</p>
-                                    <p className="text-gray-900 flex gap-1">
-                                      {(data["Parameters"] &&
-                                        formatUnit(data["Parameters"], "")) ||
-                                        "-"}
                                     </p>
                                   </div>
                                   <div>
@@ -462,6 +445,25 @@ export default function Main({ dataset }) {
                                     </p>
                                     <p className="text-gray-900 flex gap-1">
                                       {data["Inclusion criteria"] || "-"}
+                                    </p>
+                                  </div>
+                                  <div className="block sm:hidden">
+                                    <p className=" text-xs">Training Compute</p>
+                                    <p className="text-gray-900 flex gap-1">
+                                      {data["Training compute (FLOPs)"]
+                                        ? formatUnit(
+                                            data["Training compute (FLOPs)"],
+                                            "FLOPs"
+                                          )
+                                        : "-"}
+                                    </p>
+                                  </div>
+                                  <div className="block sm:hidden">
+                                    <p className="text-xs">Paramenters</p>
+                                    <p className="text-gray-900 flex gap-1">
+                                      {(data["Parameters"] &&
+                                        formatUnit(data["Parameters"], "")) ||
+                                        "-"}
                                     </p>
                                   </div>
                                 </div>
@@ -495,6 +497,33 @@ export default function Main({ dataset }) {
           )}
         </div>
         {/* /End replace */}
+      </div>
+      <div className="max-w-screen-xl mx-auto py-16 px-4 sm:px-6 lg:px-8">
+        <div className="bg-black rounded-lg shadow-xl overflow-hidden lg:grid lg:grid-cols-2 lg:gap-4">
+          <div className="pt-10 pb-12 px-6 sm:pt-16 sm:px-16 lg:py-16 lg:pr-0 xl:py-20 xl:px-20">
+            <div className="lg:self-center">
+              <h2 className="text-3xl leading-9 font-extrabold text-white sm:text-4xl sm:leading-10">
+                <span className="block">Want to contribute?</span>
+              </h2>
+              <p className="mt-4 text-lg leading-6 text-gray-200">
+                You have access to our database where you can point out any errors or suggest changes
+              </p>
+              <a
+                href="https://docs.google.com/spreadsheets/d/1AAIebjNsnJj_uKALHbXNfn3_YsT6sHXtCU0q7OIPuc4/edit#gid=0" rel="noopener noreferrer" target="_blank"
+                className="mt-8 bg-white border border-transparent rounded-md shadow px-6 py-3 inline-flex items-center text-base leading-6 font-medium text-[#AA3248] hover:text-[#8a283a] hover:bg-gray-50 transition duration-150 ease-in-out"
+              >
+                Go to database
+              </a>
+            </div>
+          </div>
+          <div className="relative pb-3/5 -mt-6 md:pb-1/2">
+            <img
+              className="absolute inset-0 w-full h-full transform translate-x-6 translate-y-6 rounded-md object-cover object-left-top sm:translate-x-16 lg:translate-y-20"
+              src="/database.jpg"
+              alt="App screenshot"
+            />
+          </div>
+        </div>
       </div>
     </main>
   );

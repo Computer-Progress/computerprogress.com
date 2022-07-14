@@ -207,7 +207,7 @@ export default function Main({ benchmarks, dataset, accuracyTypes }) {
             {benchmark[0]} <span className="font-normal">on</span>{" "}
             {benchmark[1]}
           </h1>
-          <div className="grid grid-cols-[1fr_1fr_min-content_1fr_1fr] items-center gap-2 justify-center mt-5">
+          <div className="hidden sm:grid  grid-cols-[1fr_1fr_min-content_1fr_1fr] items-center gap-2 justify-center mt-5">
             <Menu
               as="div"
               className="col-start-2 place-self-end  relative inline-block text-left"
@@ -286,7 +286,7 @@ export default function Main({ benchmarks, dataset, accuracyTypes }) {
               </Menu.Items>
             </Menu>
           </div>
-          <div>
+          <div className="hidden sm:block">
             {filteredDataset.length > 2 ? (
               <Chart
                 dataset={dataset.filter(
@@ -311,7 +311,7 @@ export default function Main({ benchmarks, dataset, accuracyTypes }) {
             <table className="w-full text-sm text-left text-gray-500">
               <thead className="sticky top-0 text-xs table-fixed text-gray-700 uppercase bg-gray-50">
                 <tr>
-                  <th scope="col" className="px-6 py-3 w-2/5">
+                  <th scope="col" className="px-6 py-3  sm:w-2/5">
                     <button
                       className="flex items-center uppercase gap-2"
                       onClick={() => requestSort("name")}
@@ -325,7 +325,10 @@ export default function Main({ benchmarks, dataset, accuracyTypes }) {
                         ))}
                     </button>
                   </th>
-                  <th scope="col" className="px-6 py-3 w-1/5">
+                  <th
+                    scope="col"
+                    className="hidden sm:table-cell px-6 py-3 w-1/5"
+                  >
                     <button
                       className="flex items-center uppercase gap-2"
                       onClick={() => requestSort("year")}
@@ -339,7 +342,10 @@ export default function Main({ benchmarks, dataset, accuracyTypes }) {
                         ))}
                     </button>
                   </th>
-                  <th scope="col" className="px-6 py-3 w-1/5">
+                  <th
+                    scope="col"
+                    className="hidden sm:table-cell px-6 py-3 w-1/5"
+                  >
                     <button
                       className="flex items-center uppercase gap-2"
                       onClick={() => requestSort(yAxis.column)}
@@ -354,7 +360,10 @@ export default function Main({ benchmarks, dataset, accuracyTypes }) {
                     </button>
                   </th>
 
-                  <th scope="col" className="px-6 py-3 w-1/5">
+                  <th
+                    scope="col"
+                    className="hidden sm:table-cell px-6 py-3 w-1/5"
+                  >
                     <button
                       className="flex items-center uppercase gap-2"
                       onClick={() => requestSort("computing_power")}
@@ -398,10 +407,14 @@ export default function Main({ benchmarks, dataset, accuracyTypes }) {
                             >
                               {data["name"]}
                             </th>
-                            <td className="px-6 py-2">{data["year"]}</td>
+                            <td className="hidden sm:table-cell px-6 py-2">
+                              {data["year"]}
+                            </td>
 
-                            <td className="px-6 py-2">{data[yAxis.column]}</td>
-                            <td className="px-6 py-2">
+                            <td className="hidden sm:table-cell px-6 py-2">
+                              {data[yAxis.column]}
+                            </td>
+                            <td className="hidden sm:table-cell px-6 py-2">
                               {data["computing_power"]
                                 ? formatUnit(data["computing_power"], "FLOPs")
                                 : "-"}
@@ -449,10 +462,10 @@ export default function Main({ benchmarks, dataset, accuracyTypes }) {
                               <div className="border-x-[#AA3248] border-x-2 p-6 sm:grid sm:grid-cols-2 gap-8">
                                 <div>
                                   <h2 className="font-bold">Paper</h2>
-                                  <div className="flex gap-8 mt-1">
+                                  <div className="flex flex-col sm:flex-row gap-x-8 gap-y-2 mt-1">
                                     <div>
                                       <p className="text-xs">Title</p>
-                                      <p className="text-gray-900 flex gap-1">
+                                      <p className="text-gray-900 flex flex-wrap gap-1">
                                         <a
                                           className="text-[#AA3248] hover:underline"
                                           title="paper link"
@@ -466,10 +479,15 @@ export default function Main({ benchmarks, dataset, accuracyTypes }) {
                                         </a>
                                       </p>
                                     </div>
-                                    <div></div>
+                                    <div className="block sm:hidden">
+                                      <p className="text-xs flex gap-1">Year</p>
+                                      <p className="text-gray-900">
+                                        {data["year"] || "-"}
+                                      </p>
+                                    </div>
                                   </div>
                                 </div>
-                                <div>
+                                <div className="mt-8 sm:mt-0">
                                   <h2 className="font-bold">External links</h2>
 
                                   <p className="text-[#21cbce] ">
@@ -498,12 +516,12 @@ export default function Main({ benchmarks, dataset, accuracyTypes }) {
                                   </p>
                                 </div>
 
-                                <div>
+                                <div className="mt-8 sm:mt-0">
                                   <h2 className="font-bold">
                                     Model Characteristics
                                   </h2>
 
-                                  <div className="flex gap-5 mt-1">
+                                  <div className="flex flex-col sm:flex-row  gap-x-5 gap-y-2 mt-1">
                                     <div>
                                       <p className="text-xs flex gap-1">
                                         Operations per network pass
@@ -534,13 +552,26 @@ export default function Main({ benchmarks, dataset, accuracyTypes }) {
                                           "-"}
                                       </p>
                                     </div>
+                                    <div className="block sm:hidden">
+                                      <p className="text-xs flex gap-1">
+                                        Hardware Burden
+                                      </p>
+                                      <p className="text-gray-900">
+                                        {data["computing_power"]
+                                          ? formatUnit(
+                                              data["computing_power"],
+                                              "FLOPs"
+                                            )
+                                          : "-"}
+                                      </p>
+                                    </div>
                                   </div>
                                 </div>
-                                <div>
+                                <div className="mt-8 sm:mt-0">
                                   <h2 className="font-bold">
                                     Peformance metrics
                                   </h2>
-                                  <div className="flex gap-5 mt-1">
+                                  <div className="flex flex-col sm:flex-row gap-x-5 gap-y-2 mt-1">
                                     {accuracyTypes.map((metric, index) => (
                                       <div key={index}>
                                         <p className="text-xs">{metric}</p>
@@ -590,10 +621,13 @@ export default function Main({ benchmarks, dataset, accuracyTypes }) {
                 <span className="block">Want to contribute?</span>
               </h2>
               <p className="mt-4 text-lg leading-6 text-gray-200">
-                You have access to our database where you can point out any errors or suggest changes
+                You have access to our database where you can point out any
+                errors or suggest changes
               </p>
               <a
-                href="https://docs.google.com/spreadsheets/d/1xthNnZ_I43SUXzLvuP7TFXsd-XeHDUx_4dedH5sE2GM/edit#gid=1571653277" rel="noopener noreferrer" target="_blank"
+                href="https://docs.google.com/spreadsheets/d/1xthNnZ_I43SUXzLvuP7TFXsd-XeHDUx_4dedH5sE2GM/edit#gid=1571653277"
+                rel="noopener noreferrer"
+                target="_blank"
                 className="mt-8 bg-white border border-transparent rounded-md shadow px-6 py-3 inline-flex items-center text-base leading-6 font-medium text-[#AA3248] hover:text-[#8a283a] hover:bg-gray-50 transition duration-150 ease-in-out"
               >
                 Go to database
