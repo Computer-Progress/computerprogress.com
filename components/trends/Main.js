@@ -344,7 +344,7 @@ export default function Main({ dataset }) {
                             >
                               {data["System"]}
                             </th>
-                            <td className="hidden sm:table-cell px-6 py-2">
+                            <td className="hidden sm:table-cell px-6 py-2 whitespace-nowrap">
                               {data["Training compute (FLOPs)"]
                                 ? formatUnit(
                                     data["Training compute (FLOPs)"],
@@ -355,7 +355,7 @@ export default function Main({ dataset }) {
                             <td className="hidden sm:table-cell px-6 py-2">
                               {data["Year"]}
                             </td>
-                            <td className="hidden sm:table-cell px-6 py-2">
+                            <td className="hidden sm:table-cell px-6 py-2 whitespace-nowrap">
                               {(data["Parameters"] &&
                                 formatUnit(data["Parameters"], "")) ||
                                 "-"}

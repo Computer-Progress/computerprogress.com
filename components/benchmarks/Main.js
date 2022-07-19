@@ -414,7 +414,7 @@ export default function Main({ benchmarks, dataset, accuracyTypes }) {
                             <td className="hidden sm:table-cell px-6 py-2">
                               {data[yAxis.column]}
                             </td>
-                            <td className="hidden sm:table-cell px-6 py-2">
+                            <td className="hidden sm:table-cell px-6 py-2 whitespace-nowrap">
                               {data["computing_power"]
                                 ? formatUnit(data["computing_power"], "FLOPs")
                                 : "-"}
