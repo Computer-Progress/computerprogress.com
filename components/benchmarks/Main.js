@@ -175,7 +175,7 @@ export default function Main({ benchmarks, dataset, accuracyTypes }) {
     const parsedValue = Number(value);
     if (parsedValue === 0) return "0 flops";
 
-    const k = 1024;
+    const k = 1000;
     const dm = decimals < 0 ? 0 : decimals;
     const sizes = [
       unit,

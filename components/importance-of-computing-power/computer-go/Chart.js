@@ -2,7 +2,7 @@ import { ArrowsExpandIcon, DownloadIcon } from "@heroicons/react/outline";
 import Highcharts from "highcharts";
 import HighchartsReact from "highcharts-react-official";
 import HighchartsExporting from "highcharts/modules/exporting";
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 
 if (typeof Highcharts === "object") {
   HighchartsExporting(Highcharts);
@@ -75,43 +75,153 @@ export default function Chart({
   const scatterData = dataset.map((model) => {
     return {
       x:
-        xAxis.column === "year"
-          ? model[xAxis.column]
-          : Math.log10(model[xAxis.column]),
-      y: Math.log10(1 / (1 - model[yAxis.column] / 100)),
-      name: model.name,
-      relevant: model.relevant,
+        xAxis.column === "GFLOPS"
+          ? Math.log10(model[xAxis.column])
+          : Number(model[xAxis.column]),
+      y:
+        yAxis.column === "GFLOPS"
+          ? Math.log10(model[yAxis.column])
+          : Number(model[yAxis.column]),
+      name: model["PROGRAM"],
       color: "#aa3248",
     };
   });
 
+  const plotBands = () =>
+    yAxis.column === "ELO"
+      ? [
+          {
+            color: "#AA324825",
+            label: {
+              text: "NOVICE PLAYER",
+              style: {
+                color: "#999999",
+              },
+            },
+            from: -9999999,
+            to: 200,
+          },
+          {
+            label: {
+              text: "CASUAL PLAYER",
+              style: {
+                color: "#999999",
+              },
+            },
+            color: "#AA324815",
+            from: 200,
+            to: 1200,
+          },
+          {
+            label: {
+              text: "INTERMEDIATE PLAYER",
+              style: {
+                color: "#999999",
+              },
+            },
+            color: "#AA324825",
+            from: 1200,
+            to: 2100,
+          },
+          {
+            label: {
+              text: "ADVANCED PLAYER",
+              style: {
+                color: "#999999",
+              },
+            },
+            color: "#AA324815",
+            from: 2100,
+            to: 2700,
+          },
+          {
+            label: {
+              text: "PROFESSIONAL",
+              style: {
+                color: "#999999",
+              },
+            },
+            color: "#AA324825",
+            from: 2700,
+            to: 9000,
+          },
+        ]
+      : [];
+
   const lineData = () => {
     const x = dataset.map((model) => {
-      if (xAxis.column === "year") {
-        return Number(model[xAxis.column]);
+      if (xAxis.column === "GFLOPS") {
+        return Math.log10(model[xAxis.column]);
       }
-
-      return Math.log10(model[xAxis.column]);
+      return Number(model[xAxis.column]);
     });
     const y = dataset.map((model) => {
-      return Math.log10(1 / (1 - model[yAxis.column] / 100));
+      if (yAxis.column === "GFLOPS") {
+        return Math.log10(model[yAxis.column]);
+      }
+      return Number(model[yAxis.column]);
     });
     const lr = linearRegressionLine(x, y);
     return lr.points;
   };
+
   const chartOptions = {
     chart: {
       spacingBottom: 25,
       spacingTop: 50,
       height: 600, // 16:9 ratio
       events: {
+        render: function () {
+          if (this.labelRender) {
+            try {
+              this.labelRender.destroy();
+            } catch (e) {
+              console.log(e);
+            }
+          }
+          let text;
+          if (yAxis.column === "ELO" && xAxis.column === "YEAR") {
+            text = '<span class="text-lg text-gray-600">Elo = 37.6 Year + 1111.0</span>';
+          } else if (
+            yAxis.column === "ELO" &&
+            xAxis.column === "GFLOPS"
+          ) {
+            text =
+              '<span class="text-lg text-gray-600">Elo = 242.4 log<sub>10</sub> (GFLOPS) + 1078.1</span>';
+          } else if (
+            yAxis.column === "GFLOPS" &&
+            xAxis.column === "YEAR"
+          ) {
+            text =
+              '<span class="text-lg text-gray-600">GFLOPS = 10<sup>0.14 Year + 0.44</sup></span>';
+          }
+          if (text) {
+            this.labelRender = this.renderer
+              .text(
+                text,
+                (this.chartWidth / 3.5),
+                (this.chartHeight / 3),
+                true
+              )
+              .attr({
+                zIndex: 6,
+              })
+              .add();
+            this.labelRender.attr({
+              x: (this.chartWidth / 3.5),
+              y: (this.chartHeight / 3),
+            });
+            this.labelRender.toFront();
+          }
+        },
+
         beforePrint: function () {
           this.update({
             credits: {
               enabled: true,
               text:
-                '<a target="_blank" href="https://arxiv.org/abs/2007.05558">' +
-                "Ⓒ The Computational Limits of Deep Learning, N.C. THOMPSON, K. GREENEWALD, K. LEE, G.F. MANSO</a>",
+                '<a target="_blank" href="https://arxiv.org/abs/2206.14007">' +
+                "Ⓒ The Importance of (Exponentially More) Computing Power, N.C. THOMPSON, SHUNING GE, K. LEE, G.F. MANSO</a>",
             },
           });
         },
@@ -120,8 +230,8 @@ export default function Chart({
             credits: {
               enabled: true,
               text:
-                '<a target="_blank" href="https://arxiv.org/abs/2007.05558">' +
-                "Ⓒ The Computational Limits of Deep Learning, N.C. THOMPSON, K. GREENEWALD, K. LEE, G.F. MANSO</a>" +
+                '<a target="_blank" href="https://arxiv.org/abs/2206.14007">' +
+                "Ⓒ The Importance of (Exponentially More) Computing Power, N.C. THOMPSON, SHUNING GE, K. LEE, G.F. MANSO</a>" +
                 ' [<a target="_blank" href="https://dblp.org/rec/journals/corr/abs-2007-05558.html">CITE</a>, <a target="_blank" href="https://dblp.uni-trier.de/rec/journals/corr/abs-2007-05558.html?view=bibtex">BibTex</a>]',
             },
           });
@@ -137,14 +247,13 @@ export default function Chart({
     xAxis: {
       title: {
         enabled: true,
-        text:
-          xAxis.name === "Hardware Burden" ? "Hardware Burden (FLOPs)" : "Year",
+        text: xAxis.name,
         margin: 5,
         style: {
           fontSize: 22,
         },
       },
-      minPadding: xAxis.column === "year" ? 0.099 : 0.102,
+      minPadding: xAxis.column === "YEAR" ? 0.099 : 0.102,
       maxPadding: 0.06,
 
       allowDecimals: false,
@@ -154,10 +263,10 @@ export default function Chart({
         },
         useHTML: true,
         formatter: function () {
-          if (xAxis.column === "year") {
-            return `<span class="text-lg">${this.value}</span>`;
+          if (xAxis.column === "GFLOPS") {
+            return `<span class="text-lg">10<sup>${this.value}</sup></span>`;
           }
-          return `<span class="text-lg">10<sup>${this.value}</sup></span>`;
+          return `<span class="text-lg">${this.value}</span>`;
         },
       },
     },
@@ -173,8 +282,8 @@ export default function Chart({
       useHTML: true,
       href: "",
       text:
-        '<a target="_blank" href="https://arxiv.org/abs/2007.05558">' +
-        "Ⓒ The Computational Limits of Deep Learning, N.C. THOMPSON, K. GREENEWALD, K. LEE, G.F. MANSO</a>" +
+        '<a target="_blank" href="https://arxiv.org/abs/2206.14007">' +
+        "Ⓒ The Importance of (Exponentially More) Computing Power, N.C. THOMPSON, SHUNING GE, K. LEE, G.F. MANSO</a>" +
         ' [<a style="color: black;" target="_blank" href="https://dblp.org/rec/journals/corr/abs-2007-05558.html">CITE</a>, <a style="color: black;" target="_blank" href="https://dblp.uni-trier.de/rec/journals/corr/abs-2007-05558.html?view=bibtex">BibTex</a>]',
     },
     yAxis: {
@@ -185,20 +294,21 @@ export default function Chart({
           fontSize: 22,
         },
       },
+      plotBands: plotBands(),
       // allowDecimals: false,
       maxPadding: 0,
       // showLastLabel: false,
 
       labels: {
-        y: -3,
-        x: 0,
-        align: "left",
+        // y: -11,
+        // x: 0,
+        useHTML: true,
+        // align: "left",
         formatter: function () {
-          let label = (1 - 10 ** -this.value) * 100;
-          label = Math.round(label * 100) / 100;
-          return `<span class=" text-lg">${
-            this.value ? label.toFixed(0) : 0
-          }%</span>`;
+          if (yAxis.column === "GFLOPS") {
+            return `<span class="text-lg">10<sup>${this.value}</sup></span>`;
+          }
+          return `<span class="text-lg">${this.value}</span>`;
         },
       },
     },
@@ -209,24 +319,25 @@ export default function Chart({
       useHTML: true,
       padding: 0,
       formatter: function () {
-        let y = (1 - 10 ** -this.y) * 100;
-        y = Math.round(y * 100) / 100;
-        let x = Math.round(this.x * 100) / 100;
-        const formatXAxis = (x) => {
-          if (xAxis.column === "year") {
-            return `<span class="">${x}</span>`;
+        const formatAxis = (value, column) => {
+          if (column === "GFLOPS") {
+            return `<span class="">10<sup>${value}</sup></span>`;
           }
-          return `<span class="">10<sup>${x}</sup></span>`;
+          return `<span class="">${value}</span>`;
         };
         return `<div class="bg-white block px-3 py-2 mt-[1px] ml-[1px]"> <b>${
           this.point.name
-        }</b><br>${yAxis.name}: ${y}% <br> ${xAxis.name}: ${formatXAxis(
-          x
-        )}</div>`;
+        }</b><br>${yAxis.name}: ${formatAxis(this.y, yAxis.column)} <br> ${
+          xAxis.name
+        }: ${formatAxis(this.x, xAxis.column)}</div>`;
       },
     },
     plotOptions: {
       scatter: {
+        jitter: {
+          x: 0.24,
+          y: 0
+      },
         marker: {
           radius: 5,
           states: {
@@ -255,16 +366,6 @@ export default function Chart({
         data: scatterData,
         marker: {
           radius: 4,
-        },
-        dataLabels: {
-          enabled: true,
-          allowOverlap: false,
-          padding: 5,
-
-          useHTML: true,
-          formatter: function () {
-            if (this.point.relevant) return this.point.name;
-          },
         },
       },
       {
@@ -343,8 +444,8 @@ export default function Chart({
           credits: {
             enabled: true,
             text:
-              '<a target="_blank" href="https://arxiv.org/abs/2007.05558">' +
-              "Ⓒ The Computational Limits of Deep Learning, N.C. THOMPSON, K. GREENEWALD, K. LEE, G.F. MANSO</a>",
+              '<a target="_blank" href="https://arxiv.org/abs/2206.14007">' +
+              "Ⓒ The Importance of (Exponentially More) Computing Power, N.C. THOMPSON, SHUNING GE, K. LEE, G.F. MANSO</a>",
           },
         }
       );

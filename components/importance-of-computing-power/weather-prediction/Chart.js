@@ -1,0 +1,645 @@
+import { ArrowsExpandIcon, DownloadIcon } from "@heroicons/react/outline";
+import Highcharts from "highcharts";
+import HighchartsReact from "highcharts-react-official";
+import HighchartsExporting from "highcharts/modules/exporting";
+import { useCallback, useEffect, useRef } from "react";
+
+if (typeof Highcharts === "object") {
+  HighchartsExporting(Highcharts);
+}
+
+export default function Chart({
+  dataset,
+  xAxis,
+  yAxis,
+  downloadCSV,
+  benchmark,
+}) {
+  function formatFLOPs(flops, decimals = 2) {
+    const parsedFlops = Number(flops);
+    if (parsedFlops === 0) return "0 flops";
+
+    const k = 1000;
+    const dm = decimals < 0 ? 0 : decimals;
+    const sizes = [
+      "FLOPs",
+      "KFLOPs",
+      "MFLOPs",
+      "GFLOPs",
+      "TFLOPs",
+      "PFLOPs",
+      "EFLOPs",
+      "ZFLOPs",
+      "YFLOPs",
+    ];
+
+    const i = Math.floor(Math.log(parsedFlops) / Math.log(k));
+
+    return (
+      parseFloat((parsedFlops / Math.pow(k, i)).toFixed(dm)) + " " + sizes[i]
+    );
+  }
+  const linearRegressionLine = (x, y) => {
+    const xs = [];
+    const ys = [];
+    for (let i = 0; i < x.length; i++) {
+      xs.push(x[i]);
+      ys.push(y[i]);
+    }
+    const n = xs.length;
+    const sum_x = xs.reduce((a, b) => a + b, 0);
+    const sum_y = ys.reduce((a, b) => a + b, 0);
+    const sum_xy = xs.reduce((a, b, i) => a + b * ys[i], 0);
+    const sum_xx = xs.reduce((a, b, i) => a + b * b, 0);
+    const sum_yy = ys.reduce((a, b, i) => a + b * b, 0);
+    const slope = (n * sum_xy - sum_x * sum_y) / (n * sum_xx - sum_x * sum_x);
+    const intercept = (sum_y - slope * sum_x) / n;
+    const r =
+      (n * sum_xy - sum_x * sum_y) /
+      Math.sqrt((n * sum_xx - sum_x * sum_x) * (n * sum_yy - sum_y * sum_y));
+    const r2 = r * r;
+    const x1 = Math.min.apply(null, xs);
+    const x2 = Math.max.apply(null, xs);
+    const y1 = slope * x1 + intercept;
+    const y2 = slope * x2 + intercept;
+    return {
+      slope,
+      intercept,
+      r2,
+      points: [
+        [x1, y1],
+        [x2, y2],
+      ],
+    };
+  };
+  const scatterData = (yColumn, xColumn) => {
+    const data = [];
+    dataset.forEach((model) => {
+      if (model[yColumn] && model[xColumn]) {
+        data.push({
+          x:
+            xColumn === "GFLOPS"
+              ? Math.log10(model[xColumn])
+              : Number(model[xColumn]),
+          y:
+            yColumn === "GFLOPS"
+              ? Math.log10(model[yColumn])
+              : Number(model[yColumn]),
+          color: "#aa3248",
+        });
+      }
+    });
+
+    return data;
+  };
+
+  const lineData = (points) => {
+    const x = points.map((p) => p.x);
+    const y = points.map((p) => p.y);
+    const lr = linearRegressionLine(x, y);
+    return lr.points;
+  };
+
+  let getSeries = useCallback(() => {
+    const series = [];
+
+    if (yAxis.column === "MEAN") {
+      series.push({
+        type: "scatter",
+        step: false,
+        lineWidth: 0,
+
+        name: "DAY 3",
+        data: scatterData("DAY 3", xAxis.column),
+        marker: {
+          symbol: "circle",
+          radius: 3,
+          fillColor: "#182C4A",
+          lineColor: "#182C4A",
+          lineWidth: 1,
+        },
+      });
+      series.push({
+        type: "line",
+        name: "DAY 3",
+        data: lineData(scatterData("DAY 3", xAxis.column)),
+        color: "#182C4A",
+        dataLabels: {
+          enabled: true,
+          crop: false,
+          overflow: "none",
+          padding: 10,
+          align: "left",
+          useHTML: true,
+          verticalAlign: "middle",
+
+          formatter: function () {
+            let points = this.series.points;
+            if (this.x === points[points.length - 1].x)
+              return (
+                '<span class="text-lg" style="color:' +
+                this.series.color +
+                '">' +
+                this.series.name +
+                "</span>"
+              );
+          },
+        },
+        marker: {
+          symbol: "circle",
+          enabled: false,
+        },
+
+        states: {
+          hover: {
+            lineWidth: 0,
+          },
+        },
+        enableMouseTracking: false,
+      });
+      series.push({
+        type: "scatter",
+        name: "DAY 4",
+        data: scatterData("DAY 4", xAxis.column),
+        marker: {
+          symbol: "circle",
+          radius: 3,
+          fillColor: "#F78105",
+          lineColor: "#F78105",
+
+          lineWidth: 1,
+        },
+      });
+      series.push({
+        type: "line",
+        name: "DAY 4",
+        data: lineData(scatterData("DAY 4", xAxis.column)),
+        color: "#F78105",
+        marker: {
+          symbol: "circle",
+          enabled: false,
+        },
+        dataLabels: {
+          enabled: true,
+          crop: false,
+          overflow: "none",
+          padding: 10,
+          align: "left",
+          useHTML: true,
+          verticalAlign: "middle",
+
+          formatter: function () {
+            let points = this.series.points;
+            if (this.x === points[points.length - 1].x)
+              return (
+                '<span class="text-lg" style="color:' +
+                this.series.color +
+                '">' +
+                this.series.name +
+                "</span>"
+              );
+          },
+        },
+        states: {
+          hover: {
+            lineWidth: 0,
+          },
+        },
+        enableMouseTracking: false,
+      });
+
+      series.push({
+        type: "scatter",
+        name: "DAY 5",
+        data: scatterData("DAY 5", xAxis.column),
+        marker: {
+          symbol: "circle",
+          radius: 3,
+          fillColor: "#D93C3C",
+          lineColor: "#D93C3C",
+
+          lineWidth: 1,
+        },
+      });
+      series.push({
+        type: "line",
+        name: "DAY 5",
+        data: lineData(scatterData("DAY 5", xAxis.column)),
+        color: "#D93C3C",
+        marker: {
+          symbol: "circle",
+          enabled: false,
+        },dataLabels: {
+          enabled: true,
+          crop: false,
+          overflow: "none",
+          padding: 10,
+          align: "left",
+          useHTML: true,
+          verticalAlign: "middle",
+
+          formatter: function () {
+            let points = this.series.points;
+            if (this.x === points[points.length - 1].x)
+              return (
+                '<span class="text-lg" style="color:' +
+                this.series.color +
+                '">' +
+                this.series.name +
+                "</span>"
+              );
+          },
+        },
+        states: {
+          hover: {
+            lineWidth: 0,
+          },
+        },
+        enableMouseTracking: false,
+      });
+
+      series.push({
+        type: "scatter",
+        name: "DAY 6",
+        data: scatterData("DAY 6", xAxis.column),
+        marker: {
+          symbol: "circle",
+          radius: 3,
+          fillColor: "#9EB3C2",
+          lineColor: "#9EB3C2",
+
+          lineWidth: 1,
+        },
+      });
+      series.push({
+        type: "line",
+        name: "DAY 6",
+        data: lineData(scatterData("DAY 6", xAxis.column)),
+        color: "#9EB3C2",
+        marker: {
+          symbol: "circle",
+          enabled: false,
+        },
+        dataLabels: {
+          enabled: true,
+          crop: false,
+          overflow: "none",
+          padding: 10,
+          align: "left",
+          useHTML: true,
+          verticalAlign: "middle",
+
+          formatter: function () {
+            let points = this.series.points;
+            if (this.x === points[points.length - 1].x)
+              return (
+                '<span class="text-lg" style="color:' +
+                this.series.color +
+                '">' +
+                this.series.name +
+                "</span>"
+              );
+          },
+        },
+        states: {
+          hover: {
+            lineWidth: 0,
+          },
+        },
+        enableMouseTracking: false,
+      });
+
+      series.push({
+        type: "scatter",
+        name: "DAY 7",
+        data: scatterData("DAY 7", xAxis.column),
+        marker: {
+          symbol: "circle",
+          radius: 3,
+          fillColor: "#095B83",
+          lineColor: "#095B83",
+
+          lineWidth: 1,
+        },
+      });
+      series.push({
+        type: "line",
+        name: "DAY 7",
+        data: lineData(scatterData("DAY 7", xAxis.column)),
+        color: "#095B83",
+        marker: {
+          symbol: "circle",
+          enabled: false,
+        },
+        dataLabels: {
+          enabled: true,
+          crop: false,
+          overflow: "none",
+          padding: 10,
+          align: "left",
+          useHTML: true,
+          verticalAlign: "middle",
+
+          formatter: function () {
+            let points = this.series.points;
+            if (this.x === points[points.length - 1].x)
+              return (
+                '<span class="text-lg" style="color:' +
+                this.series.color +
+                '">' +
+                this.series.name +
+                "</span>"
+              );
+          },
+        },
+        states: {
+          hover: {
+            lineWidth: 0,
+          },
+        },
+        enableMouseTracking: false,
+      });
+    } else {
+      series.push({
+        step: true,
+        id: xAxis.column + yAxis.column,
+        name: "Weather Prediction",
+        data: scatterData(yAxis.column, xAxis.column),
+        lineColor: "#9EB3C2",
+        lineWidth: 3,
+        marker: {
+          radius: 3,
+          fillColor: "#9EB3C2",
+          lineColor: "#9EB3C2",
+
+          lineWidth: 2,
+        },
+      });
+    }
+    return series;
+  }, [yAxis.column, scatterData, xAxis.column, lineData]);
+
+  const chartOptions = {
+    chart: {
+      spacingBottom: 25,
+      spacingTop: 50,
+      height: 600, // 16:9 ratio
+      events: {
+        load: function () {
+          this.series.forEach(function (series) {
+            console.log(series.points);
+            if (yAxis.column === "MEAN" && series.type === "line") {
+              series.points[series.points.length - 1].update({});
+            }
+          });
+        },
+        beforePrint: function () {
+          this.update({
+            credits: {
+              enabled: true,
+              text:
+                '<a target="_blank" href="https://arxiv.org/abs/2206.14007">' +
+                "Ⓒ The Importance of (Exponentially More) Computing Power, N.C. THOMPSON, SHUNING GE, K. LEE, G.F. MANSO</a>",
+            },
+          });
+        },
+        afterPrint: function () {
+          this.update({
+            credits: {
+              enabled: true,
+              text:
+                '<a target="_blank" href="https://arxiv.org/abs/2206.14007">' +
+                "Ⓒ The Importance of (Exponentially More) Computing Power, N.C. THOMPSON, SHUNING GE, K. LEE, G.F. MANSO</a>" +
+                ' [<a target="_blank" href="https://dblp.org/rec/journals/corr/abs-2007-05558.html">CITE</a>, <a target="_blank" href="https://dblp.uni-trier.de/rec/journals/corr/abs-2007-05558.html?view=bibtex">BibTex</a>]',
+            },
+          });
+        },
+      },
+    },
+    title: {
+      text: null,
+    },
+    subtitle: {
+      text: null,
+    },
+    xAxis: {
+      title: {
+        enabled: true,
+        text: xAxis.name,
+        margin: 5,
+        style: {
+          fontSize: 22,
+        },
+      },
+      // minPadding: xAxis.column === "YEAR" ? 0.099 : 0.102,
+      maxPadding: 0.15,
+
+      allowDecimals: false,
+      labels: {
+        style: {
+          fontSize: 25,
+        },
+        useHTML: true,
+        formatter: function () {
+          if (xAxis.column === "GFLOPS") {
+            return `<span class="text-lg">10<sup>${this.value}</sup></span>`;
+          }
+          return `<span class="text-lg">${this.value}</span>`;
+        },
+      },
+    },
+    credits: {
+      enabled: true,
+      style: {
+        margin: 10,
+      },
+      position: {
+        align: "center",
+        y: -5,
+      },
+      useHTML: true,
+      href: "",
+      text:
+        '<a target="_blank" href="https://arxiv.org/abs/2206.14007">' +
+        "Ⓒ The Importance of (Exponentially More) Computing Power, N.C. THOMPSON, SHUNING GE, K. LEE, G.F. MANSO</a>" +
+        ' [<a style="color: black;" target="_blank" href="https://dblp.org/rec/journals/corr/abs-2007-05558.html">CITE</a>, <a style="color: black;" target="_blank" href="https://dblp.uni-trier.de/rec/journals/corr/abs-2007-05558.html?view=bibtex">BibTex</a>]',
+    },
+    yAxis: {
+      title: {
+        text: yAxis.name,
+        margin: 30,
+        style: {
+          fontSize: 22,
+        },
+      },
+      // allowDecimals: false,
+      padding: 0,
+      // showLastLabel: false,
+
+      labels: {
+        // y: -11,
+        // x: 0,
+        useHTML: true,
+        // align: "left",
+        formatter: function () {
+          if (yAxis.column === "GFLOPS") {
+            return `<span class="text-lg">10<sup>${this.value}</sup></span>`;
+          }
+          return `<span class="text-lg">${this.value}</span>`;
+        },
+      },
+    },
+    legend: {
+      enabled: false,
+    },
+    tooltip: {
+      useHTML: true,
+      padding: 0,
+      formatter: function () {
+        const formatAxis = (value, column) => {
+          if (column === "GFLOPS") {
+            return `<span class="">10<sup>${value}</sup></span>`;
+          }
+          return `<span class="">${value}</span>`;
+        };
+        return `<div class="bg-white block px-3 py-2 mt-[1px] ml-[1px]"> <b>${
+          this.series.name || ''
+        }</b><br>${yAxis.name}: ${formatAxis(this.y, yAxis.column)} <br> ${
+          xAxis.name
+        }: ${formatAxis(this.x, xAxis.column)}</div>`;
+      },
+    },
+    plotOptions: {
+      scatter: {
+        marker: {
+          radius: 3,
+          states: {
+            hover: {
+              enabled: true,
+              lineColor: "rgb(100,0,0)",
+            },
+          },
+        },
+        style: {
+          color: "#aa3248",
+        },
+        states: {
+          hover: {
+            marker: {
+              enabled: false,
+            },
+          },
+        },
+      },
+    },
+    series: getSeries(),
+    exporting: {
+      enabled: false,
+      allowHTML: true,
+      scale: 5,
+      sourceWidth: 1200,
+      menuItemDefinitions: {
+        // Custom definition
+        label: {
+          onclick: function () {
+            downloadCSV();
+          },
+          text: "Download data (CSV)",
+        },
+      },
+      buttons: {
+        contextButton: {
+          menuItems: [
+            "viewFullscreen",
+            "printChart",
+            "separator",
+            "downloadPNG",
+            "downloadJPEG",
+            "downloadPDF",
+            "downloadSVG",
+            "separator",
+            "label",
+          ],
+        },
+      },
+    },
+  };
+  useEffect(() => {
+    for (var i = 0; i < Highcharts.charts.length; i++) {
+      if (Highcharts.charts[i] !== undefined) {
+        Highcharts.charts[i].reflow();
+      }
+    }
+  });
+
+  useEffect(() => {
+    for (var i = 0; i < Highcharts.charts.length; i++) {
+      if (Highcharts.charts[i] !== undefined) {
+        console.log(Highcharts.charts[i].series);
+        Highcharts.charts[i].redraw();
+      }
+    }
+  }, [yAxis, xAxis]);
+
+  function ChartFullScreen() {
+    const chart = Highcharts.charts.find((chart) => chart !== undefined);
+    if (chart) {
+      chart.fullscreen.toggle();
+    }
+  }
+
+  function downloadGraph() {
+    const chart = Highcharts.charts.find((chart) => chart !== undefined);
+    if (chart) {
+      chart.exportChart(
+        {
+          type: "image/png",
+          filename: benchmark,
+        },
+        {
+          credits: {
+            enabled: true,
+            text:
+              '<a target="_blank" href="https://arxiv.org/abs/2206.14007">' +
+              "Ⓒ The Importance of (Exponentially More) Computing Power, N.C. THOMPSON, SHUNING GE, K. LEE, G.F. MANSO</a>",
+          },
+        }
+      );
+    }
+  }
+
+  function printGraph() {
+    const chart = Highcharts.charts.find((chart) => chart !== undefined);
+    if (chart) {
+      chart.print();
+    }
+  }
+
+  return (
+    <div className="w-full relative">
+      <HighchartsReact highcharts={Highcharts} options={chartOptions} />
+      <div className="flex items-center justify-end gap-4 mt-3 px-2 sm:px-0 lg:absolute bottom-0.5 right-0">
+        <button
+          className="flex gap-1 items-center uppercase  hover:underline text-[#AA3248] text-sm rounded-lg"
+          onClick={() => ChartFullScreen()}
+        >
+          <ArrowsExpandIcon className="w-4 h-4" />
+          full screen
+        </button>
+
+        <button
+          className="flex gap-1 items-center uppercase hover:underline text-[#AA3248] text-sm rounded-lg"
+          onClick={() => downloadGraph()}
+        >
+          <DownloadIcon className="w-4 h-4" /> graph
+        </button>
+        <button
+          className="flex gap-1 items-center uppercase hover:underline text-[#AA3248] text-sm rounded-lg"
+          onClick={() => downloadCSV()}
+        >
+          <DownloadIcon className="w-4 h-4" /> data
+        </button>
+      </div>
+    </div>
+  );
+}

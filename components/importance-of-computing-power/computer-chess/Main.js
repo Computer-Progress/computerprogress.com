@@ -6,67 +6,37 @@ import {
   SortDescendingIcon,
 } from "@heroicons/react/outline";
 import { createRef, useEffect, useState } from "react";
-import { init } from "./graph/trends";
+import { useRouter } from "next/router";
 import Chart from "./Chart";
 
-export default function Main({ dataset }) {
-  const [parsedDataset, setparsedDataset] = useState(dataset);
+export default function Main({ dataset, accuracyTypes }) {
+  const router = useRouter();
+  const benchmark = {
+    name: "Computer Chess",
+    range: "computer-chess",
+  }
+
+  // ============================================================
 
   const [yAxisOptions, setYAxisOptions] = useState([
     {
-      name: "Training compute ",
-      column: "Training compute (FLOPs)",
+      name: "Elo",
+      column: "ELO",
     },
     {
-      name: "Parameters",
-      column: "Parameters",
-    },
-    {
-      name: "Inference compute",
-      column: "Inference compute (FLOPs)",
-    },
-    {
-      name: "Training dataset size ",
-      column: "Training dataset size (datapoints)",
-    },
-    {
-      name: "Training compute per parameter",
-      column: "Training compute per parameter (FLOPs)",
-    },
-    {
-      name: "Training compute times parameters",
-      column: "Training compute times parameters",
+      name: "Computing Power",
+      column: "POSITIONS/SEC",
     },
   ]);
 
   const [xAxisOptions, setXAxisOptions] = useState([
     {
-      name: "Publication date",
-      column: "Publication date",
+      name: "Year",
+      column: "YEAR",
     },
     {
-      name: "Parameters",
-      column: "Parameters",
-    },
-    {
-      name: "Training compute",
-      column: "Training compute (FLOPs)",
-    },
-    {
-      name: "Inference compute",
-      column: "Inference compute (FLOPs)",
-    },
-    {
-      name: "Training dataset size",
-      column: "Training dataset size (datapoints)",
-    },
-    {
-      name: "Training compute per parameter",
-      column: "Training compute per parameter (FLOPs)",
-    },
-    {
-      name: "Training compute times parameters",
-      column: "Training compute times parameters",
+      name: "Computing Power",
+      column: "POSITIONS/SEC",
     },
   ]);
 
@@ -77,7 +47,9 @@ export default function Main({ dataset }) {
   const [showMore, setShowMore] = useState(false);
   //   ==============================================================
 
-  const [filteredDataset, setFilteredDataset] = useState(parsedDataset);
+  const [filteredDataset, setFilteredDataset] = useState(dataset);
+
+  // update yAxisOptions when benchmark changes
 
   // update yAxis and xAxis when yAxisOptions changes
   useEffect(() => {
@@ -87,17 +59,31 @@ export default function Main({ dataset }) {
 
   useEffect(() => {
     setFilteredDataset(
-      parsedDataset
+      dataset
         .filter((x) => x[xAxis.column] && x[yAxis.column])
         .sort((a, b) => {
-          return b[xAxis.column] - a[xAxis.column];
+          const A =
+            typeof a[xAxis.column] === "string"
+              ? a[xAxis.column].toLowerCase()
+              : a[xAxis.column];
+          const B =
+            typeof b[xAxis.column] === "string"
+              ? b[xAxis.column].toLowerCase()
+              : b[xAxis.column];
+          if (A < B) {
+            return sortBy.type === "asc" ? 1 : -1;
+          }
+          if (A > B) {
+            return sortBy.type === "asc" ? -1 : 1;
+          }
+          return 0;
         })
     );
-  }, [xAxis, yAxis, parsedDataset]);
+  }, [xAxis, yAxis, dataset, sortBy.type]);
 
   useEffect(() => {
-    setSortBy({ column: "Training Compute (FLOPs)", type: "desc" });
-  }, []);
+    setSortBy({ column: yAxis.column, type: "desc" });
+  }, [yAxis]);
 
   function requestSort(column) {
     setSortBy({
@@ -105,7 +91,7 @@ export default function Main({ dataset }) {
       type: sortBy.type === "asc" && sortBy.column === column ? "desc" : "asc",
     });
     setFilteredDataset(
-      parsedDataset
+      dataset
         .filter((x) => x[xAxis.column] && x[yAxis.column])
         .sort((a, b) => {
           const A =
@@ -123,6 +109,48 @@ export default function Main({ dataset }) {
     );
   }
   // ==============================================================
+  function downloadCSV() {
+    var array = typeof dataset != "object" ? JSON.parse(dataset) : dataset;
+    var str = "";
+    var line = "";
+    for (var index of Object.keys(array[0])) {
+      if (line != "") line += ",";
+
+      line += index;
+    }
+    str += line + "\r\n";
+
+    for (var i = 0; i < array.length; i++) {
+      line = "";
+      for (var index in array[i]) {
+        if (line != "") line += ",";
+
+        line += array[i][index];
+      }
+
+      str += line + "\r\n";
+    }
+
+    const blob = new Blob([str], { type: "data:text/csv;charset=utf-8," });
+    const blobURL = window.URL.createObjectURL(blob);
+
+    // Create new tag for download file
+    const anchor = document.createElement("a");
+    anchor.download = `${benchmark.name}.csv`;
+    anchor.href = blobURL;
+    anchor.dataset.downloadurl = [
+      "text/csv",
+      anchor.download,
+      anchor.href,
+    ].join(":");
+    anchor.click();
+
+    // Remove URL.createObjectURL. The browser should not save the reference to the file.
+    setTimeout(() => {
+      // For Firefox it is necessary to delay revoking the ObjectURL
+      URL.revokeObjectURL(blobURL);
+    }, 100);
+  }
 
   function formatUnit(value, unit, decimals = 2) {
     const parsedValue = Number(value);
@@ -152,14 +180,14 @@ export default function Main({ dataset }) {
   //   ==============================================================
 
   return (
-    <main className="flex-grow mb-16">
+    <main className="flex-grow  mb-16">
       <div className="max-w-7xl mx-auto pb-6 sm:px-6 lg:px-8 mt-10">
         {/* Replace with your content */}
         <div>
           <h1 className="text-xl font-bold text-center text-gray-900">
-            Parameter, Compute and Data Trends in Machine Learning
+            {benchmark.name}
           </h1>
-          <div className="hidden sm:grid grid-cols-[1fr_1fr_min-content_1fr_1fr] items-center gap-2 justify-center mt-5">
+          <div className="hidden sm:grid  grid-cols-[1fr_1fr_min-content_1fr_1fr] items-center gap-2 justify-center mt-5">
             <Menu
               as="div"
               className="col-start-2 place-self-end  relative inline-block text-left"
@@ -240,7 +268,15 @@ export default function Main({ dataset }) {
           </div>
           <div className="hidden sm:block">
             {filteredDataset.length > 2 ? (
-              <Chart dataset={parsedDataset} xAxis={xAxis} yAxis={yAxis} />
+              <Chart
+                dataset={dataset.filter(
+                  (x) => x[xAxis.column] && x[yAxis.column]
+                )}
+                benchmark={`${benchmark.name}`}
+                xAxis={xAxis}
+                yAxis={yAxis}
+                downloadCSV={downloadCSV}
+              />
             ) : (
               <div className="mt-8 text-center bg-slate-50 py-16">
                 <p className="text-gray-900 ">
@@ -251,17 +287,17 @@ export default function Main({ dataset }) {
             )}
           </div>
 
-          <div className="relative   shadow-md sm:rounded-lg mt-8">
-            <table className="w-full overflow-x-auto text-sm text-left text-gray-500">
-              <thead className="text-xs sticky top-0  table-fixed text-gray-700 uppercase bg-gray-50">
+          <div className=" shadow-md sm:rounded-lg mt-8">
+            <table className="w-full text-sm text-left text-gray-500">
+              <thead className="sticky top-0 text-xs table-fixed text-gray-700 uppercase bg-gray-50">
                 <tr>
-                  <th scope="col" className="px-6 py-3 sm:w-2/5">
+                  <th scope="col" className="px-6 py-3  sm:w-2/5">
                     <button
                       className="flex items-center uppercase gap-2"
-                      onClick={() => requestSort("System")}
+                      onClick={() => requestSort("PROGRAM")}
                     >
-                      <p>Model</p>
-                      {sortBy.column === "System" &&
+                      <p>Program</p>
+                      {sortBy.column === "PROGRAM" &&
                         (sortBy.type === "asc" ? (
                           <SortAscendingIcon className="h-4 w-4 text-gray-300" />
                         ) : (
@@ -275,10 +311,27 @@ export default function Main({ dataset }) {
                   >
                     <button
                       className="flex items-center uppercase gap-2"
-                      onClick={() => requestSort("Training compute (FLOPs)")}
+                      onClick={() => requestSort("YEAR")}
                     >
-                      <p>Training compute</p>
-                      {sortBy.column === "Training compute (FLOPs)" &&
+                      <p>YEAR</p>
+                      {sortBy.column === "YEAR" &&
+                        (sortBy.type === "asc" ? (
+                          <SortAscendingIcon className="h-4 w-4 text-gray-300" />
+                        ) : (
+                          <SortDescendingIcon className="h-4 w-4 text-gray-300" />
+                        ))}
+                    </button>
+                  </th>
+                  <th
+                    scope="col"
+                    className="hidden sm:table-cell px-6 py-3 w-1/5"
+                  >
+                    <button
+                      className="flex items-center uppercase gap-2"
+                      onClick={() => requestSort("ELO")}
+                    >
+                      <p>{"ELO"}</p>
+                      {sortBy.column === "ELO" &&
                         (sortBy.type === "asc" ? (
                           <SortAscendingIcon className="h-4 w-4 text-gray-300" />
                         ) : (
@@ -293,10 +346,10 @@ export default function Main({ dataset }) {
                   >
                     <button
                       className="flex items-center uppercase gap-2"
-                      onClick={() => requestSort("Year")}
+                      onClick={() => requestSort("COMPUTING POWER")}
                     >
-                      <p>Year</p>
-                      {sortBy.column === "Year" &&
+                      <div className="flex gap-1">COMPUTING POWER</div>
+                      {sortBy.column === "COMPUTING POWER" &&
                         (sortBy.type === "asc" ? (
                           <SortAscendingIcon className="h-4 w-4 text-gray-300" />
                         ) : (
@@ -304,24 +357,6 @@ export default function Main({ dataset }) {
                         ))}
                     </button>
                   </th>
-                  <th
-                    scope="col"
-                    className="hidden sm:table-cell  px-6 py-3 w-1/5"
-                  >
-                    <button
-                      className="flex items-center uppercase gap-2"
-                      onClick={() => requestSort("Parameters")}
-                    >
-                      <p>Parameters</p>
-                      {sortBy.column === "Parameters" &&
-                        (sortBy.type === "asc" ? (
-                          <SortAscendingIcon className="h-4 w-4 text-gray-300" />
-                        ) : (
-                          <SortDescendingIcon className="h-4 w-4 text-gray-300" />
-                        ))}
-                    </button>
-                  </th>
-
                   <th scope="col" className="px-6 py-3">
                     <span className="sr-only">open</span>
                   </th>
@@ -342,25 +377,24 @@ export default function Main({ dataset }) {
                               scope="row"
                               className="px-6 py-2 font-medium text-gray-900 whitespace-pre-wrap"
                             >
-                              {data["System"]}
+                              {data["PROGRAM"]}
                             </th>
+                            <td className="hidden sm:table-cell px-6 py-2">
+                              {data["YEAR"]}
+                            </td>
+
+                            <td className="hidden sm:table-cell px-6 py-2">
+                              {data["ELO"]}
+                            </td>
                             <td className="hidden sm:table-cell px-6 py-2 whitespace-nowrap">
-                              {data["Training compute (FLOPs)"]
+                              {data["POSITIONS/SEC"]
                                 ? formatUnit(
-                                    data["Training compute (FLOPs)"],
-                                    "FLOPs"
+                                    data["POSITIONS/SEC"],
+                                    " POSITIONS/SEC"
                                   )
                                 : "-"}
                             </td>
-                            <td className="hidden sm:table-cell px-6 py-2">
-                              {data["Year"]}
-                            </td>
-                            <td className="hidden sm:table-cell px-6 py-2 whitespace-nowrap">
-                              {(data["Parameters"] &&
-                                formatUnit(data["Parameters"], "")) ||
-                                "-"}
-                            </td>
-
+                            {/* <td className="px-6 py-2">{data[xAxis.column]}</td> */}
                             <td className="px-6 py-2 text-right">
                               <Disclosure.Button className="py-2">
                                 {open ? (
@@ -397,79 +431,6 @@ export default function Main({ dataset }) {
                               </Disclosure.Button>
                             </td>
                           </tr>
-
-                          <Disclosure.Panel as="tr" className="   bg-white  ">
-                            <td colSpan="5">
-                              <div className="border-x-[#AA3248] border-x-2 p-6  gap-8">
-                                <div className="grid sm:grid-cols-2 md:grid-cols-[2fr_repeat(4,_1fr)] gap-8 mt-1">
-                                  <div>
-                                    <p className="text-xs">Paper Title</p>
-                                    <p className="text-gray-900 flex gap-1">
-                                      <a
-                                        className="text-[#AA3248] hover:underline"
-                                        title="paper link"
-                                        href={data["Link"]}
-                                        target="_blank"
-                                        rel="noreferrer"
-                                      >
-                                        <span className="whitespace-pre-wrap">
-                                          {data["Reference"] || "-"}
-                                        </span>
-                                      </a>
-                                    </p>
-                                  </div>
-                                  <div className="block sm:hidden">
-                                    <p className=" text-xs">Year</p>
-                                    <p className="text-gray-900 flex gap-1">
-                                      {data["Year"] || "-"}
-                                    </p>
-                                  </div>
-                                  <div>
-                                    <p className="text-xs">Domain</p>
-                                    <p className="text-gray-900 flex gap-1">
-                                      {data["Domain"] || "-"}
-                                    </p>
-                                  </div>
-                                  <div>
-                                    <p className="text-xs">
-                                      Organization categorization
-                                    </p>
-                                    <p className="text-gray-900 flex gap-1">
-                                      {data["Organization Categorization"] ||
-                                        "-"}
-                                    </p>
-                                  </div>
-                                  <div>
-                                    <p className="text-xs">
-                                      Inclusion criteria
-                                    </p>
-                                    <p className="text-gray-900 flex gap-1">
-                                      {data["Inclusion criteria"] || "-"}
-                                    </p>
-                                  </div>
-                                  <div className="block sm:hidden">
-                                    <p className=" text-xs">Training Compute</p>
-                                    <p className="text-gray-900 flex gap-1">
-                                      {data["Training compute (FLOPs)"]
-                                        ? formatUnit(
-                                            data["Training compute (FLOPs)"],
-                                            "FLOPs"
-                                          )
-                                        : "-"}
-                                    </p>
-                                  </div>
-                                  <div className="block sm:hidden">
-                                    <p className="text-xs">Paramenters</p>
-                                    <p className="text-gray-900 flex gap-1">
-                                      {(data["Parameters"] &&
-                                        formatUnit(data["Parameters"], "")) ||
-                                        "-"}
-                                    </p>
-                                  </div>
-                                </div>
-                              </div>
-                            </td>
-                          </Disclosure.Panel>
                         </>
                       )}
                     </Disclosure>
@@ -506,10 +467,13 @@ export default function Main({ dataset }) {
                 <span className="block">Want to contribute?</span>
               </h2>
               <p className="mt-4 text-lg leading-6 text-gray-200">
-                You have access to our database where you can point out any errors or suggest changes
+                You have access to our database where you can point out any
+                errors or suggest changes
               </p>
               <a
-                href="https://docs.google.com/spreadsheets/d/1AAIebjNsnJj_uKALHbXNfn3_YsT6sHXtCU0q7OIPuc4/edit#gid=0" rel="noopener noreferrer" target="_blank"
+                href="https://docs.google.com/spreadsheets/d/1xthNnZ_I43SUXzLvuP7TFXsd-XeHDUx_4dedH5sE2GM/edit#gid=1571653277"
+                rel="noopener noreferrer"
+                target="_blank"
                 className="mt-8 bg-white border border-transparent rounded-md shadow px-6 py-3 inline-flex items-center text-base leading-6 font-medium text-[#AA3248] hover:text-[#8a283a] hover:bg-gray-50 transition duration-150 ease-in-out"
               >
                 Go to database

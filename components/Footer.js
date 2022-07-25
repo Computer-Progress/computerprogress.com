@@ -1,4 +1,4 @@
-import { MailIcon } from "@heroicons/react/outline";
+import { MailIcon, ScaleIcon } from "@heroicons/react/outline";
 import Image from "next/image";
 
 function classNames(...classes) {
@@ -24,10 +24,23 @@ export default function Navbar({ transparent }) {
             </a>
           </div>
           <p className="text-gray-100 text-sm items-end justify-center flex flex-col gap-2 ">
-             © 2022 Computer Progress
-            <a className="flex items-center gap-1"  href="mailto:hello@computerprogress.org">
-            <MailIcon  strokeWidth="1" className="w-4 h-4" /> hello@computerprogress.org
+            <a
+              className="flex items-center gap-1"
+              href="mailto:hello@computerprogress.org"
+            >
+              <MailIcon strokeWidth="1" className="w-4 h-4" />{" "}
+              hello@computerprogress.org
             </a>
+            <span className="flex gap-2">
+
+              © 2022 Computer Progress
+            <a
+              className="flex items-center gap-1"
+              href="https://creativecommons.org/licenses/by-sa/4.0/"
+              >
+              <ScaleIcon strokeWidth="1" className="w-4 h-4" /> CC-BY-SA
+            </a>
+              </span>
           </p>
         </div>
       </div>
