@@ -8,13 +8,14 @@ import {
 import { createRef, useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import Chart from "./Chart";
+import * as XLSX from "xlsx/xlsx.mjs";
 
 export default function Main({ dataset, accuracyTypes }) {
   const router = useRouter();
   const benchmark = {
     name: "Computer Chess",
     range: "computer-chess",
-  }
+  };
 
   // ============================================================
 
@@ -42,7 +43,10 @@ export default function Main({ dataset, accuracyTypes }) {
 
   const [xAxis, setXAxis] = useState(xAxisOptions[0]);
   const [yAxis, setYAxis] = useState(yAxisOptions[0]);
-  const [sortBy, setSortBy] = useState(yAxisOptions[0]);
+  const [sortBy, setSortBy] = useState({
+    name: "Year",
+    column: "YEAR",
+  });
 
   const [showMore, setShowMore] = useState(false);
   //   ==============================================================
@@ -82,8 +86,8 @@ export default function Main({ dataset, accuracyTypes }) {
   }, [xAxis, yAxis, dataset, sortBy.type]);
 
   useEffect(() => {
-    setSortBy({ column: yAxis.column, type: "desc" });
-  }, [yAxis]);
+    setSortBy({ column: "YEAR", type: "asc" });
+  }, []);
 
   function requestSort(column) {
     setSortBy({
@@ -109,47 +113,15 @@ export default function Main({ dataset, accuracyTypes }) {
     );
   }
   // ==============================================================
-  function downloadCSV() {
-    var array = typeof dataset != "object" ? JSON.parse(dataset) : dataset;
-    var str = "";
-    var line = "";
-    for (var index of Object.keys(array[0])) {
-      if (line != "") line += ",";
-
-      line += index;
+  function downloadData(format) {
+    const wb = XLSX.utils.book_new();
+    const ws = XLSX.utils.json_to_sheet(dataset);
+    XLSX.utils.book_append_sheet(wb, ws, "Sheet1");
+    if (format === ".xlsx") {
+      XLSX.writeFile(wb, `${benchmark.name}.xlsx`);
+    } else {
+      XLSX.writeFile(wb, `${benchmark.name}.csv`);
     }
-    str += line + "\r\n";
-
-    for (var i = 0; i < array.length; i++) {
-      line = "";
-      for (var index in array[i]) {
-        if (line != "") line += ",";
-
-        line += array[i][index];
-      }
-
-      str += line + "\r\n";
-    }
-
-    const blob = new Blob([str], { type: "data:text/csv;charset=utf-8," });
-    const blobURL = window.URL.createObjectURL(blob);
-
-    // Create new tag for download file
-    const anchor = document.createElement("a");
-    anchor.download = `${benchmark.name}.csv`;
-    anchor.href = blobURL;
-    anchor.dataset.downloadurl = [
-      "text/csv",
-      anchor.download,
-      anchor.href,
-    ].join(":");
-    anchor.click();
-
-    // Remove URL.createObjectURL. The browser should not save the reference to the file.
-    setTimeout(() => {
-      // For Firefox it is necessary to delay revoking the ObjectURL
-      URL.revokeObjectURL(blobURL);
-    }, 100);
   }
 
   function formatUnit(value, unit, decimals = 2) {
@@ -207,7 +179,7 @@ export default function Main({ dataset, accuracyTypes }) {
 
               <Menu.Items className="z-10 absolute left-0 mt-2 w-max origin-top-right divide-y divide-gray-100 rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
                 <div className="px-1 py-1 ">
-                  {yAxisOptions.map((option, index) => (
+                  {yAxisOptions.filter(x=> x.column !== xAxis.column).map((option, index) => (
                     <Menu.Item key={index}>
                       {({ active }) => (
                         <button
@@ -246,7 +218,7 @@ export default function Main({ dataset, accuracyTypes }) {
 
               <Menu.Items className="z-10 absolute left-0 mt-2 w-max origin-top-right divide-y divide-gray-100 rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
                 <div className="px-1 py-1 ">
-                  {xAxisOptions.map((option, index) => (
+                  {xAxisOptions.filter(x=> x.column !== yAxis.column).map((option, index) => (
                     <Menu.Item key={index}>
                       {({ active }) => (
                         <button
@@ -275,7 +247,7 @@ export default function Main({ dataset, accuracyTypes }) {
                 benchmark={`${benchmark.name}`}
                 xAxis={xAxis}
                 yAxis={yAxis}
-                downloadCSV={downloadCSV}
+                downloadData={downloadData}
               />
             ) : (
               <div className="mt-8 text-center bg-slate-50 py-16">
@@ -291,7 +263,7 @@ export default function Main({ dataset, accuracyTypes }) {
             <table className="w-full text-sm text-left text-gray-500">
               <thead className="sticky top-0 text-xs table-fixed text-gray-700 uppercase bg-gray-50">
                 <tr>
-                  <th scope="col" className="px-6 py-3  sm:w-2/5">
+                  <th scope="col" className="px-6 py-3  sm:w-1/4">
                     <button
                       className="flex items-center uppercase gap-2"
                       onClick={() => requestSort("PROGRAM")}
@@ -307,7 +279,7 @@ export default function Main({ dataset, accuracyTypes }) {
                   </th>
                   <th
                     scope="col"
-                    className="hidden sm:table-cell px-6 py-3 w-1/5"
+                    className="hidden sm:table-cell px-6 py-3 w-1/4"
                   >
                     <button
                       className="flex items-center uppercase gap-2"
@@ -324,7 +296,7 @@ export default function Main({ dataset, accuracyTypes }) {
                   </th>
                   <th
                     scope="col"
-                    className="hidden sm:table-cell px-6 py-3 w-1/5"
+                    className="hidden sm:table-cell px-6 py-3 w-1/4"
                   >
                     <button
                       className="flex items-center uppercase gap-2"
@@ -342,14 +314,14 @@ export default function Main({ dataset, accuracyTypes }) {
 
                   <th
                     scope="col"
-                    className="hidden sm:table-cell px-6 py-3 w-1/5"
+                    className="hidden sm:table-cell px-6 py-3 w-1/4"
                   >
                     <button
                       className="flex items-center uppercase gap-2"
-                      onClick={() => requestSort("COMPUTING POWER")}
+                      onClick={() => requestSort("POSITIONS/SEC")}
                     >
-                      <div className="flex gap-1">COMPUTING POWER</div>
-                      {sortBy.column === "COMPUTING POWER" &&
+                      <div className="flex gap-1 whitespace-nowrap">COMPUTING POWER (POSITIONS/SEC)</div>
+                      {sortBy.column === "POSITIONS/SEC" &&
                         (sortBy.type === "asc" ? (
                           <SortAscendingIcon className="h-4 w-4 text-gray-300" />
                         ) : (
@@ -390,7 +362,7 @@ export default function Main({ dataset, accuracyTypes }) {
                               {data["POSITIONS/SEC"]
                                 ? formatUnit(
                                     data["POSITIONS/SEC"],
-                                    " POSITIONS/SEC"
+                                    ""
                                   )
                                 : "-"}
                             </td>
@@ -471,7 +443,7 @@ export default function Main({ dataset, accuracyTypes }) {
                 errors or suggest changes
               </p>
               <a
-                href="https://docs.google.com/spreadsheets/d/1xthNnZ_I43SUXzLvuP7TFXsd-XeHDUx_4dedH5sE2GM/edit#gid=1571653277"
+                href="https://docs.google.com/spreadsheets/d/14YFYHXBeUwqnD00X57LaIXETEukPHCMRfor30ictSJI/edit#gid=453101089"
                 rel="noopener noreferrer"
                 target="_blank"
                 className="mt-8 bg-white border border-transparent rounded-md shadow px-6 py-3 inline-flex items-center text-base leading-6 font-medium text-[#AA3248] hover:text-[#8a283a] hover:bg-gray-50 transition duration-150 ease-in-out"

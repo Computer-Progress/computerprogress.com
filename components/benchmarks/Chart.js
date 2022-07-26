@@ -1,3 +1,4 @@
+import { Menu } from "@headlessui/react";
 import { ArrowsExpandIcon, DownloadIcon } from "@heroicons/react/outline";
 import Highcharts from "highcharts";
 import HighchartsReact from "highcharts-react-official";
@@ -12,7 +13,7 @@ export default function Chart({
   dataset,
   xAxis,
   yAxis,
-  downloadCSV,
+  downloadData,
   benchmark,
 }) {
   function formatFLOPs(flops, decimals = 2) {
@@ -294,7 +295,7 @@ export default function Chart({
         // Custom definition
         label: {
           onclick: function () {
-            downloadCSV();
+            downloadData();
           },
           text: "Download data (CSV)",
         },
@@ -331,12 +332,17 @@ export default function Chart({
     }
   }
 
-  function downloadGraph() {
+  function downloadGraph(format) {
     const chart = Highcharts.charts.find((chart) => chart !== undefined);
+    const type = {
+      ".png": 'image/png', 
+      ".svg": 'image/svg+xml', 
+      ".pdf": 'application/pdf',
+    }[format];
     if (chart) {
       chart.exportChart(
         {
-          type: "image/png",
+          type,
           filename: benchmark,
         },
         {
@@ -369,19 +375,52 @@ export default function Chart({
           <ArrowsExpandIcon className="w-4 h-4" />
           full screen
         </button>
-
-        <button
-          className="flex gap-1 items-center uppercase hover:underline text-[#AA3248] text-sm rounded-lg"
-          onClick={() => downloadGraph()}
-        >
-          <DownloadIcon className="w-4 h-4" /> graph
-        </button>
-        <button
-          className="flex gap-1 items-center uppercase hover:underline text-[#AA3248] text-sm rounded-lg"
-          onClick={() => downloadCSV()}
-        >
-          <DownloadIcon className="w-4 h-4" /> data
-        </button>
+        <Menu as={"div"} className="relative">
+          <Menu.Button className="flex gap-1 items-center uppercase hover:underline text-[#AA3248] text-sm rounded-lg">
+            <DownloadIcon className="w-4 h-4" /> graph
+          </Menu.Button>
+          <Menu.Items className="z-10 absolute  w-full origin-top divide-y divide-gray-100 rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
+            {[".png", ".svg", ".pdf"].map((type, i) => (
+              <Menu.Item key={i}>
+                {({ active }) => (
+                  <button
+                    onClick={() => {
+                      downloadGraph(type);
+                    }}
+                    className={`${
+                      active ? "bg-[#AA3248] text-white" : "text-gray-900"
+                    } group flex w-full items-center rounded-md  px-2 py-2 text-sm`}
+                  >
+                    {type}
+                  </button>
+                )}
+              </Menu.Item>
+            ))}
+          </Menu.Items>
+        </Menu>
+        <Menu as={"div"} className="relative">
+          <Menu.Button className="flex gap-1 items-center uppercase hover:underline text-[#AA3248] text-sm rounded-lg">
+            <DownloadIcon className="w-4 h-4" /> data
+          </Menu.Button>
+          <Menu.Items className="z-10 absolute  w-full origin-top divide-y divide-gray-100 rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
+            {[".csv", ".xlsx"].map((type, i) => (
+              <Menu.Item key={i}>
+                {({ active }) => (
+                  <button
+                    onClick={() => {
+                      downloadData(type);
+                    }}
+                    className={`${
+                      active ? "bg-[#AA3248] text-white" : "text-gray-900"
+                    } group flex w-full items-center rounded-md  px-2 py-2 text-sm`}
+                  >
+                    {type}
+                  </button>
+                )}
+              </Menu.Item>
+            ))}
+          </Menu.Items>
+        </Menu>
       </div>
     </div>
   );

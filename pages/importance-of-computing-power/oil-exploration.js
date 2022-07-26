@@ -129,7 +129,6 @@ export async function getStaticProps({ params }) {
     return a['YEAR'] - b['YEAR'];
     
   });
-  console.log(dataset);
 
   return {
     props: {

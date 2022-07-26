@@ -12,6 +12,11 @@ const nextConfig = {
         destination: '/computation-limits-deep-learning/image-classification-on-imagenet',
         permanent: true,
       },
+      {
+        source: '/importance-of-computing-power',
+        destination: '/importance-of-computing-power/computer-chess',
+        permanent: true,
+      },
     ]
   },
 }

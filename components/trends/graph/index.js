@@ -18,7 +18,6 @@ export function trendsGraph(container,dataset, options) {
     setupControls(mlp);
     setupObjects(mlp);
     setupPlotter(mlp);
-    console.log(mlp);
     buildTrendsGraph(container, mlp, {rows: dataset}, options);
   }
 }

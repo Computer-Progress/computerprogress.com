@@ -1,3 +1,4 @@
+import { Menu } from "@headlessui/react";
 import { ArrowsExpandIcon, DownloadIcon } from "@heroicons/react/outline";
 import Highcharts from "highcharts";
 import HighchartsReact from "highcharts-react-official";
@@ -12,7 +13,7 @@ export default function Chart({
   dataset,
   xAxis,
   yAxis,
-  downloadCSV,
+  downloadData,
   benchmark,
 }) {
   function formatFLOPs(flops, decimals = 2) {
@@ -91,7 +92,7 @@ export default function Chart({
     yAxis.column === "ELO"
       ? [
           {
-            color: "#AA324825",
+            color: "#F8EEF0",
             label: {
               text: "NOVICE",
               style: {
@@ -108,7 +109,7 @@ export default function Chart({
                 color: "#999999",
               },
             },
-            color: "#AA324815",
+            color: "#fff",
             from: 1200,
             to: 2000,
           },
@@ -119,7 +120,7 @@ export default function Chart({
                 color: "#999999",
               },
             },
-            color: "#AA324825",
+            color: "#F8EEF0",
             from: 2000,
             to: 2500,
           },
@@ -130,7 +131,7 @@ export default function Chart({
                 color: "#999999",
               },
             },
-            color: "#AA324815",
+            color: "#fff",
             from: 2500,
             to: 2882,
           },
@@ -141,7 +142,7 @@ export default function Chart({
                 color: "#999999",
               },
             },
-            color: "#AA324825",
+            color: "#F8EEF0",
             from: 2882,
             to: 9000,
           },
@@ -172,47 +173,48 @@ export default function Chart({
       height: 600, // 16:9 ratio
       events: {
         render: function () {
-          if (this.labelRender) {
-            try {
-              this.labelRender.destroy();
-            } catch (e) {
-              console.log(e);
-            }
-          }
-          let text;
-          if (yAxis.column === "ELO" && xAxis.column === "YEAR") {
-            text = '<span class="text-lg text-gray-600">Elo = 37.6 Year + 1111.0</span>';
-          } else if (
-            yAxis.column === "ELO" &&
-            xAxis.column === "POSITIONS/SEC"
-          ) {
-            text =
-              '<span class="text-lg text-gray-600">Elo = 242.4 log<sub>10</sub> (Positions/Sec) + 1078.1</span>';
-          } else if (
-            yAxis.column === "POSITIONS/SEC" &&
-            xAxis.column === "YEAR"
-          ) {
-            text =
-              '<span class="text-lg text-gray-600">Positions/Sec = 10<sup>0.14 Year + 0.44</sup></span>';
-          }
-          if (text) {
-            this.labelRender = this.renderer
-              .text(
-                text,
-                (this.chartWidth / 3.5) * 2,
-                (this.chartHeight / 3) * 2,
-                true
-              )
-              .attr({
-                zIndex: 6,
-              })
-              .add();
-            this.labelRender.attr({
-              x: (this.chartWidth / 3.5) * 2,
-              y: (this.chartHeight / 3) * 2,
-            });
-            this.labelRender.toFront();
-          }
+          // if (this.labelRender) {
+          //   try {
+          //     this.labelRender.destroy();
+          //   } catch (e) {
+          //     console.log(e);
+          //   }
+          // }
+          // let text;
+          // if (yAxis.column === "ELO" && xAxis.column === "YEAR") {
+          //   text =
+          //     '<span class="text-lg text-gray-600">Elo = 37.6 Year + 1111.0</span>';
+          // } else if (
+          //   yAxis.column === "ELO" &&
+          //   xAxis.column === "POSITIONS/SEC"
+          // ) {
+          //   text =
+          //     '<span class="text-lg text-gray-600">Elo = 242.4 log<sub>10</sub> (Positions/Sec) + 1078.1</span>';
+          // } else if (
+          //   yAxis.column === "POSITIONS/SEC" &&
+          //   xAxis.column === "YEAR"
+          // ) {
+          //   text =
+          //     '<span class="text-lg text-gray-600">Positions/Sec = 10<sup>0.14 Year + 0.44</sup></span>';
+          // }
+          // if (text) {
+          //   this.labelRender = this.renderer
+          //     .text(
+          //       text,
+          //       (this.chartWidth / 3.5) * 2,
+          //       (this.chartHeight / 3) * 2,
+          //       true
+          //     )
+          //     .attr({
+          //       zIndex: 6,
+          //     })
+          //     .add();
+          //   this.labelRender.attr({
+          //     x: (this.chartWidth / 3.5) * 2,
+          //     y: (this.chartHeight / 3) * 2,
+          //   });
+          //   this.labelRender.toFront();
+          // }
         },
 
         beforePrint: function () {
@@ -221,7 +223,7 @@ export default function Chart({
               enabled: true,
               text:
                 '<a target="_blank" href="https://arxiv.org/abs/2206.14007">' +
-                "Ⓒ The Importance of (Exponentially More) Computing Power, N.C. THOMPSON, SHUNING GE, K. LEE, G.F. MANSO</a>",
+                "Ⓒ The Importance of (Exponentially More) Computing Power, N.C. THOMPSON, SHUNING GE, G.F. MANSO</a>",
             },
           });
         },
@@ -231,7 +233,7 @@ export default function Chart({
               enabled: true,
               text:
                 '<a target="_blank" href="https://arxiv.org/abs/2206.14007">' +
-                "Ⓒ The Importance of (Exponentially More) Computing Power, N.C. THOMPSON, SHUNING GE, K. LEE, G.F. MANSO</a>" +
+                "Ⓒ The Importance of (Exponentially More) Computing Power, N.C. THOMPSON, SHUNING GE, G.F. MANSO</a>" +
                 ' [<a target="_blank" href="https://dblp.org/rec/journals/corr/abs-2007-05558.html">CITE</a>, <a target="_blank" href="https://dblp.uni-trier.de/rec/journals/corr/abs-2007-05558.html?view=bibtex">BibTex</a>]',
             },
           });
@@ -278,22 +280,23 @@ export default function Chart({
       position: {
         align: "center",
         y: -5,
+        x: 25,
       },
       useHTML: true,
       href: "",
       text:
         '<a target="_blank" href="https://arxiv.org/abs/2206.14007">' +
-        "Ⓒ The Importance of (Exponentially More) Computing Power, N.C. THOMPSON, SHUNING GE, K. LEE, G.F. MANSO</a>" +
+        "Ⓒ The Importance of (Exponentially More) Computing Power, N.C. THOMPSON, SHUNING GE, G.F. MANSO</a>" +
         ' [<a style="color: black;" target="_blank" href="https://dblp.org/rec/journals/corr/abs-2007-05558.html">CITE</a>, <a style="color: black;" target="_blank" href="https://dblp.uni-trier.de/rec/journals/corr/abs-2007-05558.html?view=bibtex">BibTex</a>]',
     },
     yAxis: {
       title: {
         text: yAxis.name,
-        margin: 30,
         style: {
           fontSize: 22,
         },
       },
+      gridLineWidth: yAxis.column === "ELO" ? 0 : 1,
       plotBands: plotBands(),
       // allowDecimals: false,
       maxPadding: 0,
@@ -301,7 +304,7 @@ export default function Chart({
 
       labels: {
         // y: -11,
-        // x: 0,
+        x: -5,
         useHTML: true,
         // align: "left",
         formatter: function () {
@@ -321,7 +324,7 @@ export default function Chart({
       formatter: function () {
         const formatAxis = (value, column) => {
           if (column === "POSITIONS/SEC") {
-            return `<span class="">10<sup>${value}</sup></span>`;
+            return `<span class="">10<sup>${value.toFixed(2)}</sup></span>`;
           }
           return `<span class="">${value}</span>`;
         };
@@ -391,7 +394,7 @@ export default function Chart({
         // Custom definition
         label: {
           onclick: function () {
-            downloadCSV();
+            downloadData();
           },
           text: "Download data (CSV)",
         },
@@ -428,12 +431,17 @@ export default function Chart({
     }
   }
 
-  function downloadGraph() {
+  function downloadGraph(format) {
     const chart = Highcharts.charts.find((chart) => chart !== undefined);
+    const type = {
+      ".png": "image/png",
+      ".svg": "image/svg+xml",
+      ".pdf": "application/pdf",
+    }[format];
     if (chart) {
       chart.exportChart(
         {
-          type: "image/png",
+          type,
           filename: benchmark,
         },
         {
@@ -441,7 +449,7 @@ export default function Chart({
             enabled: true,
             text:
               '<a target="_blank" href="https://arxiv.org/abs/2206.14007">' +
-              "Ⓒ The Importance of (Exponentially More) Computing Power, N.C. THOMPSON, SHUNING GE, K. LEE, G.F. MANSO</a>",
+              "Ⓒ The Importance of (Exponentially More) Computing Power, N.C. THOMPSON, SHUNING GE, G.F. MANSO</a>",
           },
         }
       );
@@ -467,18 +475,52 @@ export default function Chart({
           full screen
         </button>
 
-        <button
-          className="flex gap-1 items-center uppercase hover:underline text-[#AA3248] text-sm rounded-lg"
-          onClick={() => downloadGraph()}
-        >
-          <DownloadIcon className="w-4 h-4" /> graph
-        </button>
-        <button
-          className="flex gap-1 items-center uppercase hover:underline text-[#AA3248] text-sm rounded-lg"
-          onClick={() => downloadCSV()}
-        >
-          <DownloadIcon className="w-4 h-4" /> data
-        </button>
+        <Menu as={"div"} className="relative">
+          <Menu.Button className="flex gap-1 items-center uppercase hover:underline text-[#AA3248] text-sm rounded-lg">
+            <DownloadIcon className="w-4 h-4" /> graph
+          </Menu.Button>
+          <Menu.Items className="z-10 absolute  w-full origin-top divide-y divide-gray-100 rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
+            {[".png", ".svg", ".pdf"].map((type, i) => (
+              <Menu.Item key={i}>
+                {({ active }) => (
+                  <button
+                    onClick={() => {
+                      downloadGraph(type);
+                    }}
+                    className={`${
+                      active ? "bg-[#AA3248] text-white" : "text-gray-900"
+                    } group flex w-full items-center rounded-md  px-2 py-2 text-sm`}
+                  >
+                    {type}
+                  </button>
+                )}
+              </Menu.Item>
+            ))}
+          </Menu.Items>
+        </Menu>
+        <Menu as={"div"} className="relative">
+          <Menu.Button className="flex gap-1 items-center uppercase hover:underline text-[#AA3248] text-sm rounded-lg">
+            <DownloadIcon className="w-4 h-4" /> data
+          </Menu.Button>
+          <Menu.Items className="z-10 absolute  w-full origin-top divide-y divide-gray-100 rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
+            {[".csv", ".xlsx"].map((type, i) => (
+              <Menu.Item key={i}>
+                {({ active }) => (
+                  <button
+                    onClick={() => {
+                      downloadData(type);
+                    }}
+                    className={`${
+                      active ? "bg-[#AA3248] text-white" : "text-gray-900"
+                    } group flex w-full items-center rounded-md  px-2 py-2 text-sm`}
+                  >
+                    {type}
+                  </button>
+                )}
+              </Menu.Item>
+            ))}
+          </Menu.Items>
+        </Menu>
       </div>
     </div>
   );

@@ -27,7 +27,7 @@ export default function Header({ benchmarks }) {
             most important sources of national productivity growth. But data
             substantiating these claims tend to either be abstracted - for
             example by examining spending on I.T., rather than I.T. itself - or
-            anecdotal. In this paper, we assemble direct quantitative evidence
+            anecdotal. In this project, we assemble direct quantitative evidence
             of the impact that computing power has had on five domains: two
             computing bellwethers (Chess and Go), and three economically
             important applications (weather prediction, protein folding, and oil

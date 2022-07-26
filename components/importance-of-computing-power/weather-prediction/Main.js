@@ -8,6 +8,7 @@ import {
 import { createRef, useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import Chart from "./Chart";
+import * as XLSX from "xlsx/xlsx.mjs";
 
 export default function Main({ dataset, accuracyTypes }) {
   const router = useRouter();
@@ -20,11 +21,11 @@ export default function Main({ dataset, accuracyTypes }) {
 
   const [yAxisOptions, setYAxisOptions] = useState([
     {
-      name: "Mean Absolute Error",
+      name: "Mean Absolute Error (Degrees ºF)",
       column: "MEAN",
     },
     {
-      name: "Computing Power",
+      name: "Computing Power (Gflops)",
       column: "GFLOPS",
     },
   ]);
@@ -35,14 +36,17 @@ export default function Main({ dataset, accuracyTypes }) {
       column: "YEAR",
     },
     {
-      name: "Computing Power",
+      name: "Computing Power (Gflops)",
       column: "GFLOPS",
     },
   ]);
 
   const [xAxis, setXAxis] = useState(xAxisOptions[0]);
   const [yAxis, setYAxis] = useState(yAxisOptions[0]);
-  const [sortBy, setSortBy] = useState(yAxisOptions[0]);
+  const [sortBy, setSortBy] = useState({
+    name: "Year",
+    column: "YEAR",
+  });
 
   const [showMore, setShowMore] = useState(false);
   //   ==============================================================
@@ -80,8 +84,8 @@ export default function Main({ dataset, accuracyTypes }) {
   }, [xAxis, yAxis, dataset, sortBy.type]);
 
   useEffect(() => {
-    setSortBy({ column: yAxis.column, type: "desc" });
-  }, [yAxis]);
+    setSortBy({ column: "YEAR", type: "asc" });
+  }, []);
 
   function requestSort(column) {
     setSortBy({
@@ -105,47 +109,15 @@ export default function Main({ dataset, accuracyTypes }) {
     );
   }
   // ==============================================================
-  function downloadCSV() {
-    var array = typeof dataset != "object" ? JSON.parse(dataset) : dataset;
-    var str = "";
-    var line = "";
-    for (var index of Object.keys(array[0])) {
-      if (line != "") line += ",";
-
-      line += index;
+  function downloadData(format) {
+    const wb = XLSX.utils.book_new();
+    const ws = XLSX.utils.json_to_sheet(dataset);
+    XLSX.utils.book_append_sheet(wb, ws, "Sheet1");
+    if (format === ".xlsx") {
+      XLSX.writeFile(wb, `${benchmark.name}.xlsx`);
+    } else {
+      XLSX.writeFile(wb, `${benchmark.name}.csv`);
     }
-    str += line + "\r\n";
-
-    for (var i = 0; i < array.length; i++) {
-      line = "";
-      for (var index in array[i]) {
-        if (line != "") line += ",";
-
-        line += array[i][index];
-      }
-
-      str += line + "\r\n";
-    }
-
-    const blob = new Blob([str], { type: "data:text/csv;charset=utf-8," });
-    const blobURL = window.URL.createObjectURL(blob);
-
-    // Create new tag for download file
-    const anchor = document.createElement("a");
-    anchor.download = `${benchmark.name}.csv`;
-    anchor.href = blobURL;
-    anchor.dataset.downloadurl = [
-      "text/csv",
-      anchor.download,
-      anchor.href,
-    ].join(":");
-    anchor.click();
-
-    // Remove URL.createObjectURL. The browser should not save the reference to the file.
-    setTimeout(() => {
-      // For Firefox it is necessary to delay revoking the ObjectURL
-      URL.revokeObjectURL(blobURL);
-    }, 100);
   }
 
   function formatUnit(value, unit, decimals = 2) {
@@ -192,7 +164,7 @@ export default function Main({ dataset, accuracyTypes }) {
                 <div className="flex flex-col items-start">
                   <span className="text-xs font-light">Y axis</span>
                   <div className="flex items-center ">
-                    <span className="text-md uppercase"> {yAxis.name}</span>
+                    <span className="text-md uppercase"> {yAxis.name.replace(/\(.*\)/, '')}</span>
                     <ChevronDownIcon
                       className="ml-2 -mr-1 h-5 w-5 text-gray-400"
                       aria-hidden="true"
@@ -203,7 +175,7 @@ export default function Main({ dataset, accuracyTypes }) {
 
               <Menu.Items className="z-10 absolute left-0 mt-2 w-max origin-top-right divide-y divide-gray-100 rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
                 <div className="px-1 py-1 ">
-                  {yAxisOptions.map((option, index) => (
+                  {yAxisOptions.filter(x=> x.column !== xAxis.column).map((option, index) => (
                     <Menu.Item key={index}>
                       {({ active }) => (
                         <button
@@ -214,7 +186,7 @@ export default function Main({ dataset, accuracyTypes }) {
                             active ? "bg-[#AA3248] text-white" : "text-gray-900"
                           } group flex w-full items-center rounded-md uppercase px-2 py-2 text-sm`}
                         >
-                          {option.name}
+                          {option.name.replace(/\(.*\)/, '')}
                         </button>
                       )}
                     </Menu.Item>
@@ -231,7 +203,7 @@ export default function Main({ dataset, accuracyTypes }) {
                 <div className="flex flex-col items-start">
                   <span className="text-xs font-light">X axis</span>
                   <div className="flex items-center ">
-                    <span className="text-md uppercase"> {xAxis.name}</span>
+                    <span className="text-md uppercase"> {xAxis.name.replace(/\(.*\)/, '')}</span>
                     <ChevronDownIcon
                       className="ml-2 -mr-1 h-5 w-5 text-gray-400"
                       aria-hidden="true"
@@ -242,7 +214,7 @@ export default function Main({ dataset, accuracyTypes }) {
 
               <Menu.Items className="z-10 absolute left-0 mt-2 w-max origin-top-right divide-y divide-gray-100 rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
                 <div className="px-1 py-1 ">
-                  {xAxisOptions.map((option, index) => (
+                  {xAxisOptions.filter(x=> x.column !== yAxis.column).map((option, index) => (
                     <Menu.Item key={index}>
                       {({ active }) => (
                         <button
@@ -253,7 +225,7 @@ export default function Main({ dataset, accuracyTypes }) {
                             active ? "bg-[#AA3248] text-white" : "text-gray-900"
                           } group flex w-full items-center rounded-md uppercase px-2 py-2 text-sm`}
                         >
-                          {option.name}
+                          {option.name.replace(/\(.*\)/, '')}
                         </button>
                       )}
                     </Menu.Item>
@@ -269,7 +241,7 @@ export default function Main({ dataset, accuracyTypes }) {
                 benchmark={`${benchmark.name}`}
                 xAxis={xAxis}
                 yAxis={yAxis}
-                downloadCSV={downloadCSV}
+                downloadData={downloadData}
               />
             ) : (
               <div className="mt-8 text-center bg-slate-50 py-16">
@@ -284,8 +256,9 @@ export default function Main({ dataset, accuracyTypes }) {
           <div className=" shadow-md sm:rounded-lg mt-8">
             <table className="w-full text-sm text-left text-gray-500">
               <thead className="sticky top-0 text-xs table-fixed text-gray-700 uppercase bg-gray-50">
+                
                 <tr>
-                  <th scope="col" className="px-6 py-3  sm:w-2/5">
+                  <th rowSpan="2" scope="col" className="px-6 py-3  sm:w-1/8">
                     <button
                       className="flex items-center uppercase gap-2"
                       onClick={() => requestSort("YEAR")}
@@ -299,9 +272,38 @@ export default function Main({ dataset, accuracyTypes }) {
                         ))}
                     </button>
                   </th>
+                  <th colSpan={5} scope="col" className="hidden sm:table-cell pt-3  text-center sm:w-5/8">
+                    Mean absolute error (Degrees ºF) 
+
+                  </th>
+                  
+
                   <th
                     scope="col"
-                    className="hidden sm:table-cell px-6 py-3 w-1/5"
+                    rowSpan="2"
+                    className="hidden sm:table-cell px-6 py-3 w-2/8"
+                  >
+                    <button
+                      className="flex items-center uppercase gap-2"
+                      onClick={() => requestSort("GFLOPS")}
+                    >
+                      <div className="flex gap-1 whitespace-nowrap">COMPUTING POWER</div>
+                      {sortBy.column === "GFLOPS" &&
+                        (sortBy.type === "asc" ? (
+                          <SortAscendingIcon className="h-4 w-4 text-gray-300" />
+                        ) : (
+                          <SortDescendingIcon className="h-4 w-4 text-gray-300" />
+                        ))}
+                    </button>
+                  </th>
+                  <th rowSpan="2" scope="col" className="px-6 py-3">
+                    <span className="sr-only">open</span>
+                  </th>
+                </tr>
+                <tr>
+                <th
+                    scope="col"
+                    className="hidden sm:table-cell px-6 py-3 "
                   >
                     <button
                       className="flex items-center uppercase gap-2"
@@ -318,7 +320,7 @@ export default function Main({ dataset, accuracyTypes }) {
                   </th>
                   <th
                     scope="col"
-                    className="hidden sm:table-cell px-6 py-3 w-1/5"
+                    className="hidden sm:table-cell px-6 py-3 "
                   >
                     <button
                       className="flex items-center uppercase gap-2"
@@ -335,7 +337,7 @@ export default function Main({ dataset, accuracyTypes }) {
                   </th>
                   <th
                     scope="col"
-                    className="hidden sm:table-cell px-6 py-3 w-1/5"
+                    className="hidden sm:table-cell px-6 py-3 "
                   >
                     <button
                       className="flex items-center uppercase gap-2"
@@ -352,7 +354,7 @@ export default function Main({ dataset, accuracyTypes }) {
                   </th>
                   <th
                     scope="col"
-                    className="hidden sm:table-cell px-6 py-3 w-1/5"
+                    className="hidden sm:table-cell px-6 py-3 "
                   >
                     <button
                       className="flex items-center uppercase gap-2"
@@ -369,7 +371,7 @@ export default function Main({ dataset, accuracyTypes }) {
                   </th>
                   <th
                     scope="col"
-                    className="hidden sm:table-cell px-6 py-3 w-1/5"
+                    className="hidden sm:table-cell px-6 py-3 "
                   >
                     <button
                       className="flex items-center uppercase gap-2"
@@ -383,27 +385,6 @@ export default function Main({ dataset, accuracyTypes }) {
                           <SortDescendingIcon className="h-4 w-4 text-gray-300" />
                         ))}
                     </button>
-                  </th>
-
-                  <th
-                    scope="col"
-                    className="hidden sm:table-cell px-6 py-3 w-1/5"
-                  >
-                    <button
-                      className="flex items-center uppercase gap-2"
-                      onClick={() => requestSort("GFLOPS")}
-                    >
-                      <div className="flex gap-1">COMPUTING POWER</div>
-                      {sortBy.column === "GFLOPS" &&
-                        (sortBy.type === "asc" ? (
-                          <SortAscendingIcon className="h-4 w-4 text-gray-300" />
-                        ) : (
-                          <SortDescendingIcon className="h-4 w-4 text-gray-300" />
-                        ))}
-                    </button>
-                  </th>
-                  <th scope="col" className="px-6 py-3">
-                    <span className="sr-only">open</span>
                   </th>
                 </tr>
               </thead>
@@ -522,7 +503,7 @@ export default function Main({ dataset, accuracyTypes }) {
                 errors or suggest changes
               </p>
               <a
-                href="https://docs.google.com/spreadsheets/d/1xthNnZ_I43SUXzLvuP7TFXsd-XeHDUx_4dedH5sE2GM/edit#gid=1571653277"
+                href="https://docs.google.com/spreadsheets/d/14YFYHXBeUwqnD00X57LaIXETEukPHCMRfor30ictSJI/edit#gid=2082539277"
                 rel="noopener noreferrer"
                 target="_blank"
                 className="mt-8 bg-white border border-transparent rounded-md shadow px-6 py-3 inline-flex items-center text-base leading-6 font-medium text-[#AA3248] hover:text-[#8a283a] hover:bg-gray-50 transition duration-150 ease-in-out"

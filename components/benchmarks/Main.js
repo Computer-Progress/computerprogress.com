@@ -9,6 +9,8 @@ import { createRef, useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import Chart from "./Chart";
 
+import * as XLSX from "xlsx/xlsx.mjs";
+
 const Tooltip = ({ children, position }) => {
   const [popoverShow, setPopoverShow] = useState(false);
   const pos = position || "bottom-left";
@@ -128,48 +130,17 @@ export default function Main({ benchmarks, dataset, accuracyTypes }) {
     );
   }
   // ==============================================================
-  function downloadCSV() {
-    var array = typeof dataset != "object" ? JSON.parse(dataset) : dataset;
-    var str = "";
-    var line = "";
-    for (var index of Object.keys(array[0])) {
-      if (line != "") line += ",";
-
-      line += index;
+  function downloadData(format) {
+    const wb = XLSX.utils.book_new();
+    const ws = XLSX.utils.json_to_sheet(dataset);
+    XLSX.utils.book_append_sheet(wb, ws, "Sheet1");
+    if (format === ".xlsx") {
+      XLSX.writeFile(wb, `${benchmark[0]} on ${benchmark[1]}.xlsx`);
+    } else {
+      XLSX.writeFile(wb, `${benchmark[0]} on ${benchmark[1]}.csv`);
     }
-    str += line + "\r\n";
-
-    for (var i = 0; i < array.length; i++) {
-      line = "";
-      for (var index in array[i]) {
-        if (line != "") line += ",";
-
-        line += array[i][index];
-      }
-
-      str += line + "\r\n";
-    }
-
-    const blob = new Blob([str], { type: "data:text/csv;charset=utf-8," });
-    const blobURL = window.URL.createObjectURL(blob);
-
-    // Create new tag for download file
-    const anchor = document.createElement("a");
-    anchor.download = `${benchmark[0]} on ${benchmark[1]}.csv`;
-    anchor.href = blobURL;
-    anchor.dataset.downloadurl = [
-      "text/csv",
-      anchor.download,
-      anchor.href,
-    ].join(":");
-    anchor.click();
-
-    // Remove URL.createObjectURL. The browser should not save the reference to the file.
-    setTimeout(() => {
-      // For Firefox it is necessary to delay revoking the ObjectURL
-      URL.revokeObjectURL(blobURL);
-    }, 100);
   }
+
 
   function formatUnit(value, unit, decimals = 2) {
     const parsedValue = Number(value);
@@ -295,7 +266,7 @@ export default function Main({ benchmarks, dataset, accuracyTypes }) {
                 benchmark={`${benchmark[0]} on ${benchmark[1]}`}
                 xAxis={xAxis}
                 yAxis={yAxis}
-                downloadCSV={downloadCSV}
+                downloadData={downloadData}
               />
             ) : (
               <div className="mt-8 text-center bg-slate-50 py-16">

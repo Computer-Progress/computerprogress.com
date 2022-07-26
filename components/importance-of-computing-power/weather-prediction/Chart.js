@@ -1,3 +1,4 @@
+import { Menu } from "@headlessui/react";
 import { ArrowsExpandIcon, DownloadIcon } from "@heroicons/react/outline";
 import Highcharts from "highcharts";
 import HighchartsReact from "highcharts-react-official";
@@ -12,7 +13,7 @@ export default function Chart({
   dataset,
   xAxis,
   yAxis,
-  downloadCSV,
+  downloadData,
   benchmark,
 }) {
   function formatFLOPs(flops, decimals = 2) {
@@ -229,7 +230,8 @@ export default function Chart({
         marker: {
           symbol: "circle",
           enabled: false,
-        },dataLabels: {
+        },
+        dataLabels: {
           enabled: true,
           crop: false,
           overflow: "none",
@@ -385,21 +387,13 @@ export default function Chart({
       spacingTop: 50,
       height: 600, // 16:9 ratio
       events: {
-        load: function () {
-          this.series.forEach(function (series) {
-            console.log(series.points);
-            if (yAxis.column === "MEAN" && series.type === "line") {
-              series.points[series.points.length - 1].update({});
-            }
-          });
-        },
         beforePrint: function () {
           this.update({
             credits: {
               enabled: true,
               text:
                 '<a target="_blank" href="https://arxiv.org/abs/2206.14007">' +
-                "Ⓒ The Importance of (Exponentially More) Computing Power, N.C. THOMPSON, SHUNING GE, K. LEE, G.F. MANSO</a>",
+                "Ⓒ The Importance of (Exponentially More) Computing Power, N.C. THOMPSON, SHUNING GE, G.F. MANSO</a>",
             },
           });
         },
@@ -409,7 +403,7 @@ export default function Chart({
               enabled: true,
               text:
                 '<a target="_blank" href="https://arxiv.org/abs/2206.14007">' +
-                "Ⓒ The Importance of (Exponentially More) Computing Power, N.C. THOMPSON, SHUNING GE, K. LEE, G.F. MANSO</a>" +
+                "Ⓒ The Importance of (Exponentially More) Computing Power, N.C. THOMPSON, SHUNING GE, G.F. MANSO</a>" +
                 ' [<a target="_blank" href="https://dblp.org/rec/journals/corr/abs-2007-05558.html">CITE</a>, <a target="_blank" href="https://dblp.uni-trier.de/rec/journals/corr/abs-2007-05558.html?view=bibtex">BibTex</a>]',
             },
           });
@@ -432,7 +426,8 @@ export default function Chart({
         },
       },
       // minPadding: xAxis.column === "YEAR" ? 0.099 : 0.102,
-      maxPadding: 0.15,
+      maxPadding: 0.10,
+      minPadding: 0.05,
 
       allowDecimals: false,
       labels: {
@@ -455,19 +450,19 @@ export default function Chart({
       },
       position: {
         align: "center",
+        x: 25,
         y: -5,
       },
       useHTML: true,
       href: "",
       text:
         '<a target="_blank" href="https://arxiv.org/abs/2206.14007">' +
-        "Ⓒ The Importance of (Exponentially More) Computing Power, N.C. THOMPSON, SHUNING GE, K. LEE, G.F. MANSO</a>" +
+        "Ⓒ The Importance of (Exponentially More) Computing Power, N.C. THOMPSON, SHUNING GE, G.F. MANSO</a>" +
         ' [<a style="color: black;" target="_blank" href="https://dblp.org/rec/journals/corr/abs-2007-05558.html">CITE</a>, <a style="color: black;" target="_blank" href="https://dblp.uni-trier.de/rec/journals/corr/abs-2007-05558.html?view=bibtex">BibTex</a>]',
     },
     yAxis: {
       title: {
         text: yAxis.name,
-        margin: 30,
         style: {
           fontSize: 22,
         },
@@ -498,12 +493,12 @@ export default function Chart({
       formatter: function () {
         const formatAxis = (value, column) => {
           if (column === "GFLOPS") {
-            return `<span class="">10<sup>${value}</sup></span>`;
+            return `<span class="">10<sup>${value.toFixed(2)}</sup></span>`;
           }
           return `<span class="">${value}</span>`;
         };
         return `<div class="bg-white block px-3 py-2 mt-[1px] ml-[1px]"> <b>${
-          this.series.name || ''
+          this.series.name || ""
         }</b><br>${yAxis.name}: ${formatAxis(this.y, yAxis.column)} <br> ${
           xAxis.name
         }: ${formatAxis(this.x, xAxis.column)}</div>`;
@@ -542,7 +537,7 @@ export default function Chart({
         // Custom definition
         label: {
           onclick: function () {
-            downloadCSV();
+            downloadData();
           },
           text: "Download data (CSV)",
         },
@@ -575,7 +570,6 @@ export default function Chart({
   useEffect(() => {
     for (var i = 0; i < Highcharts.charts.length; i++) {
       if (Highcharts.charts[i] !== undefined) {
-        console.log(Highcharts.charts[i].series);
         Highcharts.charts[i].redraw();
       }
     }
@@ -588,12 +582,17 @@ export default function Chart({
     }
   }
 
-  function downloadGraph() {
+  function downloadGraph(format) {
     const chart = Highcharts.charts.find((chart) => chart !== undefined);
+    const type = {
+      ".png": "image/png",
+      ".svg": "image/svg+xml",
+      ".pdf": "application/pdf",
+    }[format];
     if (chart) {
       chart.exportChart(
         {
-          type: "image/png",
+          type,
           filename: benchmark,
         },
         {
@@ -601,7 +600,7 @@ export default function Chart({
             enabled: true,
             text:
               '<a target="_blank" href="https://arxiv.org/abs/2206.14007">' +
-              "Ⓒ The Importance of (Exponentially More) Computing Power, N.C. THOMPSON, SHUNING GE, K. LEE, G.F. MANSO</a>",
+              "Ⓒ The Importance of (Exponentially More) Computing Power, N.C. THOMPSON, SHUNING GE, G.F. MANSO</a>",
           },
         }
       );
@@ -627,18 +626,52 @@ export default function Chart({
           full screen
         </button>
 
-        <button
-          className="flex gap-1 items-center uppercase hover:underline text-[#AA3248] text-sm rounded-lg"
-          onClick={() => downloadGraph()}
-        >
-          <DownloadIcon className="w-4 h-4" /> graph
-        </button>
-        <button
-          className="flex gap-1 items-center uppercase hover:underline text-[#AA3248] text-sm rounded-lg"
-          onClick={() => downloadCSV()}
-        >
-          <DownloadIcon className="w-4 h-4" /> data
-        </button>
+        <Menu as={"div"} className="relative">
+          <Menu.Button className="flex gap-1 items-center uppercase hover:underline text-[#AA3248] text-sm rounded-lg">
+            <DownloadIcon className="w-4 h-4" /> graph
+          </Menu.Button>
+          <Menu.Items className="z-10 absolute  w-full origin-top divide-y divide-gray-100 rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
+            {[".png", ".svg", ".pdf"].map((type, i) => (
+              <Menu.Item key={i}>
+                {({ active }) => (
+                  <button
+                    onClick={() => {
+                      downloadGraph(type);
+                    }}
+                    className={`${
+                      active ? "bg-[#AA3248] text-white" : "text-gray-900"
+                    } group flex w-full items-center rounded-md  px-2 py-2 text-sm`}
+                  >
+                    {type}
+                  </button>
+                )}
+              </Menu.Item>
+            ))}
+          </Menu.Items>
+        </Menu>
+        <Menu as={"div"} className="relative">
+          <Menu.Button className="flex gap-1 items-center uppercase hover:underline text-[#AA3248] text-sm rounded-lg">
+            <DownloadIcon className="w-4 h-4" /> data
+          </Menu.Button>
+          <Menu.Items className="z-10 absolute  w-full origin-top divide-y divide-gray-100 rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
+            {[".csv", ".xlsx"].map((type, i) => (
+              <Menu.Item key={i}>
+                {({ active }) => (
+                  <button
+                    onClick={() => {
+                      downloadData(type);
+                    }}
+                    className={`${
+                      active ? "bg-[#AA3248] text-white" : "text-gray-900"
+                    } group flex w-full items-center rounded-md  px-2 py-2 text-sm`}
+                  >
+                    {type}
+                  </button>
+                )}
+              </Menu.Item>
+            ))}
+          </Menu.Items>
+        </Menu>
       </div>
     </div>
   );

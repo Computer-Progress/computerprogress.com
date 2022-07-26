@@ -34,6 +34,16 @@ export default function Home() {
       dataUrl: "/compute-trends-machine-learning",
       image: "/chart-trends.png",
     },
+    {
+      title: "The Importance of (Exponentially More) Computing Power",
+      description:
+        "This project aims to highlight the fast-growing compute requirements for training advanced ML systems of three eras: the Pre Deep Learning Era, the Deep Learning Era and the Large-Scale Era.",
+      date: "2022",
+      authors: "Thompson, N. et al",
+      paperUrl: "https://arxiv.org/abs/2206.14007",
+      dataUrl: "/importance-of-computing-power/computer-chess",
+      image: "/chart-chess.png",
+    },
   ];
 
   useEffect(() => {

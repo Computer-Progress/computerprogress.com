@@ -1,3 +1,5 @@
+import { Menu } from "@headlessui/react";
+
 import { ArrowsExpandIcon, DownloadIcon } from "@heroicons/react/outline";
 import Highcharts from "highcharts";
 import HighchartsReact from "highcharts-react-official";
@@ -14,7 +16,7 @@ export default function Chart({
   dataset,
   xAxis,
   yAxis,
-  downloadCSV,
+  downloadData,
   benchmark,
 }) {
   function formatFLOPs(flops, decimals = 2) {
@@ -76,7 +78,6 @@ export default function Chart({
   };
   const scatterData = function() {
     const data = [];
-    console.log('dataset',dataset)
     dataset.forEach((model, i) => {
       if (model[yAxis.column] && model[xAxis.column]) {
         data.push({
@@ -127,7 +128,6 @@ export default function Chart({
 
   function getSeries() {
     if (yAxis.column === "SUCCESS RATE" && xAxis.column === "GFLOPS") {
-      console.log(lineData())
       return [
         {
           type: "bubble",
@@ -141,8 +141,9 @@ export default function Chart({
         {
           type: "line",
           name: "Regression Line",
+          color: "rgb(100,100,100)",
           data: lineData(),
-          lineWidth: 1,
+          lineWidth: 2,
           marker: {
             enabled: false,
           },
@@ -158,7 +159,6 @@ export default function Chart({
         },
       ];
     } else if (yAxis.column === "GFLOPS" && xAxis.column === "YEAR") {
-      console.log(scatterData())
       return [
         {
           name: "Observationas",
@@ -195,7 +195,7 @@ export default function Chart({
               enabled: true,
               text:
                 '<a target="_blank" href="https://arxiv.org/abs/2206.14007">' +
-                "Ⓒ The Importance of (Exponentially More) Computing Power, N.C. THOMPSON, SHUNING GE, K. LEE, G.F. MANSO</a>",
+                "Ⓒ The Importance of (Exponentially More) Computing Power, N.C. THOMPSON, SHUNING GE, G.F. MANSO</a>",
             },
           });
         },
@@ -205,7 +205,7 @@ export default function Chart({
               enabled: true,
               text:
                 '<a target="_blank" href="https://arxiv.org/abs/2206.14007">' +
-                "Ⓒ The Importance of (Exponentially More) Computing Power, N.C. THOMPSON, SHUNING GE, K. LEE, G.F. MANSO</a>" +
+                "Ⓒ The Importance of (Exponentially More) Computing Power, N.C. THOMPSON, SHUNING GE, G.F. MANSO</a>" +
                 ' [<a target="_blank" href="https://dblp.org/rec/journals/corr/abs-2007-05558.html">CITE</a>, <a target="_blank" href="https://dblp.uni-trier.de/rec/journals/corr/abs-2007-05558.html?view=bibtex">BibTex</a>]',
             },
           });
@@ -252,19 +252,19 @@ export default function Chart({
       },
       position: {
         align: "center",
+        x: 25,
         y: -5,
       },
       useHTML: true,
       href: "",
       text:
         '<a target="_blank" href="https://arxiv.org/abs/2206.14007">' +
-        "Ⓒ The Importance of (Exponentially More) Computing Power, N.C. THOMPSON, SHUNING GE, K. LEE, G.F. MANSO</a>" +
+        "Ⓒ The Importance of (Exponentially More) Computing Power, N.C. THOMPSON, SHUNING GE, G.F. MANSO</a>" +
         ' [<a style="color: black;" target="_blank" href="https://dblp.org/rec/journals/corr/abs-2007-05558.html">CITE</a>, <a style="color: black;" target="_blank" href="https://dblp.uni-trier.de/rec/journals/corr/abs-2007-05558.html?view=bibtex">BibTex</a>]',
     },
     yAxis: {
       title: {
         text: yAxis.name,
-        margin: 30,
         style: {
           fontSize: 22,
         },
@@ -298,7 +298,7 @@ export default function Chart({
       formatter: function () {
         const formatAxis = (value, column) => {
           if (column === "GFLOPS") {
-            return `<span class="">10<sup>${value}</sup></span>`;
+            return `<span class="">10<sup>${value.toFixed(2)}</sup></span>`;
           }
           return `<span class="">${value}</span>`;
         };
@@ -313,8 +313,8 @@ export default function Chart({
       bubble: {
         maxSize: 30,
         jitter: {
-          x: 0.078,
-          y: 0.02,
+          x: 0.05,
+          y: 0.05,
         },
       },
       scatter: {
@@ -349,7 +349,7 @@ export default function Chart({
         // Custom definition
         label: {
           onclick: function () {
-            downloadCSV();
+            downloadData();
           },
           text: "Download data (CSV)",
         },
@@ -386,12 +386,17 @@ export default function Chart({
     }
   }
 
-  function downloadGraph() {
+  function downloadGraph(format) {
     const chart = Highcharts.charts.find((chart) => chart !== undefined);
+    const type = {
+      ".png": "image/png",
+      ".svg": "image/svg+xml",
+      ".pdf": "application/pdf",
+    }[format];
     if (chart) {
       chart.exportChart(
         {
-          type: "image/png",
+          type,
           filename: benchmark,
         },
         {
@@ -399,7 +404,7 @@ export default function Chart({
             enabled: true,
             text:
               '<a target="_blank" href="https://arxiv.org/abs/2206.14007">' +
-              "Ⓒ The Importance of (Exponentially More) Computing Power, N.C. THOMPSON, SHUNING GE, K. LEE, G.F. MANSO</a>",
+              "Ⓒ The Importance of (Exponentially More) Computing Power, N.C. THOMPSON, SHUNING GE, G.F. MANSO</a>",
           },
         }
       );
@@ -425,18 +430,52 @@ export default function Chart({
           full screen
         </button>
 
-        <button
-          className="flex gap-1 items-center uppercase hover:underline text-[#AA3248] text-sm rounded-lg"
-          onClick={() => downloadGraph()}
-        >
-          <DownloadIcon className="w-4 h-4" /> graph
-        </button>
-        <button
-          className="flex gap-1 items-center uppercase hover:underline text-[#AA3248] text-sm rounded-lg"
-          onClick={() => downloadCSV()}
-        >
-          <DownloadIcon className="w-4 h-4" /> data
-        </button>
+        <Menu as={"div"} className="relative">
+          <Menu.Button className="flex gap-1 items-center uppercase hover:underline text-[#AA3248] text-sm rounded-lg">
+            <DownloadIcon className="w-4 h-4" /> graph
+          </Menu.Button>
+          <Menu.Items className="z-10 absolute  w-full origin-top divide-y divide-gray-100 rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
+            {[".png", ".svg", ".pdf"].map((type, i) => (
+              <Menu.Item key={i}>
+                {({ active }) => (
+                  <button
+                    onClick={() => {
+                      downloadGraph(type);
+                    }}
+                    className={`${
+                      active ? "bg-[#AA3248] text-white" : "text-gray-900"
+                    } group flex w-full items-center rounded-md  px-2 py-2 text-sm`}
+                  >
+                    {type}
+                  </button>
+                )}
+              </Menu.Item>
+            ))}
+          </Menu.Items>
+        </Menu>
+        <Menu as={"div"} className="relative">
+          <Menu.Button className="flex gap-1 items-center uppercase hover:underline text-[#AA3248] text-sm rounded-lg">
+            <DownloadIcon className="w-4 h-4" /> data
+          </Menu.Button>
+          <Menu.Items className="z-10 absolute  w-full origin-top divide-y divide-gray-100 rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
+            {[".csv", ".xlsx"].map((type, i) => (
+              <Menu.Item key={i}>
+                {({ active }) => (
+                  <button
+                    onClick={() => {
+                      downloadData(type);
+                    }}
+                    className={`${
+                      active ? "bg-[#AA3248] text-white" : "text-gray-900"
+                    } group flex w-full items-center rounded-md  px-2 py-2 text-sm`}
+                  >
+                    {type}
+                  </button>
+                )}
+              </Menu.Item>
+            ))}
+          </Menu.Items>
+        </Menu>
       </div>
     </div>
   );
