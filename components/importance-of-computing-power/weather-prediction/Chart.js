@@ -73,7 +73,7 @@ export default function Chart({
       ],
     };
   };
-  const scatterData = (yColumn, xColumn) => {
+  const scatterData = useCallback((yColumn, xColumn) => {
     const data = [];
     dataset.forEach((model) => {
       if (model[yColumn] && model[xColumn]) {
@@ -91,15 +91,15 @@ export default function Chart({
       }
     });
 
-    return data;
-  };
+    return data.sort((a, b) => a.x - b.x);
+  }, [dataset]);
 
-  const lineData = (points) => {
+  const lineData =useCallback((points) => {
     const x = points.map((p) => p.x);
     const y = points.map((p) => p.y);
     const lr = linearRegressionLine(x, y);
     return lr.points;
-  };
+  },[])
 
   let getSeries = useCallback(() => {
     const series = [];

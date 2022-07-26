@@ -18,6 +18,10 @@ export default function Navbar({ hideLogo }) {
       name: "Compute Trends Across Three Eras of Machine Learning",
       href: "/compute-trends-machine-learning",
     },
+    {
+      name: "The Importance of (Exponentially More) Computing Power",
+      href: "/importance-of-computing-power/computer-chess",
+    },
   ];
   return (
     <Disclosure as="nav" className="bg-black border-b-[#70202f] border-b">

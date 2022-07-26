@@ -37,7 +37,7 @@ export default function Home() {
     {
       title: "The Importance of (Exponentially More) Computing Power",
       description:
-        "This project aims to highlight the fast-growing compute requirements for training advanced ML systems of three eras: the Pre Deep Learning Era, the Deep Learning Era and the Large-Scale Era.",
+        "This project aims to show how more powerful computers are improving outcomes across society. For that, we looked across five key application areas: Computer Chess, Computer Go, Weather Prediction, Protein Folding, and Oil Exploration.",
       date: "2022",
       authors: "Thompson, N. et al",
       paperUrl: "https://arxiv.org/abs/2206.14007",

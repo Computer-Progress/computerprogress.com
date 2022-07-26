@@ -18,48 +18,61 @@ export default function Main({ dataset, accuracyTypes }) {
   }
 
   // ============================================================
+  const charts = [
+    {
+      title: "Prediction accuracy vs. Year",
+      x: {
+        name: "Year",
+        column: "YEAR",
+      },
+      y: {
+        name: "Prediction accuracy (GDT_TS)",
+        column: "GDT_TS",
+      },
+    },
+    {
+      title: "Computing Power vs. Year",
+      x: {
+        name: "Year",
+        column: "YEAR",
+      },
+      y: {
+        name: "Computing Power",
+        column: "HARDWARE BURDEN (GFLOPS)",
+      },
+    },
+    {
+      title: "Prediction accuracy vs. Computing Power",
+      y: {
+        name: "Prediction accuracy (GDT_TS)",
+        column: "GDT_TS",
+      },
+      x: {
+        name: "Computing Power",
+        column: "HARDWARE BURDEN (GFLOPS)",
+      },
+    },
+  ];
 
-  const [yAxisOptions, setYAxisOptions] = useState([
-    {
-      name: "GDT_TS",
-      column: "GDT_TS",
-    },
-    {
-      name: "Computing Power",
-      column: "HARDWARE BURDEN (GFLOPS)",
-    },
-  ]);
-
-  const [xAxisOptions, setXAxisOptions] = useState([
-    {
-      name: "Year",
-      column: "YEAR",
-    },
-    {
-      name: "Computing Power",
-      column: "HARDWARE BURDEN (GFLOPS)",
-    },
-  ]);
-
-  const [xAxis, setXAxis] = useState(xAxisOptions[0]);
-  const [yAxis, setYAxis] = useState(yAxisOptions[0]);
-const [sortBy, setSortBy] = useState({
+  const [chart, setChart] = useState(charts[0]);
+  const [xAxis, setXAxis] = useState(charts[0].x);
+  const [yAxis, setYAxis] = useState(charts[0].y);
+  const [sortBy, setSortBy] = useState({
     name: "Year",
     column: "YEAR",
   });
+
+  function selectChart(chart) {
+    setChart(chart);
+    setXAxis(chart.x);
+    setYAxis(chart.y);
+  }
 
   const [showMore, setShowMore] = useState(false);
   //   ==============================================================
 
   const [filteredDataset, setFilteredDataset] = useState(dataset);
 
-  // update yAxisOptions when benchmark changes
-
-  // update yAxis and xAxis when yAxisOptions changes
-  useEffect(() => {
-    setYAxis(yAxisOptions[0]);
-    setXAxis(xAxisOptions[0]);
-  }, [yAxisOptions, xAxisOptions]);
 
   useEffect(() => {
     setFilteredDataset(
@@ -159,16 +172,13 @@ const [sortBy, setSortBy] = useState({
           <h1 className="text-xl font-bold text-center text-gray-900">
             {benchmark.name}
           </h1>
-          <div className="hidden sm:grid  grid-cols-[1fr_1fr_min-content_1fr_1fr] items-center gap-2 justify-center mt-5">
-            <Menu
-              as="div"
-              className="col-start-2 place-self-end  relative inline-block text-left"
-            >
-              <Menu.Button className="inline-flex w-full justify-center rounded-md px-4 py-2 text-sm font-medium text-gray-900 hover:bg-gray-100 focus:outline-none focus-visible:ring-2 focus-visible:ring-gray-200 focus-visible:ring-opacity-75">
+          <div className="hidden sm:flex  justify-center items-center gap-2  mt-5">
+            <Menu as="div" className="w-auto relative">
+              <Menu.Button className="inline-flex w- justify-center rounded-md px-4 py-2 text-sm font-medium text-gray-900 hover:bg-gray-100 focus:outline-none focus-visible:ring-2 focus-visible:ring-gray-200 focus-visible:ring-opacity-75">
                 <div className="flex flex-col items-start">
-                  <span className="text-xs font-light">Y axis</span>
+                  <span className="text-xs font-light">Chart:</span>
                   <div className="flex items-center ">
-                    <span className="text-md uppercase"> {yAxis.name}</span>
+                    <span className="text-md "> {chart.title}</span>
                     <ChevronDownIcon
                       className="ml-2 -mr-1 h-5 w-5 text-gray-400"
                       aria-hidden="true"
@@ -179,57 +189,18 @@ const [sortBy, setSortBy] = useState({
 
               <Menu.Items className="z-10 absolute left-0 mt-2 w-max origin-top-right divide-y divide-gray-100 rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
                 <div className="px-1 py-1 ">
-                  {yAxisOptions.filter(x=> x.column !== xAxis.column).map((option, index) => (
+                  {charts.map((option, index) => (
                     <Menu.Item key={index}>
                       {({ active }) => (
                         <button
                           onClick={() => {
-                            setYAxis(option);
+                            selectChart(option);
                           }}
                           className={`${
                             active ? "bg-[#AA3248] text-white" : "text-gray-900"
-                          } group flex w-full items-center rounded-md uppercase px-2 py-2 text-sm`}
+                          } group flex w-full items-center rounded-md  px-2 py-2 text-sm`}
                         >
-                          {option.name}
-                        </button>
-                      )}
-                    </Menu.Item>
-                  ))}
-                </div>
-              </Menu.Items>
-            </Menu>
-            <p className="place-self-center">vs.</p>
-            <Menu
-              as="div"
-              className="place-self-start relative inline-block text-left"
-            >
-              <Menu.Button className="inline-flex w-full justify-center rounded-md px-4 py-2 text-sm font-medium text-gray-900 hover:bg-gray-100 focus:outline-none focus-visible:ring-2 focus-visible:ring-gray-200 focus-visible:ring-opacity-75">
-                <div className="flex flex-col items-start">
-                  <span className="text-xs font-light">X axis</span>
-                  <div className="flex items-center ">
-                    <span className="text-md uppercase"> {xAxis.name}</span>
-                    <ChevronDownIcon
-                      className="ml-2 -mr-1 h-5 w-5 text-gray-400"
-                      aria-hidden="true"
-                    />
-                  </div>
-                </div>
-              </Menu.Button>
-
-              <Menu.Items className="z-10 absolute left-0 mt-2 w-max origin-top-right divide-y divide-gray-100 rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
-                <div className="px-1 py-1 ">
-                  {xAxisOptions.filter(x=> x.column !== yAxis.column).map((option, index) => (
-                    <Menu.Item key={index}>
-                      {({ active }) => (
-                        <button
-                          onClick={() => {
-                            setXAxis(option);
-                          }}
-                          className={`${
-                            active ? "bg-[#AA3248] text-white" : "text-gray-900"
-                          } group flex w-full items-center rounded-md uppercase px-2 py-2 text-sm`}
-                        >
-                          {option.name}
+                          {option.title}
                         </button>
                       )}
                     </Menu.Item>
@@ -343,9 +314,7 @@ const [sortBy, setSortBy] = useState({
                         ))}
                     </button>
                   </th>
-                  <th scope="col" className="px-6 py-3">
-                    <span className="sr-only">open</span>
-                  </th>
+                  
                 </tr>
               </thead>
 
@@ -387,41 +356,7 @@ const [sortBy, setSortBy] = useState({
                                 : "-"}
                             </td>
                             {/* <td className="px-6 py-2">{data[xAxis.column]}</td> */}
-                            <td className="px-6 py-2 text-right">
-                              <Disclosure.Button className="py-2">
-                                {open ? (
-                                  <svg
-                                    xmlns="http://www.w3.org/2000/svg"
-                                    className="h-6 w-6"
-                                    fill="none"
-                                    viewBox="0 0 24 24"
-                                    stroke="currentColor"
-                                    strokeWidth={2}
-                                  >
-                                    <path
-                                      strokeLinecap="round"
-                                      strokeLinejoin="round"
-                                      d="M18 12H6"
-                                    />
-                                  </svg>
-                                ) : (
-                                  <svg
-                                    xmlns="http://www.w3.org/2000/svg"
-                                    className="h-6 w-6"
-                                    fill="none"
-                                    viewBox="0 0 24 24"
-                                    stroke="currentColor"
-                                    strokeWidth={2}
-                                  >
-                                    <path
-                                      strokeLinecap="round"
-                                      strokeLinejoin="round"
-                                      d="M12 6v6m0 0v6m0-6h6m-6 0H6"
-                                    />
-                                  </svg>
-                                )}
-                              </Disclosure.Button>
-                            </td>
+                            
                           </tr>
                         </>
                       )}

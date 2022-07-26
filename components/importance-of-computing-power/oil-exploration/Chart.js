@@ -179,8 +179,49 @@ export default function Chart({
           },
         },
       ];
+    } else if (yAxis.column === "SUCCESS RATE" && xAxis.column === "YEAR") {
+      return [
+        {
+          name: "Observationass",
+          type: "scatter",
+          step: false,
+          id: xAxis.column + yAxis.column,
+          color: "#AA3248",
+          data: scatterData(),
+          lineColor: "#AA3248",
+
+          lineWidth: 0, 
+          marker: {
+          symbol: "circle",
+
+            radius: 3,
+            fillColor: "#AA3248",
+            lineColor: "#AA3248",
+
+            lineWidth: 0,
+          },
+        },
+        {
+          type: "line",
+          name: "Regression Line",
+          color: "rgb(100,100,100)",
+          data: lineData(),
+          lineWidth: 2,
+          marker: {
+            enabled: false,
+          },
+          dataLabels: {
+            enabled: false,
+          },
+          states: {
+            hover: {
+              lineWidth: 0,
+            },
+          },
+          enableMouseTracking: false,
+        },
+      ];
     }
-    return [1, 1];
   }
   const chartOptions = {
     chart: {
@@ -270,8 +311,8 @@ export default function Chart({
         },
       },
 
-      max: yAxis.column === "SUCCESS RATE" ? 3.2 : undefined,
-      min: yAxis.column === "SUCCESS RATE" ? 0.2 : undefined,
+      // max: yAxis.column === "SUCCESS RATE" ? 3.2 : undefined,
+      // min: yAxis.column === "SUCCESS RATE" ? 0.2 : undefined,
       // allowDecimals: false,
       maxPadding: 0,
       // showLastLabel: false,
