@@ -6,7 +6,7 @@ import Footer from "../../components/Footer";
 import { getDataset } from "../../lib/api";
 import { parseBenchmark } from "../../lib/parser";
 
-export default function Home({  dataset, accuracyTypes }) {
+export default function Home({ dataset, accuracyTypes }) {
   const benchmarks = [
     {
       name: "Computer Chess",
@@ -108,7 +108,6 @@ export default function Home({  dataset, accuracyTypes }) {
           className="flex-grow"
           dataset={dataset}
           benchmarks={benchmarks}
-
         ></Main>
         <Footer className="flex-1" />
       </div>
@@ -118,21 +117,22 @@ export default function Home({  dataset, accuracyTypes }) {
 
 export async function getStaticProps({ params }) {
   const spreadsheetId = "1b3yTYqPCk3Q_7iLtYMJj3g0G7pyJIX2tNn4eeQnidiU";
-  const data = await getDataset('oil-exploration', spreadsheetId);
-  const dataset = data.slice(1).map((row) => {
+  const data = await getDataset("oil-exploration", spreadsheetId);
+  const dataset = [];
+  data.slice(1).forEach((row, index) => {
     const rowObject = {};
+    rowObject["ORDER_INDEX"] = index;
     row.forEach((column, i) => {
       rowObject[data[0][i]] = column.trim();
     });
-    return rowObject;
-  }).sort((a, b) => {
-    return a['YEAR'] - b['YEAR'];
-    
+    if (rowObject["YEAR"]) dataset.push(rowObject);
   });
 
   return {
     props: {
-      dataset,
+      dataset: dataset.sort((a, b) => {
+        return a["YEAR"] - b["YEAR"];
+      }),
     },
     // Next.js will attempt to re-generate the page:
     // - When a request comes in

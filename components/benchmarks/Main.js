@@ -129,13 +129,18 @@ export default function Main({ benchmarks, dataset, accuracyTypes }) {
         })
     );
   }
+  // open url with new query
+
   // ==============================================================
   function downloadData(format) {
     const wb = XLSX.utils.book_new();
     const ws = XLSX.utils.json_to_sheet(dataset);
     XLSX.utils.book_append_sheet(wb, ws, "Sheet1");
     if (format === ".xlsx") {
-      XLSX.writeFile(wb, `${benchmark[0]} on ${benchmark[1]}.xlsx`);
+        window.open('https://docs.google.com/spreadsheets/d/1xthNnZ_I43SUXzLvuP7TFXsd-XeHDUx_4dedH5sE2GM/export?format=xlsx&id=1xthNnZ_I43SUXzLvuP7TFXsd-XeHDUx_4dedH5sE2GM', '_blank');
+
+
+      // XLSX.writeFile(wb, `${benchmark[0]} on ${benchmark[1]}.xlsx`);
     } else {
       XLSX.writeFile(wb, `${benchmark[0]} on ${benchmark[1]}.csv`);
     }

@@ -119,12 +119,14 @@ export default function Home({  dataset, accuracyTypes }) {
 export async function getStaticProps({ params }) {
   const spreadsheetId = "1b3yTYqPCk3Q_7iLtYMJj3g0G7pyJIX2tNn4eeQnidiU";
   const data = await getDataset('weather-prediction', spreadsheetId);
-  const dataset = data.slice(1).map((row) => {
+  const dataset = [];
+  data.slice(1).forEach((row, index) => {
     const rowObject = {};
+    rowObject["ORDER_INDEX"] = index;
     row.forEach((column, i) => {
       rowObject[data[0][i]] = column.trim();
     });
-    return rowObject;
+    if (rowObject["YEAR"]) dataset.push(rowObject);
   });
 
   return {

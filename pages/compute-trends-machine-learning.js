@@ -71,7 +71,7 @@ export default function Home({ dataset }) {
 }
 
 export async function getStaticProps({ params }) {
-  const spreadsheetId = "1N5CHCc9tuRKOzFrzdAWrG9_u9RbXDoCYXbaGvb-kbu0";
+  const spreadsheetId = "1AAIebjNsnJj_uKALHbXNfn3_YsT6sHXtCU0q7OIPuc4";
 
   const data = await getDataset("NOTABLE ML SYSTEMS", spreadsheetId);
   const dataset = data.slice(1).map((row) => {

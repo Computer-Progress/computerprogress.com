@@ -5,7 +5,7 @@ import {
   SortAscendingIcon,
   SortDescendingIcon,
 } from "@heroicons/react/outline";
-import { createRef, useEffect, useState } from "react";
+import { createRef, useCallback, useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import Chart from "./Chart";
 import * as XLSX from "xlsx/xlsx.mjs";
@@ -82,7 +82,7 @@ export default function Main({ dataset, accuracyTypes }) {
   const [xAxis, setXAxis] = useState(charts[0].x);
   const [yAxis, setYAxis] = useState(charts[0].y);
   const [sortBy, setSortBy] = useState({
-    name: "Year",
+    type: "asc",
     column: "YEAR",
   });
 
@@ -96,20 +96,32 @@ export default function Main({ dataset, accuracyTypes }) {
   //   ==============================================================
 
   const [filteredDataset, setFilteredDataset] = useState(dataset);
+  const requestSort = useCallback(
+    function (column) {
+      setSortBy({
+        column,
+        type:
+          sortBy.type === "desc" && sortBy.column === column ? "asc" : "desc",
+      });
 
-  useEffect(() => {
-    setFilteredDataset(
-      dataset
-        .filter((x) => x[xAxis.column] && x[yAxis.column])
-        .sort((a, b) => {
+      setFilteredDataset(
+        [...dataset].sort((a, b) => {
+          const Acolumn = Number(a[column]) || a[column];
+          const Bcolumn = Number(b[column]) || b[column];
           const A =
-            typeof a[xAxis.column] === "string"
-              ? a[xAxis.column].toLowerCase()
-              : a[xAxis.column];
+            typeof Acolumn === "string"
+              ? Acolumn.toLowerCase().trim()
+              : Acolumn;
           const B =
-            typeof b[xAxis.column] === "string"
-              ? b[xAxis.column].toLowerCase()
-              : b[xAxis.column];
+            typeof Bcolumn === "string"
+              ? Bcolumn.toLowerCase().trim()
+              : Bcolumn;
+          if (A === null || A === undefined || A === "" || A === NaN) {
+            return 1;
+          }
+          if (B === null || B === undefined || B === "" || B === NaN) {
+            return -1;
+          }
           if (A < B) {
             return sortBy.type === "asc" ? 1 : -1;
           }
@@ -118,43 +130,20 @@ export default function Main({ dataset, accuracyTypes }) {
           }
           return 0;
         })
-    );
-  }, [xAxis, yAxis, dataset, sortBy.type]);
-
+      );
+    },
+    [dataset, sortBy]
+  );
   useEffect(() => {
-    setSortBy({ column: "YEAR", type: "asc" });
+    requestSort("YEAR");
   }, []);
-
-  function requestSort(column) {
-    setSortBy({
-      column,
-      type: sortBy.type === "asc" && sortBy.column === column ? "desc" : "asc",
-    });
-    setFilteredDataset(
-      dataset
-        .filter((x) => x[xAxis.column] && x[yAxis.column])
-        .sort((a, b) => {
-          const A =
-            typeof a[column] === "string" ? a[column].toLowerCase() : a[column];
-          const B =
-            typeof b[column] === "string" ? b[column].toLowerCase() : b[column];
-          if (A < B) {
-            return sortBy.type === "asc" ? 1 : -1;
-          }
-          if (A > B) {
-            return sortBy.type === "asc" ? -1 : 1;
-          }
-          return 0;
-        })
-    );
-  }
   // ==============================================================
   function downloadData(format) {
     const wb = XLSX.utils.book_new();
     const ws = XLSX.utils.json_to_sheet(dataset);
     XLSX.utils.book_append_sheet(wb, ws, "Sheet1");
     if (format === ".xlsx") {
-      XLSX.writeFile(wb, `${benchmark.name}.xlsx`);
+      window.open('https://docs.google.com/spreadsheets/d/1b3yTYqPCk3Q_7iLtYMJj3g0G7pyJIX2tNn4eeQnidiU/export?format=xlsx&id=1b3yTYqPCk3Q_7iLtYMJj3g0G7pyJIX2tNn4eeQnidiU', '_blank');
     } else {
       XLSX.writeFile(wb, `${benchmark.name}.csv`);
     }
@@ -310,8 +299,8 @@ export default function Main({ dataset, accuracyTypes }) {
                     >
                       <p>{"SUCCESS RATE"}</p>
                       <Tooltip position="bottom-left">
-                          After removing time trend
-                        </Tooltip>
+                        After removing time trend
+                      </Tooltip>
                       {sortBy.column === "SUCCESS RATE" &&
                         (sortBy.type === "asc" ? (
                           <SortAscendingIcon className="h-4 w-4 text-gray-300" />
@@ -345,6 +334,9 @@ export default function Main({ dataset, accuracyTypes }) {
                           <SortDescendingIcon className="h-4 w-4 text-gray-300" />
                         ))}
                     </button>
+                  </th>
+                  <th scope="col" className="table-cell sm:hidden px-6 py-3">
+                    <span className="sr-only">open</span>
                   </th>
                 </tr>
               </thead>
@@ -383,8 +375,70 @@ export default function Main({ dataset, accuracyTypes }) {
                                 ? formatUnit(data["GFLOPS"], "FLOPS")
                                 : "-"}
                             </td>
-                            {/* <td className="px-6 py-2">{data[xAxis.column]}</td> */}
+                            <td className="table-cell sm:hidden px-6 py-2 text-right">
+                              <Disclosure.Button className="py-2">
+                                {open ? (
+                                  <svg
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    className="h-6 w-6"
+                                    fill="none"
+                                    viewBox="0 0 24 24"
+                                    stroke="currentColor"
+                                    strokeWidth={2}
+                                  >
+                                    <path
+                                      strokeLinecap="round"
+                                      strokeLinejoin="round"
+                                      d="M18 12H6"
+                                    />
+                                  </svg>
+                                ) : (
+                                  <svg
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    className="h-6 w-6"
+                                    fill="none"
+                                    viewBox="0 0 24 24"
+                                    stroke="currentColor"
+                                    strokeWidth={2}
+                                  >
+                                    <path
+                                      strokeLinecap="round"
+                                      strokeLinejoin="round"
+                                      d="M12 6v6m0 0v6m0-6h6m-6 0H6"
+                                    />
+                                  </svg>
+                                )}
+                              </Disclosure.Button>
+                            </td>
                           </tr>
+                          <Disclosure.Panel as="tr" className="   bg-white  ">
+                            <td colSpan="5">
+                              <div className="border-x-[#AA3248] border-x-2 p-6 sm:grid sm:grid-cols-2 gap-8">
+                                <div className="flex flex-col sm:flex-row gap-x-8 gap-y-2 mt-1">
+                                  <div>
+                                    <p className="text-xs">Year</p>
+                                    <p className="text-gray-900 flex flex-wrap gap-1">
+                                      {data["YEAR"] || "-"}
+                                    </p>
+                                  </div>
+                                  <div>
+                                    <p className="text-xs">Success Rate</p>
+                                    <p className="text-gray-900 flex flex-wrap gap-1">
+                                      {data["SUCCESS RATE"] || "-"}
+                                    </p>
+                                  </div>
+                                  <div>
+                                    <p className="text-xs">Computing Power</p>
+                                    <p className="text-gray-900 flex flex-wrap gap-1">
+                                      {data["GFLOPS"]
+                                        ? formatUnit(data["GFLOPS"], "Flops")
+                                        : "-"}
+                                    </p>
+                                  </div>
+                                </div>
+                              </div>
+                            </td>
+                          </Disclosure.Panel>
                         </>
                       )}
                     </Disclosure>
