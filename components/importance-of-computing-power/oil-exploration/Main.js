@@ -10,10 +10,44 @@ import { useRouter } from "next/router";
 import Chart from "./Chart";
 import * as XLSX from "xlsx/xlsx.mjs";
 
+const Tooltip = ({ children, position }) => {
+  const [popoverShow, setPopoverShow] = useState(false);
+  const pos = position || "bottom-left";
+  const openTooltip = () => {
+    setPopoverShow(true);
+  };
+  const closeTooltip = () => {
+    setPopoverShow(false);
+  };
+  return (
+    <>
+      <div className="flex flex-wrap">
+        <div className="w-full text-center relative">
+          <InformationCircleIcon
+            onMouseEnter={openTooltip}
+            onMouseLeave={closeTooltip}
+            className="w-4 h-4 "
+          />
+          <div
+            className={
+              (pos.includes("right") ? " -left-3/4 " : " -right-3/4 ") +
+              (pos.includes("top") ? " bottom-full " : " top-full ") +
+              (popoverShow ? "" : "hidden ") +
+              "absolute rounded-lg bg-black bg-opacity-70  z-50 font-normal leading-normal w-max max-w-xs text-sm  break-words "
+            }
+          >
+            <div className="text-white p-2 normal-case">{children}</div>
+          </div>
+        </div>
+      </div>
+    </>
+  );
+};
+
 export default function Main({ dataset, accuracyTypes }) {
   const router = useRouter();
   const benchmark = {
-    name: "Oil Exploration",
+    name: "Oil Exploration (BP)",
     range: "oil-exploration",
   };
 
@@ -27,7 +61,7 @@ export default function Main({ dataset, accuracyTypes }) {
         column: "YEAR",
       },
       y: {
-        name: "Computing Power",
+        name: "Computing Power (GFlops)",
         column: "GFLOPS",
       },
     },
@@ -38,7 +72,7 @@ export default function Main({ dataset, accuracyTypes }) {
         column: "SUCCESS RATE",
       },
       x: {
-        name: "Computing Power",
+        name: "Computing Power (GFlops)",
         column: "GFLOPS",
       },
     },
@@ -62,7 +96,6 @@ export default function Main({ dataset, accuracyTypes }) {
   //   ==============================================================
 
   const [filteredDataset, setFilteredDataset] = useState(dataset);
-
 
   useEffect(() => {
     setFilteredDataset(
@@ -224,7 +257,7 @@ export default function Main({ dataset, accuracyTypes }) {
                 <tr>
                   <th scope="col" className="px-6 py-3  sm:w-1/5">
                     <button
-                      className="flex items-center uppercase gap-2"
+                      className="flex items-center uppercase w-full justify-center gap-2"
                       onClick={() => requestSort("DEPTH")}
                     >
                       <p>DEPTH</p>
@@ -238,7 +271,7 @@ export default function Main({ dataset, accuracyTypes }) {
                   </th>
                   <th scope="col" className="px-6 py-3  sm:w-1/5">
                     <button
-                      className="flex items-center uppercase gap-2"
+                      className="flex items-center uppercase w-full justify-center gap-2"
                       onClick={() => requestSort("# OF WEELS")}
                     >
                       <p># OF WEELS</p>
@@ -255,7 +288,7 @@ export default function Main({ dataset, accuracyTypes }) {
                     className="hidden sm:table-cell px-6 py-3 w-1/5"
                   >
                     <button
-                      className="flex items-center uppercase gap-2"
+                      className="flex items-center uppercase w-full justify-center gap-2"
                       onClick={() => requestSort("YEAR")}
                     >
                       <p>YEAR</p>
@@ -272,10 +305,13 @@ export default function Main({ dataset, accuracyTypes }) {
                     className="hidden sm:table-cell px-6 py-3 w-1/5"
                   >
                     <button
-                      className="flex items-center uppercase gap-2"
+                      className="flex items-center uppercase w-full justify-center gap-2"
                       onClick={() => requestSort("SUCCESS RATE")}
                     >
                       <p>{"SUCCESS RATE"}</p>
+                      <Tooltip position="bottom-left">
+                          After removing time trend
+                        </Tooltip>
                       {sortBy.column === "SUCCESS RATE" &&
                         (sortBy.type === "asc" ? (
                           <SortAscendingIcon className="h-4 w-4 text-gray-300" />
@@ -290,10 +326,18 @@ export default function Main({ dataset, accuracyTypes }) {
                     className="hidden sm:table-cell px-6 py-3 w-1/5"
                   >
                     <button
-                      className="flex items-center uppercase gap-2"
+                      className="flex items-center uppercase w-full justify-center gap-2"
                       onClick={() => requestSort("GFLOPS")}
                     >
-                      <div className="flex gap-1">COMPUTING POWER</div>
+                      <div className="flex gap-1">
+                        <p className="whitespace-nowrap">COMPUTING POWER</p>
+
+                        <Tooltip position="bottom-left">
+                          This measurement is about the functionality of the
+                          whole system, not the computation needed for a
+                          particular task.
+                        </Tooltip>
+                      </div>
                       {sortBy.column === "GFLOPS" &&
                         (sortBy.type === "asc" ? (
                           <SortAscendingIcon className="h-4 w-4 text-gray-300" />
@@ -302,7 +346,6 @@ export default function Main({ dataset, accuracyTypes }) {
                         ))}
                     </button>
                   </th>
-                  
                 </tr>
               </thead>
 
@@ -316,32 +359,31 @@ export default function Main({ dataset, accuracyTypes }) {
                       {({ open }) => (
                         <>
                           <tr className="border-b   bg-gray-50  ">
-                            <th
+                            <td
                               scope="row"
-                              className="px-6 py-2 font-medium text-gray-900 whitespace-pre-wrap"
+                              className="px-6 py-2 text-center whitespace-pre-wrap"
                             >
                               {data["DEPTH"] || "-"}
-                            </th>
-                            <th
+                            </td>
+                            <td
                               scope="row"
-                              className="px-6 py-2 font-medium text-gray-900 whitespace-pre-wrap"
+                              className="px-6 py-2 text-center  whitespace-pre-wrap"
                             >
                               {data["# OF WEELS"] || "-"}
-                            </th>
-                            <td className="hidden sm:table-cell px-6 py-2">
+                            </td>
+                            <td className="hidden sm:table-cell text-center px-6 py-2">
                               {data["YEAR"]}
                             </td>
 
-                            <td className="hidden sm:table-cell px-6 py-2">
+                            <td className="hidden sm:table-cell text-center px-6 py-2">
                               {data["SUCCESS RATE"] || "-"}
                             </td>
-                            <td className="hidden sm:table-cell px-6 py-2 whitespace-nowrap">
+                            <td className="hidden sm:table-cell text-center px-6 py-2 whitespace-nowrap">
                               {data["GFLOPS"]
                                 ? formatUnit(data["GFLOPS"], "FLOPS")
                                 : "-"}
                             </td>
                             {/* <td className="px-6 py-2">{data[xAxis.column]}</td> */}
-                            
                           </tr>
                         </>
                       )}

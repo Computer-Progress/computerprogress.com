@@ -10,10 +10,44 @@ import { useRouter } from "next/router";
 import Chart from "./Chart";
 import * as XLSX from "xlsx/xlsx.mjs";
 
+const Tooltip = ({ children, position }) => {
+  const [popoverShow, setPopoverShow] = useState(false);
+  const pos = position || "bottom-left";
+  const openTooltip = () => {
+    setPopoverShow(true);
+  };
+  const closeTooltip = () => {
+    setPopoverShow(false);
+  };
+  return (
+    <>
+      <div className="flex flex-wrap">
+        <div className="w-full text-center relative">
+          <InformationCircleIcon
+            onMouseEnter={openTooltip}
+            onMouseLeave={closeTooltip}
+            className="w-4 h-4 "
+          />
+          <div
+            className={
+              (pos.includes("right") ? " -left-3/4 " : " -right-3/4 ") +
+              (pos.includes("top") ? " bottom-full " : " top-full ") +
+              (popoverShow ? "" : "hidden ") +
+              "absolute rounded-lg bg-black bg-opacity-70  z-50 font-normal leading-normal w-max max-w-xs text-sm  break-words "
+            }
+          >
+            <div className="text-white p-2 normal-case">{children}</div>
+          </div>
+        </div>
+      </div>
+    </>
+  );
+};
+
 export default function Main({ dataset, accuracyTypes }) {
   const router = useRouter();
   const benchmark = {
-    name: "Weather Prediction",
+    name: "Weather Prediction (NOAA)",
     range: "weather-prediction",
   };
 
@@ -38,7 +72,7 @@ export default function Main({ dataset, accuracyTypes }) {
         column: "YEAR",
       },
       y: {
-        name: "Computing Power",
+        name: "Computing Power (GFlops)",
         column: "GFLOPS",
       },
     },
@@ -49,7 +83,7 @@ export default function Main({ dataset, accuracyTypes }) {
         column: "MEAN",
       },
       x: {
-        name: "Computing Power",
+        name: "Computing Power (GFlops)",
         column: "GFLOPS",
       },
     },
@@ -230,7 +264,7 @@ export default function Main({ dataset, accuracyTypes }) {
                 <tr>
                   <th rowSpan="2" scope="col" className="px-6 py-3  sm:w-1/8">
                     <button
-                      className="flex items-center uppercase gap-2"
+                      className="flex items-center uppercase gap-2  w-full justify-center  text-center"
                       onClick={() => requestSort("YEAR")}
                     >
                       <p>YEAR</p>
@@ -245,7 +279,7 @@ export default function Main({ dataset, accuracyTypes }) {
                   <th
                     colSpan={5}
                     scope="col"
-                    className="hidden sm:table-cell pt-3  text-center sm:w-5/8"
+                    className="hidden sm:table-cell pt-3  w-full justify-center  text-center sm:w-5/8"
                   >
                     Mean absolute error (Degrees ºF)
                   </th>
@@ -256,11 +290,17 @@ export default function Main({ dataset, accuracyTypes }) {
                     className="hidden sm:table-cell px-6 py-3 w-2/8"
                   >
                     <button
-                      className="flex items-center uppercase gap-2"
+                      className="flex items-center uppercase gap-2  w-full justify-center  text-center"
                       onClick={() => requestSort("GFLOPS")}
                     >
-                      <div className="flex gap-1 whitespace-nowrap">
-                        COMPUTING POWER
+                      <div className="flex gap-1">
+                        <p className="whitespace-nowrap">COMPUTING POWER</p>
+
+                        <Tooltip position="bottom-left">
+                          This measurement is about the functionality of the
+                          whole system, not the computation needed for a
+                          particular task.
+                        </Tooltip>
                       </div>
                       {sortBy.column === "GFLOPS" &&
                         (sortBy.type === "asc" ? (
@@ -274,7 +314,7 @@ export default function Main({ dataset, accuracyTypes }) {
                 <tr>
                   <th scope="col" className="hidden sm:table-cell px-6 py-3 ">
                     <button
-                      className="flex items-center uppercase gap-2"
+                      className="flex items-center uppercase gap-2  w-full justify-center  text-center"
                       onClick={() => requestSort("DAY 3")}
                     >
                       <p>DAY 3</p>
@@ -288,7 +328,7 @@ export default function Main({ dataset, accuracyTypes }) {
                   </th>
                   <th scope="col" className="hidden sm:table-cell px-6 py-3 ">
                     <button
-                      className="flex items-center uppercase gap-2"
+                      className="flex items-center uppercase gap-2  w-full justify-center  text-center"
                       onClick={() => requestSort("DAY 4")}
                     >
                       <p>DAY 4</p>
@@ -302,7 +342,7 @@ export default function Main({ dataset, accuracyTypes }) {
                   </th>
                   <th scope="col" className="hidden sm:table-cell px-6 py-3 ">
                     <button
-                      className="flex items-center uppercase gap-2"
+                      className="flex items-center uppercase gap-2  w-full justify-center  text-center"
                       onClick={() => requestSort("DAY 5")}
                     >
                       <p>DAY 5</p>
@@ -316,7 +356,7 @@ export default function Main({ dataset, accuracyTypes }) {
                   </th>
                   <th scope="col" className="hidden sm:table-cell px-6 py-3 ">
                     <button
-                      className="flex items-center uppercase gap-2"
+                      className="flex items-center uppercase gap-2  w-full justify-center  text-center"
                       onClick={() => requestSort("DAY 6")}
                     >
                       <p>DAY 6</p>
@@ -330,7 +370,7 @@ export default function Main({ dataset, accuracyTypes }) {
                   </th>
                   <th scope="col" className="hidden sm:table-cell px-6 py-3 ">
                     <button
-                      className="flex items-center uppercase gap-2"
+                      className="flex items-center uppercase gap-2  w-full justify-center  text-center"
                       onClick={() => requestSort("DAY 7")}
                     >
                       <p>DAY 7</p>
@@ -355,31 +395,31 @@ export default function Main({ dataset, accuracyTypes }) {
                       {({ open }) => (
                         <>
                           <tr className="border-b   bg-gray-50  ">
-                            <th
+                            <td
                               scope="row"
-                              className="px-6 py-2 font-medium text-gray-900 whitespace-pre-wrap"
+                              className="px-6 py-2 text-center whitespace-pre-wrap"
                             >
                               {data["YEAR"] || "-"}
-                            </th>
-                            <td className="hidden sm:table-cell px-6 py-2">
+                            </td>
+                            <td className="hidden sm:table-cell text-center px-6 py-2">
                               {data["DAY 3"] || "-"}
                             </td>
-                            <td className="hidden sm:table-cell px-6 py-2">
+                            <td className="hidden sm:table-cell text-center px-6 py-2">
                               {data["DAY 4"] || "-"}
                             </td>
-                            <td className="hidden sm:table-cell px-6 py-2">
+                            <td className="hidden sm:table-cell text-center px-6 py-2">
                               {data["DAY 5"] || "-"}
                             </td>
-                            <td className="hidden sm:table-cell px-6 py-2">
+                            <td className="hidden sm:table-cell text-center px-6 py-2">
                               {data["DAY 6"] || "-"}
                             </td>
-                            <td className="hidden sm:table-cell px-6 py-2">
+                            <td className="hidden sm:table-cell text-center px-6 py-2">
                               {data["DAY 7"] || "-"}
                             </td>
 
-                            <td className="hidden sm:table-cell px-6 py-2 whitespace-nowrap">
+                            <td className="hidden sm:table-cell text-center px-6 py-2 whitespace-nowrap">
                               {data["GFLOPS"]
-                                ? formatUnit(data["GFLOPS"], "FLOPS")
+                                ? formatUnit(data["GFLOPS"], "Flops")
                                 : "-"}
                             </td>
                             {/* <td className="px-6 py-2">{data[xAxis.column]}</td> */}

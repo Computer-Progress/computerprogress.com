@@ -162,7 +162,7 @@ export default function Chart({
               enabled: true,
               text:
                 '<a target="_blank" href="https://arxiv.org/abs/2206.14007">' +
-                "Ⓒ The Importance of (Exponentially More) Computing Power, N.C. THOMPSON, SHUNING GE, G.F. MANSO</a>",
+                "Ⓒ The Importance of (Exponentially More) Computing Power, N.C. THOMPSON, S. GE, G.F. MANSO</a>",
             },
           });
         },
@@ -172,7 +172,7 @@ export default function Chart({
               enabled: true,
               text:
                 '<a target="_blank" href="https://arxiv.org/abs/2206.14007">' +
-                "Ⓒ The Importance of (Exponentially More) Computing Power, N.C. THOMPSON, SHUNING GE, G.F. MANSO</a>" +
+                "Ⓒ The Importance of (Exponentially More) Computing Power, N.C. THOMPSON, S. GE, G.F. MANSO</a>" +
                 ' [<a target="_blank" href="https://dblp.org/rec/journals/corr/abs-2007-05558.html">CITE</a>, <a target="_blank" href="https://dblp.uni-trier.de/rec/journals/corr/abs-2007-05558.html?view=bibtex">BibTex</a>]',
             },
           });
@@ -196,7 +196,7 @@ export default function Chart({
       },
       minPadding: 0.099,
       maxPadding: 0.099,
-      
+
       allowDecimals: false,
       labels: {
         style: {
@@ -225,7 +225,7 @@ export default function Chart({
       href: "",
       text:
         '<a target="_blank" href="https://arxiv.org/abs/2206.14007">' +
-        "Ⓒ The Importance of (Exponentially More) Computing Power, N.C. THOMPSON, SHUNING GE, G.F. MANSO</a>" +
+        "Ⓒ The Importance of (Exponentially More) Computing Power, N.C. THOMPSON, S. GE, G.F. MANSO</a>" +
         ' [<a style="color: black;" target="_blank" href="https://dblp.org/rec/journals/corr/abs-2007-05558.html">CITE</a>, <a style="color: black;" target="_blank" href="https://dblp.uni-trier.de/rec/journals/corr/abs-2007-05558.html?view=bibtex">BibTex</a>]',
     },
     yAxis: {
@@ -304,10 +304,10 @@ export default function Chart({
         data: scatterData,
         dataLabels: {
           enabled: true,
-          align: "left",
-          x: -5,
+          color: "rgb(107, 114, 128 )",
+          useHTML: true,
           formatter: function () {
-            return `<span class="text-md">${this.point.name}</span>`;
+            return `<span class="text-md py-12 text-gray-500">${this.point.name}</span>`;
           },
         },
         marker: {
@@ -396,7 +396,7 @@ export default function Chart({
             enabled: true,
             text:
               '<a target="_blank" href="https://arxiv.org/abs/2206.14007">' +
-              "Ⓒ The Importance of (Exponentially More) Computing Power, N.C. THOMPSON, SHUNING GE, G.F. MANSO</a>",
+              "Ⓒ The Importance of (Exponentially More) Computing Power, N.C. THOMPSON, S. GE, G.F. MANSO</a>",
           },
         }
       );

@@ -17,7 +17,7 @@ export default function Home({  dataset, accuracyTypes }) {
       range: "computer-go",
     },
     {
-      name: "Weather Prediction",
+      name: "Weather Prediction (NOAA)",
       range: "weather-prediction",
     },
     {
@@ -25,7 +25,7 @@ export default function Home({  dataset, accuracyTypes }) {
       range: "protein-folding",
     },
     {
-      name: "Oil Exploration",
+      name: "Oil Exploration (BP)",
       range: "oil-exploration",
     },
   ];

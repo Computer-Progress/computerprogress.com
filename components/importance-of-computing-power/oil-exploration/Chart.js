@@ -76,7 +76,7 @@ export default function Chart({
       ],
     };
   };
-  const scatterData = function() {
+  const scatterData = function () {
     const data = [];
     dataset.forEach((model, i) => {
       if (model[yAxis.column] && model[xAxis.column]) {
@@ -100,27 +100,10 @@ export default function Chart({
     return data;
   };
 
-  // const scatterData = dataset.map((model, i) => {
-  //   return {
-  //     x:
-  //       xAxis.column === "GFLOPS"
-  //         ? Math.log10(model[xAxis.column])
-  //         : Number(model[xAxis.column]),
-  //     y:
-  //       yAxis.column === "GFLOPS"
-  //         ? Math.log10(model[yAxis.column])
-  //         : Number(model[yAxis.column]),
-  // z: Number(model["# OF WEELS"]),
-  // name: model["DEPTH"],
-  // id: i,
-  // color: "#aa3248",
-  //   };
-  // });
-
   const lineData = () => {
-    const data = scatterData()
-    const x = data.map(({x}) => x);
-    const y = data.map(({y}) => y);
+    const data = scatterData();
+    const x = data.map(({ x }) => x);
+    const y = data.map(({ y }) => y);
 
     const lr = linearRegressionLine(x, y);
     return lr.points;
@@ -190,9 +173,9 @@ export default function Chart({
           data: scatterData(),
           lineColor: "#AA3248",
 
-          lineWidth: 0, 
+          lineWidth: 0,
           marker: {
-          symbol: "circle",
+            symbol: "circle",
 
             radius: 3,
             fillColor: "#AA3248",
@@ -236,7 +219,7 @@ export default function Chart({
               enabled: true,
               text:
                 '<a target="_blank" href="https://arxiv.org/abs/2206.14007">' +
-                "Ⓒ The Importance of (Exponentially More) Computing Power, N.C. THOMPSON, SHUNING GE, G.F. MANSO</a>",
+                "Ⓒ The Importance of (Exponentially More) Computing Power, N.C. THOMPSON, S. GE, G.F. MANSO</a>",
             },
           });
         },
@@ -246,12 +229,15 @@ export default function Chart({
               enabled: true,
               text:
                 '<a target="_blank" href="https://arxiv.org/abs/2206.14007">' +
-                "Ⓒ The Importance of (Exponentially More) Computing Power, N.C. THOMPSON, SHUNING GE, G.F. MANSO</a>" +
+                "Ⓒ The Importance of (Exponentially More) Computing Power, N.C. THOMPSON, S. GE, G.F. MANSO</a>" +
                 ' [<a target="_blank" href="https://dblp.org/rec/journals/corr/abs-2007-05558.html">CITE</a>, <a target="_blank" href="https://dblp.uni-trier.de/rec/journals/corr/abs-2007-05558.html?view=bibtex">BibTex</a>]',
             },
           });
         },
       },
+    },
+    legend: {
+      enabled: false,
     },
     title: {
       text: null,
@@ -300,7 +286,7 @@ export default function Chart({
       href: "",
       text:
         '<a target="_blank" href="https://arxiv.org/abs/2206.14007">' +
-        "Ⓒ The Importance of (Exponentially More) Computing Power, N.C. THOMPSON, SHUNING GE, G.F. MANSO</a>" +
+        "Ⓒ The Importance of (Exponentially More) Computing Power, N.C. THOMPSON, S. GE, G.F. MANSO</a>" +
         ' [<a style="color: black;" target="_blank" href="https://dblp.org/rec/journals/corr/abs-2007-05558.html">CITE</a>, <a style="color: black;" target="_blank" href="https://dblp.uni-trier.de/rec/journals/corr/abs-2007-05558.html?view=bibtex">BibTex</a>]',
     },
     yAxis: {
@@ -330,9 +316,7 @@ export default function Chart({
         },
       },
     },
-    legend: {
-      enabled: false,
-    },
+
     tooltip: {
       useHTML: true,
       padding: 0,
@@ -343,9 +327,14 @@ export default function Chart({
           }
           return `<span class="">${value}</span>`;
         };
-        return `<div class="bg-white block px-3 py-2 mt-[1px] ml-[1px]"> <b>${
-          this.point.z
-        }</b><br>${yAxis.name}: ${formatAxis(this.y, yAxis.column)} <br> ${
+        const weels =
+          yAxis.column === "GFLOPS"
+            ? ""
+            : `# of Weels: ${this.point.z}
+        <br>`;
+
+        return `<div class="bg-white block px-3 py-2 mt-[1px] ml-[1px]">
+        ${weels}   ${yAxis.name}: ${formatAxis(this.y, yAxis.column)} <br> ${
           xAxis.name
         }: ${formatAxis(this.x, xAxis.column)}</div>`;
       },
@@ -445,7 +434,7 @@ export default function Chart({
             enabled: true,
             text:
               '<a target="_blank" href="https://arxiv.org/abs/2206.14007">' +
-              "Ⓒ The Importance of (Exponentially More) Computing Power, N.C. THOMPSON, SHUNING GE, G.F. MANSO</a>",
+              "Ⓒ The Importance of (Exponentially More) Computing Power, N.C. THOMPSON, S. GE, G.F. MANSO</a>",
           },
         }
       );

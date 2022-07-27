@@ -37,7 +37,7 @@ export default function Main({ dataset, accuracyTypes }) {
         column: "YEAR",
       },
       y: {
-        name: "Computing Power",
+        name: "Computing Power (Positions/Second)",
         column: "POSITIONS/SEC",
       },
     },
@@ -48,7 +48,7 @@ export default function Main({ dataset, accuracyTypes }) {
         column: "ELO",
       },
       x: {
-        name: "Computing Power",
+        name: "Computing Power (Positions/Second)",
         column: "POSITIONS/SEC",
       },
     },
@@ -61,41 +61,17 @@ export default function Main({ dataset, accuracyTypes }) {
     name: "Year",
     column: "YEAR",
   });
-  
-    function selectChart(chart) {
-      setChart(chart);
-      setXAxis(chart.x);
-      setYAxis(chart.y);
-    }
+
+  function selectChart(chart) {
+    setChart(chart);
+    setXAxis(chart.x);
+    setYAxis(chart.y);
+  }
 
   const [showMore, setShowMore] = useState(false);
   //   ==============================================================
 
   const [filteredDataset, setFilteredDataset] = useState(dataset);
-
-  useEffect(() => {
-    setFilteredDataset(
-      dataset
-        .filter((x) => x[xAxis.column] && x[yAxis.column])
-        .sort((a, b) => {
-          const A =
-            typeof a[xAxis.column] === "string"
-              ? a[xAxis.column].toLowerCase()
-              : a[xAxis.column];
-          const B =
-            typeof b[xAxis.column] === "string"
-              ? b[xAxis.column].toLowerCase()
-              : b[xAxis.column];
-          if (A < B) {
-            return sortBy.type === "asc" ? 1 : -1;
-          }
-          if (A > B) {
-            return sortBy.type === "asc" ? -1 : 1;
-          }
-          return 0;
-        })
-    );
-  }, [xAxis, yAxis, dataset, sortBy.type]);
 
   useEffect(() => {
     setSortBy({ column: "YEAR", type: "asc" });
@@ -106,22 +82,32 @@ export default function Main({ dataset, accuracyTypes }) {
       column,
       type: sortBy.type === "asc" && sortBy.column === column ? "desc" : "asc",
     });
+    console.log(JSON.stringify(dataset));
     setFilteredDataset(
-      dataset
-        .filter((x) => x[xAxis.column] && x[yAxis.column])
-        .sort((a, b) => {
-          const A =
-            typeof a[column] === "string" ? a[column].toLowerCase() : a[column];
-          const B =
-            typeof b[column] === "string" ? b[column].toLowerCase() : b[column];
-          if (A < B) {
-            return sortBy.type === "asc" ? 1 : -1;
-          }
-          if (A > B) {
-            return sortBy.type === "asc" ? -1 : 1;
-          }
-          return 0;
-        })
+      [...dataset].sort((a, b) => {
+        const Acolumn = Number(a[column]) || a[column];
+        const Bcolumn = Number(b[column]) || b[column];
+        const A = typeof Acolumn === "string"
+          ? Acolumn.toLowerCase().trim()
+          : Acolumn;
+        const B =
+          typeof Bcolumn === "string"
+            ? Bcolumn.toLowerCase().trim()
+            : Bcolumn;
+        if (A === null || A === undefined || A === "" || A === NaN) {
+          return 1;
+        }
+        if (B === null || B === undefined || B === "" || B === NaN) {
+          return -1;
+        }
+        if (A < B) {
+          return sortBy.type === "asc" ? 1 : -1;
+        }
+        if (A > B) {
+          return sortBy.type === "asc" ? -1 : 1;
+        }
+        return 0;
+      })
     );
   }
   // ==============================================================
@@ -172,9 +158,7 @@ export default function Main({ dataset, accuracyTypes }) {
             {benchmark.name}
           </h1>
           <div className="hidden sm:flex  justify-center items-center gap-2  mt-5">
-    
             <Menu as="div" className="w-auto relative">
-            
               <Menu.Button className="inline-flex w- justify-center rounded-md px-4 py-2 text-sm font-medium text-gray-900 hover:bg-gray-100 focus:outline-none focus-visible:ring-2 focus-visible:ring-gray-200 focus-visible:ring-opacity-75">
                 <div className="flex flex-col items-start">
                   <span className="text-xs font-light">Chart:</span>
@@ -254,10 +238,10 @@ export default function Main({ dataset, accuracyTypes }) {
                     className="hidden sm:table-cell px-6 py-3 w-1/4"
                   >
                     <button
-                      className="flex items-center uppercase gap-2"
+                      className="flex w-full justify-center items-center uppercase gap-2"
                       onClick={() => requestSort("YEAR")}
                     >
-                      <p>YEAR</p>
+                      <p className="text-center">YEAR</p>
                       {sortBy.column === "YEAR" &&
                         (sortBy.type === "asc" ? (
                           <SortAscendingIcon className="h-4 w-4 text-gray-300" />
@@ -268,13 +252,13 @@ export default function Main({ dataset, accuracyTypes }) {
                   </th>
                   <th
                     scope="col"
-                    className="hidden sm:table-cell px-6 py-3 w-1/4"
+                    className="hidden sm:table-cell  px-6 py-3 w-1/4 text-center"
                   >
                     <button
-                      className="flex items-center uppercase gap-2"
+                      className="flex items-center w-full justify-center text-center uppercase gap-2"
                       onClick={() => requestSort("ELO")}
                     >
-                      <p>{"ELO"}</p>
+                      <p className="text-center">ELO</p>
                       {sortBy.column === "ELO" &&
                         (sortBy.type === "asc" ? (
                           <SortAscendingIcon className="h-4 w-4 text-gray-300" />
@@ -289,10 +273,10 @@ export default function Main({ dataset, accuracyTypes }) {
                     className="hidden sm:table-cell px-6 py-3 w-1/4"
                   >
                     <button
-                      className="flex items-center uppercase gap-2"
+                      className="flex items-center w-full justify-center uppercase gap-2"
                       onClick={() => requestSort("POSITIONS/SEC")}
                     >
-                      <div className="flex gap-1 whitespace-nowrap">
+                      <div className="flex text-center gap-1 whitespace-nowrap">
                         COMPUTING POWER (POSITIONS/SEC)
                       </div>
                       {sortBy.column === "POSITIONS/SEC" &&
@@ -303,7 +287,6 @@ export default function Main({ dataset, accuracyTypes }) {
                         ))}
                     </button>
                   </th>
-                  
                 </tr>
               </thead>
 
@@ -319,24 +302,23 @@ export default function Main({ dataset, accuracyTypes }) {
                           <tr className="border-b   bg-gray-50  ">
                             <th
                               scope="row"
-                              className="px-6 py-2 font-medium text-gray-900 whitespace-pre-wrap"
+                              className="px-6 py-2  font-medium text-gray-900 whitespace-pre-wrap"
                             >
                               {data["PROGRAM"]}
                             </th>
-                            <td className="hidden sm:table-cell px-6 py-2">
+                            <td className="hidden text-center sm:table-cell px-6 py-2">
                               {data["YEAR"]}
                             </td>
 
-                            <td className="hidden sm:table-cell px-6 py-2">
+                            <td className="hidden text-center sm:table-cell px-6 py-2">
                               {data["ELO"]}
                             </td>
-                            <td className="hidden sm:table-cell px-6 py-2 whitespace-nowrap">
+                            <td className="hidden text-center sm:table-cell px-6 py-2 whitespace-nowrap">
                               {data["POSITIONS/SEC"]
                                 ? formatUnit(data["POSITIONS/SEC"], "")
                                 : "-"}
                             </td>
                             {/* <td className="px-6 py-2">{data[xAxis.column]}</td> */}
-                            
                           </tr>
                         </>
                       )}

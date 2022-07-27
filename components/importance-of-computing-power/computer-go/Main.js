@@ -15,7 +15,7 @@ export default function Main({ dataset, accuracyTypes }) {
   const benchmark = {
     name: "Computer Go",
     range: "computer-go",
-  }
+  };
 
   // ============================================================
 
@@ -38,7 +38,7 @@ export default function Main({ dataset, accuracyTypes }) {
         column: "YEAR",
       },
       y: {
-        name: "Computing Power",
+        name: "Computing Power (GFlops)",
         column: "GFLOPS",
       },
     },
@@ -49,7 +49,7 @@ export default function Main({ dataset, accuracyTypes }) {
         column: "ELO",
       },
       x: {
-        name: "Computing Power",
+        name: "Computing Power (GFlops)",
         column: "GFLOPS",
       },
     },
@@ -62,19 +62,17 @@ export default function Main({ dataset, accuracyTypes }) {
     name: "Year",
     column: "YEAR",
   });
-  
-    function selectChart(chart) {
-      setChart(chart);
-      setXAxis(chart.x);
-      setYAxis(chart.y);
-    }
+
+  function selectChart(chart) {
+    setChart(chart);
+    setXAxis(chart.x);
+    setYAxis(chart.y);
+  }
 
   const [showMore, setShowMore] = useState(false);
   //   ==============================================================
 
   const [filteredDataset, setFilteredDataset] = useState(dataset);
-
-
 
   useEffect(() => {
     setFilteredDataset(
@@ -175,42 +173,41 @@ export default function Main({ dataset, accuracyTypes }) {
             {benchmark.name}
           </h1>
           <div className="hidden sm:flex  justify-center items-center gap-2  mt-5">
-          <Menu as="div" className="w-auto relative">
-            
-            <Menu.Button className="inline-flex w- justify-center rounded-md px-4 py-2 text-sm font-medium text-gray-900 hover:bg-gray-100 focus:outline-none focus-visible:ring-2 focus-visible:ring-gray-200 focus-visible:ring-opacity-75">
-              <div className="flex flex-col items-start">
-                <span className="text-xs font-light">Chart:</span>
-                <div className="flex items-center ">
-                  <span className="text-md "> {chart.title}</span>
-                  <ChevronDownIcon
-                    className="ml-2 -mr-1 h-5 w-5 text-gray-400"
-                    aria-hidden="true"
-                  />
+            <Menu as="div" className="w-auto relative">
+              <Menu.Button className="inline-flex w- justify-center rounded-md px-4 py-2 text-sm font-medium text-gray-900 hover:bg-gray-100 focus:outline-none focus-visible:ring-2 focus-visible:ring-gray-200 focus-visible:ring-opacity-75">
+                <div className="flex flex-col items-start">
+                  <span className="text-xs font-light">Chart:</span>
+                  <div className="flex items-center ">
+                    <span className="text-md "> {chart.title}</span>
+                    <ChevronDownIcon
+                      className="ml-2 -mr-1 h-5 w-5 text-gray-400"
+                      aria-hidden="true"
+                    />
+                  </div>
                 </div>
-              </div>
-            </Menu.Button>
+              </Menu.Button>
 
-            <Menu.Items className="z-10 absolute left-0 mt-2 w-max origin-top-right divide-y divide-gray-100 rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
-              <div className="px-1 py-1 ">
-                {charts.map((option, index) => (
-                  <Menu.Item key={index}>
-                    {({ active }) => (
-                      <button
-                        onClick={() => {
-                          selectChart(option);
-                        }}
-                        className={`${
-                          active ? "bg-[#AA3248] text-white" : "text-gray-900"
-                        } group flex w-full items-center rounded-md  px-2 py-2 text-sm`}
-                      >
-                        {option.title}
-                      </button>
-                    )}
-                  </Menu.Item>
-                ))}
-              </div>
-            </Menu.Items>
-          </Menu>
+              <Menu.Items className="z-10 absolute left-0 mt-2 w-max origin-top-right divide-y divide-gray-100 rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
+                <div className="px-1 py-1 ">
+                  {charts.map((option, index) => (
+                    <Menu.Item key={index}>
+                      {({ active }) => (
+                        <button
+                          onClick={() => {
+                            selectChart(option);
+                          }}
+                          className={`${
+                            active ? "bg-[#AA3248] text-white" : "text-gray-900"
+                          } group flex w-full items-center rounded-md  px-2 py-2 text-sm`}
+                        >
+                          {option.title}
+                        </button>
+                      )}
+                    </Menu.Item>
+                  ))}
+                </div>
+              </Menu.Items>
+            </Menu>
           </div>
           <div className="hidden sm:block">
             {filteredDataset.length > 2 ? (
@@ -237,7 +234,7 @@ export default function Main({ dataset, accuracyTypes }) {
             <table className="w-full text-sm text-left text-gray-500">
               <thead className="sticky top-0 text-xs table-fixed text-gray-700 uppercase bg-gray-50">
                 <tr>
-                  <th scope="col" className="px-6 py-3  sm:w-2/5">
+                  <th scope="col" className="px-6 py-3  sm:w-1/4">
                     <button
                       className="flex items-center uppercase gap-2"
                       onClick={() => requestSort("PROGRAM")}
@@ -253,10 +250,10 @@ export default function Main({ dataset, accuracyTypes }) {
                   </th>
                   <th
                     scope="col"
-                    className="hidden sm:table-cell px-6 py-3 w-1/5"
+                    className="hidden sm:table-cell px-6 py-3 w-1/4"
                   >
                     <button
-                      className="flex items-center uppercase gap-2"
+                      className="flex w-full justify-center  text-center items-center uppercase gap-2"
                       onClick={() => requestSort("YEAR")}
                     >
                       <p>YEAR</p>
@@ -270,10 +267,10 @@ export default function Main({ dataset, accuracyTypes }) {
                   </th>
                   <th
                     scope="col"
-                    className="hidden sm:table-cell px-6 py-3 w-1/5"
+                    className="hidden sm:table-cell px-6 py-3 w-1/4"
                   >
                     <button
-                      className="flex items-center uppercase gap-2"
+                      className="flex w-full justify-center  text-center items-center uppercase gap-2"
                       onClick={() => requestSort("ELO")}
                     >
                       <p>{"ELO"}</p>
@@ -288,13 +285,15 @@ export default function Main({ dataset, accuracyTypes }) {
 
                   <th
                     scope="col"
-                    className="hidden sm:table-cell px-6 py-3 w-1/5"
+                    className="hidden sm:table-cell px-6 py-3 w-1/4"
                   >
                     <button
-                      className="flex items-center uppercase gap-2"
+                      className="flex w-full justify-center  text-center items-center uppercase gap-2"
                       onClick={() => requestSort("COMPUTING POWER")}
                     >
-                      <div className="flex gap-1">COMPUTING POWER</div>
+                      <div className="flex text-center gap-1 whitespace-nowrap">
+                        COMPUTING POWER
+                      </div>
                       {sortBy.column === "COMPUTING POWER" &&
                         (sortBy.type === "asc" ? (
                           <SortAscendingIcon className="h-4 w-4 text-gray-300" />
@@ -303,7 +302,6 @@ export default function Main({ dataset, accuracyTypes }) {
                         ))}
                     </button>
                   </th>
-                  
                 </tr>
               </thead>
 
@@ -323,23 +321,19 @@ export default function Main({ dataset, accuracyTypes }) {
                             >
                               {data["PROGRAM"]}
                             </th>
-                            <td className="hidden sm:table-cell px-6 py-2">
-                              {data["YEAR"]}
+                            <td className="hidden sm:table-cell text-center px-6 py-2">
+                              {data["YEAR"] || "-"}
                             </td>
 
-                            <td className="hidden sm:table-cell px-6 py-2">
-                              {data["ELO"]}
+                            <td className="hidden sm:table-cell text-center px-6 py-2">
+                              {data["ELO"] || "-"}
                             </td>
-                            <td className="hidden sm:table-cell px-6 py-2 whitespace-nowrap">
+                            <td className="hidden sm:table-cell text-center px-6 py-2 whitespace-nowrap">
                               {data["GFLOPS"]
-                                ? formatUnit(
-                                    data["GFLOPS"],
-                                    "FLOPS"
-                                  )
+                                ? formatUnit(data["GFLOPS"], "Flops")
                                 : "-"}
                             </td>
                             {/* <td className="px-6 py-2">{data[xAxis.column]}</td> */}
-                            
                           </tr>
                         </>
                       )}

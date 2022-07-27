@@ -20,13 +20,13 @@ export default function Main({ dataset, accuracyTypes }) {
   // ============================================================
   const charts = [
     {
-      title: "Prediction accuracy vs. Year",
+      title: "Prediction Accuracy vs. Year",
       x: {
         name: "Year",
         column: "YEAR",
       },
       y: {
-        name: "Prediction accuracy (GDT_TS)",
+        name: "Prediction Accuracy (GDT_TS)",
         column: "GDT_TS",
       },
     },
@@ -37,18 +37,18 @@ export default function Main({ dataset, accuracyTypes }) {
         column: "YEAR",
       },
       y: {
-        name: "Computing Power",
+        name: "Computing Power (GFlops)",
         column: "HARDWARE BURDEN (GFLOPS)",
       },
     },
     {
-      title: "Prediction accuracy vs. Computing Power",
+      title: "Prediction Accuracy vs. Computing Power",
       y: {
-        name: "Prediction accuracy (GDT_TS)",
+        name: "Prediction Accuracy (GDT_TS)",
         column: "GDT_TS",
       },
       x: {
-        name: "Computing Power",
+        name: "Computing Power (GFlops)",
         column: "HARDWARE BURDEN (GFLOPS)",
       },
     },
@@ -234,7 +234,7 @@ export default function Main({ dataset, accuracyTypes }) {
             <table className="w-full text-sm text-left text-gray-500">
               <thead className="sticky top-0 text-xs table-fixed text-gray-700 uppercase bg-gray-50">
                 <tr>
-                  <th scope="col" className="px-6 py-3  sm:w-2/5">
+                  <th scope="col" className="px-6 py-3  sm:w-1/5">
                     <button
                       className="flex items-center uppercase gap-2"
                       onClick={() => requestSort("TEAM")}
@@ -248,9 +248,9 @@ export default function Main({ dataset, accuracyTypes }) {
                         ))}
                     </button>
                   </th>
-                  <th scope="col" className="px-6 py-3  sm:w-2/5">
+                  <th scope="col" className="px-6 py-3  sm:w-1/5">
                     <button
-                      className="flex items-center uppercase gap-2"
+                      className="flex items-center uppercase w-full justify-center gap-2"
                       onClick={() => requestSort("ROUND")}
                     >
                       <p>ROUND</p>
@@ -267,7 +267,7 @@ export default function Main({ dataset, accuracyTypes }) {
                     className="hidden sm:table-cell px-6 py-3 w-1/5"
                   >
                     <button
-                      className="flex items-center uppercase gap-2"
+                      className="flex items-center uppercase w-full justify-center gap-2"
                       onClick={() => requestSort("YEAR")}
                     >
                       <p>YEAR</p>
@@ -284,7 +284,7 @@ export default function Main({ dataset, accuracyTypes }) {
                     className="hidden sm:table-cell px-6 py-3 w-1/5"
                   >
                     <button
-                      className="flex items-center uppercase gap-2"
+                      className="flex items-center uppercase w-full justify-center gap-2"
                       onClick={() => requestSort("GDT_TS")}
                     >
                       <p>{"GDT_TS"}</p>
@@ -302,7 +302,7 @@ export default function Main({ dataset, accuracyTypes }) {
                     className="hidden sm:table-cell px-6 py-3 w-1/5"
                   >
                     <button
-                      className="flex items-center uppercase gap-2"
+                      className="flex items-center uppercase w-full justify-center gap-2"
                       onClick={() => requestSort("HARDWARE BURDEN (GFLOPS)")}
                     >
                       <div className="flex gap-1">COMPUTING POWER</div>
@@ -332,22 +332,22 @@ export default function Main({ dataset, accuracyTypes }) {
                               scope="row"
                               className="px-6 py-2 font-medium text-gray-900 whitespace-pre-wrap"
                             >
-                              {data["TEAM"]}
+                              {data["TEAM"] || '-'}
                             </th>
-                            <th
+                            <td
                               scope="row"
-                              className="px-6 py-2 font-medium text-gray-900 whitespace-pre-wrap"
+                              className="px-6 py-2  text-center  whitespace-pre-wrap"
                             >
-                              {data["ROUND"]}
-                            </th>
-                            <td className="hidden sm:table-cell px-6 py-2">
-                              {data["YEAR"]}
+                              {data["ROUND"] || '-'}
+                            </td>
+                            <td className="hidden sm:table-cell text-center px-6 py-2">
+                              {data["YEAR"] || '-'}
                             </td>
 
-                            <td className="hidden sm:table-cell px-6 py-2">
-                              {data["GDT_TS"]}
+                            <td className="hidden sm:table-cell text-center px-6 py-2">
+                              {data["GDT_TS"] || '-'}
                             </td>
-                            <td className="hidden sm:table-cell px-6 py-2 whitespace-nowrap">
+                            <td className="hidden sm:table-cell text-center px-6 py-2 whitespace-nowrap">
                               {data["HARDWARE BURDEN (GFLOPS)"]
                                 ? formatUnit(
                                     data["HARDWARE BURDEN (GFLOPS)"],
