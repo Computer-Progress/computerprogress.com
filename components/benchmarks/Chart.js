@@ -1,9 +1,15 @@
 import { Menu } from "@headlessui/react";
-import { ArrowsExpandIcon, DownloadIcon } from "@heroicons/react/outline";
+import {
+  ArrowsExpandIcon,
+  ClipboardCopyIcon,
+  DownloadIcon,
+  PlusIcon,
+} from "@heroicons/react/outline";
 import Highcharts from "highcharts";
 import HighchartsReact from "highcharts-react-official";
 import HighchartsExporting from "highcharts/modules/exporting";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
+import Tooltip from "../Tooltip";
 
 if (typeof Highcharts === "object") {
   HighchartsExporting(Highcharts);
@@ -170,13 +176,14 @@ export default function Chart({
       position: {
         align: "center",
         y: -5,
+        x:15,
       },
       useHTML: true,
       href: "",
       text:
         '<a target="_blank" href="https://arxiv.org/abs/2007.05558">' +
         "Ⓒ The Computational Limits of Deep Learning, N.C. THOMPSON, K. GREENEWALD, K. LEE, G.F. MANSO</a>" +
-        ' [<a style="color: black;" target="_blank" href="https://dblp.org/rec/journals/corr/abs-2007-05558.html">CITE</a>, <a style="color: black;" target="_blank" href="https://dblp.uni-trier.de/rec/journals/corr/abs-2007-05558.html?view=bibtex">BibTex</a>]',
+        '',
     },
     yAxis: {
       title: {
@@ -335,9 +342,9 @@ export default function Chart({
   function downloadGraph(format) {
     const chart = Highcharts.charts.find((chart) => chart !== undefined);
     const type = {
-      ".png": 'image/png', 
-      ".svg": 'image/svg+xml', 
-      ".pdf": 'application/pdf',
+      ".png": "image/png",
+      ".svg": "image/svg+xml",
+      ".pdf": "application/pdf",
     }[format];
     if (chart) {
       chart.exportChart(
@@ -363,11 +370,75 @@ export default function Chart({
       chart.print();
     }
   }
+  const [copied, setCopied] = useState(false);
+  async function copyTextToClipboard(text) {
+    setCopied(true);
+    setTimeout(() => {
+      setCopied(false);
+    }, 2000);
+    if ("clipboard" in navigator) {
+      return await navigator.clipboard.writeText(text);
+    } else {
+      return document.execCommand("copy", true, text);
+    }
+  }
 
   return (
     <div className="w-full relative">
       <HighchartsReact highcharts={Highcharts} options={chartOptions} />
       <div className="flex items-center justify-end gap-4 mt-3 px-2 sm:px-0 lg:absolute bottom-0.5 right-0">
+        <Menu as={"div"} className="relative">
+          {copied && (
+            <div className="absolute rounded-lg bottom-full bg-black bg-opacity-70  z-50 font-normal leading-normal w-max max-w-xs text-sm  break-words ">
+              <div className="text-white p-2 normal-case">Copied</div>
+            </div>
+          )}
+          <Menu.Button className="flex gap-1 items-center uppercase hover:underline text-[#AA3248] text-sm rounded-lg">
+            <ClipboardCopyIcon className="w-4 h-4" /> cite
+          </Menu.Button>
+          <Menu.Items className="z-10 absolute  w-max origin-top divide-y divide-gray-100 rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
+            {[
+              {
+                name: "APA",
+                text: `Thompson, N. C., Greenewld, K., Lee, K., & Manso, G. F. (2022). The Computational Limits of Deep Learning. arXiv preprint arXiv:——.`,
+              },
+              {
+                name: "BibTex",
+                text: `@article{DBLP:journals/corr/abs-2007-05558,
+  author    = {Neil C. Thompson and
+                Kristjan H. Greenewald and
+                Keeheon Lee and
+                Gabriel F. Manso},
+  title     = {The Computational Limits of Deep Learning},
+  journal   = {CoRR},
+  volume    = {abs/2007.05558},
+  year      = {2020},
+  url       = {https://arxiv.org/abs/2007.05558},
+  eprinttype = {arXiv},
+  eprint    = {2007.05558},
+  timestamp = {Sat, 23 Jan 2021 01:12:47 +0100},
+  biburl    = {https://dblp.org/rec/journals/corr/abs-2007-05558.bib},
+  bibsource = {dblp computer science bibliography, https://dblp.org}
+}`,
+              },
+            ].map((item, i) => (
+              <Menu.Item key={i}>
+                {({ active }) => (
+                  <button
+                    onClick={() => {
+                      copyTextToClipboard(item.text);
+                    }}
+                    className={`${
+                      active ? "bg-[#AA3248] text-white" : "text-gray-900"
+                    } group flex w-full items-center rounded-md  px-2 py-2 text-sm`}
+                  >
+                    {item.name}
+                  </button>
+                )}
+              </Menu.Item>
+            ))}
+          </Menu.Items>
+        </Menu>
         <button
           className="flex gap-1 items-center uppercase  hover:underline text-[#AA3248] text-sm rounded-lg"
           onClick={() => ChartFullScreen()}
