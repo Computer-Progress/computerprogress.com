@@ -20,7 +20,7 @@ export default function Home() {
 
       authors: "Thompson, N. et al",
 
-      paperUrl: "https://arxiv.org/abs/2007.05558",
+      paperUrl: "https://arxiv.org/abs/2007.05558v2",
       dataUrl: "/computation-limits-deep-learning/image-classification-on-imagenet",
       image: "/chart-imagenet.png",
     },

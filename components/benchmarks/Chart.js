@@ -117,7 +117,7 @@ export default function Chart({
             credits: {
               enabled: true,
               text:
-                '<a target="_blank" href="https://arxiv.org/abs/2007.05558">' +
+                '<a target="_blank" href="https://arxiv.org/abs/2007.05558v2">' +
                 "Ⓒ The Computational Limits of Deep Learning, N.C. THOMPSON, K. GREENEWALD, K. LEE, G.F. MANSO</a>",
             },
           });
@@ -127,7 +127,7 @@ export default function Chart({
             credits: {
               enabled: true,
               text:
-                '<a target="_blank" href="https://arxiv.org/abs/2007.05558">' +
+                '<a target="_blank" href="https://arxiv.org/abs/2007.05558v2">' +
                 "Ⓒ The Computational Limits of Deep Learning, N.C. THOMPSON, K. GREENEWALD, K. LEE, G.F. MANSO</a>" +
                 ' [<a target="_blank" href="https://dblp.org/rec/journals/corr/abs-2007-05558.html">CITE</a>, <a target="_blank" href="https://dblp.uni-trier.de/rec/journals/corr/abs-2007-05558.html?view=bibtex">BibTex</a>]',
             },
@@ -181,7 +181,7 @@ export default function Chart({
       useHTML: true,
       href: "",
       text:
-        '<a target="_blank" href="https://arxiv.org/abs/2007.05558">' +
+        '<a target="_blank" href="https://arxiv.org/abs/2007.05558v2">' +
         "Ⓒ The Computational Limits of Deep Learning, N.C. THOMPSON, K. GREENEWALD, K. LEE, G.F. MANSO</a>" +
         '',
     },
@@ -356,7 +356,7 @@ export default function Chart({
           credits: {
             enabled: true,
             text:
-              '<a target="_blank" href="https://arxiv.org/abs/2007.05558">' +
+              '<a target="_blank" href="https://arxiv.org/abs/2007.05558v2">' +
               "Ⓒ The Computational Limits of Deep Learning, N.C. THOMPSON, K. GREENEWALD, K. LEE, G.F. MANSO</a>",
           },
         }
@@ -400,7 +400,7 @@ export default function Chart({
             {[
               {
                 name: "APA",
-                text: `Thompson, N. C., Greenewld, K., Lee, K., & Manso, G. F. (2022). The Computational Limits of Deep Learning. arXiv preprint arXiv:——.`,
+                text: `Thompson, N. C., Greenewld, K., Lee, K., & Manso, G. F. (2022). The Computational Limits of Deep Learning. arXiv preprint arXiv:2007.05558v2.`,
               },
               {
                 name: "BibTex",
@@ -411,11 +411,11 @@ export default function Chart({
                 Gabriel F. Manso},
   title     = {The Computational Limits of Deep Learning},
   journal   = {CoRR},
-  volume    = {abs/2007.05558},
+  volume    = {abs/2007.05558v2},
   year      = {2020},
-  url       = {https://arxiv.org/abs/2007.05558},
+  url       = {https://arxiv.org/abs/2007.05558v2},
   eprinttype = {arXiv},
-  eprint    = {2007.05558},
+  eprint    = {2007.05558v2},
   timestamp = {Sat, 23 Jan 2021 01:12:47 +0100},
   biburl    = {https://dblp.org/rec/journals/corr/abs-2007-05558.bib},
   bibsource = {dblp computer science bibliography, https://dblp.org}

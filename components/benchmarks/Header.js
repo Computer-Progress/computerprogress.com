@@ -46,7 +46,7 @@ export default function Header({ benchmarks }) {
           <ul className="flex flex-col sm:flex-row justify-start  gap-x-8 gap-y-4">
             <li className="flex items-center text-sm text-gray-600 gap-1">
               <a
-                href="https://arxiv.org/abs/2007.05558"
+                href="https://arxiv.org/abs/2007.05558v2"
                 target="_blank"
                 rel="noreferrer"
                 className="hover:underline flex items-center text-sm text-gray-600 gap-1"
