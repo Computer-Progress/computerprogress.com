@@ -63,7 +63,7 @@ export default function Main({ benchmarks, dataset, accuracyTypes }) {
   const [xAxisOptions, setXAxisOptions] = useState([
     {
       name: "Hardware Burden",
-      column: "computing_power",
+      column: "hardware_burden",
     },
     {
       name: "Year",
@@ -342,7 +342,7 @@ export default function Main({ benchmarks, dataset, accuracyTypes }) {
                   >
                     <button
                       className="flex items-center uppercase gap-2"
-                      onClick={() => requestSort("computing_power")}
+                      onClick={() => requestSort("hardware_burden")}
                     >
                       <div className="flex gap-1">
                         hardware burden
@@ -353,7 +353,7 @@ export default function Main({ benchmarks, dataset, accuracyTypes }) {
                           asdasd
                         </Tooltip> */}
                       </div>
-                      {sortBy.column === "computing_power" &&
+                      {sortBy.column === "hardware_burden" &&
                         (sortBy.type === "asc" ? (
                           <SortAscendingIcon className="h-4 w-4 text-gray-300" />
                         ) : (
@@ -391,8 +391,8 @@ export default function Main({ benchmarks, dataset, accuracyTypes }) {
                               {data[yAxis.column]}
                             </td>
                             <td className="hidden sm:table-cell px-6 py-2 whitespace-nowrap">
-                              {data["computing_power"]
-                                ? formatUnit(data["computing_power"], "FLOPs")
+                              {data["hardware_burden"]
+                                ? formatUnit(data["hardware_burden"], "FLOPs")
                                 : "-"}
                             </td>
                             {/* <td className="px-6 py-2">{data[xAxis.column]}</td> */}
@@ -533,9 +533,9 @@ export default function Main({ benchmarks, dataset, accuracyTypes }) {
                                         Hardware Burden
                                       </p>
                                       <p className="text-gray-900">
-                                        {data["computing_power"]
+                                        {data["hardware_burden"]
                                           ? formatUnit(
-                                              data["computing_power"],
+                                              data["hardware_burden"],
                                               "FLOPs"
                                             )
                                           : "-"}

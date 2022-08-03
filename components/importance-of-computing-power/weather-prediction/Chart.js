@@ -611,7 +611,7 @@ export default function Chart({
   return (
     <div className="w-full relative">
       <HighchartsReact highcharts={Highcharts} options={chartOptions} />
-      <div className="flex items-center justify-end gap-4 mt-3 px-2 sm:px-0 lg:absolute bottom-0.5 right-0">
+      <div className="flex items-center justify-end gap-4 mt-3 px-2 sm:px-0 xl:absolute bottom-0.5 right-0">
       <Menu as={"div"} className="relative">
           {copied && (
             <div className="absolute rounded-lg bottom-full bg-black bg-opacity-70  z-50 font-normal leading-normal w-max max-w-xs text-sm  break-words ">
