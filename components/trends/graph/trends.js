@@ -103,10 +103,15 @@ export function init(database) {
     let row = database.rows[rowIndex];
 
     // Parsing
-    row["Publication date"] = parseDate(row["Publication date"]);
-    row["Publication date (julian date)"] = dateToJulianDate(
-      row["Publication date"]
-    );
+    try {
+      row["Publication date"] = parseDate(row["Publication date"]);
+      row["Publication date (julian date)"] = dateToJulianDate(
+        row["Publication date"]
+      );
+
+    } catch (e) {
+      console.log(e);
+    }
     row["Training compute (FLOPs)"] = parseFloat(
       row["Training compute (FLOPs)"]
     );
@@ -564,24 +569,24 @@ function regressData(rows, eras, params) {
     let y = [];
 
     for (let row of group) {
-      let xv =
-        params.xAxis == "Publication date"
-          ? dateToJulianDate(row["Publication date"])
-          : Math.log10(row[params.xAxis]);
-      let yv = Math.log10(row[params.yAxis]);
+        let xv =
+          params.xAxis == "Publication date"
+            ? dateToJulianDate(row["Publication date"])
+            : Math.log10(row[params.xAxis]);
+        let yv = Math.log10(row[params.yAxis]);
 
-      if (xv < minX) {
-        minX = xv;
-        minEra = row._Era;
-      }
-      if (xv > maxX) {
-        maxX = xv;
-        maxEra = row._Era;
-      }
+        if (xv < minX) {
+          minX = xv;
+          minEra = row._Era;
+        }
+        if (xv > maxX) {
+          maxX = xv;
+          maxEra = row._Era;
+        }
 
-      x.push(xv);
-      y.push(yv);
-      data.push([xv, yv]);
+        x.push(xv);
+        y.push(yv);
+        data.push([xv, yv]);
     }
 
     // Collect information about the fit
