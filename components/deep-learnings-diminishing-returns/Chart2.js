@@ -766,6 +766,8 @@ export default function Chart({
         name: "Observationss",
         data: ThreeAndFivePercentMark(),
         marker: {
+          radius: 12,
+          lineWidth: 5,
           symbol:
             "url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAMAAAAUCAYAAABI+4ecAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAdSURBVHgB5cchAQAACAOwQf/OYBB0+NwK47QnJwsUYwEnmla9JQAAAABJRU5ErkJggg==)",
         },
