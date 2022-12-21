@@ -23,7 +23,7 @@ export default function Navbar({ hideLogo }) {
       href: "/importance-of-computing-power/computer-chess",
     },
     {
-      name: "Deep Learning's Diminishing Returns",
+      name: "Deep Learning's Diminishing Returns: The Cost of Improvement is Becoming Unsustainable",
       href: "/deep-learnings-diminishing-returns",
     },
   ];

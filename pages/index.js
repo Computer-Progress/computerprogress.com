@@ -45,13 +45,9 @@ export default function Home() {
       image: "/chart-chess.png",
     },
     {
-      title: "Deep Learning's diminishing returns",
+      title: "Deep Learning's Diminishing Returns: The Cost of Improvement is Becoming Unsustainable",
       description:
-        "DEEP LEARNING IS NOW being used to translate between languages, \
-        predict how proteins fold, analyze medical scans, and play games as \
-        is now becoming pervasive. Success in those and other realms has \
-        brought this machine-learning technique from obscurity in the early \
-        2000s to dominance today.",
+        "Deep learning is now being used to translate between languages, predict how proteins fold, analyze medical scans, and play games as complex as Go, to name just a few applications of a technique that is now becoming pervasive. Success in those and other realms has brought this machine-learning technique from obscurity in the early 2000s to dominance today. ",
       date: "2022",
       authors: "Thompson, N. et al",
       paperUrl: "https://spectrum.ieee.org/deep-learning-computational-cost",

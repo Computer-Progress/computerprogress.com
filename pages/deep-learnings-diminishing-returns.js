@@ -11,7 +11,7 @@ export default function Home({ benchmarks, dataset, accuracyTypes }) {
     <div>
       <Head>
         <title>
-          Computer Progress - Deep Learning{"'"}s diminishing returns
+          {"Computer Progress - Deep Learning's Diminishing Returns: The Cost of Improvement is Becoming Unsustainable"}
         </title>
         <meta
           name="description"
@@ -101,7 +101,6 @@ export async function getStaticProps({ params }) {
     getDataset("image-classification-on-imagenet", spreadsheetId),
   ]);
   let { dataset, accuracyTypes } = await parseBenchmark(benchmark);
-  console.log(dataset[0])
   dataset = dataset.map((d) => ({
     ...d,
     error: 100 - Number(d['TOP 1 score']),

@@ -41,6 +41,35 @@ export default function Chart({
       sizes[i]
     );
   }
+
+  function formatUnit(value, unit, decimals = 0, spacing = true) {
+    const parsedValue = Number(value);
+    if (parsedValue === 0) return "0" + unit;
+
+    const k = 1000;
+    const dm = decimals < 0 ? 0 : decimals;
+    const sizes = [
+      unit,
+      "K" + unit,
+      "M" + unit,
+      "G" + unit,
+      "T" + unit,
+      "P" + unit,
+      "E" + unit,
+      "Z" + unit,
+      "Y" + unit,
+      "B" + unit,
+    ];
+
+    const i = Math.floor(Math.log(parsedValue) / Math.log(k));
+
+    return (
+      parseFloat((parsedValue / Math.pow(k, i)).toFixed(dm)) +
+      (spacing ? " " : "") +
+      sizes[i]
+    );
+  }
+
   const linearRegressionLine = (x, y) => {
     const xs = [];
     const ys = [];
@@ -95,7 +124,7 @@ export default function Chart({
       return {
         x: Math.log10(Number(model["hardware_burden"])),
         y: Math.log10(model["error"] / 100),
-        z: Math.log10(Number(model["hardware_burden"]) / 349756347991684000),
+        carbon_equivalent: model.carbon_equivalent,
         money_equivalent: model.money_equivalent,
 
         name: model.name,
@@ -166,7 +195,7 @@ export default function Chart({
       {
         x: threePercentX,
         y: threePercentY,
-        z: Math.log10(10 ** threePercentX / 349756347991684000),
+        carbon_equivalent: 10 ** threePercentX / 349756347991684000,
         money_equivalent: 10 ** threePercentX / 68740540540540600,
         name: "3%",
         color: "#000",
@@ -175,7 +204,7 @@ export default function Chart({
       {
         x: fivePercentX,
         y: fivePercentY,
-        z: Math.log10(10 ** fivePercentX / 349756347991684000),
+        carbon_equivalent: 10 ** fivePercentX / 349756347991684000,
         money_equivalent: 10 ** fivePercentX / 68740540540540600,
         name: "5%",
         color: "#000",
@@ -347,6 +376,25 @@ export default function Chart({
             },
           },
         },
+
+        {
+          zIndex: 5,
+
+          id: "plotlines",
+          color: "#FF9999", // Red
+          width: 2,
+          value: Math.log10(6816000000),
+          dashStyle: "dash",
+          label: {
+            text: "Monaco's GDP (2022)",
+            align: "left",
+            x: 8,
+            y: 5,
+            style: {
+              fontSize: 13,
+            },
+          },
+        },
         {
           zIndex: 5,
 
@@ -448,7 +496,7 @@ export default function Chart({
               enabled: true,
               text:
                 '<a target="_blank" href="https://spectrum.ieee.org/deep-learning-computational-cost">' +
-                "Ⓒ Deep Learning's diminishing returns, N.C. THOMPSON, K. GREENEWALD, K. LEE, G.F. MANSO</a>",
+                "Ⓒ Deep Learning's Diminishing Returns: The Cost of Improvement is Becoming Unsustainable, N.C. THOMPSON, K. GREENEWALD, K. LEE, G.F. MANSO</a>",
             },
           });
         },
@@ -458,7 +506,7 @@ export default function Chart({
               enabled: true,
               text:
                 '<a target="_blank" href="https://spectrum.ieee.org/deep-learning-computational-cost">' +
-                "Ⓒ Deep Learning's diminishing returns, N.C. THOMPSON, K. GREENEWALD, K. LEE, G.F. MANSO</a>" +
+                "Ⓒ Deep Learning's Diminishing Returns: The Cost of Improvement is Becoming Unsustainable, N.C. THOMPSON, K. GREENEWALD, K. LEE, G.F. MANSO</a>" +
                 ' [<a target="_blank" href="https://dblp.org/rec/journals/corr/abs-2007-05558.html">CITE</a>, <a target="_blank" href="https://dblp.uni-trier.de/rec/journals/corr/abs-2007-05558.html?view=bibtex">BibTex</a>]',
             },
           });
@@ -517,7 +565,7 @@ export default function Chart({
       href: "",
       text:
         '<a target="_blank" href="https://spectrum.ieee.org/deep-learning-computational-cost">' +
-        "Ⓒ Deep Learning's diminishing returns, N.C. THOMPSON, K. GREENEWALD, K. LEE, G.F. MANSO</a>" +
+        "Ⓒ Deep Learning's Diminishing Returns: The Cost of Improvement is Becoming Unsustainable, N.C. THOMPSON, K. GREENEWALD, K. LEE, G.F. MANSO</a>" +
         "",
     },
     yAxis: {
@@ -568,14 +616,14 @@ export default function Chart({
           ? ""
           : `<b>${this.point.name}</b><br>`;
         let error = `Error: ${y}% <br>`;
-        let computation = `Computation Used: <span class="">10<sup>${Number(
-          x
-        ).toFixed(2)}</sup> FLOPS</span><br>`;
-        let carbon = `Carbon: <span class="">10<sup>${this.point.z?.toFixed(
-          2
-        )}</sup> lbs</span><br>`;
+        let computation = `Computation Used: <span class="">${formatUnit(
+          10 ** Number(x), 'FLOPS'
+        )}</span><br>`;
+        let carbon = `Carbon: <span class="">${this.point.carbon_equivalent?.toFixed(
+          0
+        )} lbs</span><br>`;
         let dollar = `Dollar: <span class="">$${formatMoney(
-          this.point.money_equivalent
+          this.point.money_equivalent, '', this.point.money_equivalent > 1e6 ? 1 : 0
         )}</sup></span><br>`;
         let year = `Year: ${this.point.year}<br>`;
 
@@ -779,9 +827,9 @@ export default function Chart({
     }
   }
 
-  function downloadGraph(format) {
+  function downloadGraph(format='.png') {
     // const chart = Highcharts.charts.find((chart) => chart !== undefined);
-    // // const chart = chartComponent.current.chart;
+    // const chart = chartComponent.current.chart;
     // const type = {
     //   ".png": "image/png",
     //   ".svg": "image/svg+xml",
@@ -798,7 +846,7 @@ export default function Chart({
     //         enabled: true,
     //         text:
     //           '<a target="_blank" href="https://spectrum.ieee.org/deep-learning-computational-cost">' +
-    //           "Ⓒ Deep Learning's diminishing returns, N.C. THOMPSON, K. GREENEWALD, K. LEE, G.F. MANSO</a>",
+    //           "Ⓒ Deep Learning's Diminishing Returns: The Cost of Improvement is Becoming Unsustainable, N.C. THOMPSON, K. GREENEWALD, K. LEE, G.F. MANSO</a>",
     //       },
     //     }
     //   );
@@ -822,7 +870,7 @@ export default function Chart({
         a.click();
         window.URL.revokeObjectURL(url);
       })
-      .catch(() => alert("An error sorry"));
+      .catch(() => {});
   }
 
   function printGraph() {
@@ -895,26 +943,19 @@ export default function Chart({
             {[
               {
                 name: "APA",
-                text: `Thompson, N. C., Greenewld, K., Lee, K., & Manso, G. F. (2022). Deep Learning's diminishing returns. arXiv preprint arXiv:2007.05558v2.`,
+                text: `N. C. Thompson, K. Greenewald, K. Lee and G. F. Manso, "Deep Learning's Diminishing Returns: The Cost of Improvement is Becoming Unsustainable," in IEEE Spectrum, vol. 58, no. 10, pp. 50-55, October 2021, doi: 10.1109/MSPEC.2021.9563954.`,
               },
               {
                 name: "BibTex",
-                text: `@article{DBLP:journals/corr/abs-2007-05558,
-  author    = {Neil C. Thompson and
-                Kristjan H. Greenewald and
-                Keeheon Lee and
-                Gabriel F. Manso},
-  title     = {Deep Learning's diminishing returns},
-  journal   = {CoRR},
-  volume    = {abs/2007.05558v2},
-  year      = {2020},
-  url       = {https://spectrum.ieee.org/deep-learning-computational-cost},
-  eprinttype = {arXiv},
-  eprint    = {2007.05558v2},
-  timestamp = {Sat, 23 Jan 2021 01:12:47 +0100},
-  biburl    = {https://dblp.org/rec/journals/corr/abs-2007-05558.bib},
-  bibsource = {dblp computer science bibliography, https://dblp.org}
-}`,
+                text: `@ARTICLE{9563954,
+author={Thompson, Neil C. and Greenewald, Kristjan and Lee, Keeheon and Manso, Gabriel F.},
+journal={IEEE Spectrum}, 
+title={Deep Learning's Diminishing Returns: The Cost of Improvement is Becoming Unsustainable}, 
+year={2021},
+volume={58},
+number={10},
+pages={50-55},
+doi={10.1109/MSPEC.2021.9563954}}`,
               },
             ].map((item, i) => (
               <Menu.Item key={i}>

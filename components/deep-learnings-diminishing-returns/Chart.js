@@ -160,7 +160,7 @@ export default function Chart({
               enabled: true,
               text:
                 '<a target="_blank" href="https://spectrum.ieee.org/deep-learning-computational-cost">' +
-                "Ⓒ Deep Learning's diminishing returns, N.C. THOMPSON, K. GREENEWALD, K. LEE, G.F. MANSO</a>",
+                "Ⓒ Deep Learning's Diminishing Returns: The Cost of Improvement is Becoming Unsustainable, N.C. THOMPSON, K. GREENEWALD, K. LEE, G.F. MANSO</a>",
             },
           });
         },
@@ -170,7 +170,7 @@ export default function Chart({
               enabled: true,
               text:
                 '<a target="_blank" href="https://spectrum.ieee.org/deep-learning-computational-cost">' +
-                "Ⓒ Deep Learning's diminishing returns, N.C. THOMPSON, K. GREENEWALD, K. LEE, G.F. MANSO</a>" +
+                "Ⓒ Deep Learning's Diminishing Returns: The Cost of Improvement is Becoming Unsustainable, N.C. THOMPSON, K. GREENEWALD, K. LEE, G.F. MANSO</a>" +
                 ' [<a target="_blank" href="https://dblp.org/rec/journals/corr/abs-2007-05558.html">CITE</a>, <a target="_blank" href="https://dblp.uni-trier.de/rec/journals/corr/abs-2007-05558.html?view=bibtex">BibTex</a>]',
             },
           });
@@ -223,7 +223,7 @@ export default function Chart({
       href: "",
       text:
         '<a target="_blank" href="https://spectrum.ieee.org/deep-learning-computational-cost">' +
-        "Ⓒ Deep Learning's diminishing returns, N.C. THOMPSON, K. GREENEWALD, K. LEE, G.F. MANSO</a>" +
+        "Ⓒ Deep Learning's Diminishing Returns: The Cost of Improvement is Becoming Unsustainable, N.C. THOMPSON, K. GREENEWALD, K. LEE, G.F. MANSO</a>" +
         "",
     },
     yAxis: {
@@ -451,7 +451,7 @@ export default function Chart({
             enabled: true,
             text:
               '<a target="_blank" href="https://spectrum.ieee.org/deep-learning-computational-cost">' +
-              "Ⓒ Deep Learning's diminishing returns, N.C. THOMPSON, K. GREENEWALD, K. LEE, G.F. MANSO</a>",
+              "Ⓒ Deep Learning's Diminishing Returns: The Cost of Improvement is Becoming Unsustainable, N.C. THOMPSON, K. GREENEWALD, K. LEE, G.F. MANSO</a>",
           },
         }
       );
