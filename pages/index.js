@@ -44,6 +44,20 @@ export default function Home() {
       dataUrl: "/importance-of-computing-power/computer-chess",
       image: "/chart-chess.png",
     },
+    {
+      title: "Deep Learning's diminishing returns",
+      description:
+        "DEEP LEARNING IS NOW being used to translate between languages, \
+        predict how proteins fold, analyze medical scans, and play games as \
+        is now becoming pervasive. Success in those and other realms has \
+        brought this machine-learning technique from obscurity in the early \
+        2000s to dominance today.",
+      date: "2022",
+      authors: "Thompson, N. et al",
+      paperUrl: "https://spectrum.ieee.org/deep-learning-computational-cost",
+      dataUrl: "/deep-learnings-diminishing-returns",
+      image: "/deep-learning-diminishing-returns.webp",
+    },
   ];
 
   useEffect(() => {

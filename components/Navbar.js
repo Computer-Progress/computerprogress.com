@@ -22,6 +22,10 @@ export default function Navbar({ hideLogo }) {
       name: "The Importance of (Exponentially More) Computing Power",
       href: "/importance-of-computing-power/computer-chess",
     },
+    {
+      name: "Deep Learning's Diminishing Returns",
+      href: "/deep-learnings-diminishing-returns",
+    },
   ];
   return (
     <Disclosure as="nav" className="bg-black border-b-[#70202f] border-b">
