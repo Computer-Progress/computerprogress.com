@@ -200,7 +200,7 @@ export default function Main({ benchmarks, dataset, accuracyTypes }) {
             <table className="w-full text-sm text-left text-gray-500">
               <thead className="sticky top-0 text-xs table-fixed text-gray-700 uppercase bg-gray-50">
                 <tr>
-                  <th scope="col" className="px-6 py-3  sm:w-2/7">
+                  <th scope="col" className="px-6 py-3  sm:w-1/7">
                     <button
                       className="flex items-center uppercase gap-2"
                       onClick={() => requestSort("name")}
@@ -256,7 +256,7 @@ export default function Main({ benchmarks, dataset, accuracyTypes }) {
                       className="flex items-center uppercase gap-2"
                       onClick={() => requestSort("carbon_equivalent")}
                     >
-                      <p>
+                      <p className="text-left">
                         CO<sub>2</sub> equivalent Emissions
                       </p>
                       {sortBy.column === "carbon_equivalent" &&
@@ -276,7 +276,7 @@ export default function Main({ benchmarks, dataset, accuracyTypes }) {
                       className="flex items-center uppercase gap-2"
                       onClick={() => requestSort("money_equivalent")}
                     >
-                      <p>dollar equivalent</p>
+                      <p className="text-left" >dollar equivalent</p>
                       {sortBy.column === "money_equivalent" &&
                         (sortBy.type === "asc" ? (
                           <SortAscendingIcon className="h-4 w-4 text-gray-300" />
@@ -294,7 +294,7 @@ export default function Main({ benchmarks, dataset, accuracyTypes }) {
                       className="flex items-center uppercase gap-2"
                       onClick={() => requestSort("hardware_burden")}
                     >
-                      <div className="flex gap-1">Computation Used</div>
+                      <div className="flex gap-1 text-left">Computation Used For Training</div>
                       {sortBy.column === "hardware_burden" &&
                         (sortBy.type === "asc" ? (
                           <SortAscendingIcon className="h-4 w-4 text-gray-300" />
@@ -321,7 +321,7 @@ export default function Main({ benchmarks, dataset, accuracyTypes }) {
                           <tr className="border-b   bg-gray-50  ">
                             <th
                               scope="row"
-                              className="px-6 py-2 font-medium text-gray-900 whitespace-pre-wrap"
+                              className="px-6 py-2 font-medium text-gray-900 whitespace-pre-wrap "
                             >
                               {data["name"]}
                             </th>
@@ -478,7 +478,7 @@ export default function Main({ benchmarks, dataset, accuracyTypes }) {
                                     </div>
                                     <div className="block sm:hidden">
                                       <p className="text-xs flex gap-1">
-                                        Computation used
+                                        Computation used for training
                                       </p>
                                       <p className="text-gray-900">
                                         {data["hardware_burden"]

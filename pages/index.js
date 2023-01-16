@@ -52,7 +52,7 @@ export default function Home() {
       authors: "Thompson, N. et al",
       paperUrl: "https://spectrum.ieee.org/deep-learning-computational-cost",
       dataUrl: "/deep-learnings-diminishing-returns",
-      image: "/deep-learning-diminishing-returns.webp",
+      image: "/deep-learning-diminishing-returns.png",
     },
   ];
 
@@ -161,7 +161,7 @@ export default function Home() {
                     <Image
                       alt={item.title}
                       layout="fill"
-                      objectFit="cover"
+                      objectFit="contain"
                       src={item.image}
                     />
                   </div>

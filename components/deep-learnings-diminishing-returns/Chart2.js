@@ -383,10 +383,10 @@ export default function Chart({
           id: "plotlines",
           color: "#FF9999", // Red
           width: 2,
-          value: Math.log10(6816000000),
+          value: Math.log10(5990000000),
           dashStyle: "dash",
           label: {
-            text: "Monaco's GDP (2022)",
+            text: "Airbnb revenue (2021)",
             align: "left",
             x: 8,
             y: 5,
@@ -524,7 +524,7 @@ export default function Chart({
         title: {
           enabled: true,
 
-          text: "COMPUTATION USED (FLOPS)",
+          text: "COMPUTATION USED FOR TRAINING (FLOPS)",
           margin: 5,
           style: {
             fontSize: 22,
@@ -616,14 +616,17 @@ export default function Chart({
           ? ""
           : `<b>${this.point.name}</b><br>`;
         let error = `Error: ${y}% <br>`;
-        let computation = `Computation Used: <span class="">${formatUnit(
-          10 ** Number(x), 'FLOPS'
+        let computation = `Computation Used For Training: <span class="">${formatUnit(
+          10 ** Number(x),
+          "FLOPS"
         )}</span><br>`;
         let carbon = `Carbon: <span class="">${this.point.carbon_equivalent?.toFixed(
           0
         )} lbs</span><br>`;
         let dollar = `Dollar: <span class="">$${formatMoney(
-          this.point.money_equivalent, '', this.point.money_equivalent > 1e6 ? 1 : 0
+          this.point.money_equivalent,
+          "",
+          this.point.money_equivalent > 1e6 ? 1 : 0
         )}</sup></span><br>`;
         let year = `Year: ${this.point.year}<br>`;
 
@@ -768,7 +771,7 @@ export default function Chart({
         marker: {
           radius: 12,
           lineWidth: 5,
-          
+
           symbol:
             "url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAABhGlDQ1BJQ0MgcHJvZmlsZQAAKJF9kT1Iw0AcxV9TRZFKESuIOGSoThZERRy1CkWoEGqFVh1MLv2CJg1Jiouj4Fpw8GOx6uDirKuDqyAIfoA4OjkpukiJ/0sKLWI8OO7Hu3uPu3eAUC8zzeoYBzTdNlOJuJjJropdrwhhAH2IIiwzy5iTpCR8x9c9Any9i/Es/3N/jl41ZzEgIBLPMsO0iTeIpzdtg/M+cYQVZZX4nHjMpAsSP3Jd8fiNc8FlgWdGzHRqnjhCLBbaWGljVjQ14iniqKrplC9kPFY5b3HWylXWvCd/YSinryxzneYwEljEEiSIUFBFCWXYiNGqk2IhRftxH/+Q65fIpZCrBEaOBVSgQXb94H/wu1srPznhJYXiQOeL43yMAF27QKPmON/HjtM4AYLPwJXe8lfqwMwn6bWWFj0CwtvAxXVLU/aAyx1g8MmQTdmVgjSFfB54P6NvygL9t0DPmtdbcx+nD0CaukreAAeHwGiBstd93t3d3tu/Z5r9/QBr6HKk5/JFwQAAAAZiS0dEAP8A/wD/oL2nkwAAAAlwSFlzAAAuIwAALiMBeKU/dgAAAAd0SU1FB+YMFgADLdK5uMsAAAAZdEVYdENvbW1lbnQAQ3JlYXRlZCB3aXRoIEdJTVBXgQ4XAAAAIklEQVQ4y2NgIA78h2KCgImBymDUwFEDRw0cNXDUwKFiIADG8AIlhiI7xQAAAABJRU5ErkJggg==)",
         },
@@ -830,7 +833,7 @@ export default function Chart({
     }
   }
 
-  function downloadGraph(format='.png') {
+  function downloadGraph(format = ".png") {
     // const chart = Highcharts.charts.find((chart) => chart !== undefined);
     // const chart = chartComponent.current.chart;
     // const type = {
@@ -926,6 +929,15 @@ export default function Chart({
           Economic cost
         </button>
       </div>
+      {/* <div>
+        <div className="flex items-center justify-end gap-4 mt-3 px-2 sm:px-0 top-0 right-0">
+          <button>-</button>
+          {selectedXAxis.title.text === topXAxis[1].title.text
+            ? ` 1 USD`
+            : `1 lbs CO2`}{" "}
+          = 1 GFLOP <button>+</button>
+        </div>
+      </div> */}
 
       <HighchartsReact
         ref={chartComponent}
